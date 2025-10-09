@@ -1,11 +1,10 @@
-﻿using ECommerceAPI.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerceAPI.Domain
+namespace ECommerceAPI.Domain.Entities
 {
     public class ProductBox : BaseEntity
     {

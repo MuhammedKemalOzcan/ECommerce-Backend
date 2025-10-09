@@ -16,12 +16,12 @@ namespace ECommerceAPI.Persistence
         public ECommerceAPIDbContext CreateDbContext(string[] args)
         {
 
-            var optionsBuilder = new DbContextOptionsBuilder();
+            var dbContextOptionsBuilder = new DbContextOptionsBuilder<ECommerceAPIDbContext>();
 
-            optionsBuilder.UseNpgsql(Configuration.ConnectionString);
+            dbContextOptionsBuilder.UseNpgsql(Configuration.ConnectionString);
             var basePath = Path.Combine(Directory.GetCurrentDirectory(), "../../ECommerceAPI.API");
 
-            return new ECommerceAPIDbContext(optionsBuilder.Options);
+            return new ECommerceAPIDbContext(dbContextOptionsBuilder.Options);
 
         }
     }
