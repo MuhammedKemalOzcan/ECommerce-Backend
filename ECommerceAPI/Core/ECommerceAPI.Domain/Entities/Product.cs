@@ -1,11 +1,10 @@
-﻿using ECommerceAPI.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerceAPI.Domain
+namespace ECommerceAPI.Domain.Entities
 {
     public class Product : BaseEntity
     {
@@ -14,8 +13,8 @@ namespace ECommerceAPI.Domain
         public decimal Price { get; set; }
         public string? Description { get; set; }
         public string? Features { get; set; }
-        public ICollection<ProductBox>? ProductBoxex { get; set; } = new List<ProductBox>();
-        public ICollection<ProductGallery>? Productİmages { get; set; } = new List<ProductGallery>();
+        public ICollection<ProductBox> ProductBoxes { get; set; } = new List<ProductBox>();
+        public ICollection<ProductGallery> ProductGalleries { get; set; } = new List<ProductGallery>();
 
     }
 }

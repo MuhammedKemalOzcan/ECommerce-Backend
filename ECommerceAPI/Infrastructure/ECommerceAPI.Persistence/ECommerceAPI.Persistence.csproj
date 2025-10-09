@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ECommerceAPI.Application\ECommerceAPI.Application.csproj" />
+    <ProjectReference Include="..\..\Core\ECommerceAPI.Domain\ECommerceAPI.Domain.csproj" />
 
   </ItemGroup>
 

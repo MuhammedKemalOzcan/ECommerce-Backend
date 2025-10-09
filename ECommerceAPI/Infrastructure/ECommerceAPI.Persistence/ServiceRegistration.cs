@@ -17,6 +17,8 @@ namespace ECommerceAPI.Persistence
             {
                 opt.UseNpgsql(Configuration.ConnectionString);
             });
+
+            
         }
     }
 }
