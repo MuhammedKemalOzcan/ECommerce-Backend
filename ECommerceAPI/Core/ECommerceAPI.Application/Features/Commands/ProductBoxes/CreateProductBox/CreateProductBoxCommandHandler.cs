@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Application.Repositories.ProductBoxes;
+﻿using ECommerceAPI.Application.Exceptions;
+using ECommerceAPI.Application.Repositories.ProductBoxes;
 using ECommerceAPI.Application.Repositories.Products;
 using ECommerceAPI.Domain.Entities;
 using MediatR;
@@ -23,7 +24,7 @@ namespace ECommerceAPI.Application.Features.Commands.ProductBoxes.CreateProductB
         public async Task<CreateProductBoxCommandResponse> Handle(CreateProductBoxCommandRequest request, CancellationToken cancellationToken)
         {
             var product = await _productReadRepo.GetByIdAsync(request.ProductId,true);
-            if (product == null) throw new Exception("Ürün Bulunamadı");
+            if (product == null) throw new NotFoundException("Ürün Bulunamadı");
 
             var productBox = new ProductBox
             {
