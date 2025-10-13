@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ECommerceAPI.Persistence.Contexts
 {
@@ -39,7 +40,23 @@ namespace ECommerceAPI.Persistence.Contexts
                 .HasForeignKey(x => x.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
             });
+        }
 
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entities = ChangeTracker.Entries<BaseEntity>();
+
+            foreach (var entity in entities)
+            {
+                _ = entity.State switch
+                {
+                    EntityState.Added => entity.Entity.CreatedDate = DateTime.UtcNow,
+                    EntityState.Modified => entity.Entity.UpdatedDate = DateTime.UtcNow,
+                    _ => DateTime.UtcNow
+                };
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
 
         }
 

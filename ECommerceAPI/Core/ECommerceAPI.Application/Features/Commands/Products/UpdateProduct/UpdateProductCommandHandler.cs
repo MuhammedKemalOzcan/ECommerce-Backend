@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.Application.Dtos.Products;
+using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories.Products;
 using MediatR;
 using System;
@@ -24,7 +25,7 @@ namespace ECommerceAPI.Application.Features.Commands.Products.UpdateProduct
         {
             var product = await _productReadRepo.GetByIdAsync(request.Id,true);
 
-            if (product == null) throw new Exception("Ürün bulunamadı.");
+            if (product == null) throw new NotFoundException("Ürün bulunamadı.");
 
             product.Name = request.Name;
             product.Price = request.Price;
