@@ -37,7 +37,7 @@ namespace ECommerceAPI.Persistence.Repositories
         public async Task<int> SaveChangesAsync()
             => await _context.SaveChangesAsync();
 
-        public void update(T entity)
+        public void Update(T entity)
             => Table.Update(entity);
 
     }
