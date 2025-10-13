@@ -1,10 +1,5 @@
 ﻿using ECommerceAPI.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Application.Repositories
 {
@@ -19,7 +14,7 @@ namespace ECommerceAPI.Application.Repositories
         Task<T?> GetByIdAsync(Guid id, bool asNoTracking = true);
 
         Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, CancellationToken ct, bool asNoTracking = true);
-
+        
         
     }
 }

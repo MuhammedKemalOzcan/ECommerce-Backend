@@ -1,4 +1,8 @@
-﻿using ECommerceAPI.Persistence.Contexts;
+﻿using ECommerceAPI.Application.Repositories.ProductBoxes;
+using ECommerceAPI.Application.Repositories.Products;
+using ECommerceAPI.Persistence.Contexts;
+using ECommerceAPI.Persistence.Repositories.ProductBoxes;
+using ECommerceAPI.Persistence.Repositories.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,7 +22,10 @@ namespace ECommerceAPI.Persistence
                 opt.UseNpgsql(Configuration.ConnectionString);
             });
 
-            
+            services.AddScoped<IProductReadRepository, ProductReadRepository>();
+            services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
+            services.AddScoped<IProductBoxReadRepository, ProductBoxReadRepository>();
+            services.AddScoped<IProductBoxWriteRepository, ProductBoxWriteRepository>();
         }
     }
 }
