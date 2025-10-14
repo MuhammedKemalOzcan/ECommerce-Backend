@@ -27,6 +27,7 @@ namespace ECommerceAPI.Application.Features.Commands.Products.CreateProduct
             {
                 Name = request.Name,
                 Stock = request.Stock,
+                Category = request.Category,
                 Price = request.Price,
                 Description = request.Description,
                 Features = request.Features

@@ -29,6 +29,7 @@ namespace ECommerceAPI.Application.Features.Commands.Products.UpdateProduct
 
             product.Name = request.Name;
             product.Price = request.Price;
+            product.Category = request.Category;
             product.Stock = request.Stock;
             product.Description = request.Description;
             product.Features = request.Features;
