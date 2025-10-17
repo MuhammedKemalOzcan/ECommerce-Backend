@@ -11,12 +11,18 @@ namespace ECommerceAPI.API
     {
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
             builder.Services.AddApplicationServices();
             builder.Services.AddPersistenceServices();
             builder.Services.AddInfrastructureServices(builder.Configuration);
+
+            builder.Services.AddCors(options =>
+            options.AddPolicy("client", builder =>
+            builder.WithOrigins("http://localhost:5174").AllowAnyMethod().AllowAnyHeader()
+            ));
 
             // JWT Bearer auth
             var key = builder.Configuration["Jwt:Key"];
@@ -60,6 +66,7 @@ namespace ECommerceAPI.API
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("client");
 
             app.UseAuthentication();
             app.UseAuthorization();
