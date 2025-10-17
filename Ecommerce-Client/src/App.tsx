@@ -6,6 +6,7 @@ import Earphones from "./pages/Earphones";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div>
+      <ToastContainer position="bottom-right" theme="dark" autoClose={3000} />
       <RouterProvider router={router} />
     </div>
   );
