@@ -4,7 +4,7 @@ import { methods } from "./apiClient";
 export const productsApi = {
   list: () => methods.get<{ products: Products[] }>("Product"),
 
-  detail: (id: string) => methods.get<Products>(`Product/${id}`),
+  detail: (id: string) => methods.get<{ product: Products }>(`Product/${id}`),
 
   add: (product: AddProduct) =>
     methods.post<AddProduct, Products>("Product", product),

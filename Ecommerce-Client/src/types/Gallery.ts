@@ -1,3 +1,3 @@
-export interface Gallery {
+export interface ImageGalleries {
   image: string;
 }

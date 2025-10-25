@@ -1,4 +1,4 @@
-export interface ProductBox{
+export interface ProductBoxes{
     name:string,
     quantity:number
 }

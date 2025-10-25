@@ -1,9 +1,19 @@
+/* index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+
 .btn-1 {
   background-color: #d87d4a;
-  width: 160px;
+  width:auto;
   height: 48px;
+  color: white;
+  border: #d87d4a;
+  border-radius: 12px;
+}
+
+a.active {
+  color: #d87d4a;
 }
