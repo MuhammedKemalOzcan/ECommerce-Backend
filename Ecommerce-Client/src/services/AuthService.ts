@@ -6,13 +6,6 @@ export async function loginUser(email: string, password: string) {
     "Auth/login",
     { email, password }
   );
-  console.log(response.token);
-  
+
   return response;
-
-  // const { user } = response.data;
-
-  // localStorage.setItem("token", response.data.token);
-  // localStorage.setItem("user", JSON.stringify(user));
-  // return user;
 }

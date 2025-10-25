@@ -1,24 +1,18 @@
-import logo from "../assets/logo.svg";
-import facebook from "../assets/facebook.svg";
-import instagram from "../assets/instagram.svg";
-import twitter from "../assets/twitter.svg";
+import logo from "../../assets/logo.svg";
+import facebook from "../../assets/facebook.svg";
+import instagram from "../../assets/instagram.svg";
+import twitter from "../../assets/twitter.svg";
 import { NavLink } from "react-router-dom";
+import { navItems } from "../../utils/navItems";
 
 function Footer() {
-  const listItems = [
-    { item: "HOME", path: "/" },
-    { item: "HEADPHONES", path: "/headphones" },
-    { item: "SPEAKERS", path: "/speakers" },
-    { item: "EARPHONES", path: "/earphones" },
-  ];
-
   return (
     <div className="w-full h-[365px] bg-black flex justify-center items-center text-white  ">
       <div className="w-[80%] mt-20 flex flex-col h-[80%] gap-9">
         <div className="flex justify-between">
           <img src={logo} />
           <nav className="flex justify-around gap-4 w-[30%] ">
-            {listItems.map((item) => (
+            {navItems.map((item) => (
               <NavLink
                 to={item.path}
                 key={item.item}

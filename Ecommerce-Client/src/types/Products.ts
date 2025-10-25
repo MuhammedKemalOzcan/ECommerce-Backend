@@ -1,6 +1,5 @@
-import type { Gallery } from "./Gallery";
-import type { ProductBox } from "./productBox";
-
+import type {  ImageGalleries } from "./Gallery";
+import type { ProductBoxes } from "./ProductBox";
 
 export interface Products {
   id: string;
@@ -10,8 +9,8 @@ export interface Products {
   features: string;
   category: string;
   description: string;
-  productBox?: ProductBox[];
-  productGallery?: Gallery[];
+  productBoxes?: ProductBoxes[];
+  productGalleries?: ImageGalleries[];
 }
 
 export interface AddProduct {
@@ -21,6 +20,6 @@ export interface AddProduct {
   features: string;
   category: string;
   description: string;
-  productBox?: ProductBox[];
-  productGallery?: Gallery[];
+  productBox?: ProductBoxes[];
+  productGallery?: ImageGalleries[];
 }

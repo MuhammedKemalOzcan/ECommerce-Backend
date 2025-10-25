@@ -1,17 +1,26 @@
 import { useNavigate } from "react-router-dom";
-import facebook from "../assets/facebook.svg";
+import facebook from "../../assets/facebook.svg";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import type { User } from "../types/User";
-import { loginUser } from "../services/AuthService";
+import type { User } from "../../types/User";
+import { useAuthStore } from "../../auth/authStore";
+import { useLogin } from "../../auth/useLogin";
+import { useEffect } from "react";
+
 export default function Login() {
   const navigate = useNavigate();
+  const { mutate } = useLogin();
   const { register, handleSubmit } = useForm<User>();
+  const user = useAuthStore((s) => s.user);
 
   const onSubmit: SubmitHandler<User> = async (data) => {
-    await loginUser(data.email, data.password);
-    
-    
+    await mutate(data.email, data.password);
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   return (
     <div className="w-screen h-screen bg-[#F1F1F1] flex justify-center items-center text-white">

@@ -1,10 +1,11 @@
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import { useAuthStore } from "../auth/authStore";
 
 axios.defaults.baseURL = "https://localhost:7196/api/";
 
 axios.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = useAuthStore.getState().token;
 
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
@@ -20,15 +21,13 @@ axios.interceptors.response.use(
     }
     const { data, status } = error.response;
     const message = typeof data === "string" ? data : (data?.message as string);
-    console.log("Error response data", data);
-    console.log(message);
     switch (status) {
       case 400:
         console.warn("Bad Request", data);
         toast.error(message);
         break;
       case 404:
-        console.warn("NotFound", data);
+        console.warn("Not Found", data);
         toast.error(message);
         break;
       case 500:

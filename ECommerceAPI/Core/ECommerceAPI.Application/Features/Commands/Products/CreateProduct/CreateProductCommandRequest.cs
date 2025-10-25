@@ -16,7 +16,7 @@ namespace ECommerceAPI.Application.Features.Commands.Products.CreateProduct
         public string Category { get; set; }
         public string Description { get; set; }
         public string Features { get; set; }
-        public List<string>? GalleryUrls { get; set; }
-        public List<ProductBoxDto>? BoxItems { get; set; }
+        public List<string>? ProductGalleries { get; set; }
+        public List<ProductBoxDto>? ProductBoxes { get; set; }
     }
 }
