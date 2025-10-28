@@ -1,6 +1,7 @@
 import type { Category, Status } from "../../../types/Catalog";
 import { CATEGORY_OPTIONS, STATUS_OPTIONS } from "../../../constants/catalog";
 import { PlusCircleIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   category: Category;
@@ -15,6 +16,8 @@ export default function CatalogFilter({
   onCategoryChange,
   onStatusChange,
 }: Props) {
+  const navigate = useNavigate();
+
   return (
     <div className="flex justify-between">
       <div className="flex gap-10">
@@ -44,7 +47,10 @@ export default function CatalogFilter({
         </select>
       </div>
       {/* Add Product Button */}
-      <button className="btn-1 flex items-center p-3 w-auto gap-3">
+      <button
+        onClick={() => navigate("create-product")}
+        className="btn-1 flex items-center p-3 w-auto gap-3"
+      >
         <span>
           <PlusCircleIcon />
         </span>

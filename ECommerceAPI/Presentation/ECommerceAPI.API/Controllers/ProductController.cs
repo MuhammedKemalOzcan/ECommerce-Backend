@@ -74,7 +74,7 @@ namespace ECommerceAPI.API.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
+        [HttpPut("{Id}")]
         public async Task<IActionResult> Update([FromBody] UpdateProductCommandRequest request)
         {
             UpdateProductCommandResponse response = await _mediator.Send(request);

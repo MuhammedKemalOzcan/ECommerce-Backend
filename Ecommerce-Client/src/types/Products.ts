@@ -1,4 +1,4 @@
-import type {  ImageGalleries } from "./Gallery";
+import type { ImageGalleries } from "./Gallery";
 import type { ProductBoxes } from "./ProductBox";
 
 export interface Products {
@@ -14,7 +14,7 @@ export interface Products {
 }
 
 export interface AddProduct {
-  name: string;
+  name: string | null;
   stock: number;
   price: number;
   features: string;

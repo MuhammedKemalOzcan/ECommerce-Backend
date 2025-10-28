@@ -14,3 +14,5 @@ export const STATUS_OPTIONS: readonly Status[] = [
   "Available",
   "Out of Stock",
 ] as const;
+
+export const PRODUCT_CATEGORIES = ["speakers", "headphones", "earphones"] as const ;

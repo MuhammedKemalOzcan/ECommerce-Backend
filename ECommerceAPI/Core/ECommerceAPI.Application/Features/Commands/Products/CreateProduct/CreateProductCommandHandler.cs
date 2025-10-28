@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Application.Repositories.Products;
+﻿using ECommerceAPI.Application.Dtos.Products;
+using ECommerceAPI.Application.Repositories.Products;
 using ECommerceAPI.Domain.Entities;
 using MediatR;
 using System;
@@ -57,7 +58,22 @@ namespace ECommerceAPI.Application.Features.Commands.Products.CreateProduct
             await _productWriteRepo.AddAsync(product,cancellationToken);
             await _productWriteRepo.SaveChangesAsync();
 
-            return new CreateProductCommandResponse();
+            return new CreateProductCommandResponse
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Stock = product.Stock,
+                Price = product.Price,
+                Category = product.Category,
+                Description = product.Description,
+                Features = product.Features,
+                ProductGalleries = product.ProductGalleries?.Select(pg => pg.Image).ToList(),
+                ProductBoxes = product.ProductBoxes?.Select(pb => new ProductBoxDto
+                {
+                    Name = pb.Name,
+                    Quantity = pb.Quantity
+                }).ToList()
+            };
 
         }
     }

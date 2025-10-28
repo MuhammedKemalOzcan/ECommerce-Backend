@@ -14,6 +14,8 @@ import Customers from "./admin/Pages/Customers";
 import Catalog from "./admin/Pages/Catalog";
 import Orders from "./admin/Pages/Orders";
 import AdminHome from "./admin/Pages/AdminHome";
+import EditProduct from "./admin/Pages/EditProduct";
+import CreateProduct from "./admin/Pages/CreateProduct";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,8 @@ const router = createBrowserRouter([
       { path: "dashboard", element: <Dashboard /> },
       { path: "customers", element: <Customers /> },
       { path: "products", element: <Catalog /> },
+      { path: "products/:id", element: <EditProduct /> },
+      { path: "products/create-product", element: <CreateProduct /> },
       { path: "orders", element: <Orders /> },
     ],
   },

@@ -38,7 +38,7 @@ export default function ListProduct() {
             <p className="text-[15px] font-medium leading-[25px] w-[60%]">
               {product.description}
             </p>
-            <button onClick={() => handleClick(product.id)} className="btn-1">
+            <button onClick={() => handleClick(product.id)} className="btn-1 w-">
               See Product
             </button>
           </div>

@@ -39,7 +39,9 @@ namespace ECommerceAPI.Application.Features.Commands.Products.UpdateProduct
 
             return new UpdateProductCommandResponse
             {
+                Id = product.Id,
                 Name = product.Name,
+                Category = product.Category,
                 Price = product.Price,
                 Stock = product.Stock,
                 Description = product.Description,

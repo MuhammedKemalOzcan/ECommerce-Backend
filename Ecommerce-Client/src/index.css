@@ -3,11 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .btn-1 {
   background-color: #d87d4a;
-  width:auto;
+  width: auto;
   height: 48px;
   color: white;
   border: #d87d4a;
@@ -16,4 +14,36 @@
 
 a.active {
   color: #d87d4a;
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+}
+
+.modal-container {
+  display: flex;
+  width: 30%;
+  height: auto;
+  flex-direction: column;
+  border-radius: 20px;
+  background-color: white;
+  padding: 20px;
+}
+
+.input {
+  border: 1px solid black;
+  padding: 10px 20px;
+  border-radius: 12px;
+}
+
+.input:focus {
+  outline: none;
 }

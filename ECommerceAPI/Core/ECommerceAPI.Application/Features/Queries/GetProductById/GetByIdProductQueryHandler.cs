@@ -30,6 +30,8 @@ namespace ECommerceAPI.Application.Features.Queries.GetProductById
             {
                 Id = product.Id,
                 Name = product.Name,
+                Stock = product.Stock,
+                Category = product.Category,
                 Description = product.Description,
                 Features = product.Features,
                 Price = product.Price,

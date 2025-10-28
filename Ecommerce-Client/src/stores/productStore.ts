@@ -10,8 +10,12 @@ type productsState = {
   error: string | null;
   getAll: () => Promise<void>;
   getById: (id: string) => Promise<void>;
-  createProduct: (newProduct: AddProduct) => Promise<void>;
   deleteProduct: (id: string) => Promise<void>;
+  createProduct: (newProduct: AddProduct) => Promise<Products>;
+  patchProduct: (
+    id: string | null,
+    data: AddProduct
+  ) => Promise<Products | undefined>;
 };
 
 export const useProductStore = create<productsState>((set, get) => ({
@@ -35,6 +39,7 @@ export const useProductStore = create<productsState>((set, get) => ({
     set({ loading: true });
     try {
       const response = await productsApi.detail(id);
+      console.log("Backend'den gelen product:", response);
       set({ currentProduct: response.product });
     } catch (error) {
       console.log(error);
@@ -45,8 +50,10 @@ export const useProductStore = create<productsState>((set, get) => ({
   createProduct: async (newProduct: AddProduct) => {
     set({ loading: true });
     try {
-      const response = await productsApi.add(newProduct);
-      set((state) => ({ products: [...state.products, response] }));
+      const created = await productsApi.add(newProduct);
+      console.log(created);
+      set((state) => ({ products: [...state.products, created] }));
+      return created;
     } catch (error) {
       set({ error: "Ürün eklenemedi." });
       throw error;
@@ -65,6 +72,39 @@ export const useProductStore = create<productsState>((set, get) => ({
     } catch (error) {
       set({ products: prev });
       console.log(error);
+    } finally {
+      set({ loading: false });
+    }
+  },
+  patchProduct: async (id: string | null, data: AddProduct) => {
+    if (!id) {
+      console.error("❌ Product ID is required for update");
+      throw new Error("Product ID is required");
+    }
+    set({ loading: true });
+    try {
+      const updated = await productsApi.update(id, data);
+      console.log("Backend response:", updated);
+
+      set((state) => ({
+        products: state.products.map((p) =>
+          p.id === id
+            ? {
+                ...p, // Eski değerleri koru
+                ...updated, // Backend'den gelenleri üzerine yaz
+              }
+            : p
+        ),
+        currentProduct: {
+          ...state.currentProduct,
+          ...updated,
+        },
+      }));
+
+      return updated;
+    } catch (err) {
+      console.error("Update error:", err);
+      throw err;
     } finally {
       set({ loading: false });
     }

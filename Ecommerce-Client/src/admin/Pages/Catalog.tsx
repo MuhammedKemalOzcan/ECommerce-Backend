@@ -33,7 +33,7 @@ export default function Catalog() {
     });
   }, [products, category, status]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div>loading...</div>;
 
   return (
     <div className="w-full w-auto p-12">
