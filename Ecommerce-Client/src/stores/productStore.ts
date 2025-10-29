@@ -9,7 +9,7 @@ type productsState = {
   loading: boolean;
   error: string | null;
   getAll: () => Promise<void>;
-  getById: (id: string) => Promise<void>;
+  getById: (id: string) => Promise<Products>
   deleteProduct: (id: string) => Promise<void>;
   createProduct: (newProduct: AddProduct) => Promise<Products>;
   patchProduct: (
@@ -36,15 +36,33 @@ export const useProductStore = create<productsState>((set, get) => ({
     }
   },
   getById: async (id: string) => {
-    set({ loading: true });
+    set((state) => ({
+      ...state,
+      loading: true,
+      currentProduct: null, // Önceki ürünü temizle
+    }));
+
     try {
       const response = await productsApi.detail(id);
-      console.log("Backend'den gelen product:", response);
-      set({ currentProduct: response.product });
+
+      // 🎯 FIX: State'i koru!
+      set((state) => ({
+        ...state,
+        currentProduct: response.product,
+        loading: false,
+      }));
+
+      return response.product; // İhtiyaç olursa döndür
     } catch (error) {
-      console.log(error);
-    } finally {
-      set({ loading: false });
+      console.error("❌ getById error:", error);
+
+      set((state) => ({
+        ...state,
+        loading: false,
+        error: error instanceof Error ? error.message : "Ürün yüklenemedi",
+      }));
+
+      throw error;
     }
   },
   createProduct: async (newProduct: AddProduct) => {
