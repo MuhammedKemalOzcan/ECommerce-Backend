@@ -1,3 +1,4 @@
+import type { ProductBoxes } from "../types/ProductBox";
 import type { AddProduct, Products } from "../types/Products";
 import { methods } from "./apiClient";
 
@@ -11,6 +12,19 @@ export const productsApi = {
 
   update: (id: string, patch: Partial<AddProduct>) =>
     methods.put<Partial<AddProduct>, Products>(`Product/${id}`, patch),
+
+  remove: (id: string) => methods.delete<Products>(`Product/${id}`),
+};
+
+export const productBoxApi = {
+  list: (productId: string) =>
+    methods.get<{ productBox: ProductBoxes[] }>(`Product/${productId}/boxes`),
+
+  update: (boxId: string, patch: Partial<ProductBoxes>) =>
+    methods.put<Partial<ProductBoxes>, ProductBoxes>(
+      `Product/Boxes/${boxId}`,
+      patch
+    ),
 
   remove: (id: string) => methods.delete<Products>(`Product/${id}`),
 };

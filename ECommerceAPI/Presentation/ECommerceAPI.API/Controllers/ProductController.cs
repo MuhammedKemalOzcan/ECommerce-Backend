@@ -81,9 +81,10 @@ namespace ECommerceAPI.API.Controllers
             return Ok(response);
         }
 
-        [HttpPut("Boxes")]
-        public async Task<IActionResult> UpdateBox([FromBody] UpdateBoxCommandRequest request)
+        [HttpPut("Boxes/{boxId}")]
+        public async Task<IActionResult> UpdateBox([FromRoute] Guid boxId, [FromBody] UpdateBoxCommandRequest request)
         {
+            request.BoxId = boxId;
             UpdateBoxCommandResponse response = await _mediator.Send(request);
             return Ok(response);
         }

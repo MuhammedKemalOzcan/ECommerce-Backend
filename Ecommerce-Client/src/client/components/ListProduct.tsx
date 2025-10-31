@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useProductStore } from "../../stores/productStore";
 import { useShallow } from "zustand/shallow";
 import image from "../../assets/product.svg";
+import { PacmanLoader } from "react-spinners";
 
 export default function ListProduct() {
   let location = useLocation().pathname.slice(1);
@@ -14,8 +15,6 @@ export default function ListProduct() {
     }))
   );
 
-  
-
   const handleClick = (id: string) => {
     navigate(`${id}`);
   };
@@ -24,7 +23,12 @@ export default function ListProduct() {
 
   console.log(filteredProduct);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div>
+        <PacmanLoader />
+      </div>
+    );
 
   return (
     <div>
@@ -38,7 +42,10 @@ export default function ListProduct() {
             <p className="text-[15px] font-medium leading-[25px] w-[60%]">
               {product.description}
             </p>
-            <button onClick={() => handleClick(product.id)} className="btn-1 w-">
+            <button
+              onClick={() => handleClick(product.id)}
+              className="btn-1 w-"
+            >
               See Product
             </button>
           </div>

@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using ECommerceAPI.Application.Dtos.Products;
+using ECommerceAPI.Domain.Entities;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;

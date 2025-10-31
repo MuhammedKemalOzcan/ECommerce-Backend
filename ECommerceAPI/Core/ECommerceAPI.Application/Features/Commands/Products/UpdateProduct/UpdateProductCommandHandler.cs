@@ -1,6 +1,7 @@
 ﻿using ECommerceAPI.Application.Dtos.Products;
 using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories.Products;
+using ECommerceAPI.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace ECommerceAPI.Application.Features.Commands.Products.UpdateProduct
                 Price = product.Price,
                 Stock = product.Stock,
                 Description = product.Description,
-                Features = product.Features
+                Features = product.Features,
             };
 
 

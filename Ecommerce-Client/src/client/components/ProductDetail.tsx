@@ -3,6 +3,7 @@ import { useProductStore } from "../../stores/productStore";
 import { useShallow } from "zustand/shallow";
 import { useEffect } from "react";
 import image from "../../assets/product.svg";
+import { PacmanLoader } from "react-spinners";
 
 export default function ProductDetail() {
   const { id, category } = useParams<{ id: string; category: string }>();
@@ -16,7 +17,6 @@ export default function ProductDetail() {
   );
 
   console.log(currentProduct);
-  
 
   useEffect(() => {
     if (id) getById(id);
@@ -27,7 +27,12 @@ export default function ProductDetail() {
     quantity: b.quantity,
   }));
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div>
+        <PacmanLoader />
+      </div>
+    );
 
   return (
     <div>

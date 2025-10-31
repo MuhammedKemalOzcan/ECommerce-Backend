@@ -21,6 +21,7 @@ namespace ECommerceAPI.Application.Features.Queries.GetProductBoxes
 
             var productBoxDto = productBox.Select(b => new ProductBoxDto
             {
+                Id = b.Id,
                 Name = b.Name,
                 Quantity = b.Quantity
             }).ToList();

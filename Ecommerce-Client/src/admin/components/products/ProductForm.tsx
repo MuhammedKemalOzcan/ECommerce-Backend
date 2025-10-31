@@ -31,7 +31,12 @@ export default function ProductForm({
   // Form'u mevcut ürün verileriyle doldur
   useEffect(() => {
     if (product) {
-      reset(product);
+      reset({
+        ...product,
+        productBox: product.productBoxes
+          ? product.productBoxes
+          : [{ name: "", quantity: 1 }],
+      });
     }
   }, [product, reset]);
 
@@ -61,7 +66,7 @@ export default function ProductForm({
 
   return (
     <form
-      className="flex flex-col gap-3 flex-1 max-w-xl"
+      className="flex flex-col flex-1 max-w-xl"
       onSubmit={handleSubmit(handleFormSubmit)}
       noValidate
     >
@@ -70,7 +75,6 @@ export default function ProductForm({
       ) : (
         <h2 className="text-2xl font-bold mb-4">Ürün Ekle</h2>
       )}
-
       <div className="flex flex-col gap-1">
         <label htmlFor="name" className="font-medium">
           İsim
@@ -183,6 +187,42 @@ export default function ProductForm({
           )}
         </div>
       </div>
+      {/* Box Item Ekleme */}
+      {mode === "create" && (
+        <div>
+          <h1 className="font-bold text-lg my-4">Box Items</h1>
+          {/* {product?.productBoxes?.map((boxItem, index) => (
+            <div key={index} className="flex flex-col gap-4">
+              <div className="flex gap-4">
+                <div className="flex flex-col">
+                  <label htmlFor="itemName" className="font-medium">
+                    Item Name
+                  </label>
+                  <input
+                    id={`productBoxes.${index}.name`}
+                    disabled={isFormDisabled}
+                    {...register(`productBox.${index}.name`)}
+                    className="input"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label htmlFor="itemName" className="font-medium">
+                    Quantity
+                  </label>
+                  <input
+                    disabled={isFormDisabled}
+                    id={`productBoxes.${index}.quantity`}
+                    {...register(`productBox.${index}.quantity`)}
+                    type="number"
+                    className="input"
+                  />
+                </div>
+              </div>
+            </div>
+          ))} */}
+        </div>
+      )}
 
       <div className="flex gap-3 mt-4">
         <button

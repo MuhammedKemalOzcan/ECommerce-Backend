@@ -33,6 +33,7 @@ namespace ECommerceAPI.Application.Features.Commands.ProductBoxes.UpdateProductB
 
             return new UpdateBoxCommandResponse
             {
+                Id = productBox.Id,
                 Name = productBox.Name,
                 Quantity = productBox.Quantity
             };

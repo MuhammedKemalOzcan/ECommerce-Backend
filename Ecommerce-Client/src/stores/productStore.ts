@@ -102,8 +102,6 @@ export const useProductStore = create<productsState>((set, get) => ({
     set({ loading: true });
     try {
       const updated = await productsApi.update(id, data);
-      console.log("Backend response:", updated);
-
       set((state) => ({
         products: state.products.map((p) =>
           p.id === id

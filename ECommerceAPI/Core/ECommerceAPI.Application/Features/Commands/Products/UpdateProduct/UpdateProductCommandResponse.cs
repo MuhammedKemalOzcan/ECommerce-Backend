@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ECommerceAPI.Application.Dtos.Products;
+using ECommerceAPI.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

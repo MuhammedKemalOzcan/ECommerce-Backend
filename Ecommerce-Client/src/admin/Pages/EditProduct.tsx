@@ -16,8 +16,6 @@ export default function EditProduct() {
   const { id } = useParams<string>();
   const navigate = useNavigate();
 
-  console.log(id);
-
   useEffect(() => {
     if (id) getById(id);
   }, [id, getById]);
@@ -47,7 +45,7 @@ export default function EditProduct() {
   }
 
   return (
-    <div className="flex gap-20 p-16">
+    <div className="flex gap-20 p-20">
       <div className="flex flex-col gap-4">
         <img
           className="size-48 object-cover rounded-lg"
