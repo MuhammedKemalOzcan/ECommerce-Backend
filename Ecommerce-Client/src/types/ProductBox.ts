@@ -3,3 +3,8 @@ export interface ProductBoxes {
   name: string;
   quantity: number;
 }
+
+export interface AddProductBoxes {
+  name: string;
+  quantity: number;
+}

@@ -1,5 +1,5 @@
 import type { ImageGalleries } from "./Gallery";
-import type { ProductBoxes } from "./ProductBox";
+import type { AddProductBoxes, ProductBoxes } from "./ProductBox";
 
 export interface Products {
   id: string;
@@ -20,6 +20,12 @@ export interface AddProduct {
   features: string;
   category: string;
   description: string;
-  productBox?: ProductBoxes[];
+  productBox?: AddProductBoxes[];
   productGallery?: ImageGalleries[];
+}
+
+// types/Products.ts
+export interface ProductBox {
+  name: string;
+  quantity: number;
 }

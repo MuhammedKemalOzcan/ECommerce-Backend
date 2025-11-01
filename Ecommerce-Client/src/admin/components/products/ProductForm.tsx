@@ -188,41 +188,7 @@ export default function ProductForm({
         </div>
       </div>
       {/* Box Item Ekleme */}
-      {mode === "create" && (
-        <div>
-          <h1 className="font-bold text-lg my-4">Box Items</h1>
-          {/* {product?.productBoxes?.map((boxItem, index) => (
-            <div key={index} className="flex flex-col gap-4">
-              <div className="flex gap-4">
-                <div className="flex flex-col">
-                  <label htmlFor="itemName" className="font-medium">
-                    Item Name
-                  </label>
-                  <input
-                    id={`productBoxes.${index}.name`}
-                    disabled={isFormDisabled}
-                    {...register(`productBox.${index}.name`)}
-                    className="input"
-                  />
-                </div>
-
-                <div className="flex flex-col">
-                  <label htmlFor="itemName" className="font-medium">
-                    Quantity
-                  </label>
-                  <input
-                    disabled={isFormDisabled}
-                    id={`productBoxes.${index}.quantity`}
-                    {...register(`productBox.${index}.quantity`)}
-                    type="number"
-                    className="input"
-                  />
-                </div>
-              </div>
-            </div>
-          ))} */}
-        </div>
-      )}
+      {mode === "create" && <div></div>}
 
       <div className="flex gap-3 mt-4">
         <button

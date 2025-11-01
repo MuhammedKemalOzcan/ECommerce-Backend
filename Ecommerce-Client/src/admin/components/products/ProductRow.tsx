@@ -20,6 +20,7 @@ const ProductRow = React.memo(function ProductRow({
   onToggle,
   onDelete,
 }: RowProps) {
+  
   const navigate = useNavigate();
 
   const toggleRow = (id: string | null) => {
