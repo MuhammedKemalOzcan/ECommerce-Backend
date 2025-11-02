@@ -1,16 +1,29 @@
-import { Send } from "lucide-react";
+import { Send, X } from "lucide-react";
 import { useProductBoxStore } from "../../../stores/ProductBoxStore";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import type { ProductBoxes } from "../../../types/ProductBox";
+import { useShallow } from "zustand/shallow";
 
 type Props = {
   setBoxItemId: React.Dispatch<React.SetStateAction<string | null>>;
   defaultValues: ProductBoxes;
   boxId: string | null;
+  productId: string | null;
 };
 
-export default function EditBox({ setBoxItemId, defaultValues, boxId }: Props) {
-  const updateBoxItem = useProductBoxStore((state) => state.updateBoxItems);
+export default function EditBox({
+  setBoxItemId,
+  defaultValues,
+  boxId,
+  productId,
+}: Props) {
+  const { updateBoxItem, deleteBoxItem } = useProductBoxStore(
+    useShallow((state) => ({
+      updateBoxItem: state.updateBoxItems,
+      deleteBoxItem: state.deleteBoxItem,
+    }))
+  );
+
   const { register, handleSubmit } = useForm<ProductBoxes>({
     defaultValues: defaultValues,
   });
@@ -30,9 +43,19 @@ export default function EditBox({ setBoxItemId, defaultValues, boxId }: Props) {
         type="number"
         className="input h-8"
       />
-      <button className="mt-2 flex items-end " type="submit">
-        <Send />
-      </button>
+      <div className="flex items-center">
+        <button type="submit">
+          <Send size={20} />
+        </button>
+        <button>
+          <X
+            onClick={() => setBoxItemId(null)}
+            className="flex"
+            size={28}
+            color="red"
+          />
+        </button>
+      </div>
     </form>
   );
 }

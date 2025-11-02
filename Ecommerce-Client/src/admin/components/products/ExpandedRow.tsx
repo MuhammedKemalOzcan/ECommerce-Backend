@@ -1,4 +1,4 @@
-import { Package, PenBoxIcon, X } from "lucide-react";
+import { Package, PenBoxIcon, Trash2 } from "lucide-react";
 import type { Products } from "../../../types/Products";
 import { useEffect, useState } from "react";
 import EditBox from "./EditBox";
@@ -12,10 +12,11 @@ type Props = {
 export default function ExpandedRow({ product }: Props) {
   const [boxItemId, setBoxItemId] = useState<string | null>(null);
 
-  const { getAllBoxes, productBoxes } = useProductBoxStore(
+  const { getAllBoxes, productBoxes, deleteBoxItem } = useProductBoxStore(
     useShallow((state) => ({
       productBoxes: state.productBoxes,
       getAllBoxes: state.getAllBoxes,
+      deleteBoxItem: state.deleteBoxItem,
     }))
   );
 
@@ -23,7 +24,7 @@ export default function ExpandedRow({ product }: Props) {
     getAllBoxes(product.id);
   }, [getAllBoxes]);
 
-  const handleClick = (id: string | null) => {
+  const handleEditBox = (id: string | null) => {
     setBoxItemId(boxItemId ? null : id);
   };
 
@@ -41,40 +42,36 @@ export default function ExpandedRow({ product }: Props) {
         <div>
           <h3>Kutu İçerisinde:</h3>
           {productBoxes.map((bx) => (
-            <div key={bx.id} className="flex gap-4 relative">
+            <div key={bx.id} className="flex gap-4 items-center">
               {boxItemId === bx.id ? (
                 <EditBox
+                  productId={product.id}
                   boxId={bx.id}
                   defaultValues={bx}
                   setBoxItemId={setBoxItemId}
                 />
               ) : (
                 <div className="flex gap-3">
-                  <p className="text-orange-500">{bx.quantity}x</p>
-                  <p>{bx.name}</p>
+                  <div className="flex gap-1 w-[120px]">
+                    <p className="text-orange-500">{bx.quantity}x</p>
+                    <p className="whitespace-nowrap">{bx.name}</p>
+                  </div>
+                  <button
+                    onClick={() => handleEditBox(bx.id)}
+                    className="justify-self-end"
+                  >
+                    <PenBoxIcon size={16} color="blue" />
+                  </button>
+                  <button
+                    onClick={() => deleteBoxItem(bx.id)}
+                    className="justify-self-end"
+                  >
+                    <Trash2 size={16} color="red" className="hover:bg-red-50" />
+                  </button>
                 </div>
               )}
-              <button className="flex" onClick={() => handleClick(bx.id)}>
-                {boxItemId === bx.id ? (
-                  <X
-                    className="absolute bottom-0 left-8"
-                    size={26}
-                    color="red"
-                  />
-                ) : (
-                  <PenBoxIcon className="" size={16} color="blue" />
-                )}
-              </button>
             </div>
           ))}
-        </div>
-        <div className="flex flex-col">
-          <h3>Ürün Boyutu:</h3>
-          <p>20x30x10</p>
-        </div>
-        <div className="flex flex-col">
-          <h3>Ürün Ağırlığı:</h3>
-          <p>5 kg</p>
         </div>
       </div>
     </div>

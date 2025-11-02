@@ -35,6 +35,10 @@ namespace ECommerceAPI.Application.Features.Commands.Products.UpdateProduct
             product.Description = request.Description;
             product.Features = request.Features;
 
+            
+            
+
+
             _productWriteRepo.Update(product);
             await _productWriteRepo.SaveChangesAsync();
 

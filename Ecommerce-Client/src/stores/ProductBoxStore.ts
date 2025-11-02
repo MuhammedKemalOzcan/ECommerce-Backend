@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type { ProductBoxes } from "../types/ProductBox";
 import { productBoxApi } from "../api/products";
+import { toast } from "react-toastify";
 
 type BoxProps = {
   productBoxes: ProductBoxes[];
@@ -8,6 +9,7 @@ type BoxProps = {
   getAllBoxes: (id: string | null) => Promise<void>;
   updateBoxItems: (id: string | null, data: ProductBoxes) => Promise<void>;
   loading: boolean;
+  deleteBoxItem: (boxId: string | null) => Promise<void>;
 };
 
 export const useProductBoxStore = create<BoxProps>((set) => ({
@@ -42,6 +44,18 @@ export const useProductBoxStore = create<BoxProps>((set) => ({
       console.log(error);
     } finally {
       set({ loading: false });
+    }
+  },
+  deleteBoxItem: async (boxId: string | null) => {
+    if (!boxId) console.error("BoxId Required");
+    try {
+      const response = await productBoxApi.remove(boxId);
+      set((state) => ({
+        productBoxes: state.productBoxes.filter((box) => boxId !== box.id),
+      }));
+      toast.success(response?.message);
+    } catch (error) {
+      console.log(error);
     }
   },
 }));
