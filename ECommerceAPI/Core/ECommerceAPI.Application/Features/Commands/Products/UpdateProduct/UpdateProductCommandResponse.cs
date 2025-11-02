@@ -17,5 +17,6 @@ namespace ECommerceAPI.Application.Features.Commands.Products.UpdateProduct
         public string? Description { get; set; }
         public string? Category { get; set; }
         public string? Features { get; set; }
+        public List<ProductBoxDto>? ProductBoxes { get; set; }
     }
 }

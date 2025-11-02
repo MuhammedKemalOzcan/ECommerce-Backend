@@ -20,6 +20,11 @@ export default function EditProduct() {
     if (id) getById(id);
   }, [id, getById]);
 
+  console.log(currentProduct);
+  
+  const productBoxes = currentProduct?.productBoxes ?? [];
+  console.log("productBoxes:", productBoxes);
+
   const handleSubmit = async (data: AddProduct) => {
     if (!id) return;
     try {
@@ -90,7 +95,6 @@ export default function EditProduct() {
         mode="edit"
         defaultValues={currentProduct}
         isLoading={loading}
-        product={currentProduct}
       />
     </div>
   );

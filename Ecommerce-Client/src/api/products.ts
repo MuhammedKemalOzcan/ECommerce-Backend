@@ -2,6 +2,10 @@ import type { ProductBoxes } from "../types/ProductBox";
 import type { AddProduct, Products } from "../types/Products";
 import { methods } from "./apiClient";
 
+type ApiMessage = {
+  message: string;
+};
+
 export const productsApi = {
   list: () => methods.get<{ products: Products[] }>("Product"),
 
@@ -26,5 +30,6 @@ export const productBoxApi = {
       patch
     ),
 
-  remove: (id: string) => methods.delete<Products>(`Product/${id}`),
+  remove: (boxId: string | null) =>
+    methods.delete<ApiMessage>(`Product/Boxes/${boxId}`),
 };

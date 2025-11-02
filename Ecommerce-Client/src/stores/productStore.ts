@@ -9,7 +9,7 @@ type productsState = {
   loading: boolean;
   error: string | null;
   getAll: () => Promise<void>;
-  getById: (id: string) => Promise<Products>
+  getById: (id: string) => Promise<Products>;
   deleteProduct: (id: string) => Promise<void>;
   createProduct: (newProduct: AddProduct) => Promise<Products>;
   patchProduct: (
@@ -116,7 +116,7 @@ export const useProductStore = create<productsState>((set, get) => ({
           ...updated,
         },
       }));
-
+      console.log(updated);
       return updated;
     } catch (err) {
       console.error("Update error:", err);

@@ -34,7 +34,7 @@ namespace ECommerceAPI.Application.Features.Queries.GetProducts
                 Features = p.Features,
                 Category = p.Category,
                 Description = p.Description,
-                ProductBoxes = p.ProductBoxes.Select(b => new ProductBoxDto {Id = b.Id,Name = b.Name,Quantity = b.Quantity }).ToList(),
+                ProductBoxes = p.ProductBoxes.Select(b => new ProductBoxDto {Name = b.Name,Quantity = b.Quantity }).ToList(),
                 ProductGalleries = p.ProductGalleries.Select(g => new ProductGalleryDto {Image = g.Image}).ToList()
             }).ToList();
 
