@@ -8,6 +8,7 @@ namespace ECommerceAPI.Application.Features.Commands.ProductBoxes.CreateProductB
 {
     public class CreateProductBoxCommandResponse
     {
-
+        public string Name { get; set; }
+        public int Quantity { get; set; }
     }
 }

@@ -10,6 +10,7 @@ export function useLogin() {
     try {
       setLoading(true);
       const response = await loginUser(email, password);
+
       setToken(response.token);
       return response;
     } catch (e: any) {

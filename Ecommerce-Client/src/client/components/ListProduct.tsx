@@ -32,8 +32,13 @@ export default function ListProduct() {
 
   return (
     <div>
-      {filteredProduct.map((product) => (
-        <div className="flex p-40 gap-32 " key={product.id}>
+      {filteredProduct.map((product, index) => (
+        <div
+          className={`${
+            index % 2 === 0 ? "flex flex-row-reverse" : "flex"
+          } " p-40 gap-32" `}
+          key={product.id}
+        >
           <img src={image} />
           <div className="flex flex-col justify-center gap-20">
             <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">
