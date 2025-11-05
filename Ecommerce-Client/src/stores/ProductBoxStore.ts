@@ -10,6 +10,10 @@ type BoxProps = {
   updateBoxItems: (id: string | null, data: ProductBoxes) => Promise<void>;
   loading: boolean;
   deleteBoxItem: (boxId: string | null) => Promise<void>;
+  createBoxItem: (
+    productId: string | null,
+    data: ProductBoxes
+  ) => Promise<void>;
 };
 
 export const useProductBoxStore = create<BoxProps>((set) => ({
@@ -50,10 +54,21 @@ export const useProductBoxStore = create<BoxProps>((set) => ({
     if (!boxId) console.error("BoxId Required");
     try {
       const response = await productBoxApi.remove(boxId);
+      console.log(response.message);
+
       set((state) => ({
         productBoxes: state.productBoxes.filter((box) => boxId !== box.id),
       }));
       toast.success(response?.message);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  createBoxItem: async (productId: string | null, data: ProductBoxes) => {
+    if (productId === null) toast.error("Ürün Id'si gerekli");
+    try {
+      const response = await productBoxApi.add(productId, data);
+      set((state) => ({ productBoxes: [...state.productBoxes, response] }));
     } catch (error) {
       console.log(error);
     }

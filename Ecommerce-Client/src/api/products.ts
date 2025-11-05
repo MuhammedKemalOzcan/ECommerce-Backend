@@ -30,6 +30,12 @@ export const productBoxApi = {
       patch
     ),
 
+  add: (productId: string | null, boxItem: ProductBoxes) =>
+    methods.post<ProductBoxes, ProductBoxes>(
+      `Product/${productId}/boxes`,
+      boxItem
+    ),
+
   remove: (boxId: string | null) =>
     methods.delete<ApiMessage>(`Product/Boxes/${boxId}`),
 };

@@ -1,5 +1,6 @@
 import type { RegisterOptions } from "react-hook-form";
 import type { AddProduct } from "../types/Products";
+import type { ProductBoxes } from "../types/ProductBox";
 
 export const PRODUCT_VALIDATION_RULES = {
   name: {
@@ -42,4 +43,22 @@ export const PRODUCT_VALIDATION_RULES = {
       message: "Geçerli bir stok bilgisi giriniz.",
     },
   } satisfies RegisterOptions<AddProduct, "stock">,
+  boxName: {
+    required: "İçerik ismi zorunludur.",
+    maxLength: {
+      value: 50,
+      message: "İçerik ismi en fazla 50 karakterli olabilir",
+    },
+    minLength: {
+      value: 1,
+      message: "İçerik ismi zorunludur",
+    },
+  } satisfies RegisterOptions<ProductBoxes, "name">,
+  quantity: {
+    required: "Miktar bilgisi zorunludur.",
+    min: {
+      value: 1,
+      message: "Geçerli bir stok bilgisi giriniz.",
+    },
+  } satisfies RegisterOptions<ProductBoxes, "quantity">,
 };

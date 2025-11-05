@@ -1,6 +1,6 @@
 import { Box, BringToFront, Home, LogOutIcon, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import logo from "../../assets/Logo.svg";
+import logo from "../../../assets/Logo.svg"
 
 export default function AdminNavbar() {
   const Items = [

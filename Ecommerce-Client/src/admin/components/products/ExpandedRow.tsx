@@ -1,9 +1,12 @@
-import { Package, PenBoxIcon, Trash2 } from "lucide-react";
+import { Package } from "lucide-react";
 import type { Products } from "../../../types/Products";
 import { useEffect, useState } from "react";
-import EditBox from "./EditBox";
 import { useProductBoxStore } from "../../../stores/ProductBoxStore";
 import { useShallow } from "zustand/shallow";
+import ProductBoxForm from "../productBox/ProductBoxForm";
+import type { ProductBoxes } from "../../../types/ProductBox";
+import DisplayProductBox from "../productBox/DisplayProductBox";
+import AddProductBox from "../productBox/AddProductBox";
 
 type Props = {
   product: Products;
@@ -12,20 +15,29 @@ type Props = {
 export default function ExpandedRow({ product }: Props) {
   const [boxItemId, setBoxItemId] = useState<string | null>(null);
 
-  const { getAllBoxes, productBoxes, deleteBoxItem } = useProductBoxStore(
+  const { getAllBoxes, productBoxes, updateBoxItem } = useProductBoxStore(
     useShallow((state) => ({
       productBoxes: state.productBoxes,
       getAllBoxes: state.getAllBoxes,
-      deleteBoxItem: state.deleteBoxItem,
+      updateBoxItem: state.updateBoxItems,
     }))
   );
 
   useEffect(() => {
     getAllBoxes(product.id);
-  }, [getAllBoxes]);
+  }, [getAllBoxes, product.id]);
 
   const handleEditBox = (id: string | null) => {
     setBoxItemId(boxItemId ? null : id);
+  };
+
+  const handleUpdate = async (boxId: string, data: ProductBoxes) => {
+    await updateBoxItem(boxId, data);
+    setBoxItemId(null);
+  };
+
+  const handleCancelEdit = () => {
+    setBoxItemId(null);
   };
 
   return (
@@ -44,34 +56,17 @@ export default function ExpandedRow({ product }: Props) {
           {productBoxes.map((bx) => (
             <div key={bx.id} className="flex gap-4 items-center">
               {boxItemId === bx.id ? (
-                <EditBox
-                  productId={product.id}
-                  boxId={bx.id}
+                <ProductBoxForm
+                  onCancel={handleCancelEdit}
+                  onSubmit={(data) => handleUpdate(bx.id, data)}
                   defaultValues={bx}
-                  setBoxItemId={setBoxItemId}
                 />
               ) : (
-                <div className="flex gap-3">
-                  <div className="flex gap-1 w-[120px]">
-                    <p className="text-orange-500">{bx.quantity}x</p>
-                    <p className="whitespace-nowrap">{bx.name}</p>
-                  </div>
-                  <button
-                    onClick={() => handleEditBox(bx.id)}
-                    className="justify-self-end"
-                  >
-                    <PenBoxIcon size={16} color="blue" />
-                  </button>
-                  <button
-                    onClick={() => deleteBoxItem(bx.id)}
-                    className="justify-self-end"
-                  >
-                    <Trash2 size={16} color="red" className="hover:bg-red-50" />
-                  </button>
-                </div>
+                <DisplayProductBox box={bx} onEditBox={handleEditBox} />
               )}
             </div>
           ))}
+          <AddProductBox productId={product.id} />
         </div>
       </div>
     </div>
