@@ -2,11 +2,6 @@
 using ECommerceAPI.Domain.Entities;
 using ECommerceAPI.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Persistence.Repositories
 {
@@ -19,6 +14,8 @@ namespace ECommerceAPI.Persistence.Repositories
         }
 
         public DbSet<T> Table => _context.Set<T>();
+
+        IQueryable<T> IWriteRepository<T>.Table => Table;
 
         //Sonucu umursamıyoruz bu yüzden return etmemize gerek yok await ile bekle ve bitir.
         //AsTask() → Task<EntityEntry<T>> döndürür.

@@ -3,13 +3,14 @@ import type { UploadStatus } from "../../../types/Gallery";
 import { productGalleryApi } from "../../../api/productGalleryApi";
 import { useSearchParams } from "react-router-dom";
 import { useProductStore } from "../../../stores/productStore";
+import { X } from "lucide-react";
 export default function AddProductImage() {
-
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState<UploadStatus>("initial");
   const [primaryIndex, setPrimaryIndex] = useState<number | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  
+  let [previewUrls, setPreviewUrls] = useState<string[]>([]);
+
   const refreshById = useProductStore((s) => s.refreshById);
 
   const productId = searchParams.get("productId");
@@ -23,8 +24,8 @@ export default function AddProductImage() {
         [...files].forEach((file) => {
           formData.append("files", file);
         });
-        if (primaryIndex !== null)
-          formData.append("primaryIndex", String(primaryIndex));
+
+        formData.append("primaryIndex", String(primaryIndex));
 
         await productGalleryApi.add(productId, formData);
         await refreshById(productId);
@@ -39,6 +40,12 @@ export default function AddProductImage() {
     }
   };
 
+  const handleCancel = (index: number) => {
+    URL.revokeObjectURL(previewUrls[index]);
+    setPreviewUrls((prev) => prev.filter((_, i) => i !== index));
+    setFiles((prev) => prev.filter((_, i) => i !== index));
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     setStatus("initial");
@@ -47,7 +54,7 @@ export default function AddProductImage() {
   };
 
   //Eklenen resmi görüntüleme
-  const previewUrls = useMemo(() => {
+  previewUrls = useMemo(() => {
     if (files?.length === 0) return [];
     return files.map((file) => URL.createObjectURL(file));
   }, [files]);
@@ -76,9 +83,14 @@ export default function AddProductImage() {
           {previewUrls.map((src, i) => (
             <button
               onClick={() => setPrimaryIndex(i)}
-              className="focus:border-2 focus:border-blue-500"
+              className="focus:border-2 focus:border-blue-500 relative"
             >
               <img key={src} src={src} alt={`preview-${i + 1}`} />
+              <X
+                onClick={() => handleCancel(i)}
+                className="absolute top-0 right-0"
+                color="red"
+              />
             </button>
           ))}
         </div>
@@ -104,7 +116,6 @@ export default function AddProductImage() {
       >
         Confirm
       </button>
-
       <Result status={status} />
     </div>
   );

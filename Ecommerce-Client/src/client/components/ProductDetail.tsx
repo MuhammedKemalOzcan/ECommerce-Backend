@@ -28,11 +28,13 @@ export default function ProductDetail() {
     quantity: b.quantity,
   }));
 
-  const firstGallery = currentProduct?.productGalleries?.[0];
-  const productImage =
-    firstGallery && firstGallery.path
-      ? `https://minieticaret57.blob.core.windows.net/${firstGallery.path}`
-      : image;
+    const primaryImage = currentProduct?.productGalleries?.find(
+    (gallery) => gallery.isPrimary === true
+  );
+
+  const chosen = primaryImage?.path
+    ? `https://minieticaret57.blob.core.windows.net/${primaryImage.path}`
+    : image;
 
   if (loading)
     return (
@@ -45,7 +47,7 @@ export default function ProductDetail() {
     <div className="flex flex-col items-center">
       <div className="flex p-32 gap-32 ">
         <div className="bg-gray-300 p-4 w-[50%] h-[50%] flex items-center justify-center rounded-lg">
-          <img className="shadow-lg size-[70%]" src={productImage} />
+          <img className="shadow-lg size-[70%]" src={chosen} />
         </div>
 
         <div className="flex flex-col justify-center  w-[60%] gap-10">

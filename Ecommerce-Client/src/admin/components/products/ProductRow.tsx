@@ -39,19 +39,13 @@ const ProductRow = React.memo(function ProductRow({
     onAdd(id);
   };
 
-  // const firstGallery = product.productGalleries?.[0];
-  // const productImage =
-  //   firstGallery && firstGallery.path
-  //     ? `https://minieticaret57.blob.core.windows.net/${firstGallery.path}`
-  //     : image;
-
   const primaryImage = product?.productGalleries?.find(
     (gallery) => gallery.isPrimary === true
   );
 
-  const chosen = primaryImage?.path
-    ? `https://minieticaret57.blob.core.windows.net/${primaryImage.path}`
-    : image;
+  const chosen = primaryImage?.path ? `${primaryImage.path}` : image;
+
+  console.log(product);
 
   return (
     <React.Fragment key={product.id}>

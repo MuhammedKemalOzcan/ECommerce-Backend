@@ -49,13 +49,17 @@ export default function DisplayProductBox({ box, onEditBox }: DisplayProps) {
       <div className="flex gap-1 w-[120px]">
         <p className="text-orange-500">{box.quantity}x</p>
         <p className="whitespace-nowrap">{box.name}</p>
+        <button onClick={() => onEditBox(box.id)} className="">
+          <PenBoxIcon size={16} color="blue" />
+        </button>
+        <button
+          onClick={() => handleDelete(box.id)}
+          className="justify-self-end"
+        >
+          <Trash2 size={16} color="red" className="hover:bg-red-50" />
+        </button>
       </div>
-      <button onClick={() => onEditBox(box.id)} className="">
-        <PenBoxIcon size={16} color="blue" />
-      </button>
-      <button onClick={() => handleDelete(box.id)} className="justify-self-end">
-        <Trash2 size={16} color="red" className="hover:bg-red-50" />
-      </button>
+
       <ConfirmationModal
         isOpen={isDeleteModalOpen}
         title="Ürünü Sil"

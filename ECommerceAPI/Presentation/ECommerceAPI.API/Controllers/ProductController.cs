@@ -1,5 +1,4 @@
 ﻿using ECommerceAPI.Application.Abstractions.Storage;
-using ECommerceAPI.Application.Dtos.Products;
 using ECommerceAPI.Application.Features.Commands.ProductBoxes.CreateProductBox;
 using ECommerceAPI.Application.Features.Commands.ProductBoxes.RemoveProductBox;
 using ECommerceAPI.Application.Features.Commands.ProductBoxes.UpdateProductBox;
@@ -13,9 +12,9 @@ using ECommerceAPI.Application.Repositories.File;
 using ECommerceAPI.Application.Repositories.ProductGallery;
 using ECommerceAPI.Application.Repositories.Products;
 using ECommerceAPI.Domain.Entities;
-using ECommerceAPI.Persistence.Repositories.Products;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommerceAPI.API.Controllers
 {
@@ -31,8 +30,9 @@ namespace ECommerceAPI.API.Controllers
         private readonly IStorageService _storageService;
         private readonly IProductReadRepository _productReadRepository;
         private readonly IProductWriteRepository _productWriteRepository;
+        private readonly IConfiguration _config;
 
-        public ProductController(IMediator mediator, IFileWriteRepository fileWriteRepository, IFileReadRepository fileReadRepository, IProductGalleryReadRepository galleryReadRepository, IProductGalleryWriteRepository galleryWriteRepository, IStorageService storageService, IProductReadRepository productReadRepository, IProductWriteRepository productWriteRepository)
+        public ProductController(IMediator mediator, IFileWriteRepository fileWriteRepository, IFileReadRepository fileReadRepository, IProductGalleryReadRepository galleryReadRepository, IProductGalleryWriteRepository galleryWriteRepository, IStorageService storageService, IProductReadRepository productReadRepository, IProductWriteRepository productWriteRepository, IConfiguration config)
         {
             _mediator = mediator;
             _fileWriteRepository = fileWriteRepository;
@@ -42,6 +42,7 @@ namespace ECommerceAPI.API.Controllers
             _storageService = storageService;
             _productReadRepository = productReadRepository;
             _productWriteRepository = productWriteRepository;
+            _config = config;
         }
 
         [HttpGet]
@@ -140,17 +141,31 @@ namespace ECommerceAPI.API.Controllers
             await _galleryWriteRepository.AddRangeAsync(datas.Select((d,i) => new ProductGallery
             {
                 FileName = d.fileName,
-                Path = d.pathOrContainerName,
+                Path = $"{_config["BaseStorageUrl"]}/{d.pathOrContainerName}",
                 Storage = _storageService.StorageName,
                 IsPrimary = primaryIndex.HasValue && primaryIndex.Value == i,
                 Product = new List<Product>() { product }
             }).ToList());
             await _galleryWriteRepository.SaveChangesAsync();
             return Ok();
+        }
+
+        [HttpDelete("[action]/{productId}/{imageId}")]
+        public async Task<IActionResult> DeleteProductImage(Guid productId, Guid imageId)
+        {
+            var product = await _productWriteRepository.Table
+            .Include(p => p.ProductGalleries)
+            .FirstOrDefaultAsync(p => p.Id == productId);
+
+            ProductGallery? deletingImage =  product.ProductGalleries.FirstOrDefault(p => p.Id == imageId);
+
+            product.ProductGalleries?.Remove(deletingImage);
+            await _productWriteRepository.SaveChangesAsync();
+            return Ok();
 
         }
 
-     
+
 
 
     }

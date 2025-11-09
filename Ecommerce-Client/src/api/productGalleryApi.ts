@@ -7,4 +7,6 @@ export const productGalleryApi = {
       `Product/Upload/${productId}`,
       formData
     ),
+  delete: (productId: string | null, imageId: string | null) =>
+    methods.delete(`Product/DeleteProductImage/${productId}/${imageId}`),
 };
