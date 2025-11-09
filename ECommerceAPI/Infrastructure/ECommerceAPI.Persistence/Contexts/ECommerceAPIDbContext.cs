@@ -13,6 +13,7 @@ namespace ECommerceAPI.Persistence.Contexts
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductBox> ProductBoxes { get; set; }
         public DbSet<ProductGallery> ProductImages { get; set; }
+        public DbSet<Domain.Entities.File> Files { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -32,14 +33,14 @@ namespace ECommerceAPI.Persistence.Contexts
                 .HasForeignKey(x => x.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
             });
-            builder.Entity<ProductGallery>(b =>
-            {
-                b.HasKey(x => x.Id);
-                b.HasOne(x => x.Product)
-                .WithMany(p => p.ProductGalleries)
-                .HasForeignKey(x => x.ProductId)
-                .OnDelete(DeleteBehavior.Cascade);
-            });
+            //builder.Entity<ProductGallery>(b =>
+            //{
+            //    b.HasKey(x => x.Id);
+            //    b.HasOne(x => x.Product)
+            //    .WithMany(p => p.ProductGalleries)
+            //    .HasForeignKey(x => x.ProductId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+            //});
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

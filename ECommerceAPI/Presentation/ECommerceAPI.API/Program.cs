@@ -1,5 +1,7 @@
 ﻿using ECommerceAPI.Application;
 using ECommerceAPI.Infrastructure;
+using ECommerceAPI.Infrastructure.Services.Storage.Azure;
+using ECommerceAPI.Infrastructure.Services.Storage.Local;
 using ECommerceAPI.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -17,6 +19,10 @@ namespace ECommerceAPI.API
             // Add services to the container.
             builder.Services.AddApplicationServices();
             builder.Services.AddPersistenceServices();
+
+            builder.Services.AddStorage<AzureStorage>();
+            //builder.Services.AddStorage<LocalStorage>();
+
             builder.Services.AddInfrastructureServices(builder.Configuration);
 
             builder.Services.AddCors(options =>
@@ -64,6 +70,7 @@ namespace ECommerceAPI.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
             app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseCors("client");

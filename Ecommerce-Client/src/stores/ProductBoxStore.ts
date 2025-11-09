@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import type { ProductBoxes } from "../types/ProductBox";
-import { productBoxApi } from "../api/products";
 import { toast } from "react-toastify";
+import { productBoxApi } from "../api/productBoxApi";
 
 type BoxProps = {
   productBoxes: ProductBoxes[];

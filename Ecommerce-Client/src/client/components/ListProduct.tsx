@@ -21,7 +21,10 @@ export default function ListProduct() {
 
   const filteredProduct = products.filter((p) => p.category == location);
 
-  console.log(filteredProduct);
+  const firstGallery = filteredProduct.map((p) => {
+    return p.productGalleries?.[0];
+  });
+  console.log(firstGallery);
 
   if (loading)
     return (
@@ -33,26 +36,45 @@ export default function ListProduct() {
   return (
     <div>
       {filteredProduct.map((product, index) => (
-        <div
-          className={`${
-            index % 2 === 0 ? "flex flex-row-reverse" : "flex"
-          } " p-40 gap-32" `}
-          key={product.id}
-        >
-          <img src={image} />
-          <div className="flex flex-col justify-center gap-20">
-            <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">
-              {product.name}
-            </p>
-            <p className="text-[15px] font-medium leading-[25px] w-[60%]">
-              {product.description}
-            </p>
-            <button
-              onClick={() => handleClick(product.id)}
-              className="btn-1 w-"
-            >
-              See Product
-            </button>
+        <div className="gap-20" key={product.id}>
+          <div
+            className={`${
+              index % 2 === 1 ? "flex flex-row-reverse" : "flex"
+            }  p-40 gap-32`}
+          >
+            {firstGallery.map(
+              (gallery, galleryIndex) =>
+                index === galleryIndex && (
+                  <div
+                    className="bg-gray-300 w-[50%] flex items-center justify-center rounded-lg"
+                    key={galleryIndex}
+                  >
+                    <img
+                      className="shadow-lg size-[70%]"
+                      src={
+                        gallery?.path
+                          ? `https://minieticaret57.blob.core.windows.net/${gallery?.path}`
+                          : image
+                      }
+                    />
+                  </div>
+                )
+            )}
+
+            <div className="flex flex-col justify-center gap-20 p-2 w-[50%]">
+              <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">
+                {product.name}
+              </p>
+              <p className="text-[15px] font-medium leading-[25px] w-[60%]">
+                {product.description}
+              </p>
+              <button
+                onClick={() => handleClick(product.id)}
+                className="btn-1 p-4 w-[30%] "
+              >
+                See Product
+              </button>
+            </div>
           </div>
         </div>
       ))}

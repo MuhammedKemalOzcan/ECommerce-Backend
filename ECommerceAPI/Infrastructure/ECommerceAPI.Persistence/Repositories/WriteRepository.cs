@@ -28,6 +28,9 @@ namespace ECommerceAPI.Persistence.Repositories
         public Task AddRangeAsync(IEnumerable<T> entities, CancellationToken ct = default)
             => Table.AddRangeAsync(entities, ct);
 
+        public void Attach(T entity)
+         => Table.Attach(entity);
+
         public void Remove(T entity)
             => Table.Remove(entity);
 

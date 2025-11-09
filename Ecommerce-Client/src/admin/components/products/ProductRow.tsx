@@ -1,7 +1,7 @@
 import React from "react";
 import type { Products } from "../../../types/Products";
-import { ChevronDown, ChevronUp, Edit, Trash2 } from "lucide-react";
-import image from "../../../assets/product.svg";
+import { ChevronDown, ChevronUp, Edit, ImagePlus, Trash2 } from "lucide-react";
+import image from "../../../assets/empty.jpg";
 import { formatCurrency } from "../../../utils/format";
 import StatusBadge from "./StatusBadge";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ type RowProps = {
   onToggle: (id: string) => void;
   expandedRowId: string | null;
   onDelete: (id: string) => void;
+  onAdd: (id: string) => void;
 };
 
 const ProductRow = React.memo(function ProductRow({
@@ -19,8 +20,8 @@ const ProductRow = React.memo(function ProductRow({
   expandedRowId,
   onToggle,
   onDelete,
+  onAdd,
 }: RowProps) {
-  
   const navigate = useNavigate();
 
   const toggleRow = (id: string | null) => {
@@ -32,6 +33,25 @@ const ProductRow = React.memo(function ProductRow({
     if (!id) return;
     onDelete(id);
   };
+
+  const addImage = (id: string | null) => {
+    if (!id) return;
+    onAdd(id);
+  };
+
+  // const firstGallery = product.productGalleries?.[0];
+  // const productImage =
+  //   firstGallery && firstGallery.path
+  //     ? `https://minieticaret57.blob.core.windows.net/${firstGallery.path}`
+  //     : image;
+
+  const primaryImage = product?.productGalleries?.find(
+    (gallery) => gallery.isPrimary === true
+  );
+
+  const chosen = primaryImage?.path
+    ? `https://minieticaret57.blob.core.windows.net/${primaryImage.path}`
+    : image;
 
   return (
     <React.Fragment key={product.id}>
@@ -45,8 +65,9 @@ const ProductRow = React.memo(function ProductRow({
           {expandedRowId === product.id ? <ChevronUp /> : <ChevronDown />}
         </td>
         <td>
-          <img loading="lazy" className="size-20" src={image} />
+          <img loading="lazy" src={chosen} className="size-20" />
         </td>
+
         <td>{product.name}</td>
         <td>{product.category}</td>
         <td>{formatCurrency(product.price)}</td>
@@ -54,7 +75,8 @@ const ProductRow = React.memo(function ProductRow({
         <td>
           <StatusBadge stock={product.stock} />
         </td>
-        <td className=" gap-2">
+        {/* Actions */}
+        <td className="flex mt-6 gap-2">
           <button
             onClick={() => handleDelete(product.id)}
             aria-label={`Delete ${product.name}`}
@@ -65,12 +87,19 @@ const ProductRow = React.memo(function ProductRow({
           <button
             onClick={() => navigate(`${product.id}`)}
             aria-label={`Delete ${product.name}`}
-            className="inline-flex ml-2 items-center gap-5 px-3 py-1.5 rounded bg-blue-600 text-white disabled:opacity-60"
+            className="inline-flex items-center gap-5 px-3 py-1.5 rounded bg-blue-600 text-white disabled:opacity-60"
           >
             <Edit size={16} />
           </button>
+          <button
+            onClick={() => addImage(product.id)}
+            className="inline-flex items-center gap-5 px-3 py-1.5 rounded bg-amber-600 text-white disabled:opacity-60"
+          >
+            <ImagePlus size={16} />
+          </button>
         </td>
       </tr>
+      {/* Expanded Row */}
       {expandedRowId === product.id && (
         <tr>
           <td className="px-4 py-6" colSpan={8}>

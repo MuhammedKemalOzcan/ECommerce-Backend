@@ -9,13 +9,14 @@ type productsState = {
   loading: boolean;
   error: string | null;
   getAll: () => Promise<void>;
-  getById: (id: string) => Promise<Products>;
+  getById: (id: string | null) => Promise<Products | undefined>;
   deleteProduct: (id: string) => Promise<void>;
   createProduct: (newProduct: AddProduct) => Promise<Products>;
   patchProduct: (
     id: string | null,
     data: AddProduct
   ) => Promise<Products | undefined>;
+  refreshById: (id: string | null) => Promise<void>;
 };
 
 export const useProductStore = create<productsState>((set, get) => ({
@@ -35,34 +36,19 @@ export const useProductStore = create<productsState>((set, get) => ({
       set({ loading: false });
     }
   },
-  getById: async (id: string) => {
-    set((state) => ({
-      ...state,
-      loading: true,
-      currentProduct: null, // Önceki ürünü temizle
-    }));
-
+  getById: async (id: string | null) => {
+    set({ loading: true, currentProduct: null });
+    if (!id) return;
     try {
-      const response = await productsApi.detail(id);
-
-      // 🎯 FIX: State'i koru!
-      set((state) => ({
-        ...state,
-        currentProduct: response.product,
-        loading: false,
-      }));
-
-      return response.product; // İhtiyaç olursa döndür
+      const { product } = await productsApi.detail(id);
+      set({ currentProduct: product, loading: false });
+      console.log(product);
+      return product;
     } catch (error) {
-      console.error("❌ getById error:", error);
-
-      set((state) => ({
-        ...state,
+      set({
         loading: false,
         error: error instanceof Error ? error.message : "Ürün yüklenemedi",
-      }));
-
-      throw error;
+      });
     }
   },
   createProduct: async (newProduct: AddProduct) => {
@@ -123,6 +109,30 @@ export const useProductStore = create<productsState>((set, get) => ({
       throw err;
     } finally {
       set({ loading: false });
+    }
+  },
+  refreshById: async (id: string | null) => {
+    if (!id) return;
+
+    try {
+      const { product: refresh } = await productsApi.detail(id);
+
+      set((state) => {
+        const exist = state.products.some((p) => p.id === id);
+        console.log(exist);
+
+        //Ürün var mı? varsa id'si uyuşuyor mu? eğer uyuşuyorsa refreshi yerine koy.
+        const products = exist
+          ? state.products.map((p) => (p.id === id ? refresh : p))
+          : state.products;
+
+        const currentProduct =
+          state.currentProduct?.id === id ? refresh : state.currentProduct;
+
+        return { products, currentProduct };
+      });
+    } catch (error) {
+      console.error("refreshById error:", error);
     }
   },
 }));

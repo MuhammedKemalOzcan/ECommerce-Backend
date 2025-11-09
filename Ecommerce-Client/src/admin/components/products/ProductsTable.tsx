@@ -5,43 +5,48 @@ import ProductRow from "./ProductRow";
 import { useProductStore } from "../../../stores/productStore";
 import { toast } from "react-toastify";
 import ConfirmationModal from "../common/ConfirmationModal";
+import AddImageModal from "../common/AddImageModal";
 type Props = {
   products: Products[];
 };
 
 export default function ProductsTable({ products }: Props) {
-  const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
   const deleteProduct = useProductStore((s) => s.deleteProduct);
+
+  const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const deleteId = searchParams.get("deleteId");
+  const isDeleteModalOpen = Boolean(deleteId);
+
+  const productId = searchParams.get("productId");
+  const isAddModalOpen = Boolean(productId);
 
   const toggleRow = (id: string) => {
     setExpandedRowId(expandedRowId === id ? null : id);
   };
 
-  const deleteProductId = searchParams.get("deleteId");
-  const isDeleteModalOpen = Boolean(deleteProductId);
-
-  const [isDeleting, setIsDeleting] = useState(false);
-
   const handleDelete = (id: string) => {
     setSearchParams({ deleteId: id });
   };
 
+  const handleAdd = (id: string) => {
+    setSearchParams({ productId: id });
+  };
+
   const handleConfirmDelete = async () => {
-    if (!deleteProductId) return;
-    try {
-      setIsDeleting(true);
-      await deleteProduct(deleteProductId);
-      setSearchParams({});
-    } catch (error) {
-      toast.error("Silme işlemi başarısız");
-      console.error(error);
-    } finally {
-      setIsDeleting(false);
+    if (deleteId) {
+      try {
+        await deleteProduct(deleteId);
+        setSearchParams({});
+      } catch (error) {
+        toast.error("Silme işlemi başarısız");
+        console.error(error);
+      }
     }
   };
 
-  const handleCancelDelete = () => {
+  const handleCancel = () => {
     setSearchParams({});
   };
 
@@ -73,6 +78,7 @@ export default function ProductsTable({ products }: Props) {
               expandedRowId={expandedRowId}
               onToggle={toggleRow}
               onDelete={handleDelete}
+              onAdd={handleAdd}
             />
           ))}
         </tbody>
@@ -84,9 +90,13 @@ export default function ProductsTable({ products }: Props) {
         confirmText="Sil"
         cancelText="İptal"
         variant="danger"
-        isLoading={isDeleting}
         onConfirm={handleConfirmDelete}
-        onCancel={handleCancelDelete}
+        onCancel={handleCancel}
+      />
+      <AddImageModal
+        productId={productId}
+        isOpen={isAddModalOpen}
+        onCancel={handleCancel}
       />
     </div>
   );
