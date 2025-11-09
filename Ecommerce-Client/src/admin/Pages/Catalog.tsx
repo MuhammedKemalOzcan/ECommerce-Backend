@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import CatalogFilter from "../components/products/CatalogFilter";
 import ProductsTable from "../components/products/ProductsTable";
 import type { Category, Status } from "../../types/Catalog";
-import { PacmanLoader  } from "react-spinners";
+import { PacmanLoader } from "react-spinners";
 
 export default function Catalog() {
   const { loading, products } = useProductStore(
@@ -33,7 +33,7 @@ export default function Catalog() {
       return matchCat && matchStatus;
     });
   }, [products, category, status]);
-  
+
   if (loading)
     return (
       <div className="modal">

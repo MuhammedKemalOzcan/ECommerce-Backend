@@ -33,7 +33,7 @@ namespace ECommerceAPI.Application.Features.Commands.ProductBoxes.CreateProductB
                 Quantity = request.Quantity
             };
 
-            await _productBoxWriteRepository.AddAsync(productBox);
+            await _productBoxWriteRepository.AddAsync(productBox); 
             await _productBoxWriteRepository.SaveChangesAsync();
 
             return new CreateProductBoxCommandResponse

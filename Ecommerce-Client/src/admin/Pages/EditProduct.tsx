@@ -18,7 +18,7 @@ export default function EditProduct() {
 
   useEffect(() => {
     if (id) getById(id);
-  }, [id, getById]);
+  }, [id]);
 
   console.log(currentProduct);
   

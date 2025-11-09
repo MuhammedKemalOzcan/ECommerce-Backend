@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace ECommerceAPI.Domain.Entities
 {
-    public class ProductGallery : BaseEntity
+    public class ProductGallery : File
     {
-        public string Image { get; set; }
-        public Guid ProductId { get; set; }
-        //Kapak Fotoğrafı
-        public bool? IsPrimary { get; set; } = false;
-        public Product Product { get; set; }
+        public bool IsPrimary { get; set; } = false;
+        public ICollection<Product> Product { get; set; }
     }
 }

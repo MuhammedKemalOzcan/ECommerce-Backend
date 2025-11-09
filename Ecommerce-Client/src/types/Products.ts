@@ -1,3 +1,4 @@
+import type { ImageGalleries } from "./Gallery";
 import type { AddProductBoxes, ProductBoxes } from "./ProductBox";
 
 export interface Products {
@@ -9,6 +10,7 @@ export interface Products {
   category: string;
   description: string;
   productBoxes?: ProductBoxes[];
+  productGalleries?: ImageGalleries[];
 }
 
 export interface AddProduct {

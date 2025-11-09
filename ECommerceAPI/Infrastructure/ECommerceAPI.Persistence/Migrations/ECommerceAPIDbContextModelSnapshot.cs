@@ -22,6 +22,41 @@ namespace ECommerceAPI.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.File", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("character varying(21)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Storage")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Files");
+
+                    b.HasDiscriminator().HasValue("File");
+
+                    b.UseTphMappingStrategy();
+                });
+
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
@@ -86,35 +121,6 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductBoxes");
-                });
-
-            modelBuilder.Entity("ECommerceAPI.Domain.Entities.ProductGallery", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool?>("IsPrimary")
-                        .HasColumnType("boolean");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -313,21 +319,35 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ECommerceAPI.Domain.Entities.ProductBox", b =>
+            modelBuilder.Entity("ProductProductGallery", b =>
                 {
-                    b.HasOne("ECommerceAPI.Domain.Entities.Product", "Product")
-                        .WithMany("ProductBoxes")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<Guid>("ProductGalleriesId")
+                        .HasColumnType("uuid");
 
-                    b.Navigation("Product");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ProductGalleriesId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductProductGallery");
                 });
 
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.ProductGallery", b =>
                 {
+                    b.HasBaseType("ECommerceAPI.Domain.Entities.File");
+
+                    b.Property<bool>("IsPrimary")
+                        .HasColumnType("boolean");
+
+                    b.HasDiscriminator().HasValue("ProductGallery");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.ProductBox", b =>
+                {
                     b.HasOne("ECommerceAPI.Domain.Entities.Product", "Product")
-                        .WithMany("ProductGalleries")
+                        .WithMany("ProductBoxes")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -386,11 +406,24 @@ namespace ECommerceAPI.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProductProductGallery", b =>
+                {
+                    b.HasOne("ECommerceAPI.Domain.Entities.ProductGallery", null)
+                        .WithMany()
+                        .HasForeignKey("ProductGalleriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ECommerceAPI.Domain.Entities.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.Product", b =>
                 {
                     b.Navigation("ProductBoxes");
-
-                    b.Navigation("ProductGalleries");
                 });
 #pragma warning restore 612, 618
         }

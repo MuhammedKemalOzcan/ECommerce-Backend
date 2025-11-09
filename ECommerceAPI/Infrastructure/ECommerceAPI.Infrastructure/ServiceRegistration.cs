@@ -1,16 +1,13 @@
 ﻿using ECommerceAPI.Application.Abstractions;
 using ECommerceAPI.Application.Abstractions.Services;
+using ECommerceAPI.Application.Abstractions.Storage;
 using ECommerceAPI.Infrastructure.Services.JwtGenerator;
+using ECommerceAPI.Infrastructure.Services.Storage;
 using ECommerceAPI.Persistence.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Infrastructure
 {
@@ -35,6 +32,13 @@ namespace ECommerceAPI.Infrastructure
             services.AddScoped<ITokenHandler, JwtGenerator>();
             services.AddScoped<IIdentityService, IdentityServices>();
 
+            services.AddScoped<IStorageService, StorageService>();
+        }
+
+        //T => IStorage'dan türemiş bir class ise burayı çalıştır.
+        public static void AddStorage<T>(this IServiceCollection services) where T:Storage,IStorage
+        {
+            services.AddScoped<IStorage, T>();
         }
     }
 }

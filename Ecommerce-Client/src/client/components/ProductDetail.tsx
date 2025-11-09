@@ -2,8 +2,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useProductStore } from "../../stores/productStore";
 import { useShallow } from "zustand/shallow";
 import { useEffect } from "react";
-import image from "../../assets/product.svg";
+import image from "../../assets/empty.jpg";
 import { PacmanLoader } from "react-spinners";
+import ProductGallery from "./productGallery";
 
 export default function ProductDetail() {
   const { id, category } = useParams<{ id: string; category: string }>();
@@ -27,6 +28,12 @@ export default function ProductDetail() {
     quantity: b.quantity,
   }));
 
+  const firstGallery = currentProduct?.productGalleries?.[0];
+  const productImage =
+    firstGallery && firstGallery.path
+      ? `https://minieticaret57.blob.core.windows.net/${firstGallery.path}`
+      : image;
+
   if (loading)
     return (
       <div>
@@ -35,19 +42,13 @@ export default function ProductDetail() {
     );
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <div className="flex p-32 gap-32 ">
-        <div className="flex flex-col gap-12">
-          <button
-            onClick={() => navigate(`/${category}`)}
-            className="flex item-start text-gray-500"
-          >
-            Go Back
-          </button>
-          <img src={image} />
+        <div className="bg-gray-300 p-4 w-[50%] h-[50%] flex items-center justify-center rounded-lg">
+          <img className="shadow-lg size-[70%]" src={productImage} />
         </div>
 
-        <div className="flex flex-col justify-center gap-10">
+        <div className="flex flex-col justify-center  w-[60%] gap-10">
           <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">
             {currentProduct?.name}
           </p>
@@ -55,7 +56,7 @@ export default function ProductDetail() {
             {currentProduct?.description}
           </p>
           <p className="font-bold">$ {currentProduct?.price}</p>
-          <button className="btn-1">Add To Cart</button>
+          <button className="btn-1 p-4 w-[160px]">Add To Cart</button>
         </div>
       </div>
       <div className="p-32 gap-40 flex">
@@ -79,6 +80,7 @@ export default function ProductDetail() {
           ))}
         </div>
       </div>
+      <ProductGallery product={currentProduct} />
     </div>
   );
 }

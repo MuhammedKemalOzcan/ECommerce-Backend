@@ -10,5 +10,6 @@ namespace ECommerceAPI.Application.Repositories
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
         Task<int> SaveChangesAsync();
+        void Attach(T entity);
     }
 }
