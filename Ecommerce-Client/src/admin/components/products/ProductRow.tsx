@@ -45,8 +45,6 @@ const ProductRow = React.memo(function ProductRow({
 
   const chosen = primaryImage?.path ? `${primaryImage.path}` : image;
 
-  console.log(product);
-
   return (
     <React.Fragment key={product.id}>
       <tr className="relative border hover:bg-gray-200">

@@ -30,7 +30,7 @@ export default function AddProductBox({ productId }: AddItemProps) {
           className="flex items-center justify-center gap-2 p-2 rounded-xl border-2 border-dashed border-black mt-2 bg-white hover:bg-black hover:text-white"
         >
           <PlusCircleIcon size={20} />
-          <p>Add New Item</p>
+          <p className="whitespace-nowrap">Add New Item</p>
         </button>
       ) : (
         <ProductBoxForm
