@@ -50,10 +50,10 @@ export default function ListProduct() {
                     key={galleryIndex}
                   >
                     <img
-                      className="shadow-lg size-[70%]"
+                      className="shadow-lg rounded-lg h-[90%]"
                       src={
                         gallery?.path
-                          ? `https://minieticaret57.blob.core.windows.net/${gallery?.path}`
+                          ? `${gallery?.path}`
                           : image
                       }
                     />

@@ -4,11 +4,10 @@ import { useShallow } from "zustand/shallow";
 import { useEffect } from "react";
 import image from "../../assets/empty.jpg";
 import { PacmanLoader } from "react-spinners";
-import ProductGallery from "./productGallery";
+import ProductGallery from "./ProductGallery";
 
 export default function ProductDetail() {
   const { id, category } = useParams<{ id: string; category: string }>();
-  const navigate = useNavigate();
   const { getById, currentProduct, loading } = useProductStore(
     useShallow((s) => ({
       getById: s.getById,
@@ -28,13 +27,11 @@ export default function ProductDetail() {
     quantity: b.quantity,
   }));
 
-    const primaryImage = currentProduct?.productGalleries?.find(
+  const primaryImage = currentProduct?.productGalleries?.find(
     (gallery) => gallery.isPrimary === true
   );
 
-  const chosen = primaryImage?.path
-    ? `https://minieticaret57.blob.core.windows.net/${primaryImage.path}`
-    : image;
+  const chosen = primaryImage?.path ? `${primaryImage.path}` : image;
 
   if (loading)
     return (

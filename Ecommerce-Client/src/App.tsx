@@ -16,6 +16,7 @@ import Orders from "./admin/Pages/Orders";
 import AdminHome from "./admin/Pages/AdminHome";
 import EditProduct from "./admin/Pages/EditProduct";
 import CreateProduct from "./admin/Pages/CreateProduct";
+import Cart from "./client/pages/Cart";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: "/speakers", element: <Speakers /> },
       { path: "/earphones", element: <Earphones /> },
       { path: ":category/:id", element: <ProductDetail /> },
+      { path: "/cart", element: <Cart /> },
     ],
   },
   {
