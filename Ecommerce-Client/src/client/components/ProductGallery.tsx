@@ -6,7 +6,6 @@ type Props = {
 
 export default function ProductGallery({ product }: Props) {
   const image = product?.productGalleries?.map((gallery) => gallery.path);
-  console.log(image);
 
   return (
     <div className="flex w-[80%] p-4 gap-2 items-center justify-center">

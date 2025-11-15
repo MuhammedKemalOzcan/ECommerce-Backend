@@ -36,15 +36,11 @@ namespace ECommerceAPI.Persistence.Services
                 return null;
             }
 
-            var includes = new List<Expression<Func<Cart, object>>>
-            {
-                c => c.CartItems,
-                c => c.CartItems.Select(ci => ci.Product)
-            };
 
-            var carts = await _cartsReadRepository.GetAllAsync(includes, predicate, false, ct);
 
-            return carts.FirstOrDefault();
+            var carts = await _cartsReadRepository.GetActiveCartWithDetailsAsync(predicate, ct);
+
+            return carts;
 
 
         }
@@ -95,7 +91,7 @@ namespace ECommerceAPI.Persistence.Services
             x.ExpiryDate.HasValue &&
             x.ExpiryDate.Value < DateTime.UtcNow;
 
-            var expiredCarts = await _cartsReadRepository.GetAllAsync(null,predicate,false,ct);
+            var expiredCarts = await _cartsReadRepository.GetAllAsync(null, predicate, false, ct);
 
             return expiredCarts.ToList();
         }

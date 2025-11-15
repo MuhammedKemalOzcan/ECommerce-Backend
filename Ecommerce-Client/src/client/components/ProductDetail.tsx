@@ -1,13 +1,16 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useProductStore } from "../../stores/productStore";
 import { useShallow } from "zustand/shallow";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import image from "../../assets/empty.jpg";
 import { PacmanLoader } from "react-spinners";
 import ProductGallery from "./ProductGallery";
+import { Minus, Plus } from "lucide-react";
+import { useCartStore } from "../../stores/cartStore";
 
 export default function ProductDetail() {
   const { id, category } = useParams<{ id: string; category: string }>();
+  let [quantity, setQuantity] = useState<number>(1);
   const { getById, currentProduct, loading } = useProductStore(
     useShallow((s) => ({
       getById: s.getById,
@@ -15,8 +18,7 @@ export default function ProductDetail() {
       loading: s.loading,
     }))
   );
-
-  console.log(currentProduct);
+  const addItemToCart = useCartStore((s) => s.addItemToCart);
 
   useEffect(() => {
     if (id) getById(id);
@@ -32,6 +34,17 @@ export default function ProductDetail() {
   );
 
   const chosen = primaryImage?.path ? `${primaryImage.path}` : image;
+
+  const handlePlus = () => {
+    setQuantity((quantity += 1));
+  };
+  const handleMinus = () => {
+    setQuantity(quantity === 1 ? quantity : (quantity -= 1));
+  };
+
+  const AddToCart = async (productId: string | undefined) => {
+    await addItemToCart({ productId, quantity });
+  };
 
   if (loading)
     return (
@@ -55,7 +68,23 @@ export default function ProductDetail() {
             {currentProduct?.description}
           </p>
           <p className="font-bold">$ {currentProduct?.price}</p>
-          <button className="btn-1 p-4 w-[160px]">Add To Cart</button>
+          <div className="flex items-center gap-8">
+            <div className="flex w-[120px] items-center justify-between bg-gray-100 p-4">
+              <button onClick={() => handleMinus()}>
+                <Minus size={16} />
+              </button>
+              <span>{quantity}</span>
+              <button onClick={() => handlePlus()}>
+                <Plus size={16} />
+              </button>
+            </div>
+            <button
+              onClick={() => AddToCart(currentProduct?.id)}
+              className="btn-1 p-4 w-[160px]"
+            >
+              Add To Cart
+            </button>
+          </div>
         </div>
       </div>
       <div className="p-32 gap-40 flex">

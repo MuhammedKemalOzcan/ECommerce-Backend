@@ -21,10 +21,9 @@ export default function ListProduct() {
 
   const filteredProduct = products.filter((p) => p.category == location);
 
-  const firstGallery = filteredProduct.map((p) => {
-    return p.productGalleries?.[0];
-  });
-  console.log(firstGallery);
+  const showCase = filteredProduct.map((p) =>
+    p.productGalleries?.find((gallery) => gallery.isPrimary === true)
+  );
 
   if (loading)
     return (
@@ -42,7 +41,7 @@ export default function ListProduct() {
               index % 2 === 1 ? "flex flex-row-reverse" : "flex"
             }  p-40 gap-32`}
           >
-            {firstGallery.map(
+            {showCase.map(
               (gallery, galleryIndex) =>
                 index === galleryIndex && (
                   <div
@@ -51,11 +50,7 @@ export default function ListProduct() {
                   >
                     <img
                       className="shadow-lg rounded-lg h-[90%]"
-                      src={
-                        gallery?.path
-                          ? `${gallery?.path}`
-                          : image
-                      }
+                      src={gallery?.path ? `${gallery?.path}` : image}
                     />
                   </div>
                 )

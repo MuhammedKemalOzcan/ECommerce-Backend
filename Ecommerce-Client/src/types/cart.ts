@@ -12,3 +12,8 @@ export type CartItems = {
   TotalPrice: number;
   stock: number;
 };
+
+export type AddItem = {
+  productId: string | undefined;
+  quantity: number;
+};
