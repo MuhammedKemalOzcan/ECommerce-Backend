@@ -5,6 +5,7 @@ import type { User } from "../../types/User";
 import { useAuthStore } from "../../auth/authStore";
 import { useLogin } from "../../auth/useLogin";
 import { useEffect } from "react";
+import { ArrowBigRight } from "lucide-react";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -76,6 +77,10 @@ export default function Login() {
             Kayıt ol
           </button>
         </p>
+        <button onClick={() => navigate("/")} className="flex gap-3">
+          Kayıt olmadan devam et 
+          <ArrowBigRight/>
+        </button>
       </form>
     </div>
   );
