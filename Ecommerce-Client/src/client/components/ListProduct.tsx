@@ -34,40 +34,44 @@ export default function ListProduct() {
 
   return (
     <div>
-      {filteredProduct.map((product, index) => (
-        <div className="gap-20" key={product.id}>
-          <div
-            className={`${
-              index % 2 === 1 ? "flex flex-row-reverse" : "flex"
-            }  p-40 gap-32`}
-          >
-            {showCase.map(
-              (gallery, galleryIndex) =>
-                index === galleryIndex && (
-                  <img
-                    className="shadow-lg rounded-lg w-[45%]"
-                    src={gallery?.path ? `${gallery?.path}` : image}
-                  />
-                )
-            )}
-
-            <div className="flex flex-col justify-center gap-20 p-2 w-[50%]">
-              <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">
-                {product.name}
-              </p>
-              <p className="text-[15px] font-medium leading-[25px] w-[60%]">
-                {product.description}
-              </p>
-              <button
-                onClick={() => handleClick(product.id)}
-                className="btn-1 p-4 w-[30%] "
+      {filteredProduct.map(
+        (product, index) =>
+          product.stock > 0 && (
+            <div className="gap-20" key={product.id}>
+              <div
+                className={`${
+                  index % 2 === 1 ? "flex flex-row-reverse" : "flex"
+                }  p-40 gap-32`}
               >
-                See Product
-              </button>
+                {showCase.map(
+                  (gallery, galleryIndex) =>
+                    index === galleryIndex && (
+                      <img
+                        key={galleryIndex}
+                        className="shadow-lg rounded-lg w-[45%]"
+                        src={gallery?.path ? `${gallery?.path}` : image}
+                      />
+                    )
+                )}
+
+                <div className="flex flex-col justify-center gap-20 p-2 w-[50%]">
+                  <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">
+                    {product.name}
+                  </p>
+                  <p className="text-[15px] font-medium leading-[25px] w-[60%]">
+                    {product.description}
+                  </p>
+                  <button
+                    onClick={() => handleClick(product.id)}
+                    className="btn-1 p-4 w-[30%] "
+                  >
+                    See Product
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      ))}
+          )
+      )}
     </div>
   );
 }

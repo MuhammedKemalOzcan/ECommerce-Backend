@@ -35,7 +35,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
 
             if (product.Stock < totalQuantity)
             {
-                throw new StockException("Ürünün stoğu yeterli değil.");
+                throw new StockException(message: $"Stok yeterli değil stok miktarı: {product.Stock}");
             }
 
             if (existingItem != null)
