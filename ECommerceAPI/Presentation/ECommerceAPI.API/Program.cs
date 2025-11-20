@@ -27,7 +27,7 @@ namespace ECommerceAPI.API
 
             builder.Services.AddCors(options =>
             options.AddPolicy("client", builder =>
-            builder.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader()
+            builder.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader().AllowCredentials()
             ));
 
             // JWT Bearer auth

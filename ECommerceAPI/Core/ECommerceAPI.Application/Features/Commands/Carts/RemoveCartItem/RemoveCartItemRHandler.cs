@@ -26,16 +26,19 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.RemoveCartItem
 
         public async Task<RemoveCartItemResponse> Handle(RemoveCartItemRequest request, CancellationToken cancellationToken)
         {
-            var cartItem = await _cartItemReadRepository.GetByIdAsync(request.CartItemId);
-            if (cartItem == null) return new RemoveCartItemResponse { Message = "Ürün bulunamadı" };
+            //var cartItem = await _cartItemReadRepository.GetByIdAsync(request.CartItemId);
+            //if (cartItem == null) return new RemoveCartItemResponse { Message = "Ürün bulunamadı" };
 
             var cart = await _cartService.GetActiveCartAsync(request.UserId, request.SessionId, cancellationToken);
-            if (cart == null || cart.Id != cartItem.CartId) return new RemoveCartItemResponse { Message = "Sepet bulunamadı" };
+            if (cart == null) return new RemoveCartItemResponse { Message = "Sepet bulunamadı" };
 
-            var isOwner = await _cartService.ValidateCartOwnershipAsync(request.UserId,cart,request.SessionId,cancellationToken);
-            if(!isOwner) return new RemoveCartItemResponse { Message = "Bu sepete erişiminiz bulunamamaktadır." };
+            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.Id == request.CartItemId);
+            if (cartItem == null) return new RemoveCartItemResponse { Message = "Ürün bulunamadı" };
 
-             _cartItemWriteRepository.Remove(cartItem);
+            var isOwner = await _cartService.ValidateCartOwnershipAsync(request.UserId, cart, request.SessionId, cancellationToken);
+            if (!isOwner) return new RemoveCartItemResponse { Message = "Bu sepete erişiminiz bulunamamaktadır." };
+
+            _cartItemWriteRepository.Remove(cartItem);
 
             await _cartItemWriteRepository.SaveChangesAsync();
 

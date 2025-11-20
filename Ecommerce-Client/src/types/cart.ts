@@ -1,16 +1,22 @@
 export type Cart = {
-  cartItems: CartItems[];
+  id: string;
+  userId: string | null;
+  cartItems: CartItem[];
   totalAmount: number;
   totalItemCount: number;
+  createdDate?: string;
+  lastModifiedDate?: string | null;
 };
 
-export type CartItems = {
+export type CartItem = {
+   id: string;
+  productId: string;
   productName: string;
-  productImageUrl: string;
+  productImageUrl: string | null;
   quantity: number;
+  stock: number | null;
+  totalPrice: number;
   unitPrice: number;
-  TotalPrice: number;
-  stock: number;
 };
 
 export type AddItem = {
