@@ -28,14 +28,14 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
             var cart = await _cartService.GetOrCreateCartAsync(request.UserId, request.SessionId, cancellationToken);
 
             var product = await _productReadRepository.GetByIdAsync(request.ProductId);
-            if (product == null) return new AddItemToCartCommandResponse { Message = "Ürün bulunamadı" };
+            if (product == null) throw new NotFoundException("Ürün bulunamadı");
 
             var existingItem = await _cartService.GetCartItemAsync(cart.Id, request.ProductId, cancellationToken);
             var totalQuantity = (existingItem?.Quantity ?? 0) + request.Quantity;
 
             if (product.Stock < totalQuantity)
             {
-                return new AddItemToCartCommandResponse { Message = "Stok yeterli değil." };
+                throw new StockException("Ürünün stoğu yeterli değil.");
             }
 
             if (existingItem != null)
@@ -87,7 +87,8 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
 
             return new AddItemToCartCommandResponse
             {
-                CartDto = cartDto
+                Data = cartDto,
+                Message = "Ürün başarıyla eklendi."
             };
 
 

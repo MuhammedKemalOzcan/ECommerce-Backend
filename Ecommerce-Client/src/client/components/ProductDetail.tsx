@@ -43,6 +43,7 @@ export default function ProductDetail() {
   };
 
   const AddToCart = async (productId: string | undefined) => {
+    if (!productId) return;
     await addItemToCart({ productId, quantity });
   };
 

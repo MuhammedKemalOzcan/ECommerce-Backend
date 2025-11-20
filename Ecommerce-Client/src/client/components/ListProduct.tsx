@@ -44,15 +44,10 @@ export default function ListProduct() {
             {showCase.map(
               (gallery, galleryIndex) =>
                 index === galleryIndex && (
-                  <div
-                    className="bg-gray-300 w-[50%] flex items-center justify-center rounded-lg"
-                    key={galleryIndex}
-                  >
-                    <img
-                      className="shadow-lg rounded-lg h-[90%]"
-                      src={gallery?.path ? `${gallery?.path}` : image}
-                    />
-                  </div>
+                  <img
+                    className="shadow-lg rounded-lg w-[45%]"
+                    src={gallery?.path ? `${gallery?.path}` : image}
+                  />
                 )
             )}
 

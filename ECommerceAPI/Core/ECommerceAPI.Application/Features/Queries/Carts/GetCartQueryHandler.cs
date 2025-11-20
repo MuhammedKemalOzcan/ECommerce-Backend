@@ -1,18 +1,18 @@
 ﻿using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Dtos.Cart;
-using ECommerceAPI.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Application.Features.Queries.Carts
 {
     public class GetCartQueryHandler : IRequestHandler<GetCartQueryRequest, GetCartQueryResponse>
     {
         private readonly ICartService _cartService;
+
+        public GetCartQueryHandler(ICartService cartService)
+        {
+            _cartService = cartService;
+        }
+
         public async Task<GetCartQueryResponse> Handle(GetCartQueryRequest request, CancellationToken cancellationToken)
         {
             var cart = await _cartService.GetActiveCartAsync(request.UserId, request.SessionId, cancellationToken);

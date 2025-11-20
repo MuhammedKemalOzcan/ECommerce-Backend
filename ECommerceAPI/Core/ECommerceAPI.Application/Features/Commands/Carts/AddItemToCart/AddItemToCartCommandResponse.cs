@@ -9,7 +9,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
 {
     public class AddItemToCartCommandResponse
     {
-        public CartDto? CartDto { get; set; }
+        public CartDto? Data { get; set; }
         public string Message { get; set; }
     }
 }

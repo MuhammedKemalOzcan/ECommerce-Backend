@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { useAuthStore } from "../auth/authStore";
 
 axios.defaults.baseURL = "https://localhost:7196/api/";
+axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use((config) => {
   const token = useAuthStore.getState().token;
@@ -11,7 +12,7 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
-//Daha sonra dönüş yap.
+// Daha sonra dönüş yap.
 axios.interceptors.response.use(
   (response) => response,
   (error: AxiosError<any>) => {

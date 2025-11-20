@@ -5,6 +5,7 @@ import { useAuthStore } from "../../auth/authStore";
 import logo from "../../assets/Logo.svg";
 
 import { useShallow } from "zustand/shallow";
+import { useCartStore } from "../../stores/cartStore";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function Navbar() {
       user: state.user,
     }))
   );
+  const cart = useCartStore((s) => s.cart);
 
   const handleLogout = () => {
     clearAuth();
@@ -42,7 +44,8 @@ function Navbar() {
           ) : (
             <button onClick={handleLogin}>Giriş Yap</button>
           )}
-          <button onClick={() => navigate("/cart")}>
+          <button className="relative" onClick={() => navigate("/cart")}>
+            <p className="absolute -top-3 -right-4 bg-red-500 px-1 rounded-full ">{cart?.totalItemCount}</p>
             <ShoppingCart />
           </button>
         </div>

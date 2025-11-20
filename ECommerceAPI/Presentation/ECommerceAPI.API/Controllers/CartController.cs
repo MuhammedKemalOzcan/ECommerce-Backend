@@ -74,7 +74,7 @@ namespace ECommerceAPI.API.Controllers
         }
 
         [HttpDelete("items/{itemId}")]
-        public async Task<IActionResult> DeleteItem(Guid itemId, [FromBody] RemoveCartItemRequest request)
+        public async Task<IActionResult> DeleteItem(Guid itemId)
         {
             var userId = GetUserIdFromToken();
             var sessionId = GetOrCreateSessionId();
@@ -148,7 +148,7 @@ namespace ECommerceAPI.API.Controllers
                 {
                     HttpOnly = true, //JS erişemez (XSS’e karşı).
                     Secure = true,
-                    SameSite = SameSiteMode.Lax,
+                    SameSite = SameSiteMode.None,
                     Expires = DateTimeOffset.UtcNow.AddDays(30),
 
                     Path = "/"
