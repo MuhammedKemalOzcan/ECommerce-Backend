@@ -86,6 +86,11 @@ export default function ProductDetail() {
               Add To Cart
             </button>
           </div>
+          {currentProduct?.stock && currentProduct?.stock <= 5 && (
+            <p className="text-sm text-red-500">
+              Ürün tükenmek üzere acele et. son {currentProduct.stock} adet!
+            </p>
+          )}
         </div>
       </div>
       <div className="p-32 gap-40 flex">

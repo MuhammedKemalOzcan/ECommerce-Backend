@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.Application.Dtos.Products;
+using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories.Products;
 using ECommerceAPI.Domain.Entities;
 using MediatR;
@@ -24,7 +25,7 @@ namespace ECommerceAPI.Application.Features.Queries.GetProductById
             };
 
             var product = await _productReadRepo.GetByIdAsync(request.Id,includes,true);
-            if (product == null) throw new Exception("Ürün bulunamadı");
+            if (product == null) throw new NotFoundException("Ürün bulunamadı");
 
             var productDto = new ProductDto
             {

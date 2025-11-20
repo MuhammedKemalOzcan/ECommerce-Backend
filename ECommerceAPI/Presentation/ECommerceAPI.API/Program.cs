@@ -1,5 +1,6 @@
 ﻿using ECommerceAPI.Application;
 using ECommerceAPI.Infrastructure;
+using ECommerceAPI.Infrastructure.Middleware;
 using ECommerceAPI.Infrastructure.Services.Storage.Azure;
 using ECommerceAPI.Infrastructure.Services.Storage.Local;
 using ECommerceAPI.Persistence;
@@ -70,6 +71,8 @@ namespace ECommerceAPI.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
             app.UseStaticFiles();
             app.UseHttpsRedirection();

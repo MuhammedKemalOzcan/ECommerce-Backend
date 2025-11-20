@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ECommerceAPI.Application.Exceptions
 {
-    public class StockException : BaseException
+    public class UnauthorizedException : BaseException
     {
-        public StockException(string message = "Stok Yeterli Değil") : base(message, 400, "INSUFFICIENT_STOCK")
+        public UnauthorizedException(string message = "Unauthorized") : base(message, 401, "UNAUTHORIZED")
         {
         }
     }

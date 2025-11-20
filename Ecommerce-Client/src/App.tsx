@@ -17,6 +17,7 @@ import AdminHome from "./admin/Pages/AdminHome";
 import EditProduct from "./admin/Pages/EditProduct";
 import CreateProduct from "./admin/Pages/CreateProduct";
 import Cart from "./client/pages/Cart";
+import NotFoundPage from "./client/components/NotFoundPage";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: "/earphones", element: <Earphones /> },
       { path: ":category/:id", element: <ProductDetail /> },
       { path: "/cart", element: <Cart /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
   {
