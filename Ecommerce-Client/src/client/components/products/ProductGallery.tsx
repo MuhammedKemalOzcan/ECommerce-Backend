@@ -1,4 +1,5 @@
-import type { Products } from "../../types/Products";
+import type { Products } from "../../../types/Products";
+
 
 type Props = {
   product: Products | null;

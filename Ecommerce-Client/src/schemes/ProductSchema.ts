@@ -23,7 +23,7 @@ export const PRODUCT_VALIDATION_RULES = {
   features: {
     maxLength: {
       value: 1000,
-      message: "Ürün ismi en fazla 500 karakter olabilir.",
+      message: "Ürün özelliği en fazla 1000 karakter olabilir.",
     },
   } satisfies RegisterOptions<AddProduct, "features">,
   category: {

@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
-import { useProductStore } from "../../stores/productStore";
 import { useShallow } from "zustand/shallow";
 import { useEffect, useState } from "react";
-import image from "../../assets/empty.jpg";
+import image from "../../../assets/empty.jpg";
 import { PacmanLoader } from "react-spinners";
 import ProductGallery from "./ProductGallery";
 import { Minus, Plus } from "lucide-react";
-import { useCartStore } from "../../stores/cartStore";
+import { useProductStore } from "../../../stores/productStore";
+import { useCartStore } from "../../../stores/cartStore";
 
 export default function ProductDetail() {
   const { id, category } = useParams<{ id: string; category: string }>();

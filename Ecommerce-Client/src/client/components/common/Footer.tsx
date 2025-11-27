@@ -1,9 +1,9 @@
-import logo from "../../assets/logo.svg";
-import facebook from "../../assets/facebook.svg";
-import instagram from "../../assets/instagram.svg";
-import twitter from "../../assets/twitter.svg";
+import logo from "../../../assets/Logo.svg"
+import facebook from "../../../assets/facebook.svg";
+import instagram from "../../../assets/instagram.svg";
+import twitter from "../../../assets/twitter.svg";
 import { NavLink } from "react-router-dom";
-import { navItems } from "../../utils/navItems";
+import { navItems } from "../../../utils/navItems";
 
 function Footer() {
   return (

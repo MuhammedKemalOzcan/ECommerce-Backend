@@ -1,11 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { navItems } from "../../utils/navItems";
+import { navItems } from "../../../utils/navItems";
 import { LogOutIcon, ShoppingCart } from "lucide-react";
-import { useAuthStore } from "../../auth/authStore";
-import logo from "../../assets/Logo.svg";
+import { useAuthStore } from "../../../auth/authStore";
+import logo from "../../../assets/Logo.svg";
 
 import { useShallow } from "zustand/shallow";
-import { useCartStore } from "../../stores/cartStore";
+import { useCartStore } from "../../../stores/cartStore";
 
 function Navbar() {
   const navigate = useNavigate();

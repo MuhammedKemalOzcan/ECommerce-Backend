@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useProductStore } from "../../stores/productStore";
 import { useShallow } from "zustand/shallow";
-import image from "../../assets/product.svg";
+import image from "../../../assets/product.svg";
 import { PacmanLoader } from "react-spinners";
+import { useProductStore } from "../../../stores/productStore";
 
 export default function ListProduct() {
   let location = useLocation().pathname.slice(1);
