@@ -5,7 +5,6 @@ import Home from "./client/pages/Home";
 import Headphones from "./client/pages/Headphones";
 import Speakers from "./client/pages/Speakers";
 import Earphones from "./client/pages/Earphones";
-import ProductDetail from "./client/components/ProductDetail";
 import Login from "./client/pages/Login";
 import Register from "./client/pages/Register";
 import AdminLayout from "./layouts/AdminLayout";
@@ -17,7 +16,8 @@ import AdminHome from "./admin/Pages/AdminHome";
 import EditProduct from "./admin/Pages/EditProduct";
 import CreateProduct from "./admin/Pages/CreateProduct";
 import Cart from "./client/pages/Cart";
-import NotFoundPage from "./client/components/NotFoundPage";
+import NotFoundPage from "./client/components/common/NotFoundPage";
+import ProductDetail from "./client/components/products/ProductDetail";
 
 const router = createBrowserRouter([
   {

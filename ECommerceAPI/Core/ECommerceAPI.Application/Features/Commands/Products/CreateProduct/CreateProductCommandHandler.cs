@@ -34,13 +34,7 @@ namespace ECommerceAPI.Application.Features.Commands.Products.CreateProduct
                 Features = request.Features
             };
 
-            //if(request.ProductGalleries is { Count: > 0 })
-            //{
-            //    foreach (var url in request.ProductGalleries.Where(u => !string.IsNullOrEmpty(u)))
-            //    {
-            //        product.ProductGalleries.Add(new ProductGallery { Image = url });
-            //    }
-            //};
+
 
             if (request.ProductBoxes is { Count: > 0 })
             {
@@ -53,12 +47,7 @@ namespace ECommerceAPI.Application.Features.Commands.Products.CreateProduct
                 }
             };
 
-
-
-            await _productWriteRepo.AddAsync(product,cancellationToken);
-            await _productWriteRepo.SaveChangesAsync();
-
-            return new CreateProductCommandResponse
+            var productDto = new ProductDto
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -67,12 +56,23 @@ namespace ECommerceAPI.Application.Features.Commands.Products.CreateProduct
                 Category = product.Category,
                 Description = product.Description,
                 Features = product.Features,
-                //ProductGalleries = product.ProductGalleries?.Select(pg => pg.Image).ToList(),
                 ProductBoxes = product.ProductBoxes?.Select(pb => new ProductBoxDto
                 {
                     Name = pb.Name,
                     Quantity = pb.Quantity
                 }).ToList()
+            };
+
+
+
+
+
+            await _productWriteRepo.AddAsync(product, cancellationToken);
+            await _productWriteRepo.SaveChangesAsync();
+
+            return new CreateProductCommandResponse
+            {
+                Data = productDto
             };
 
         }

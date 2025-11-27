@@ -1,4 +1,4 @@
-import ListProduct from "../components/ListProduct";
+import ListProduct from "../components/products/ListProduct";
 
 export default function Earphones() {
   return (
