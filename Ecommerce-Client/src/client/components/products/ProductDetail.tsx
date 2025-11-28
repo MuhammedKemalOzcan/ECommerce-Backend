@@ -56,11 +56,10 @@ export default function ProductDetail() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex p-32 gap-32 ">
-        <div className="bg-gray-300 p-4 w-[50%] h-[50%] flex items-center justify-center rounded-lg">
+      <div className="flex gap-32 ">
+        <div className="p-4 w-[70%] h-[60%] flex items-center justify-center rounded-lg">
           <img className="shadow-lg size-[70%]" src={chosen} />
         </div>
-
         <div className="flex flex-col justify-center  w-[60%] gap-10">
           <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">
             {currentProduct?.name}

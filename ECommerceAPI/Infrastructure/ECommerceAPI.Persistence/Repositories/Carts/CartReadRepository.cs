@@ -18,6 +18,7 @@ namespace ECommerceAPI.Persistence.Repositories.Carts
         {
             return _context.Carts.Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
+                .ThenInclude(p => p.ProductGalleries)
                 .FirstOrDefaultAsync(predicate, ct);
         }
     }

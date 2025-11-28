@@ -12,7 +12,7 @@ export default function MainLayout() {
   }, [getAll]);
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center w-screen gap-40">
       <Navbar />
       <Outlet />
       <Footer />

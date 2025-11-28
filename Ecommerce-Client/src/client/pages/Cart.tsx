@@ -20,7 +20,7 @@ export default function Cart() {
   console.log(cartItems);
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center">
+    <div className="w-screen h-screen flex flex-col items-center">
       <div className="flex flex-col w-[80%] h-auto p-8 ">
         <div className="flex mb-4 justify-between">
           <h1>SHOPPING CART</h1>

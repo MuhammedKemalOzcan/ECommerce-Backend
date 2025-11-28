@@ -20,10 +20,18 @@ export default function CartTable({ cart }: CartProps) {
     deleteCartItem(itemId);
   };
   return (
-    <div className="flex flex-col gap-4 w-full mx-auto">
+    <div className="flex flex-col gap-4 w-full">
       {/* Cart items */}
       <div className="flex flex-col gap-2 bg-white rounded-lg border border-gray-200 shadow-lg">
-        {cart?.cartItems.map((item, index) => (
+        {cart?.cartItems?.map((item, index) => (
+          <div
+            key={item.id}
+            className={`flex flex-col gap-2 p-4 ${
+              index % 2 === 1 ? "bg-gray-50" : "bg-white"
+            }`}
+          ></div>
+        ))}
+        {/* {cart?.cartItems.map((item, index) => (
           <div
             key={item.id}
             className={`flex flex-col gap-2 p-4 ${
@@ -31,6 +39,9 @@ export default function CartTable({ cart }: CartProps) {
             }`}
           >
             <div className="flex items-start justify-between">
+              {item.productImageUrl && (
+                <img className="size-24" src={item.productImageUrl} />
+              )}
               <h1 className="font-semibold text-gray-900">
                 {item.productName}
               </h1>
@@ -41,7 +52,6 @@ export default function CartTable({ cart }: CartProps) {
                 <Trash2Icon size={18} />
               </button>
             </div>
-
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-4">
@@ -60,7 +70,7 @@ export default function CartTable({ cart }: CartProps) {
               </div>
             </div>
           </div>
-        ))}
+        ))} */}
 
         {(!cart || cart.cartItems.length === 0) && (
           <div className="p-4 text-sm text-gray-500 text-center">

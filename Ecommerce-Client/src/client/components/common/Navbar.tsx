@@ -3,9 +3,10 @@ import { navItems } from "../../../utils/navItems";
 import { LogOutIcon, ShoppingCart } from "lucide-react";
 import { useAuthStore } from "../../../auth/authStore";
 import logo from "../../../assets/Logo.svg";
-
+import { Badge } from "@mui/material";
 import { useShallow } from "zustand/shallow";
 import { useCartStore } from "../../../stores/cartStore";
+import { useEffect } from "react";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -15,7 +16,16 @@ function Navbar() {
       user: state.user,
     }))
   );
-  const cart = useCartStore((s) => s.cart);
+  const { cart, listCart } = useCartStore(
+    useShallow((s) => ({
+      cart: s.cart,
+      listCart: s.listCart,
+    }))
+  );
+
+  useEffect(() => {
+    listCart();
+  }, [listCart]);
 
   const handleLogout = () => {
     clearAuth();
@@ -45,8 +55,9 @@ function Navbar() {
             <button onClick={handleLogin}>Giriş Yap</button>
           )}
           <button className="relative" onClick={() => navigate("/cart")}>
-            <p className="absolute -top-3 -right-4 bg-red-500 px-1 rounded-full ">{cart?.totalItemCount}</p>
-            <ShoppingCart />
+            <Badge badgeContent={cart?.totalItemCount} color="warning">
+              <ShoppingCart />
+            </Badge>
           </button>
         </div>
       </div>
