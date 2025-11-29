@@ -36,6 +36,8 @@ namespace ECommerceAPI.Persistence.Services
                 return null;
             }
 
+           
+
 
 
             var carts = await _cartsReadRepository.GetActiveCartWithDetailsAsync(predicate, ct);

@@ -1,4 +1,4 @@
-import type { AddItem, Cart, CartItem } from "../types/cart";
+import type { AddItem, Cart, CartItem, UpdateCartItem } from "../types/cart";
 import { methods } from "./apiClient";
 
 export const cartApi = {
@@ -6,6 +6,11 @@ export const cartApi = {
     methods.post<AddItem, { data: Cart; message?: string }>(
       "/Cart/items",
       cartItem
+    ),
+  update: (CartItem: UpdateCartItem) =>
+    methods.put<UpdateCartItem, { data: Cart }>(
+      `Cart/items/${CartItem.cartItemId}`,
+      CartItem
     ),
   list: () => methods.get<{ data: Cart }>("/Cart"),
   clear: () => methods.delete("/Cart"),

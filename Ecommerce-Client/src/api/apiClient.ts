@@ -78,7 +78,7 @@ axios.interceptors.response.use(
         if (data?.errors && typeof data.errors == "object") {
           Object.entries(data.errors).forEach(([field, messages]) => {
             if (Array.isArray(messages)) {
-              messages.forEach((msg) => toast.error(`${msg}`));
+              messages.forEach((msg) => toast.error(`${field} : ${msg}`));
             }
           });
         }

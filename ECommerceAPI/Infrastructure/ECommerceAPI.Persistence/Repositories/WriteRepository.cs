@@ -19,8 +19,8 @@ namespace ECommerceAPI.Persistence.Repositories
 
         //Sonucu umursamıyoruz bu yüzden return etmemize gerek yok await ile bekle ve bitir.
         //AsTask() → Task<EntityEntry<T>> döndürür.
-        public async Task AddAsync(T entity,CancellationToken ct = default)
-            => await Table.AddAsync(entity,ct).AsTask();
+        public async Task AddAsync(T entity, CancellationToken ct = default)
+            => await Table.AddAsync(entity, ct).AsTask();
 
         public Task AddRangeAsync(IEnumerable<T> entities, CancellationToken ct = default)
             => Table.AddRangeAsync(entities, ct);
@@ -38,7 +38,7 @@ namespace ECommerceAPI.Persistence.Repositories
             => await _context.SaveChangesAsync();
 
         public void Update(T entity)
-            => Table.Update(entity);
+            => Table.Entry(entity).State = EntityState.Modified;
 
     }
 }
