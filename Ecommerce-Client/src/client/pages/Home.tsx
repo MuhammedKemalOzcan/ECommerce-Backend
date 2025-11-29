@@ -1,7 +1,6 @@
 import HomeBanner from "../components/home/Banner";
 import MenuItem from "../components/home/MenuItem";
 import ProductShowcase from "../components/home/ProductShowcase";
-
 import StoreIntro from "../components/home/StoreIntro";
 
 export default function Home() {

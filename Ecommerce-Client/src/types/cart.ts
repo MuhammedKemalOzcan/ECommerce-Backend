@@ -9,7 +9,7 @@ export type Cart = {
 };
 
 export type CartItem = {
-   id: string;
+  id: string;
   productId: string;
   productName: string;
   productImageUrl: string | null;
@@ -22,4 +22,9 @@ export type CartItem = {
 export type AddItem = {
   productId: string | undefined;
   quantity: number;
+};
+export type UpdateCartItem = {
+  cartItemId: string;
+  quantity: number;
+  stock?: number;
 };

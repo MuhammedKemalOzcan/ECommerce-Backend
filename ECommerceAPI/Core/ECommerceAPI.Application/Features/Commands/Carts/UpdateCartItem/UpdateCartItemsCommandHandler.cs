@@ -1,8 +1,8 @@
 ﻿using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Dtos.Cart;
+using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Features.Commands.Carts.UpdateCartItem;
 using ECommerceAPI.Application.Repositories.CartItems;
-using ECommerceAPI.Application.Repositories.Carts;
 using ECommerceAPI.Application.Repositories.Products;
 using MediatR;
 
@@ -15,42 +15,46 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.UpdateCart
         private readonly ICartService _cartService;
         private readonly IProductReadRepository _productReadRepo;
 
-        public UpdateCartItemsCommandHandler(ICartItemReadRepository cartItemRepo, ICartService cartService, IProductReadRepository productReadRepo)
+        public UpdateCartItemsCommandHandler(ICartItemReadRepository cartItemRepo, ICartService cartService, IProductReadRepository productReadRepo, ICartItemWriteRepository cartItemWriteRepo)
         {
             _cartItemRepo = cartItemRepo;
             _cartService = cartService;
             _productReadRepo = productReadRepo;
+            _cartItemWriteRepo = cartItemWriteRepo;
         }
 
         public async Task<UpdateCartItemsCommandResponse> Handle(UpdateCartItemsCommandRequest request, CancellationToken cancellationToken)
         {
-            var cartItem = await _cartItemRepo.GetByIdAsync(request.CartItemId);
 
-            if (cartItem == null) return new UpdateCartItemsCommandResponse() { Message = "Ürün bulunamadı." };
 
             var cart = await _cartService.GetActiveCartAsync(request.UserId, request.SessionId, cancellationToken);
-            if (cart == null || cart.Id != cartItem.CartId) return new UpdateCartItemsCommandResponse() { Message = "Sepetiniz bulunamadı." };
+            if (cart == null) throw new NotFoundException("Sepet Bulunamadı");
+
+            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.Id == request.CartItemId);
+            if (cartItem == null)
+                throw new NotFoundException("Ürün Bulunamadı");
 
             var isOwner = await _cartService.ValidateCartOwnershipAsync(request.UserId, cart, request.SessionId, cancellationToken);
-            if(!isOwner) return new UpdateCartItemsCommandResponse() { Message = "Bu sepete erişim hakkınız bulunmamaktadır." };
+            if (!isOwner) throw new UnauthorizedAccessException();
 
             var product = await _productReadRepo.GetByIdAsync(cartItem.ProductId);
-            if(product == null) return new UpdateCartItemsCommandResponse() { Message = "Bu ürün bulunamadı." };
+            if (product == null) throw new NotFoundException("Ürün Bulunamadı");
 
-            if(product.Stock < request.Quantity) return new UpdateCartItemsCommandResponse() { Message = "Yeterli stok yok." };
+            if (product.Stock < request.Quantity) throw new StockException();
 
             cartItem.Quantity = request.Quantity;
 
+            _cartItemWriteRepo.Update(cartItem);
             await _cartItemWriteRepo.SaveChangesAsync();
 
-            var updatedCart = _cartService.GetActiveCartAsync(request.UserId, request.SessionId, cancellationToken);
+            var updatedCart = await _cartService.GetActiveCartAsync(request.UserId, request.SessionId, cancellationToken);
             var cartDto = new CartDto
             {
-                Id = cart.Id,
-                UserId = cart.UserId,
-                TotalItemCount = cart.TotalItemCount,
-                TotalAmount = cart.TotalAmount,
-                CartItems = cart.CartItems.Select(ci =>
+                Id = updatedCart.Id,
+                UserId = updatedCart.UserId,
+                TotalItemCount = updatedCart.TotalItemCount,
+                TotalAmount = updatedCart.TotalAmount,
+                CartItems = updatedCart.CartItems.Select(ci =>
                 {
                     var primary = ci.Product?.ProductGalleries?
                         .FirstOrDefault(g => g.IsPrimary)
@@ -75,7 +79,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.UpdateCart
 
             return new UpdateCartItemsCommandResponse()
             {
-                CartDto = cartDto
+                Data = cartDto
             };
 
 

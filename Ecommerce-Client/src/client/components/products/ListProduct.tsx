@@ -4,6 +4,7 @@ import image from "../../../assets/product.svg";
 import { PacmanLoader } from "react-spinners";
 import { useProductStore } from "../../../stores/productStore";
 
+
 export default function ListProduct() {
   let location = useLocation().pathname.slice(1);
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function ListProduct() {
 
   if (loading)
     return (
-      <div>
+      <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-lg z-50">
         <PacmanLoader />
       </div>
     );
@@ -53,7 +54,6 @@ export default function ListProduct() {
                     />
                   )
               )}
-
               <div className="flex flex-col justify-center gap-20 p-2 w-[50%]">
                 <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">
                   {product.name}

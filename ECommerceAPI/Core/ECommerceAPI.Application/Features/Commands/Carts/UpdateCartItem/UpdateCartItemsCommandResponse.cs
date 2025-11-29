@@ -4,7 +4,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.UpdateCart
 {
     public class UpdateCartItemsCommandResponse
     {
-        public CartDto CartDto { get; set; }
+        public CartDto Data { get; set; }
         public string Message { get; set; }
     }
 }

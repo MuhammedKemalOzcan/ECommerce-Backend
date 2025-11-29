@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { AddItem, Cart, CartItem } from "../types/cart";
+import type { AddItem, Cart, CartItem, UpdateCartItem } from "../types/cart";
 import { cartApi } from "../api/cart";
 import { toast } from "react-toastify";
 
@@ -10,6 +10,7 @@ type cartProps = {
   listCart: () => Promise<void>;
   clearCart: () => Promise<void>;
   deleteCartItem: (itemId: string | null) => Promise<void>;
+  updateCartItem: (cartItem: UpdateCartItem) => Promise<void>;
   error: CartError | null;
   isLoading: boolean;
 };
@@ -28,7 +29,7 @@ const handleError = (error: any, context: string): CartError => {
 
   // Axios error structure
   if (error?.message) {
-    errorMessage = error.message;
+    errorMessage = error.response.message;
   }
 
   if (error?.code) {
@@ -37,7 +38,7 @@ const handleError = (error: any, context: string): CartError => {
 
   // Backend'den gelen spesifik hata mesajları
   if (error?.data?.message) {
-    errorMessage = error.data.message;
+    errorMessage = error.response.data.message;
   }
 
   return {
@@ -77,6 +78,8 @@ export const useCartStore = create<cartProps>((set) => ({
     set({ isLoading: true });
     try {
       const res = await cartApi.add(cartItem);
+      console.log(res);
+
       set({ cart: res.data });
       toast.success(res.message);
     } catch (error) {
@@ -87,6 +90,21 @@ export const useCartStore = create<cartProps>((set) => ({
       });
     } finally {
       set({ isLoading: false });
+    }
+  },
+  updateCartItem: async (cartItem: UpdateCartItem) => {
+    set({ isLoading: true });
+    try {
+      const res = await cartApi.update(cartItem);
+      set({ cart: res.data, isLoading: false });
+      console.log(res.data);
+    } catch (error: any) {
+      console.log(error.response?.data?.message);
+      const cartError = handleError(error, "Update Item Error");
+      set({
+        error: error.response?.data,
+        isLoading: false,
+      });
     }
   },
   clearCart: async () => {
