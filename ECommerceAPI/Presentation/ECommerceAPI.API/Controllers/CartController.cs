@@ -5,12 +5,14 @@ using ECommerceAPI.Application.Features.Commands.Carts.RemoveCartItem;
 using ECommerceAPI.Application.Features.Commands.Carts.UpdateCartItem;
 using ECommerceAPI.Application.Features.Queries.Carts;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace ECommerceAPI.API.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CartController : ControllerBase

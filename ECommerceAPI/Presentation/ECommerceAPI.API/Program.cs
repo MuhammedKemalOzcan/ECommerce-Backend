@@ -1,9 +1,17 @@
-﻿using ECommerceAPI.Infrastructure;
+﻿using ECommerceAPI.API.Configurations;
+using ECommerceAPI.Infrastructure;
 using ECommerceAPI.Infrastructure.Middleware;
 using ECommerceAPI.Infrastructure.Services.Storage.Azure;
 using ECommerceAPI.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using NpgsqlTypes;
+using Serilog;
+using Serilog.Context;
+using Serilog.Core;
+using Serilog.Events;
+using Serilog.Sinks.PostgreSQL;
+using System.Security.Claims;
 using System.Text;
 
 namespace ECommerceAPI.API
@@ -12,81 +20,137 @@ namespace ECommerceAPI.API
     {
         public static void Main(string[] args)
         {
+            try
+            {
+                Log.Information("Uygulama başlatılıyor...");
 
-            var builder = WebApplication.CreateBuilder(args);
+                var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddApplicationServices();
-            builder.Services.AddPersistenceServices();
+                Log.Logger = new LoggerConfiguration()
+                    .ReadFrom.Configuration(builder.Configuration)
+                    .WriteTo.PostgreSQL(
+                        connectionString: builder.Configuration.GetConnectionString("PostgreSQL"),
+                        tableName: "Logs",
+                        needAutoCreateTable: true,
+                        restrictedToMinimumLevel: LogEventLevel.Information,
+                        columnOptions: new Dictionary<string, ColumnWriterBase>
+                        {
+                            {"message", new RenderedMessageColumnWriter(NpgsqlDbType.Text)},
+                            {"message_template", new MessageTemplateColumnWriter(NpgsqlDbType.Text)},
+                            {"level", new LevelColumnWriter(true , NpgsqlDbType.Varchar)},
+                            {"time_stamp", new TimestampColumnWriter(NpgsqlDbType.Timestamp)},
+                            {"exception", new ExceptionColumnWriter(NpgsqlDbType.Text)},
+                            {"log_event", new LogEventSerializedColumnWriter(NpgsqlDbType.Json)},
+                            {"user",new  UserColumWriter() }
+                        }
+                    )
+                    .Enrich.FromLogContext()
+                    .CreateLogger();
 
-            builder.Services.AddStorage<AzureStorage>();
-            //builder.Services.AddStorage<LocalStorage>();
+                builder.Host.UseSerilog();
 
-            builder.Services.AddInfrastructureServices(builder.Configuration);
+                // Add services to the container.
+                builder.Services.AddApplicationServices();
+                builder.Services.AddPersistenceServices();
 
-            builder.Services.AddCors(options =>
-            options.AddPolicy("client", builder =>
-            builder.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader().AllowCredentials()
-            ));
+                builder.Services.AddStorage<AzureStorage>();
+                //builder.Services.AddStorage<LocalStorage>();
 
+                builder.Services.AddInfrastructureServices(builder.Configuration);
 
-            // JWT Bearer auth
-            var key = builder.Configuration["Jwt:Key"];
-            var issuer = builder.Configuration["Jwt:Issuer"];
-            var audience = builder.Configuration["Jwt:Audience"];
+                builder.Services.AddCors(options =>
+                options.AddPolicy("client", builder =>
+                builder.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader().AllowCredentials()
+                ));
 
-            builder.Services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(opt =>
-                {
-                    // ↓ Token doğrulama kuralları
-                    opt.TokenValidationParameters = new()
+                // JWT Bearer auth
+                var key = builder.Configuration["Jwt:Key"];
+                var issuer = builder.Configuration["Jwt:Issuer"];
+                var audience = builder.Configuration["Jwt:Audience"];
+
+                builder.Services
+                    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer("Admin",opt =>
                     {
-                        ValidateIssuer = true,
-                        ValidIssuer = issuer,
+                        // ↓ Token doğrulama kuralları
+                        opt.TokenValidationParameters = new()
+                        {
+                            ValidateIssuer = true,
+                            ValidIssuer = issuer,
 
-                        ValidateAudience = true,
-                        ValidAudience = audience,
+                            ValidateAudience = true,
+                            ValidAudience = audience,
 
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key!)),
+                            ValidateIssuerSigningKey = true,
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key!)),
 
-                        ValidateLifetime = true // süresi geçmiş token reddedilir
-                    };
+                            ValidateLifetime = true // süresi geçmiş token reddedilir
+                        };
+                    });
+
+                builder.Services.AddAuthorization();
+
+                builder.Services.AddControllers();
+                // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+                builder.Services.AddEndpointsApiExplorer();
+                builder.Services.AddSwaggerGen();
+
+
+                var app = builder.Build();
+
+                // Configure the HTTP request pipeline.
+                if (app.Environment.IsDevelopment())
+                {
+                    app.UseSwagger();
+                    app.UseSwaggerUI();
+                }
+
+                app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+
+
+
+                app.UseStaticFiles();
+                app.UseHttpsRedirection();
+                app.UseCors("client");
+
+                app.UseAuthentication();
+                app.UseAuthorization();
+
+                app.Use(async (context, next) =>
+                {
+
+                    string username = context.User?.Identity?.IsAuthenticated == true
+                    ? context.User.FindFirst(ClaimTypes.Email)?.Value
+                    ?? context.User.FindFirst("email")?.Value
+                    ?? "Unknown" : "Anonymous";
+
+
+                    var correlationId = context.Request.Headers["X-Correlation-Id"].FirstOrDefault() ?? context.TraceIdentifier;
+
+                    using (LogContext.PushProperty("user", username))
+                    using (LogContext.PushProperty("correlation_id", correlationId))
+                    {
+                        await next();
+                    }
                 });
 
+                app.UseSerilogRequestLogging();
+                app.MapControllers();
 
+                Log.Information("Uygulama başarıyla başladı!");
 
-            builder.Services.AddAuthorization();
-
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+                app.Run();
+            }
+            catch (Exception ex)
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                Log.Fatal(ex, "Application start-up failed");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
             }
 
-            app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
-            app.UseStaticFiles();
-            app.UseHttpsRedirection();
-            app.UseCors("client");
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
         }
     }
 }

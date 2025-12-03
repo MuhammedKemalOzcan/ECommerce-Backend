@@ -1,5 +1,7 @@
-﻿using ECommerceAPI.Application.Repositories.Products;
+﻿using ECommerceAPI.Application.Exceptions;
+using ECommerceAPI.Application.Repositories.Products;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +14,23 @@ namespace ECommerceAPI.Application.Features.Commands.Products.RemoveProduct
     {
         private readonly IProductWriteRepository _productWrite;
         private readonly IProductReadRepository _productRead;
+        private readonly ILogger<RemoveProductCommandHandler> _logger;
 
-        public RemoveProductCommandHandler(IProductWriteRepository productWrite, IProductReadRepository productRead)
+        public RemoveProductCommandHandler(IProductWriteRepository productWrite, IProductReadRepository productRead, ILogger<RemoveProductCommandHandler> logger)
         {
             _productWrite = productWrite;
             _productRead = productRead;
+            _logger = logger;
         }
 
         public async Task<RemoveProductCommandResponse> Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken)
         {
             var product = await _productRead.GetByIdAsync(request.Id);
-            if (product == null) return new RemoveProductCommandResponse { Message = $"{request.Id} id'li ürün bulunamadı" };
+            if (product == null)
+            {
+                _logger.LogWarning("Ürün bulunamadı");
+                throw new NotFoundException($"{request.Id} id'li ürün bulunamadı");
+            }
 
             _productWrite.Remove(product);
             await _productWrite.SaveChangesAsync();

@@ -7,6 +7,7 @@ using ECommerceAPI.Application.Repositories.ProductBoxes;
 using ECommerceAPI.Application.Repositories.Products;
 using ECommerceAPI.Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
 {
@@ -15,12 +16,14 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
         private readonly ICartService _cartService;
         private readonly IProductReadRepository _productReadRepository;
         private readonly ICartItemWriteRepository _cartItemWriteRepository;
+        private readonly ILogger<AddItemToCartCommandHandler> _logger;
 
-        public AddItemToCartCommandHandler(ICartService cartService, IProductReadRepository productReadRepository, ICartItemWriteRepository cartItemWriteRepository)
+        public AddItemToCartCommandHandler(ICartService cartService, IProductReadRepository productReadRepository, ICartItemWriteRepository cartItemWriteRepository, ILogger<AddItemToCartCommandHandler> logger)
         {
             _cartService = cartService;
             _productReadRepository = productReadRepository;
             _cartItemWriteRepository = cartItemWriteRepository;
+            _logger = logger;
         }
 
         public async Task<AddItemToCartCommandResponse> Handle(AddItemToCartCommandRequest request, CancellationToken cancellationToken)
@@ -28,13 +31,20 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
             var cart = await _cartService.GetOrCreateCartAsync(request.UserId, request.SessionId, cancellationToken);
 
             var product = await _productReadRepository.GetByIdAsync(request.ProductId);
-            if (product == null) throw new NotFoundException("Ürün bulunamadı");
+            if (product == null) 
+            {
+                _logger.LogWarning("Ürün Bulunamadı. ProductId: {ProductId}", request.ProductId);
+                throw new NotFoundException("Ürün bulunamadı");
+            } 
 
             var existingItem = await _cartService.GetCartItemAsync(cart.Id, request.ProductId, cancellationToken);
             var totalQuantity = (existingItem?.Quantity ?? 0) + request.Quantity;
 
             if (product.Stock < totalQuantity)
             {
+                _logger.LogWarning(
+                "Yetersiz stok. ProductId: {ProductId}, Stock: {Stock}, Requested: {RequestedQuantity}",
+                product.Id, product.Stock, totalQuantity);
                 throw new StockException(message: $"Stok yeterli değil stok miktarı: {product.Stock}");
             }
 

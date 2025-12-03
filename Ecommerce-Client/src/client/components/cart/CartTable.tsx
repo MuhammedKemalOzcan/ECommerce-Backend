@@ -1,8 +1,8 @@
 import { Minus, Plus, Trash2Icon } from "lucide-react";
-import type { Cart } from "../../../types/cart";
-import { useCartStore } from "../../../stores/cartStore";
-import { useShallow } from "zustand/shallow";
 import { BeatLoader } from "react-spinners";
+import { useShallow } from "zustand/shallow";
+import { useCartStore } from "../../../stores/cartStore";
+import type { Cart } from "../../../types/cart";
 
 type CartProps = {
   cart: Cart | null;
@@ -28,21 +28,24 @@ export default function CartTable({ cart }: CartProps) {
     if (quantity <= 1) return;
     updateCartItem({ cartItemId, quantity: quantity - 1 });
   };
+
   const handlePlus = (cartItemId: string | null, quantity: number) => {
     if (!cartItemId) return;
     updateCartItem({ cartItemId, quantity: quantity + 1 });
   };
 
+  const hasItems = Boolean(cart?.cartItems.length);
+
   return (
-    <div className="flex flex-col gap-4 w-full">
+    <div className="flex w-full flex-col gap-4">
       {/* Cart items */}
-      <div className="flex flex-col gap-2 bg-white rounded-lg border border-gray-200 shadow-lg">
+      <div className="flex flex-col gap-2 rounded-lg border border-gray-200 bg-white shadow-lg">
         {isLoading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-lg z-50">
+          <div className="absolute inset-0 z-50 flex items-center justify-center rounded-lg bg-white/80 backdrop-blur-sm">
             <div className="flex flex-col items-center gap-3">
               <BeatLoader color="#D87D4A" size={12} />
-              <p className="text-sm text-gray-600 font-medium">
-                Güncelleniyor...
+              <p className="text-sm font-medium text-gray-600">
+                Guncelleniyor...
               </p>
             </div>
           </div>
@@ -50,7 +53,7 @@ export default function CartTable({ cart }: CartProps) {
         {cart?.cartItems?.map((item, index) => (
           <div
             key={item.id}
-            className={`flex gap-2 p-4 justify-between ${
+            className={`flex justify-between gap-2 p-4 ${
               index % 2 === 1 ? "bg-gray-50" : "bg-white"
             }`}
           >
@@ -58,16 +61,15 @@ export default function CartTable({ cart }: CartProps) {
               {item.productImageUrl !== null && (
                 <img className="size-24" src={item.productImageUrl} />
               )}
-              <div className="flex flex-col gap-2 my-auto justify-center ">
+              <div className="my-auto flex flex-col justify-center gap-2 ">
                 <h1 className="font-semibold text-gray-900">
                   {item.productName}
                 </h1>
                 <div className="flex items-center gap-4">
-                  <div className="flex justify-between text-lg font-medium bg-gray-300 w-20 p-2">
+                  <div className="flex w-20 justify-between bg-gray-300 p-2 text-lg font-medium">
                     <button onClick={() => handleMinus(item.id, item.quantity)}>
                       <Minus size={16} />
                     </button>
-
                     <p>{item.quantity}</p>
                     <button onClick={() => handlePlus(item.id, item.quantity)}>
                       <Plus size={16} />
@@ -80,10 +82,10 @@ export default function CartTable({ cart }: CartProps) {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-12 items-center justify-center">
+            <div className="flex flex-col items-center justify-center gap-12">
               <button
                 onClick={() => handleDelete(item.id)}
-                className="text-gray-400 hover:text-red-500 transition"
+                className="text-gray-400 transition hover:text-red-500"
               >
                 <Trash2Icon size={18} />
               </button>
@@ -95,20 +97,27 @@ export default function CartTable({ cart }: CartProps) {
         ))}
 
         {(!cart || cart.cartItems.length === 0) && (
-          <div className="p-4 text-sm text-gray-500 text-center">
-            Sepetiniz boş.
+          <div className="p-4 text-center text-sm text-gray-500">
+            Sepetiniz bos.
           </div>
         )}
       </div>
 
       {/* Summary card */}
-      <div className="w-full max-w-sm ml-auto bg-white rounded-lg border border-gray-200 shadow-lg p-4 flex flex-col gap-3">
-        <div className="flex justify-between items-center">
+      <div className="ml-auto flex w-full max-w-sm flex-col gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-lg">
+        <div className="flex items-center justify-between">
           <h2 className="text-sm font-medium text-gray-500">TOTAL</h2>
           <p className="text-lg font-semibold text-gray-900">
             ${cart?.totalAmount ?? 0}
           </p>
         </div>
+        <button
+          type="button"
+          disabled={!hasItems}
+          className="btn-1 w-full py-3 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          Proceed to Checkout
+        </button>
       </div>
     </div>
   );

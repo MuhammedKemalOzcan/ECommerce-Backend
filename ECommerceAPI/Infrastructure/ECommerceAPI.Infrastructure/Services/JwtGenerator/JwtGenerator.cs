@@ -21,7 +21,7 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
         }
         public string GenerateToken(string userId, string email, IEnumerable<string> roles)
         {
-            //appsettings'den JJwt config okuma.
+            //appsettings'den Jwt config okuma.
             var issuer = _config["Jwt:Issuer"];
             var audience = _config["Jwt:Audience"];
             var key = _config["Jwt:Key"];
@@ -45,12 +45,12 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
 
             //Token oluşturma aşaması
             var token = new JwtSecurityToken(
-                issuer:issuer,
-                audience:audience,
-                claims:claims,
-                notBefore:DateTime.UtcNow,
-                expires:DateTime.UtcNow.AddMinutes(expires),
-                signingCredentials:signingCredentials
+                issuer: issuer,
+                audience: audience,
+                claims: claims,
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddMinutes(expires),
+                signingCredentials: signingCredentials
                 );
 
             //Token'ı stringe çeviriyor.

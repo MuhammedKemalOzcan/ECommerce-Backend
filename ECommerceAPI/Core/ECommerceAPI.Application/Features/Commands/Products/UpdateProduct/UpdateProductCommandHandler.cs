@@ -3,6 +3,7 @@ using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories.Products;
 using ECommerceAPI.Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +16,24 @@ namespace ECommerceAPI.Application.Features.Commands.Products.UpdateProduct
     {
         private readonly IProductWriteRepository _productWriteRepo;
         private readonly IProductReadRepository _productReadRepo;
+        private readonly ILogger<UpdateProductCommandHandler> _logger;
 
-        public UpdateProductCommandHandler(IProductWriteRepository productWriteRepo, IProductReadRepository productReadRepo)
+        public UpdateProductCommandHandler(IProductWriteRepository productWriteRepo, IProductReadRepository productReadRepo, ILogger<UpdateProductCommandHandler> logger)
         {
             _productWriteRepo = productWriteRepo;
             _productReadRepo = productReadRepo;
+            _logger = logger;
         }
 
         public async Task<UpdateProductCommandResponse> Handle(UpdateProductCommandRequest request, CancellationToken cancellationToken)
         {
             var product = await _productReadRepo.GetByIdAsync(request.Id,true);
 
-            if (product == null) throw new NotFoundException("Ürün bulunamadı.");
+            if (product == null)
+            {
+                _logger.LogWarning("Güncellenmek istenen ürün bulunamadı. Request Id: {ProductId}", request.Id);
+                throw new NotFoundException("Ürün bulunamadı.");
+            }
 
             product.Name = request.Name;
             product.Price = request.Price;
