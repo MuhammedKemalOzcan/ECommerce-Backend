@@ -3,6 +3,7 @@ using ECommerceAPI.Application.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 
 namespace ECommerceAPI.Infrastructure.Middleware
 {
@@ -27,6 +28,10 @@ namespace ECommerceAPI.Infrastructure.Middleware
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Unhandled exception occured." +
+                    "Path: {Path}, Method: {Method}, StatusCode: {StatusCode}," +
+                    "User: {User},TraceId: {TraceId}", context.Request.Path, context.Request.Method, context.Response.StatusCode, context.User?.FindFirst(ClaimTypes.Email).Value ?? "Anonymous", context.TraceIdentifier);
+
                 await HandleExceptionAsync(context, ex);
             }
         }

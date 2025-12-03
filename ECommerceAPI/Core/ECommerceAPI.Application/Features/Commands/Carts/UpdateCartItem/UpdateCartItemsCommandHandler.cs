@@ -5,6 +5,7 @@ using ECommerceAPI.Application.Features.Commands.Carts.UpdateCartItem;
 using ECommerceAPI.Application.Repositories.CartItems;
 using ECommerceAPI.Application.Repositories.Products;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace ECommerceAPI.Application.Features.Commands.Carts.UpdateCart
 {
@@ -14,13 +15,15 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.UpdateCart
         private readonly ICartItemWriteRepository _cartItemWriteRepo;
         private readonly ICartService _cartService;
         private readonly IProductReadRepository _productReadRepo;
+        private readonly ILogger<UpdateCartItemsCommandHandler> _logger;
 
-        public UpdateCartItemsCommandHandler(ICartItemReadRepository cartItemRepo, ICartService cartService, IProductReadRepository productReadRepo, ICartItemWriteRepository cartItemWriteRepo)
+        public UpdateCartItemsCommandHandler(ICartItemReadRepository cartItemRepo, ICartService cartService, IProductReadRepository productReadRepo, ICartItemWriteRepository cartItemWriteRepo, ILogger<UpdateCartItemsCommandHandler> logger)
         {
             _cartItemRepo = cartItemRepo;
             _cartService = cartService;
             _productReadRepo = productReadRepo;
             _cartItemWriteRepo = cartItemWriteRepo;
+            _logger = logger;
         }
 
         public async Task<UpdateCartItemsCommandResponse> Handle(UpdateCartItemsCommandRequest request, CancellationToken cancellationToken)
@@ -28,17 +31,29 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.UpdateCart
 
 
             var cart = await _cartService.GetActiveCartAsync(request.UserId, request.SessionId, cancellationToken);
-            if (cart == null) throw new NotFoundException("Sepet Bulunamadı");
+            if (cart == null)
+            {
+                _logger.LogWarning("Sepet Bulunamadı. UserId: {UserId}, SessionId: {SessionId}", request.UserId, request.SessionId);
+                throw new NotFoundException("Sepet Bulunamadı");
+            }
 
             var cartItem = cart.CartItems.FirstOrDefault(ci => ci.Id == request.CartItemId);
             if (cartItem == null)
+            {
+                _logger.LogWarning("Ürün Sepette Bulunamadı. CartItemId: {CartItemId}", request.CartItemId);
                 throw new NotFoundException("Ürün Bulunamadı");
+            }
+                
 
             var isOwner = await _cartService.ValidateCartOwnershipAsync(request.UserId, cart, request.SessionId, cancellationToken);
             if (!isOwner) throw new UnauthorizedAccessException();
 
             var product = await _productReadRepo.GetByIdAsync(cartItem.ProductId);
-            if (product == null) throw new NotFoundException("Ürün Bulunamadı");
+            if (product == null)
+            {
+                _logger.LogWarning("Ürün Bulunamadı. ProductId: {ProductId}", cartItem.ProductId);
+                throw new NotFoundException("Ürün Bulunamadı");
+            }
 
             if (product.Stock < request.Quantity) throw new StockException();
 
