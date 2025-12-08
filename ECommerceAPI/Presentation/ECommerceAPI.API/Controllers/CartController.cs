@@ -12,7 +12,6 @@ using System.Security.Claims;
 
 namespace ECommerceAPI.API.Controllers
 {
-    [Authorize(AuthenticationSchemes = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CartController : ControllerBase

@@ -30,7 +30,7 @@ namespace ECommerceAPI.Infrastructure.Middleware
             {
                 _logger.LogError(ex, "Unhandled exception occured." +
                     "Path: {Path}, Method: {Method}, StatusCode: {StatusCode}," +
-                    "User: {User},TraceId: {TraceId}", context.Request.Path, context.Request.Method, context.Response.StatusCode, context.User?.FindFirst(ClaimTypes.Email).Value ?? "Anonymous", context.TraceIdentifier);
+                    "User: {User},TraceId: {TraceId}", context.Request.Path, context.Request.Method, context.Response.StatusCode, context.User?.FindFirst(ClaimTypes.Email)?.Value ?? "Anonymous", context.TraceIdentifier);
 
                 await HandleExceptionAsync(context, ex);
             }

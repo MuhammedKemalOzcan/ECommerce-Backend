@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { navItems } from "../../../utils/navItems";
-import { LogOutIcon, ShoppingCart } from "lucide-react";
+import { LogOutIcon, ShoppingCart, User } from "lucide-react";
 import { useAuthStore } from "../../../auth/authStore";
 import logo from "../../../assets/Logo.svg";
 import { Badge } from "@mui/material";
@@ -48,9 +48,14 @@ function Navbar() {
         </nav>
         <div className="flex gap-4">
           {user ? (
-            <button onClick={handleLogout}>
-              <LogOutIcon />
-            </button>
+            <div className="flex gap-3">
+              <button onClick={handleLogout}>
+                <LogOutIcon />
+              </button>
+              <button onClick={() => navigate("/profile")}>
+                <User />
+              </button>
+            </div>
           ) : (
             <button onClick={handleLogin}>Giriş Yap</button>
           )}

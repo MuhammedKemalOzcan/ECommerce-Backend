@@ -49,6 +49,8 @@ namespace ECommerceAPI.API
 
                 builder.Host.UseSerilog();
 
+                builder.Services.AddHttpContextAccessor();
+
                 // Add services to the container.
                 builder.Services.AddApplicationServices();
                 builder.Services.AddPersistenceServices();
@@ -70,7 +72,7 @@ namespace ECommerceAPI.API
 
                 builder.Services
                     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer("Admin",opt =>
+                    .AddJwtBearer(opt =>
                     {
                         // ↓ Token doğrulama kuralları
                         opt.TokenValidationParameters = new()
@@ -84,7 +86,28 @@ namespace ECommerceAPI.API
                             ValidateIssuerSigningKey = true,
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key!)),
 
-                            ValidateLifetime = true // süresi geçmiş token reddedilir
+                            ValidateLifetime = true,
+
+                            NameClaimType = ClaimTypes.NameIdentifier,
+                            RoleClaimType = ClaimTypes.Role
+                        };
+
+                        opt.Events = new JwtBearerEvents
+                        {
+                            OnAuthenticationFailed = context =>
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine($"🔥🔥 AUTH FAILED: {context.Exception.Message}");
+                                Console.ResetColor();
+                                return Task.CompletedTask;
+                            },
+                            OnTokenValidated = context =>
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("✅ TOKEN VALIDATED SUCCESS!");
+                                Console.ResetColor();
+                                return Task.CompletedTask;
+                            }
                         };
                     });
 
@@ -104,6 +127,8 @@ namespace ECommerceAPI.API
                     app.UseSwagger();
                     app.UseSwaggerUI();
                 }
+
+
 
                 app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
