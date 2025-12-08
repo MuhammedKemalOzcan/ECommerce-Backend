@@ -48,7 +48,6 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
                 issuer: issuer,
                 audience: audience,
                 claims: claims,
-                notBefore: DateTime.UtcNow,
                 expires: DateTime.UtcNow.AddMinutes(expires),
                 signingCredentials: signingCredentials
                 );

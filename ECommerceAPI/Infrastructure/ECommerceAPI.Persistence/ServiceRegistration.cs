@@ -1,6 +1,7 @@
 ﻿using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Repositories.CartItems;
 using ECommerceAPI.Application.Repositories.Carts;
+using ECommerceAPI.Application.Repositories.Customers;
 using ECommerceAPI.Application.Repositories.File;
 using ECommerceAPI.Application.Repositories.ProductBoxes;
 using ECommerceAPI.Application.Repositories.ProductGallery;
@@ -9,6 +10,7 @@ using ECommerceAPI.Persistence.Contexts;
 using ECommerceAPI.Persistence.Repositories.Cart;
 using ECommerceAPI.Persistence.Repositories.CartItem;
 using ECommerceAPI.Persistence.Repositories.Carts;
+using ECommerceAPI.Persistence.Repositories.Customer;
 using ECommerceAPI.Persistence.Repositories.File;
 using ECommerceAPI.Persistence.Repositories.ProductBoxes;
 using ECommerceAPI.Persistence.Repositories.ProductGallery;
@@ -34,13 +36,16 @@ namespace ECommerceAPI.Persistence
             services.AddScoped<IProductBoxWriteRepository, ProductBoxWriteRepository>();
             services.AddScoped<IFileReadRepository, FileReadRepository>();
             services.AddScoped<IFileWriteRepository, FileWriteRepository>();
-            services.AddScoped<IProductGalleryReadRepository,ProductGalleryReadRepository>();
+            services.AddScoped<IProductGalleryReadRepository, ProductGalleryReadRepository>();
             services.AddScoped<IProductGalleryWriteRepository, ProductGalleryWriteRepository>();
             services.AddScoped<ICartsReadRepository, CartReadRepository>();
             services.AddScoped<ICartsWriteRepository, CartWriteRepository>();
             services.AddScoped<ICartItemReadRepository, CartItemReadRepository>();
             services.AddScoped<ICartItemWriteRepository, CartItemWriteRepository>();
             services.AddScoped<ICartService, CartService>();
+            services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+            services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
+            services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 
         }
     }

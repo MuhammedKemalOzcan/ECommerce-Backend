@@ -18,6 +18,10 @@ import CreateProduct from "./admin/Pages/CreateProduct";
 import Cart from "./client/pages/Cart";
 import NotFoundPage from "./client/components/common/NotFoundPage";
 import ProductDetail from "./client/components/products/ProductDetail";
+import Profile from "./client/pages/Profile";
+import ProfileLayout from "./layouts/ProfileLayout";
+import ProfileInformation from "./client/components/Profile/ProfileInformation";
+import ProfileSettings from "./client/components/Profile/ProfileSettings";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +36,16 @@ const router = createBrowserRouter([
       { path: ":category/:id", element: <ProductDetail /> },
       { path: "/cart", element: <Cart /> },
       { path: "*", element: <NotFoundPage /> },
+    ],
+  },
+  {
+    path: "/profile",
+    element: <ProfileLayout />,
+    children: [
+      { index: true, element: <Profile /> },
+      { path: "account", element: <ProfileInformation /> },
+      { path: "orders", element: <Orders /> },
+      { path: "settings", element: <ProfileSettings /> },
     ],
   },
   {

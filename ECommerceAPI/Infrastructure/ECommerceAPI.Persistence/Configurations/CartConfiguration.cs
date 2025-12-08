@@ -1,4 +1,5 @@
-﻿using ECommerceAPI.Domain.Entities;
+﻿
+using ECommerceAPI.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -13,7 +14,7 @@ namespace ECommerceAPI.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Cart> builder)
         {
-            builder.ToTable("Carts","dbo");
+            builder.ToTable("Carts", "dbo");
 
             builder.HasKey(x => x.Id);
 
@@ -36,8 +37,9 @@ namespace ECommerceAPI.Persistence.Configurations
                 .HasDatabaseName("IX_Carts_UserId_Status");
 
             builder.HasIndex(x => x.ExpiryDate)
-                .HasDatabaseName("IX_Carts_ExpiryDate")
-                .HasFilter("[Status] = 1"); // Sadece aktif sepetler
+            .HasDatabaseName("IX_Carts_ExpiryDate")
+            // PostgreSQL için doğru format: Tırnakları escape (\") etmeliyiz
+            .HasFilter("\"Status\" = 1");
 
             builder.HasIndex(x => new { x.SessionId, x.Status })
                 .HasDatabaseName("IX_Carts_SessionId_Status");

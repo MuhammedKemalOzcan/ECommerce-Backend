@@ -1447,3 +1447,193 @@ ECommerceAPI.Application.Exceptions.StockException: Stok Yeterli Değil
    at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 27
+2025-12-04 18:22:15.819 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 99
+2025-12-04 18:25:42.379 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 99
+2025-12-04 18:26:25.456 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-04 18:26:26.252 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-04 18:26:26.262 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-04 18:26:26.386 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 18:26:26.388 +03:00 [INF] Hosting environment: Development
+2025-12-04 18:26:26.390 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-04 18:26:29.974 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-04 18:26:33.347 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 3395.3035 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 1453.6037 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 1626.7053 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 313.9993 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 2789.0017 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 2448.9317 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 2267.2336 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 2968.4548 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 3156.1523 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 1827.2852 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 2020.0978 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 4077.7598 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 2610.4127 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 3763.9110 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 1278.6914 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 3526.7885 ms
+2025-12-04 18:26:34.004 +03:00 [INF] HTTP GET /api/Product responded 200 in 35.1533 ms
+2025-12-04 18:26:34.031 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.2719 ms
+2025-12-04 18:26:33.946 +03:00 [INF] HTTP GET /api/Product responded 200 in 3565.6427 ms
+2025-12-04 18:26:34.203 +03:00 [INF] HTTP GET /api/Product responded 200 in 58.6107 ms
+2025-12-04 18:26:34.338 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.8938 ms
+2025-12-04 18:26:34.371 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.3414 ms
+2025-12-04 18:26:34.514 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.0355 ms
+2025-12-04 18:26:34.538 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.4092 ms
+2025-12-04 18:26:34.715 +03:00 [INF] HTTP GET /api/Product responded 200 in 34.3383 ms
+2025-12-04 18:26:34.744 +03:00 [INF] HTTP GET /api/Product responded 200 in 27.1940 ms
+2025-12-04 18:26:34.883 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.1350 ms
+2025-12-04 18:26:34.906 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.6902 ms
+2025-12-04 18:26:35.061 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.3459 ms
+2025-12-04 18:26:35.094 +03:00 [INF] HTTP GET /api/Product responded 200 in 30.4597 ms
+2025-12-04 18:26:35.262 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.5390 ms
+2025-12-04 18:26:35.283 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.3468 ms
+2025-12-04 18:26:35.424 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.6995 ms
+2025-12-04 18:26:35.445 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.4931 ms
+2025-12-04 18:26:35.604 +03:00 [INF] HTTP GET /api/Product responded 200 in 30.6890 ms
+2025-12-04 18:26:35.636 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.5628 ms
+2025-12-04 18:26:35.772 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.0685 ms
+2025-12-04 18:26:35.800 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.5800 ms
+2025-12-04 18:26:35.945 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.3897 ms
+2025-12-04 18:26:35.972 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.8824 ms
+2025-12-04 18:26:36.108 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.4162 ms
+2025-12-04 18:26:36.131 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.2621 ms
+2025-12-04 18:26:36.279 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.4963 ms
+2025-12-04 18:26:36.303 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.1794 ms
+2025-12-04 18:26:36.456 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.5647 ms
+2025-12-04 18:26:36.476 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.5180 ms
+2025-12-04 18:26:36.629 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.4131 ms
+2025-12-04 18:26:36.650 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.8465 ms
+2025-12-04 18:26:36.839 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.5080 ms
+2025-12-04 18:26:36.869 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.0672 ms
+2025-12-04 18:26:37.015 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.7261 ms
+2025-12-04 18:26:37.047 +03:00 [INF] HTTP GET /api/Product responded 200 in 30.4673 ms
+2025-12-04 18:26:37.198 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.4103 ms
+2025-12-04 18:26:37.232 +03:00 [INF] HTTP GET /api/Product responded 200 in 32.9178 ms
+2025-12-04 18:26:37.399 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.5340 ms
+2025-12-04 18:26:37.425 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.6582 ms
+2025-12-04 18:26:37.591 +03:00 [INF] HTTP GET /api/Product responded 200 in 28.0325 ms
+2025-12-04 18:26:37.620 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.8337 ms
+2025-12-04 18:26:37.771 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.1050 ms
+2025-12-04 18:26:37.796 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.8338 ms
+2025-12-04 18:26:37.965 +03:00 [INF] HTTP GET /api/Product responded 200 in 31.3551 ms
+2025-12-04 18:26:37.994 +03:00 [INF] HTTP GET /api/Product responded 200 in 27.2342 ms
+2025-12-04 18:26:38.154 +03:00 [INF] HTTP GET /api/Product responded 200 in 28.8875 ms
+2025-12-04 18:26:38.180 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.5191 ms
+2025-12-04 18:26:38.348 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.3359 ms
+2025-12-04 18:26:38.369 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.2131 ms
+2025-12-04 18:26:38.525 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.5610 ms
+2025-12-04 18:26:38.545 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.0677 ms
+2025-12-04 18:26:38.756 +03:00 [INF] HTTP GET /api/Product responded 200 in 33.3453 ms
+2025-12-04 18:26:38.794 +03:00 [INF] HTTP GET /api/Product responded 200 in 33.4099 ms
+2025-12-04 18:26:38.979 +03:00 [INF] HTTP GET /api/Product responded 200 in 27.5809 ms
+2025-12-04 18:26:38.999 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.2969 ms
+2025-12-04 18:26:39.184 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.1141 ms
+2025-12-04 18:26:39.217 +03:00 [INF] HTTP GET /api/Product responded 200 in 30.5026 ms
+2025-12-04 18:26:39.378 +03:00 [INF] HTTP GET /api/Product responded 200 in 28.1743 ms
+2025-12-04 18:26:39.399 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.9479 ms
+2025-12-04 18:26:39.639 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.5800 ms
+2025-12-04 18:26:39.659 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.2953 ms
+2025-12-04 18:26:39.830 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.9850 ms
+2025-12-04 18:26:39.857 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.2512 ms
+2025-12-04 18:26:40.013 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.2032 ms
+2025-12-04 18:26:40.043 +03:00 [INF] HTTP GET /api/Product responded 200 in 27.8027 ms
+2025-12-04 18:26:40.214 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.2638 ms
+2025-12-04 18:26:40.237 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.9374 ms
+2025-12-04 18:26:40.372 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.5483 ms
+2025-12-04 18:26:40.392 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.8654 ms
+2025-12-04 18:26:40.547 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.3187 ms
+2025-12-04 18:26:40.569 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.6566 ms
+2025-12-04 18:26:40.724 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.0613 ms
+2025-12-04 18:26:40.744 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.0208 ms
+2025-12-04 18:26:40.892 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.1757 ms
+2025-12-04 18:26:40.913 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.8331 ms
+2025-12-04 18:26:41.066 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.0973 ms
+2025-12-04 18:26:41.091 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.1466 ms
+2025-12-04 18:26:41.250 +03:00 [INF] HTTP GET /api/Product responded 200 in 28.7304 ms
+2025-12-04 18:26:41.275 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.7651 ms
+2025-12-04 18:26:41.434 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.0110 ms
+2025-12-04 18:26:41.458 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.0602 ms
+2025-12-04 18:26:41.614 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.5124 ms
+2025-12-04 18:26:41.636 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.3087 ms
+2025-12-04 18:26:41.793 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.3285 ms
+2025-12-04 18:26:41.817 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.9576 ms
+2025-12-04 18:26:41.969 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.2252 ms
+2025-12-04 18:26:41.991 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.4324 ms
+2025-12-04 18:26:42.175 +03:00 [INF] HTTP GET /api/Product responded 200 in 30.2905 ms
+2025-12-04 18:26:42.202 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.9372 ms
+2025-12-04 18:26:42.386 +03:00 [INF] HTTP GET /api/Product responded 200 in 27.8692 ms
+2025-12-04 18:26:42.408 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.6116 ms
+2025-12-04 18:26:42.564 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.0932 ms
+2025-12-04 18:26:42.596 +03:00 [INF] HTTP GET /api/Product responded 200 in 30.0343 ms
+2025-12-04 18:26:42.747 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.4069 ms
+2025-12-04 18:26:42.773 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.1684 ms
+2025-12-04 18:26:42.916 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.6535 ms
+2025-12-04 18:26:42.942 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.0118 ms
+2025-12-04 18:26:43.102 +03:00 [INF] HTTP GET /api/Product responded 200 in 35.0331 ms
+2025-12-04 18:26:43.123 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.7972 ms
+2025-12-04 18:26:43.271 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.4091 ms
+2025-12-04 18:26:43.293 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.8360 ms
+2025-12-04 18:26:43.455 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.0675 ms
+2025-12-04 18:26:43.475 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.9252 ms
+2025-12-04 18:26:43.620 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.5446 ms
+2025-12-04 18:26:43.650 +03:00 [INF] HTTP GET /api/Product responded 200 in 27.7380 ms
+2025-12-04 18:26:43.796 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.2013 ms
+2025-12-04 18:26:43.823 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.2037 ms
+2025-12-04 18:26:43.967 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.7790 ms
+2025-12-04 18:26:43.999 +03:00 [INF] HTTP GET /api/Product responded 200 in 30.2389 ms
+2025-12-04 18:26:44.162 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.9621 ms
+2025-12-04 18:26:44.182 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.5894 ms
+2025-12-04 18:26:44.336 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.8970 ms
+2025-12-04 18:26:44.359 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.3775 ms
+2025-12-04 18:26:44.505 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.6700 ms
+2025-12-04 18:26:44.530 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.7072 ms
+2025-12-04 18:26:44.678 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.3242 ms
+2025-12-04 18:26:44.710 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.8726 ms
+2025-12-04 18:26:44.862 +03:00 [INF] HTTP GET /api/Product responded 200 in 32.6789 ms
+2025-12-04 18:26:44.884 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.0974 ms
+2025-12-04 18:26:45.294 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.8998 ms
+2025-12-04 18:26:45.319 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.3080 ms
+2025-12-04 18:26:45.676 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.0977 ms
+2025-12-04 18:26:45.703 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.6935 ms
+2025-12-04 18:26:46.139 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.8897 ms
+2025-12-04 18:26:46.168 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.6752 ms
+2025-12-04 18:26:46.518 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.3850 ms
+2025-12-04 18:26:46.539 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.7230 ms
+2025-12-04 18:26:46.942 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.5949 ms
+2025-12-04 18:26:46.967 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.8252 ms

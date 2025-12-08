@@ -1,0 +1,909 @@
+2025-12-06 18:11:42.326 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.) (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 99
+ ---> (Inner Exception #1) System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)<---
+
+2025-12-06 18:11:56.651 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.) (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 99
+ ---> (Inner Exception #1) System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)<---
+
+2025-12-06 18:13:02.700 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.) (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 99
+ ---> (Inner Exception #1) System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)<---
+
+2025-12-06 18:15:06.225 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.) (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 99
+ ---> (Inner Exception #1) System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)<---
+
+2025-12-06 18:15:23.801 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.) (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 99
+ ---> (Inner Exception #1) System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)<---
+
+2025-12-06 18:18:30.441 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.) (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerWriteRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 99
+ ---> (Inner Exception #1) System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Repositories.Customers.ICustomerReadRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)<---
+
+2025-12-06 18:20:34.501 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-06 18:20:35.039 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-06 18:20:35.045 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-06 18:20:35.128 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-06 18:20:35.133 +03:00 [INF] Hosting environment: Development
+2025-12-06 18:20:35.138 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-06 18:21:02.170 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-06 18:21:05.047 +03:00 [INF] HTTP POST /api/Customer responded 200 in 2919.7663 ms
+2025-12-06 18:21:40.122 +03:00 [ERR] HTTP POST /api/Customer/8c0a7d6e-e60b-4512-9f15-aafeecbb6db6/addresses responded 500 in 737.0026 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: Customer not found
+   at ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler.Handle(AddAddressToCustomerCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Customers\AddAddressToCustomer\AddAddressToCustomerCommandHandler.cs:line 25
+   at ECommerceAPI.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Behaviors\ValidationBehavior.cs:line 25
+   at ECommerceAPI.API.Controllers.CustomerController.AddAddress(Guid CustomerId, AddAddressToCustomerCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\CustomerController.cs:line 22
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-12-06 18:22:38.649 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-06 18:22:39.187 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-06 18:22:39.197 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-06 18:22:39.278 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-06 18:22:39.283 +03:00 [INF] Hosting environment: Development
+2025-12-06 18:22:39.288 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-06 18:23:02.270 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-06 18:23:05.222 +03:00 [ERR] HTTP POST /api/Customer/8c0a7d6e-e60b-4512-9f15-aafeecbb6db6/addresses responded 500 in 3006.4290 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: Customer not found
+   at ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler.Handle(AddAddressToCustomerCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Customers\AddAddressToCustomer\AddAddressToCustomerCommandHandler.cs:line 25
+   at ECommerceAPI.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Behaviors\ValidationBehavior.cs:line 25
+   at ECommerceAPI.API.Controllers.CustomerController.AddAddress(Guid CustomerId, AddAddressToCustomerCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\CustomerController.cs:line 22
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-12-06 18:23:19.547 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 31
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-12-06 18:24:39.130 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-06 18:24:39.742 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-06 18:24:39.749 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-06 18:24:39.825 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-06 18:24:39.831 +03:00 [INF] Hosting environment: Development
+2025-12-06 18:24:39.836 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-06 18:24:42.804 +03:00 [INF] HTTP GET / responded 404 in 1.3215 ms
+2025-12-06 18:24:43.966 +03:00 [INF] HTTP GET / responded 404 in 0.0461 ms
+2025-12-06 18:24:45.830 +03:00 [INF] HTTP GET / responded 404 in 0.0380 ms
+2025-12-06 18:25:09.099 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-06 18:25:09.648 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-06 18:25:09.654 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-06 18:25:09.731 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-06 18:25:09.734 +03:00 [INF] Hosting environment: Development
+2025-12-06 18:25:09.737 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-06 18:25:27.558 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-06 18:25:30.278 +03:00 [ERR] HTTP POST /api/Customer/8c0a7d6e-e60b-4512-9f15-aafeecbb6db6/addresses responded 500 in 2768.4583 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: Customer not found
+   at ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler.Handle(AddAddressToCustomerCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Customers\AddAddressToCustomer\AddAddressToCustomerCommandHandler.cs:line 25
+   at ECommerceAPI.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Behaviors\ValidationBehavior.cs:line 25
+   at ECommerceAPI.API.Controllers.CustomerController.AddAddress(Guid CustomerId, AddAddressToCustomerCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\CustomerController.cs:line 22
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-12-06 18:25:39.994 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 31
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-12-06 18:26:31.696 +03:00 [ERR] HTTP POST /api/Customer/8c0a7d6e-e60b-4512-9f15-aafeecbb6db6/addresses responded 500 in 8458.4405 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: Customer not found
+   at ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler.Handle(AddAddressToCustomerCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Customers\AddAddressToCustomer\AddAddressToCustomerCommandHandler.cs:line 25
+   at ECommerceAPI.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Behaviors\ValidationBehavior.cs:line 25
+   at ECommerceAPI.API.Controllers.CustomerController.AddAddress(Guid CustomerId, AddAddressToCustomerCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\CustomerController.cs:line 22
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-12-06 18:26:42.486 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 31
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-12-06 18:27:20.908 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-06 18:27:21.465 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-06 18:27:21.472 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-06 18:27:21.537 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-06 18:27:21.543 +03:00 [INF] Hosting environment: Development
+2025-12-06 18:27:21.552 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-06 18:27:28.190 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-06 18:28:30.556 +03:00 [ERR] HTTP POST /api/Customer/8c0a7d6e-e60b-4512-9f15-aafeecbb6db6/addresses responded 500 in 62426.3751 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: Customer not found
+   at ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler.Handle(AddAddressToCustomerCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Customers\AddAddressToCustomer\AddAddressToCustomerCommandHandler.cs:line 25
+   at ECommerceAPI.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Behaviors\ValidationBehavior.cs:line 25
+   at ECommerceAPI.API.Controllers.CustomerController.AddAddress(Guid CustomerId, AddAddressToCustomerCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\CustomerController.cs:line 22
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-12-06 18:28:35.090 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 31
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-12-06 18:30:59.782 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-06 18:31:00.349 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-06 18:31:00.358 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-06 18:31:00.438 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-06 18:31:00.440 +03:00 [INF] Hosting environment: Development
+2025-12-06 18:31:00.442 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-06 18:31:05.310 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-06 18:31:33.574 +03:00 [ERR] HTTP POST /api/Customer/8c0a7d6e-e60b-4512-9f15-aafeecbb6db6/addresses responded 500 in 28318.6930 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: Customer not found
+   at ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler.Handle(AddAddressToCustomerCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Customers\AddAddressToCustomer\AddAddressToCustomerCommandHandler.cs:line 25
+   at ECommerceAPI.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Behaviors\ValidationBehavior.cs:line 25
+   at ECommerceAPI.API.Controllers.CustomerController.AddAddress(Guid CustomerId, AddAddressToCustomerCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\CustomerController.cs:line 22
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-12-06 18:31:34.461 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 31
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-12-06 18:58:04.452 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ISharedIdentityService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ISharedIdentityService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ISharedIdentityService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 99
+2025-12-06 18:58:13.817 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ISharedIdentityService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ISharedIdentityService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ISharedIdentityService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 99
+2025-12-06 18:58:23.911 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ISharedIdentityService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandRequest,ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ISharedIdentityService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ISharedIdentityService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer.CreateCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 99
+2025-12-06 18:58:52.203 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-06 18:58:52.704 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-06 18:58:52.712 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-06 18:58:52.780 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-06 18:58:52.783 +03:00 [INF] Hosting environment: Development
+2025-12-06 18:58:52.785 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-06 18:59:00.509 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-06 18:59:09.731 +03:00 [ERR] HTTP POST /api/Customer/8c0a7d6e-e60b-4512-9f15-aafeecbb6db6/addresses responded 500 in 9272.4494 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: Customer not found
+   at ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer.AddAddressToCustomerCommandHandler.Handle(AddAddressToCustomerCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Customers\AddAddressToCustomer\AddAddressToCustomerCommandHandler.cs:line 25
+   at ECommerceAPI.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Behaviors\ValidationBehavior.cs:line 25
+   at ECommerceAPI.API.Controllers.CustomerController.AddAddress(Guid CustomerId, AddAddressToCustomerCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\CustomerController.cs:line 22
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-12-06 18:59:15.753 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 31
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-12-06 18:59:50.198 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-06 18:59:50.402 +03:00 [INF] HTTP GET /api/Product responded 200 in 837.5480 ms
+2025-12-06 18:59:50.402 +03:00 [INF] HTTP GET /api/Product responded 200 in 78.8403 ms
+2025-12-06 18:59:50.649 +03:00 [INF] HTTP GET /api/Product responded 200 in 70.5379 ms
+2025-12-06 18:59:50.669 +03:00 [INF] HTTP GET /api/Product responded 200 in 31.6860 ms
+2025-12-06 18:59:50.847 +03:00 [INF] HTTP GET /api/Product responded 200 in 27.0253 ms
+2025-12-06 18:59:50.871 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.9744 ms
+2025-12-06 18:59:51.063 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.6743 ms
+2025-12-06 18:59:51.084 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.8563 ms
+2025-12-06 18:59:51.288 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.3535 ms
+2025-12-06 18:59:51.322 +03:00 [INF] HTTP GET /api/Product responded 200 in 31.3542 ms
+2025-12-06 18:59:51.500 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.2561 ms
+2025-12-06 18:59:51.523 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.6121 ms
+2025-12-06 18:59:51.736 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.4383 ms
+2025-12-06 18:59:51.760 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.3693 ms
+2025-12-06 18:59:51.974 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.5677 ms
+2025-12-06 18:59:52.004 +03:00 [INF] HTTP GET /api/Product responded 200 in 26.8817 ms
+2025-12-06 18:59:52.242 +03:00 [INF] HTTP GET /api/Product responded 200 in 27.1165 ms
+2025-12-06 18:59:52.268 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.1013 ms
+2025-12-06 18:59:52.508 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.9157 ms
+2025-12-06 18:59:52.530 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.4602 ms
+2025-12-06 18:59:52.777 +03:00 [INF] HTTP GET /api/Product responded 200 in 27.7290 ms
+2025-12-06 18:59:52.802 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.1330 ms
+2025-12-06 18:59:53.037 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.1116 ms
+2025-12-06 18:59:53.059 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.0444 ms
+2025-12-06 18:59:53.266 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.2825 ms
+2025-12-06 18:59:53.291 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.9226 ms
+2025-12-06 18:59:53.490 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.7040 ms
+2025-12-06 18:59:53.517 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.3979 ms
+2025-12-06 18:59:53.706 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.3579 ms
+2025-12-06 18:59:53.733 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.9564 ms
+2025-12-06 18:59:53.942 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.4914 ms
+2025-12-06 18:59:53.967 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.4714 ms
+2025-12-06 18:59:54.176 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.0762 ms
+2025-12-06 18:59:54.201 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.0488 ms
+2025-12-06 18:59:54.393 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.8686 ms
+2025-12-06 18:59:54.416 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.2972 ms
+2025-12-06 18:59:54.643 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.1140 ms
+2025-12-06 18:59:54.664 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.4173 ms
+2025-12-06 18:59:54.847 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.1741 ms
+2025-12-06 18:59:54.869 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.7301 ms
+2025-12-06 18:59:55.074 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.8970 ms
+2025-12-06 18:59:55.096 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.2835 ms
+2025-12-06 18:59:55.283 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.3735 ms
+2025-12-06 18:59:55.308 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.8999 ms
+2025-12-06 18:59:55.507 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.7033 ms
+2025-12-06 18:59:55.528 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.3063 ms
+2025-12-06 18:59:55.728 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.4944 ms
+2025-12-06 18:59:55.752 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.9819 ms
+2025-12-06 18:59:55.956 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.0978 ms
+2025-12-06 18:59:55.976 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.2187 ms
+2025-12-06 18:59:56.195 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.2075 ms
+2025-12-06 18:59:56.227 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.3354 ms
+2025-12-06 18:59:56.442 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.0063 ms
+2025-12-06 18:59:56.464 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.9026 ms
+2025-12-06 18:59:56.690 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.5165 ms
+2025-12-06 18:59:56.711 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.0890 ms
+2025-12-06 18:59:56.928 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.3796 ms
+2025-12-06 18:59:56.950 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.5550 ms
+2025-12-06 18:59:57.159 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.4919 ms
+2025-12-06 18:59:57.181 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.1772 ms
+2025-12-06 18:59:57.387 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.4695 ms
+2025-12-06 18:59:57.408 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.4382 ms
+2025-12-06 18:59:57.601 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.4391 ms
+2025-12-06 18:59:57.623 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.3454 ms
+2025-12-06 18:59:57.853 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.2699 ms
+2025-12-06 18:59:57.874 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.2318 ms
+2025-12-06 18:59:58.097 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.3655 ms
+2025-12-06 18:59:58.119 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.4516 ms
+2025-12-06 18:59:58.345 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.0538 ms
+2025-12-06 18:59:58.372 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.8521 ms
+2025-12-06 18:59:58.584 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.5586 ms
+2025-12-06 18:59:58.603 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.0278 ms
+2025-12-06 18:59:58.819 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.9590 ms
+2025-12-06 18:59:58.838 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.9396 ms
+2025-12-06 18:59:59.066 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.3757 ms
+2025-12-06 18:59:59.086 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.0428 ms
+2025-12-06 18:59:59.323 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.2293 ms
+2025-12-06 18:59:59.393 +03:00 [INF] HTTP GET /api/Product responded 200 in 67.1710 ms
+2025-12-06 18:59:59.787 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.6890 ms
+2025-12-06 18:59:59.805 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.1727 ms
+2025-12-06 19:00:00.133 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.2977 ms
+2025-12-06 19:00:00.149 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.4359 ms
+2025-12-06 19:10:35.259 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.0237 ms
+2025-12-06 19:10:35.279 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.6704 ms
+2025-12-06 19:10:35.525 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.9667 ms
+2025-12-06 19:10:35.542 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.8169 ms
+2025-12-06 19:10:35.721 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.2483 ms
+2025-12-06 19:10:35.735 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.5589 ms
+2025-12-06 19:10:35.911 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.2719 ms
+2025-12-06 19:10:35.928 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.5403 ms
+2025-12-06 19:10:36.111 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.6662 ms
+2025-12-06 19:10:36.134 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.1798 ms
+2025-12-06 19:10:36.300 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.6695 ms
+2025-12-06 19:10:36.316 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.1084 ms
+2025-12-06 19:10:36.504 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.9396 ms
+2025-12-06 19:10:36.519 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.4549 ms
+2025-12-06 19:10:36.701 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.3372 ms
+2025-12-06 19:10:36.716 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.9247 ms
+2025-12-06 19:10:36.899 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.7192 ms
+2025-12-06 19:10:36.915 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.6216 ms
+2025-12-06 19:10:37.090 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.5632 ms
+2025-12-06 19:10:37.107 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.3586 ms
+2025-12-06 19:10:37.303 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.5226 ms
+2025-12-06 19:10:37.319 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.3689 ms
+2025-12-06 19:10:37.519 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.7863 ms
+2025-12-06 19:10:37.535 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.5186 ms
+2025-12-06 19:10:37.723 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.5076 ms
+2025-12-06 19:10:37.740 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.8194 ms
+2025-12-06 19:10:37.929 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.4156 ms
+2025-12-06 19:10:37.948 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.4510 ms
+2025-12-06 19:10:38.141 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.9361 ms
+2025-12-06 19:10:38.157 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.7563 ms
+2025-12-06 19:10:38.330 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.4257 ms
+2025-12-06 19:10:38.345 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.5139 ms
+2025-12-06 19:10:38.565 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.4625 ms
+2025-12-06 19:10:38.580 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.1986 ms
+2025-12-06 19:10:38.758 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.5655 ms
+2025-12-06 19:10:38.774 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.5317 ms
+2025-12-06 19:10:38.958 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.6530 ms
+2025-12-06 19:10:38.973 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.2814 ms
+2025-12-06 19:10:39.164 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.4384 ms
+2025-12-06 19:10:39.178 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.4536 ms
+2025-12-06 19:10:39.343 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.2037 ms
+2025-12-06 19:10:39.357 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.6255 ms
+2025-12-06 19:10:39.530 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.8513 ms
+2025-12-06 19:10:39.549 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.0129 ms
+2025-12-06 19:10:39.728 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.6941 ms
+2025-12-06 19:10:39.744 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.8354 ms
+2025-12-06 19:10:39.907 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.9780 ms
+2025-12-06 19:10:39.922 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.8218 ms
+2025-12-06 19:10:40.105 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.7183 ms
+2025-12-06 19:10:40.120 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.0567 ms
+2025-12-06 19:10:40.308 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.5978 ms
+2025-12-06 19:10:40.322 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.1182 ms
+2025-12-06 19:10:40.485 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.3174 ms
+2025-12-06 19:10:40.499 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.6835 ms
+2025-12-06 19:10:40.692 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.2506 ms
+2025-12-06 19:10:40.709 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.8604 ms
+2025-12-06 19:10:40.882 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.3731 ms
+2025-12-06 19:10:40.898 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.6407 ms
+2025-12-06 19:10:41.070 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.6118 ms
+2025-12-06 19:10:41.088 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.0922 ms
+2025-12-06 19:10:41.262 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.9043 ms
+2025-12-06 19:10:41.280 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.8818 ms
+2025-12-06 19:10:41.453 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.4221 ms
+2025-12-06 19:10:41.470 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.6761 ms
+2025-12-06 19:10:41.650 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.3998 ms
+2025-12-06 19:10:41.666 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.2144 ms
+2025-12-06 19:10:41.872 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.0223 ms
+2025-12-06 19:10:41.886 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.1740 ms
+2025-12-06 19:10:42.078 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.0461 ms
+2025-12-06 19:10:42.092 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.3684 ms
+2025-12-06 19:10:42.293 +03:00 [INF] HTTP GET /api/Product responded 200 in 17.3267 ms
+2025-12-06 19:10:42.308 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.0185 ms
+2025-12-06 19:10:42.482 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.9148 ms
+2025-12-06 19:10:42.498 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.9508 ms
+2025-12-06 19:10:42.689 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.6664 ms
+2025-12-06 19:10:42.707 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.6766 ms
+2025-12-06 19:10:42.911 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.1378 ms
+2025-12-06 19:10:42.926 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.6776 ms
+2025-12-06 19:10:43.122 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.8027 ms
+2025-12-06 19:10:43.143 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.5268 ms
+2025-12-06 19:10:43.314 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.0544 ms
+2025-12-06 19:10:43.329 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.1070 ms
+2025-12-06 19:10:43.512 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.2164 ms
+2025-12-06 19:10:43.527 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.3224 ms
+2025-12-06 19:10:43.807 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.3276 ms
+2025-12-06 19:10:43.822 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.5734 ms
+2025-12-06 19:10:44.031 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.7586 ms
+2025-12-06 19:10:44.046 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.6021 ms
+2025-12-06 19:10:44.295 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.0015 ms
+2025-12-06 19:10:44.310 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.4739 ms
+2025-12-06 19:10:44.508 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.2715 ms
+2025-12-06 19:10:44.521 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.7539 ms
+2025-12-06 19:10:44.683 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.0946 ms
+2025-12-06 19:10:44.697 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.0448 ms
+2025-12-06 19:10:44.886 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.6543 ms
+2025-12-06 19:10:44.901 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.8987 ms
+2025-12-06 19:10:45.092 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.7310 ms
+2025-12-06 19:10:45.107 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.0959 ms
+2025-12-06 19:10:45.288 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.9509 ms
+2025-12-06 19:10:45.303 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.0719 ms
+2025-12-06 19:10:45.482 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.4454 ms
+2025-12-06 19:10:45.497 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.9033 ms
+2025-12-06 19:10:45.696 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.9868 ms
+2025-12-06 19:10:45.713 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.4585 ms
+2025-12-06 19:10:45.918 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.0916 ms
+2025-12-06 19:10:45.934 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.8357 ms
+2025-12-06 19:10:46.116 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.2226 ms
+2025-12-06 19:10:46.132 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.6361 ms
+2025-12-06 19:10:46.330 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.8240 ms
+2025-12-06 19:10:46.344 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.9993 ms
+2025-12-06 19:10:46.530 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.0263 ms
+2025-12-06 19:10:46.546 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.8199 ms
+2025-12-06 19:10:46.744 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.0871 ms
+2025-12-06 19:10:46.760 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.5896 ms
+2025-12-06 19:10:46.968 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.6001 ms
+2025-12-06 19:10:46.983 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.6116 ms
+2025-12-06 19:10:47.182 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.2040 ms
+2025-12-06 19:10:47.197 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.9957 ms
+2025-12-06 19:10:47.429 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.8851 ms
+2025-12-06 19:10:47.444 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.7315 ms
+2025-12-06 19:10:47.632 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.1060 ms
+2025-12-06 19:10:47.647 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.8422 ms
+2025-12-06 19:10:47.828 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.4775 ms
+2025-12-06 19:10:47.844 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.3174 ms
+2025-12-06 19:10:48.025 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.8955 ms
+2025-12-06 19:10:48.043 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.3999 ms
+2025-12-06 19:10:48.216 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.9442 ms
+2025-12-06 19:10:48.232 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.7615 ms
+2025-12-06 19:10:48.433 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.8699 ms
+2025-12-06 19:10:48.449 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.0542 ms
+2025-12-06 19:10:48.625 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.0692 ms
+2025-12-06 19:10:48.641 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.7641 ms
+2025-12-06 19:10:48.833 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.0355 ms
+2025-12-06 19:10:48.848 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.0188 ms
+2025-12-06 19:10:49.033 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.9969 ms
+2025-12-06 19:10:49.049 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.1299 ms
+2025-12-06 19:10:49.352 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.8195 ms
+2025-12-06 19:10:49.368 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.5855 ms
+2025-12-06 19:10:49.647 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.9613 ms
+2025-12-06 19:10:49.660 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.9892 ms
+2025-12-06 19:10:49.907 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.9612 ms
+2025-12-06 19:10:49.933 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.5425 ms
+2025-12-06 19:10:50.186 +03:00 [INF] HTTP GET /api/Product responded 200 in 31.0583 ms
+2025-12-06 19:10:50.209 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.3674 ms
+2025-12-06 19:10:50.548 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.7409 ms
+2025-12-06 19:10:50.567 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.0571 ms
+2025-12-06 19:10:50.885 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.7415 ms
+2025-12-06 19:10:50.907 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.5957 ms
+2025-12-06 19:10:51.179 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.8614 ms
+2025-12-06 19:10:51.211 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.4440 ms
+2025-12-06 19:10:51.524 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.5449 ms
+2025-12-06 19:10:51.552 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.0589 ms
+2025-12-06 19:10:51.911 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.3491 ms
+2025-12-06 19:10:51.927 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.7855 ms
+2025-12-06 19:10:52.270 +03:00 [INF] HTTP GET /api/Product responded 200 in 17.6158 ms
+2025-12-06 19:10:52.286 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.4412 ms
+2025-12-06 19:10:52.561 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.2119 ms
+2025-12-06 19:10:52.584 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.4589 ms
+2025-12-06 19:10:52.917 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.2408 ms
+2025-12-06 19:10:52.933 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.1917 ms
+2025-12-06 19:10:53.382 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.0362 ms
+2025-12-06 19:10:53.397 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.9001 ms
+2025-12-06 19:10:53.646 +03:00 [INF] HTTP GET /api/Product responded 200 in 17.8194 ms
+2025-12-06 19:10:53.662 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.3599 ms
+2025-12-06 19:10:53.968 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.7841 ms
+2025-12-06 19:10:53.986 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.2445 ms
+2025-12-06 19:10:54.317 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.6012 ms
+2025-12-06 19:10:54.333 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.0998 ms
+2025-12-06 19:10:54.696 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.9137 ms
+2025-12-06 19:10:54.713 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.1637 ms
+2025-12-06 19:10:54.989 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.9672 ms
+2025-12-06 19:10:55.003 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.9150 ms
+2025-12-06 19:10:55.301 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.8468 ms
+2025-12-06 19:10:55.330 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.9814 ms
+2025-12-06 19:10:55.630 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.7986 ms
+2025-12-06 19:10:55.653 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.0458 ms
+2025-12-06 19:10:55.998 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.1630 ms
+2025-12-06 19:10:56.014 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.1756 ms
+2025-12-06 19:10:56.324 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.3293 ms
+2025-12-06 19:10:56.341 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.5888 ms
+2025-12-06 19:10:56.661 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.3514 ms
+2025-12-06 19:10:56.686 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.7147 ms
+2025-12-06 19:10:56.935 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.2415 ms
+2025-12-06 19:10:56.952 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.6108 ms
+2025-12-06 19:10:57.233 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.2315 ms
+2025-12-06 19:10:57.248 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.7550 ms
+2025-12-06 19:10:57.510 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.2151 ms
+2025-12-06 19:10:57.535 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.3469 ms
+2025-12-06 19:10:57.827 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.0414 ms
+2025-12-06 19:10:57.845 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.7387 ms
+2025-12-06 19:10:58.111 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.6242 ms
+2025-12-06 19:10:58.129 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.2661 ms
+2025-12-06 19:10:58.383 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.5915 ms
+2025-12-06 19:10:58.404 +03:00 [INF] HTTP GET /api/Product responded 200 in 17.1792 ms
+2025-12-06 19:10:58.754 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.0003 ms
+2025-12-06 19:10:58.773 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.7343 ms
+2025-12-06 19:10:59.061 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.2716 ms
+2025-12-06 19:10:59.077 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.1701 ms
+2025-12-06 19:10:59.416 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.7410 ms
+2025-12-06 19:10:59.439 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.3937 ms
+2025-12-06 19:10:59.713 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.6215 ms
+2025-12-06 19:10:59.729 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.5906 ms
+2025-12-06 19:11:08.382 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-06 19:11:09.015 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-06 19:11:09.024 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-06 19:11:09.113 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-06 19:11:09.117 +03:00 [INF] Hosting environment: Development
+2025-12-06 19:11:09.119 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-06 19:11:14.277 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-06 19:11:17.387 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-06 19:11:18.177 +03:00 [INF] HTTP GET /api/Product responded 200 in 3631.0606 ms
+2025-12-06 19:11:18.178 +03:00 [INF] HTTP GET /api/Product responded 200 in 2524.7885 ms
+2025-12-06 19:11:18.178 +03:00 [INF] HTTP GET /api/Product responded 200 in 3189.7260 ms
+2025-12-06 19:11:18.178 +03:00 [INF] HTTP GET /api/Product responded 200 in 2313.9550 ms
+2025-12-06 19:11:18.178 +03:00 [INF] HTTP GET /api/Product responded 200 in 414.5965 ms
+2025-12-06 19:11:18.177 +03:00 [INF] HTTP GET /api/Product responded 200 in 1147.5994 ms
+2025-12-06 19:11:18.177 +03:00 [INF] HTTP GET /api/Product responded 200 in 3419.9076 ms
+2025-12-06 19:11:18.177 +03:00 [INF] HTTP GET /api/Product responded 200 in 1588.9586 ms
+2025-12-06 19:11:18.177 +03:00 [INF] HTTP GET /api/Product responded 200 in 2473.4870 ms
+2025-12-06 19:11:18.177 +03:00 [INF] HTTP GET /api/Product responded 200 in 1305.0601 ms
+2025-12-06 19:11:18.177 +03:00 [INF] HTTP GET /api/Product responded 200 in 1367.5319 ms
+2025-12-06 19:11:18.177 +03:00 [INF] HTTP GET /api/Product responded 200 in 2743.8445 ms
+2025-12-06 19:11:18.178 +03:00 [INF] HTTP GET /api/Product responded 200 in 2972.9320 ms
+2025-12-06 19:11:18.177 +03:00 [INF] HTTP GET /api/Product responded 200 in 4049.4798 ms
+2025-12-06 19:11:18.251 +03:00 [INF] HTTP GET /api/Product responded 200 in 430.5654 ms
+2025-12-06 19:11:18.178 +03:00 [INF] HTTP GET /api/Product responded 200 in 2021.8465 ms
+2025-12-06 19:11:18.178 +03:00 [INF] HTTP GET /api/Product responded 200 in 918.7172 ms
+2025-12-06 19:11:18.178 +03:00 [INF] HTTP GET /api/Product responded 200 in 1815.1091 ms
+2025-12-06 19:11:20.127 +03:00 [INF] HTTP GET /api/Product responded 200 in 33.2121 ms
+2025-12-06 19:11:20.147 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.2693 ms
+2025-12-06 19:11:20.324 +03:00 [INF] HTTP GET /api/Product responded 200 in 31.0716 ms
+2025-12-06 19:11:20.344 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.1490 ms
+2025-12-06 19:11:20.537 +03:00 [INF] HTTP GET /api/Product responded 200 in 31.6897 ms
+2025-12-06 19:11:20.580 +03:00 [INF] HTTP GET /api/Product responded 200 in 40.4722 ms
+2025-12-06 19:11:20.730 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.7785 ms
+2025-12-06 19:11:20.755 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.4213 ms
+2025-12-06 19:11:20.936 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.2630 ms
+2025-12-06 19:11:20.957 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.2062 ms
+2025-12-06 19:11:21.132 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.7904 ms
+2025-12-06 19:11:21.154 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.7055 ms
+2025-12-06 19:11:21.325 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.8009 ms
+2025-12-06 19:11:21.346 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.7905 ms
+2025-12-06 19:11:21.535 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.7146 ms
+2025-12-06 19:11:21.559 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.2898 ms
+2025-12-06 19:11:21.765 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.2377 ms
+2025-12-06 19:11:21.787 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.6886 ms
+2025-12-06 19:11:21.991 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.8219 ms
+2025-12-06 19:11:22.014 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.9290 ms
+2025-12-06 19:11:22.207 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.7085 ms
+2025-12-06 19:11:22.230 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.0609 ms
+2025-12-06 19:11:22.431 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.3342 ms
+2025-12-06 19:11:22.454 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.4838 ms
+2025-12-06 19:11:22.637 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.2335 ms
+2025-12-06 19:11:22.659 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.6795 ms
+2025-12-06 19:11:22.854 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.2321 ms
+2025-12-06 19:11:22.877 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.8697 ms
+2025-12-06 19:11:23.072 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.8063 ms
+2025-12-06 19:11:23.094 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.9980 ms
+2025-12-06 19:11:23.338 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.2023 ms
+2025-12-06 19:11:23.360 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.0248 ms
+2025-12-06 19:11:23.569 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.7206 ms
+2025-12-06 19:11:23.591 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.5618 ms
+2025-12-06 19:11:23.777 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.9137 ms
+2025-12-06 19:11:23.799 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.5229 ms
+2025-12-06 19:11:23.981 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.1008 ms
+2025-12-06 19:11:24.002 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.6708 ms
+2025-12-06 19:11:24.186 +03:00 [INF] HTTP GET /api/Product responded 200 in 25.5548 ms
+2025-12-06 19:11:24.212 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.5465 ms
+2025-12-06 19:11:24.389 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.8570 ms
+2025-12-06 19:11:24.410 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.8494 ms
+2025-12-06 19:11:24.605 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.1605 ms
+2025-12-06 19:11:24.633 +03:00 [INF] HTTP GET /api/Product responded 200 in 24.0892 ms
+2025-12-06 19:11:24.960 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.3526 ms
+2025-12-06 19:11:25.162 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.7410 ms
+2025-12-06 19:11:25.183 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.7732 ms
+2025-12-06 19:11:25.379 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.3861 ms
+2025-12-06 19:11:25.399 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.1488 ms
+2025-12-06 19:11:25.574 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.1299 ms
+2025-12-06 19:11:25.595 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.1059 ms
+2025-12-06 19:11:25.778 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.5940 ms
+2025-12-06 19:11:25.802 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.1760 ms
+2025-12-06 19:11:26.226 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.0422 ms
+2025-12-06 19:11:26.248 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.8936 ms
+2025-12-06 19:12:06.488 +03:00 [INF] HTTP GET /api/Product responded 200 in 42.0061 ms
+2025-12-06 19:12:06.513 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.6082 ms
+2025-12-06 19:12:07.065 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.5724 ms
+2025-12-06 19:12:07.081 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.1231 ms
+2025-12-06 19:12:07.652 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.8891 ms
+2025-12-06 19:12:07.666 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.4666 ms
+2025-12-06 19:12:08.147 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.6343 ms
+2025-12-06 19:12:08.160 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.7821 ms
+2025-12-06 19:12:08.624 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.3328 ms
+2025-12-06 19:12:08.647 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.5181 ms
+2025-12-06 19:12:09.111 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.4630 ms
+2025-12-06 19:12:09.130 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.8098 ms
+2025-12-06 19:12:09.618 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.3367 ms
+2025-12-06 19:12:09.633 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.5004 ms
+2025-12-06 19:14:42.932 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.6315 ms
+2025-12-06 19:14:42.956 +03:00 [INF] HTTP GET /api/Product responded 200 in 19.5278 ms
+2025-12-06 19:14:47.183 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.3655 ms
+2025-12-06 19:14:47.198 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.4878 ms
+2025-12-06 19:15:17.917 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-06 19:15:18.467 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-06 19:15:18.474 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-06 19:15:18.552 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-06 19:15:18.555 +03:00 [INF] Hosting environment: Development
+2025-12-06 19:15:18.559 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-06 19:15:36.943 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-06 19:15:37.516 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-06 19:15:37.527 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-06 19:15:37.609 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-06 19:15:37.615 +03:00 [INF] Hosting environment: Development
+2025-12-06 19:15:37.617 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-06 19:15:42.978 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-06 19:15:42.981 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-06 19:15:45.304 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-06 19:15:45.305 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-06 19:15:45.671 +03:00 [INF] HTTP GET /api/Product responded 200 in 2722.0679 ms
+2025-12-06 19:15:45.825 +03:00 [INF] HTTP GET /api/Product responded 200 in 154.1410 ms
+2025-12-06 19:15:45.888 +03:00 [INF] HTTP GET /api/Cart responded 200 in 2941.0019 ms
+2025-12-06 19:15:46.208 +03:00 [INF] HTTP GET /api/Cart responded 200 in 22.4686 ms
+2025-12-06 19:15:46.228 +03:00 [INF] HTTP GET /api/Product responded 200 in 42.5751 ms
+2025-12-06 19:15:46.252 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.1731 ms
+2025-12-06 19:15:58.980 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 354.5715 ms
+2025-12-06 19:15:59.052 +03:00 [INF] HTTP GET /api/Cart responded 200 in 19.9248 ms
+2025-12-06 19:16:41.227 +03:00 [INF] HTTP GET /api/Cart responded 200 in 13.6711 ms
+2025-12-06 19:17:01.418 +03:00 [INF] HTTP GET /api/Cart responded 200 in 13.4377 ms
+2025-12-06 19:17:06.066 +03:00 [INF] HTTP GET /api/Cart responded 200 in 15.2852 ms
+2025-12-06 19:17:08.022 +03:00 [INF] HTTP GET /api/Cart responded 200 in 13.3404 ms
+2025-12-06 19:17:12.474 +03:00 [INF] HTTP GET /api/Cart responded 200 in 10.6186 ms
+2025-12-06 19:17:17.853 +03:00 [INF] HTTP GET /api/Cart responded 200 in 9.0360 ms
+2025-12-06 19:17:20.986 +03:00 [INF] HTTP GET /api/Cart responded 200 in 16.4260 ms
+2025-12-06 19:17:25.885 +03:00 [INF] HTTP GET /api/Cart responded 200 in 15.8881 ms
+2025-12-06 19:17:29.688 +03:00 [INF] HTTP GET /api/Cart responded 200 in 14.8161 ms
+2025-12-06 19:17:34.040 +03:00 [INF] HTTP GET /api/Cart responded 200 in 16.0552 ms
+2025-12-06 19:17:38.396 +03:00 [INF] HTTP GET /api/Cart responded 200 in 19.8862 ms
+2025-12-06 19:17:40.444 +03:00 [INF] HTTP GET /api/Cart responded 200 in 18.1241 ms
+2025-12-06 19:17:41.878 +03:00 [INF] HTTP GET /api/Cart responded 200 in 15.2279 ms
+2025-12-06 19:17:48.184 +03:00 [INF] HTTP GET /api/Cart responded 200 in 12.0950 ms
+2025-12-06 19:18:01.893 +03:00 [INF] HTTP GET /api/Cart responded 200 in 7.5025 ms
+2025-12-06 19:30:26.501 +03:00 [INF] HTTP GET /api/Cart responded 200 in 8.9680 ms
+2025-12-06 19:30:30.155 +03:00 [INF] HTTP GET /api/Product/information responded 400 in 54.9113 ms
+2025-12-06 19:30:33.427 +03:00 [INF] HTTP GET /api/Product/orders responded 400 in 6.5051 ms
+2025-12-06 19:30:35.493 +03:00 [INF] HTTP GET /api/Product/settings responded 400 in 4.2236 ms
+2025-12-06 19:33:00.982 +03:00 [INF] HTTP GET /api/Cart responded 200 in 91.1813 ms
+2025-12-06 19:33:00.992 +03:00 [INF] HTTP GET /api/Product responded 200 in 94.0986 ms
+2025-12-06 19:33:01.017 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.4133 ms
+2025-12-06 19:37:22.733 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.0072 ms
+2025-12-06 19:50:02.943 +03:00 [INF] HTTP GET /api/Cart responded 200 in 21.9097 ms
+2025-12-06 19:50:02.975 +03:00 [INF] HTTP GET /api/Product responded 200 in 54.0792 ms
+2025-12-06 19:50:02.993 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.4439 ms
+2025-12-06 19:50:06.793 +03:00 [INF] HTTP GET /api/Cart responded 200 in 18.0083 ms
+2025-12-06 19:56:17.655 +03:00 [INF] HTTP GET /api/Cart responded 200 in 13.0036 ms
+2025-12-06 19:57:59.083 +03:00 [INF] HTTP GET /api/Product/information responded 400 in 10.2478 ms
+2025-12-06 19:57:59.128 +03:00 [INF] HTTP GET /api/Product responded 200 in 55.6503 ms
+2025-12-06 19:57:59.143 +03:00 [INF] HTTP GET /api/Cart responded 200 in 64.0500 ms
+2025-12-06 19:58:00.822 +03:00 [INF] HTTP GET /api/Cart responded 200 in 10.4151 ms
+2025-12-06 19:58:07.567 +03:00 [INF] HTTP GET /api/Product/information responded 400 in 6.2787 ms
+2025-12-06 19:58:07.579 +03:00 [INF] HTTP GET /api/Cart responded 200 in 18.3096 ms
+2025-12-06 19:58:08.665 +03:00 [INF] HTTP GET /api/Cart responded 200 in 9.5324 ms
+2025-12-06 19:58:49.551 +03:00 [INF] HTTP GET /api/Product/information responded 400 in 8.1825 ms
+2025-12-06 19:58:49.580 +03:00 [INF] HTTP GET /api/Cart responded 200 in 37.6072 ms
+2025-12-06 19:58:50.745 +03:00 [INF] HTTP GET /api/Cart responded 200 in 11.8620 ms
+2025-12-06 20:00:01.435 +03:00 [INF] HTTP GET /api/Cart responded 200 in 12.6754 ms
+2025-12-06 20:00:01.460 +03:00 [INF] HTTP GET /api/Cart responded 200 in 22.1838 ms
+2025-12-06 20:00:18.856 +03:00 [INF] HTTP GET /api/Product/information responded 400 in 3.3301 ms
+2025-12-06 20:01:57.909 +03:00 [INF] HTTP GET /api/Cart responded 200 in 47.2174 ms
+2025-12-06 20:02:12.090 +03:00 [INF] HTTP GET /api/Cart responded 200 in 13.6328 ms
+2025-12-06 20:03:48.866 +03:00 [INF] HTTP GET /api/Product/information responded 400 in 22.6320 ms
+2025-12-06 20:03:48.908 +03:00 [INF] HTTP GET /api/Cart responded 200 in 71.5988 ms
+2025-12-06 20:03:50.084 +03:00 [INF] HTTP GET /api/Cart responded 200 in 11.3909 ms
+2025-12-06 20:04:18.632 +03:00 [INF] HTTP GET /api/Cart responded 200 in 9.6576 ms
+2025-12-06 20:04:20.236 +03:00 [INF] HTTP GET /api/Product/information responded 400 in 22.3830 ms
+2025-12-06 20:04:20.258 +03:00 [INF] HTTP GET /api/Cart responded 200 in 66.6322 ms
+2025-12-06 20:04:20.307 +03:00 [INF] HTTP GET /api/Product responded 200 in 94.3915 ms
+2025-12-06 20:04:21.520 +03:00 [INF] HTTP GET /api/Cart responded 200 in 9.3388 ms
+2025-12-06 20:04:39.701 +03:00 [INF] HTTP GET /api/Cart responded 200 in 11.0044 ms
+2025-12-06 20:04:40.507 +03:00 [INF] HTTP GET /api/Product/information responded 400 in 3.7764 ms
+2025-12-06 20:04:40.507 +03:00 [INF] HTTP GET /api/Cart responded 200 in 18.3119 ms
+2025-12-06 20:04:40.526 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.3749 ms
+2025-12-06 20:04:42.719 +03:00 [INF] HTTP GET /api/Cart responded 200 in 12.1570 ms
+2025-12-06 20:05:44.788 +03:00 [INF] HTTP GET /api/Product/orders responded 400 in 8.7785 ms
+2025-12-06 20:05:44.795 +03:00 [INF] HTTP GET /api/Cart responded 200 in 15.6590 ms
+2025-12-06 20:05:46.283 +03:00 [INF] HTTP GET /api/Cart responded 200 in 11.9147 ms
+2025-12-06 20:07:40.260 +03:00 [INF] HTTP GET /api/Cart responded 200 in 31.6842 ms
+2025-12-06 20:16:12.327 +03:00 [INF] HTTP GET /api/Cart responded 200 in 65.6756 ms
+2025-12-06 20:16:12.342 +03:00 [INF] HTTP GET /api/Product responded 200 in 80.6300 ms
+2025-12-06 20:16:12.344 +03:00 [INF] HTTP GET /api/Cart responded 200 in 11.7061 ms
+2025-12-06 20:16:16.895 +03:00 [INF] HTTP GET /api/Cart responded 200 in 14.1118 ms
+2025-12-06 20:16:46.586 +03:00 [INF] HTTP GET /api/Product/account responded 400 in 13.6042 ms
+2025-12-06 20:16:46.593 +03:00 [INF] HTTP GET /api/Cart responded 200 in 21.9591 ms
+2025-12-06 20:16:48.043 +03:00 [INF] HTTP GET /api/Cart responded 200 in 12.8871 ms
+2025-12-06 20:16:54.574 +03:00 [INF] HTTP GET /api/Product/information responded 400 in 17.1300 ms
+2025-12-06 20:16:54.575 +03:00 [INF] HTTP GET /api/Cart responded 200 in 19.7342 ms
+2025-12-06 20:16:56.203 +03:00 [INF] HTTP GET /api/Cart responded 200 in 20.6242 ms
+2025-12-06 20:17:05.783 +03:00 [INF] HTTP GET /api/Cart responded 200 in 9.4174 ms
+2025-12-06 20:18:12.111 +03:00 [INF] HTTP GET /api/Cart responded 200 in 30.4665 ms
+2025-12-06 20:18:12.174 +03:00 [INF] HTTP GET /api/Product responded 200 in 93.6978 ms
+2025-12-06 20:18:12.196 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.6319 ms
+2025-12-06 20:18:13.393 +03:00 [INF] HTTP GET /api/Cart responded 200 in 8.8349 ms
+2025-12-06 20:18:16.902 +03:00 [INF] HTTP GET /api/Cart responded 200 in 11.1150 ms
+2025-12-06 20:18:22.632 +03:00 [INF] HTTP GET /api/Cart responded 200 in 8.3681 ms
+2025-12-06 20:19:59.320 +03:00 [INF] HTTP GET /api/Cart responded 200 in 17.1943 ms
+2025-12-06 20:20:56.057 +03:00 [INF] HTTP GET /api/Cart responded 200 in 12.8713 ms
+2025-12-06 20:21:30.831 +03:00 [INF] HTTP GET /api/Cart responded 200 in 39.4910 ms
