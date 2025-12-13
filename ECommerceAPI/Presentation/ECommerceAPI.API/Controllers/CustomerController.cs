@@ -1,5 +1,6 @@
 ﻿using ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer;
-using ECommerceAPI.Application.Features.Commands.Customers.CreateCustomer;
+using ECommerceAPI.Application.Features.Commands.Customers.UpdateCustomer;
+using ECommerceAPI.Application.Features.Queries.Customer.GetCustomer;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -18,16 +19,22 @@ namespace ECommerceAPI.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("{CustomerId}/addresses")]
-        public async Task<IActionResult> AddAddress([FromRoute] Guid CustomerId, [FromBody] AddAddressToCustomerCommandRequest request)
+        [HttpPost("[Action]")]
+        public async Task<IActionResult> AddAddress([FromBody] AddAddressToCustomerCommandRequest request)
         {
             AddAddressToCustomerCommandResponse response = await _mediator.Send(request);
             return Ok(response);
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommandRequest request)
+        [HttpGet]
+        public async Task<IActionResult> GetCustomer([FromQuery] GetCustomerQueryRequest request)
         {
-            CreateCustomerCommandResponse response = await _mediator.Send(request);
+            GetCustomerQueryResponse response = await _mediator.Send(request);
+            return Ok(response);
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateCustomer([FromBody] UpdateCustomerCommandRequest request)
+        {
+            UpdateCustomerCommandResponse response = await _mediator.Send(request);
             return Ok(response);
         }
     }

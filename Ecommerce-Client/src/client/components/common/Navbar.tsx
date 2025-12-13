@@ -52,7 +52,7 @@ function Navbar() {
               <button onClick={handleLogout}>
                 <LogOutIcon />
               </button>
-              <button onClick={() => navigate("/profile")}>
+              <button onClick={() => navigate("/profile/account")}>
                 <User />
               </button>
             </div>

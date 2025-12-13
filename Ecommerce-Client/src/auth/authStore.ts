@@ -24,8 +24,7 @@ export const useAuthStore = create(
     (set) => ({
       token: null,
       user: null,
-      setToken: (t: string | null) =>
-        set(() => ({ token: t, user: decodeUser(t) })),
+      setToken: (t: string | null) => set(() => ({ token: t, user: decodeUser(t) })),
       clearAuth: () => set({ token: null, user: null }),
     }),
     {
