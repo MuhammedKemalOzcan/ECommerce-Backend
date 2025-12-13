@@ -54,7 +54,13 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
             }
 
             //gelen requestlere göre yeni bir user oluştururuz.
-            IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
+            IdentityUser user = new IdentityUser
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = model.Email.Split("@")[0],
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+            };
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
@@ -66,7 +72,12 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
             var roles = await _userManager.GetRolesAsync(user);
             var token = _jwtToken.GenerateToken(user.Id, user.Email, roles);
 
-            return new AuthResultDto { Succeed = true, Token = token };
+            return new AuthResultDto
+            {
+                Succeed = true,
+                Token = token,
+                UserId = user.Id
+            };
 
 
         }

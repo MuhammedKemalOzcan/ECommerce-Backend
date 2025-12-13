@@ -9,7 +9,6 @@ namespace ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCusto
 {
     public class AddAddressToCustomerCommandRequest : IRequest<AddAddressToCustomerCommandResponse>
     {
-        public Guid CustomerId { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string Country { get; set; }

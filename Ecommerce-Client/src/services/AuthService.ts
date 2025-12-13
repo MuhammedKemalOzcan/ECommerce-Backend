@@ -1,4 +1,4 @@
-import type { LoginRequest, LoginResponse } from "../types/User";
+import type { LoginRequest, LoginResponse, Register } from "../types/User";
 import { methods } from "../api/apiClient";
 
 export async function loginUser(email: string, password: string) {
@@ -7,5 +7,10 @@ export async function loginUser(email: string, password: string) {
     { email, password }
   );
 
+  return response;
+}
+
+export async function RegisterUser(data: Register) {
+  const response = await methods.post<Register, void>("Auth/register", data);
   return response;
 }

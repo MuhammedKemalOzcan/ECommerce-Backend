@@ -1,8 +1,10 @@
 import { Avatar } from "@mui/material";
 import { Package, Settings, User } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCustomerStore } from "../../../stores/customerStore";
 
 export default function ProfileNavbar() {
+  const customer = useCustomerStore((s) => s.customer);
   const profileLinks = [
     { name: "Account", path: "/profile/account", icon: <User /> },
     { name: "Orders", path: "/profile/orders", icon: <Package /> },
@@ -10,12 +12,12 @@ export default function ProfileNavbar() {
   ];
 
   return (
-    <div className="flex flex-col w-80 gap-4 p-4 h-screen bg-[#141414] items-center text-white rounded-r-lg">
+    <div className="flex flex-col w-80 gap-4 p-4 bg-[#141414] items-center text-white rounded-r-lg">
       <div className="flex gap-4 items-center mb-8">
         <Avatar />
         <div>
           <p className="text-sm">Hello</p>
-          <p className="font-bold">Muhammed Kemal Özcan</p>
+          <p className="font-bold">{customer?.firstName} </p>
         </div>
       </div>
 

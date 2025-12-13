@@ -8,6 +8,7 @@ namespace ECommerceAPI.Application.Dtos.UserDto
 {
     public class AuthResultDto
     {
+        public string UserId { get; set; }
         public bool Succeed { get; set; }
         public string? Token { get; set; }
         public string? Error { get; set; }

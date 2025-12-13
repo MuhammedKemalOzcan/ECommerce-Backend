@@ -17,6 +17,7 @@ export default function Login() {
     await mutate(data.email, data.password);
   };
 
+
   useEffect(() => {
     if (user) {
       navigate("/");
@@ -27,7 +28,7 @@ export default function Login() {
     <div className="w-screen h-screen bg-[#F1F1F1] flex justify-center items-center text-white">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-[#101010] w-[50%] h-[70%] p-8 rounded-[20px] flex flex-col gap-4 "
+        className="bg-[#101010] w-auto h-auto p-8 rounded-[20px] flex flex-col gap-4 "
       >
         <p className="text-[30px]">Giriş Yap</p>
         <p>Hesabınıza giriş yapmak için e-posta ve şifrenizi giriniz</p>
@@ -78,8 +79,8 @@ export default function Login() {
           </button>
         </p>
         <button onClick={() => navigate("/")} className="flex gap-3">
-          Kayıt olmadan devam et 
-          <ArrowBigRight/>
+          Kayıt olmadan devam et
+          <ArrowBigRight />
         </button>
       </form>
     </div>

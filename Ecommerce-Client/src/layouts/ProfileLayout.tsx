@@ -6,18 +6,21 @@ import Orders from "../client/components/Profile/Orders";
 import ProfileSettings from "../client/components/Profile/ProfileSettings";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useCustomerStore } from "../stores/customerStore";
 
 export default function ProfileLayout() {
   const location = useLocation();
 
   const [path, setPathName] = useState(location);
+  const getCustomer = useCustomerStore((s) => s.getCustomer);
 
   useEffect(() => {
     setPathName(location);
-  }, [location]);
+    getCustomer();
+  }, [location, getCustomer]);
 
   return (
-    <div className="flex flex-col w-screen">
+    <div className="flex flex-col w-screen ">
       <Navbar />
       <div className="flex">
         <ProfileNavbar />
