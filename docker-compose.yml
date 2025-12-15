@@ -1,0 +1,62 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: PostgreSQL
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB: EcommerceAPI
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backup_data.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - ecommerce-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./ECommerceAPI
+      dockerfile: Presentation/ECommerceAPI.API/Dockerfile
+    container_name: audiophile_api
+    ports:
+      - "7196:8080"  # ← Container içinde 8080, dışarıda 7196
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:8080  # ← Container içinde 8080
+      - ConnectionStrings__PostgreSQL=User ID=postgres;Password=123456;Host=db;Port=5432;Database=EcommerceAPI;
+    depends_on:
+      db:
+        condition: service_healthy  # ← DB hazır olana kadar bekle
+    networks:
+      - ecommerce-network
+    restart: unless-stopped
+
+  client:
+    build:
+      context: ./Ecommerce-Client
+      dockerfile: Dockerfile
+    container_name: audiophile_client
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:7196  # ← Browser'dan host'a erişim
+    volumes:
+      - ./Ecommerce-Client:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    networks:
+      - ecommerce-network
+
+networks:
+  ecommerce-network:
+    driver: bridge
+
+volumes:
+  pgdata:

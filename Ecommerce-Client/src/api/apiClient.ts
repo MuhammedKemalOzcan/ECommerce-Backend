@@ -2,7 +2,7 @@ import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
 import { toast } from "react-toastify";
 import { useAuthStore } from "../auth/authStore";
 
-axios.defaults.baseURL = "https://localhost:7196/api/";
+axios.defaults.baseURL = "http://localhost:7196/api/";
 axios.defaults.withCredentials = true;
 // axios.defaults.timeout = 15000;
 

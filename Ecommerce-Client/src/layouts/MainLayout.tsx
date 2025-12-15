@@ -12,9 +12,11 @@ export default function MainLayout() {
   }, [getAll]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen gap-40">
+    <div className="flex flex-col items-center justify-center w-screen">
       <Navbar />
-      <Outlet />
+      <div className="flex flex-col pb-40">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );
