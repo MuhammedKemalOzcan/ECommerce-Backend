@@ -17,17 +17,18 @@ using ECommerceAPI.Persistence.Repositories.ProductGallery;
 using ECommerceAPI.Persistence.Repositories.Products;
 using ECommerceAPI.Persistence.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ECommerceAPI.Persistence
 {
     public static class ServiceRegistration
     {
-        public static void AddPersistenceServices(this IServiceCollection services)
+        public static void AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ECommerceAPIDbContext>(opt =>
             {
-                opt.UseNpgsql(Configuration.ConnectionString);
+                opt.UseNpgsql(configuration.GetConnectionString("PostgreSQL"));
             });
 
             services.AddScoped<IProductReadRepository, ProductReadRepository>();

@@ -41,7 +41,7 @@ namespace ECommerceAPI.API
                             {"time_stamp", new TimestampColumnWriter(NpgsqlDbType.Timestamp)},
                             {"exception", new ExceptionColumnWriter(NpgsqlDbType.Text)},
                             {"log_event", new LogEventSerializedColumnWriter(NpgsqlDbType.Json)},
-                            {"user",new  UserColumWriter() }
+                            {"username",new  UserColumWriter() }
                         }
                     )
                     .Enrich.FromLogContext()
@@ -53,7 +53,7 @@ namespace ECommerceAPI.API
 
                 // Add services to the container.
                 builder.Services.AddApplicationServices();
-                builder.Services.AddPersistenceServices();
+                builder.Services.AddPersistenceServices(builder.Configuration);
 
                 builder.Services.AddStorage<AzureStorage>();
                 //builder.Services.AddStorage<LocalStorage>();

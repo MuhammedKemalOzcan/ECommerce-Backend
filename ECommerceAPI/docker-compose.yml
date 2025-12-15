@@ -1,0 +1,6 @@
+services:
+  ecommerceapi.api:
+    image: ${DOCKER_REGISTRY-}ecommerceapiapi
+    build:
+      context: .
+      dockerfile: Presentation\ECommerceAPI.API\Dockerfile
