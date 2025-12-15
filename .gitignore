@@ -10,3 +10,5 @@
 *.suo
 *.userosscache
 *.sln.docstates
+
+.env
