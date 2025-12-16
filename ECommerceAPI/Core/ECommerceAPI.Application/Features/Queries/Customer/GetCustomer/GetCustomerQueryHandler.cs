@@ -2,12 +2,8 @@
 using ECommerceAPI.Application.Repositories.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Application.Features.Queries.Customer.GetCustomer
 {
@@ -24,21 +20,34 @@ namespace ECommerceAPI.Application.Features.Queries.Customer.GetCustomer
 
         public async Task<GetCustomerQueryResponse> Handle(GetCustomerQueryRequest request, CancellationToken cancellationToken)
         {
+            var includes = new Expression<Func<Domain.Entities.Customer, object>>[]
+            {
+                c => c.Addresses
+            };
+
             var id = _httpContextAccessor.HttpContext.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (id == null) throw new Exception("User Id bulunamadı");
 
             var userId = Guid.Parse(id);
 
-            var customer = await _customerReadRepository.GetAllAsync(null, predicate: c => c.AppUserId == userId, true, ct: default);
+            var customer = await _customerReadRepository.GetByUserIdAsync(includes, userId, true, cancellationToken);
 
-            var customerDto = customer.Select(c => new CustomerDto
+            var customerDto = new CustomerDto
             {
-                Email = c.Email,
-                FirstName = c.FirstName,
-                LastName = c.LastName,
-                PhoneNumber = c.PhoneNumber,
-            }).FirstOrDefault();
+                Email = customer.Email,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                PhoneNumber = customer.PhoneNumber,
+                Addresses = customer.Addresses.Select(a => new AddressDto
+                {
+                    Id = a.Id,
+                    Street = a.Street,
+                    City = a.City,
+                    Country = a.Country,
+                    ZipCode = a.ZipCode,
+                }).ToList()
+            };
 
             return new GetCustomerQueryResponse()
             {

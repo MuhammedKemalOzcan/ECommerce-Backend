@@ -1,6 +1,10 @@
 import type { AddAdress, AddCustomer, Customer } from "../types/customer";
 import { methods } from "./apiClient";
 
+type ApiMessage = {
+  message: string;
+};
+
 export const customerApi = {
   add: (customer: AddCustomer) =>
     methods.post<AddCustomer, Customer>("/Customer", customer),
@@ -9,4 +13,6 @@ export const customerApi = {
     methods.put<AddCustomer, { data: Customer }>("/Customer", updateCustomer),
   addAddress: (address: AddAdress) =>
     methods.post<AddAdress, string>("/Customer/AddAddress", address),
+  deleteAddress: (addressId: string | null) =>
+    methods.delete<ApiMessage>(`/Customer/address/${addressId}`),
 };

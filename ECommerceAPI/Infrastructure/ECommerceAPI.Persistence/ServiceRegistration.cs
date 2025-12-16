@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.Application.Abstractions.Services;
+using ECommerceAPI.Application.Repositories.Addresses;
 using ECommerceAPI.Application.Repositories.CartItems;
 using ECommerceAPI.Application.Repositories.Carts;
 using ECommerceAPI.Application.Repositories.Customers;
@@ -7,6 +8,7 @@ using ECommerceAPI.Application.Repositories.ProductBoxes;
 using ECommerceAPI.Application.Repositories.ProductGallery;
 using ECommerceAPI.Application.Repositories.Products;
 using ECommerceAPI.Persistence.Contexts;
+using ECommerceAPI.Persistence.Repositories.Address;
 using ECommerceAPI.Persistence.Repositories.Cart;
 using ECommerceAPI.Persistence.Repositories.CartItem;
 using ECommerceAPI.Persistence.Repositories.Carts;
@@ -47,6 +49,8 @@ namespace ECommerceAPI.Persistence
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
             services.AddScoped<ISharedIdentityService, SharedIdentityService>();
+            services.AddScoped<IAddressesReadRepository, AddressesReadRepository>();
+            services.AddScoped<IAddressesWriteRepository, AddressesWriteRepository>();
 
         }
     }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ECommerceAPI.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +10,6 @@ namespace ECommerceAPI.Application.Repositories.Customers
 {
     public interface ICustomerReadRepository : IReadRepository<Domain.Entities.Customer>
     {
-        Task<Domain.Entities.Customer> GetByUserIdAsync(Guid userId, bool AsNoTracking = true, CancellationToken ct = default);
+        Task<Domain.Entities.Customer> GetByUserIdAsync(IEnumerable<Expression<Func<Customer, object>>>? includes, Guid userId, bool AsNoTracking = true, CancellationToken ct = default);
     }
 }

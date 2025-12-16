@@ -3,6 +3,7 @@ using ECommerceAPI.Application.Repositories.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System.Linq.Expressions;
 using System.Security.Claims;
 
 
@@ -25,6 +26,10 @@ namespace ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCusto
 
         public async Task<AddAddressToCustomerCommandResponse> Handle(AddAddressToCustomerCommandRequest request, CancellationToken cancellationToken)
         {
+            var includes = new List<Expression<Func<Domain.Entities.Customer, object>>>
+            {
+                c => c.Addresses
+            };
 
             var Id = _httpContextAccessor.HttpContext.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -36,7 +41,7 @@ namespace ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCusto
 
             var userId = Guid.Parse(Id);
 
-            var customer = await _customerReadRepository.GetByUserIdAsync(userId, false, cancellationToken);
+            var customer = await _customerReadRepository.GetByUserIdAsync(includes, userId, false, cancellationToken);
 
 
             if (customer == null)
@@ -45,7 +50,11 @@ namespace ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCusto
                 throw new NotFoundException("Customer not found");
             }
 
+            if (customer.Addresses.Count > 3) throw new BusinessException("Bir kullanıcının 4'ten fazla kayıtlı adresi bulunamaz");
+
             customer.AddAddress(request.Street, request.City, request.Country, request.ZipCode);
+
+
 
             await _customerWriteRepository.SaveChangesAsync();
             return new AddAddressToCustomerCommandResponse

@@ -10,7 +10,7 @@ export interface Customer {
   lastName: string;
   email: string;
   phoneNumber: string;
-  address?: Adress[];
+  addresses?: Adress[];
 }
 
 export interface AddAdress {

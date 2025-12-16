@@ -14,11 +14,11 @@ namespace ECommerceAPI.Infrastructure.Services.Storage.Azure
         private readonly BlobServiceClient _blobServiceClient;
          BlobContainerClient _blobContainerClient;
 
-        public AzureStorage(IConfiguration config)
-        {
-            //appsettings.json'a eklediğimiz access keyi buraya entegre ediyoruz.
-            _blobServiceClient = new(config["Storage:Azure"]);
-        }
+        //public AzureStorage(IConfiguration config)
+        //{
+        //    //appsettings.json'a eklediğimiz access keyi buraya entegre ediyoruz.
+        //    _blobServiceClient = new(config["Storage:Azure"]);
+        //}
 
         public async Task DeleteAsync(string containerName, string fileName)
         {

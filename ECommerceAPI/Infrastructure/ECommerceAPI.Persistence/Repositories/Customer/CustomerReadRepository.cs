@@ -1,11 +1,7 @@
 ﻿using ECommerceAPI.Application.Repositories.Customers;
 using ECommerceAPI.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace ECommerceAPI.Persistence.Repositories.Customer
 {
@@ -15,12 +11,22 @@ namespace ECommerceAPI.Persistence.Repositories.Customer
         {
         }
 
-        public async Task<Domain.Entities.Customer> GetByUserIdAsync(Guid userId, bool AsNoTracking = true, CancellationToken ct = default)
+        public async Task<Domain.Entities.Customer> GetByUserIdAsync(IEnumerable<Expression<Func<Domain.Entities.Customer, object>>>? includes, Guid userId, bool AsNoTracking = true, CancellationToken ct = default)
         {
             var query = Table.AsQueryable();
-            if (AsNoTracking) query.AsNoTracking();
+            if (AsNoTracking) query = query.AsNoTracking();
+
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
 
             return await query.FirstOrDefaultAsync(c => c.AppUserId == userId, ct);
         }
+
+
     }
 }

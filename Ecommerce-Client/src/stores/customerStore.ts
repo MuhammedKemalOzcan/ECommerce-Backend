@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type { AddAdress, AddCustomer, Customer } from "../types/customer";
 import { customerApi } from "../api/customerApi";
+import { toast } from "react-toastify";
 
 type customerState = {
   customer: Customer | null;
@@ -10,6 +11,7 @@ type customerState = {
   loading: boolean;
   error: string | null;
   addAddress: (data: AddAdress) => Promise<void>;
+  deleteAddress: (id: string) => Promise<void>
 };
 
 export const useCustomerStore = create<customerState>((set) => ({
@@ -35,6 +37,7 @@ export const useCustomerStore = create<customerState>((set) => ({
     set({ loading: true });
     try {
       const response = await customerApi.get();
+      console.log(response.data);
       if (response.data) set({ customer: response.data });
     } catch (error: any) {
       set({
@@ -64,7 +67,20 @@ export const useCustomerStore = create<customerState>((set) => ({
     set({ loading: true });
     try {
       const response = await customerApi.addAddress(data);
+      toast.success("Yeni adres eklendi");
       console.log(response);
+    } catch (error: any) {
+      set({ error: error, loading: false });
+      console.log(error);
+    } finally {
+      set({ loading: false });
+    }
+  },
+  deleteAddress: async (id: string) => {
+    set({ loading: true });
+    try {
+      const response = await customerApi.deleteAddress(id);
+      toast.success(response.message);
     } catch (error: any) {
       set({ error: error, loading: false });
     } finally {

@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.Application.Features.Commands.Customers.AddAddressToCustomer;
+using ECommerceAPI.Application.Features.Commands.Customers.DeleteCustomerAddress;
 using ECommerceAPI.Application.Features.Commands.Customers.UpdateCustomer;
 using ECommerceAPI.Application.Features.Queries.Customer.GetCustomer;
 using MediatR;
@@ -35,6 +36,12 @@ namespace ECommerceAPI.API.Controllers
         public async Task<IActionResult> UpdateCustomer([FromBody] UpdateCustomerCommandRequest request)
         {
             UpdateCustomerCommandResponse response = await _mediator.Send(request);
+            return Ok(response);
+        }
+        [HttpDelete("address/{addressId}")]
+        public async Task<IActionResult> DeleteAddress([FromRoute] DeleteCustomerAddresCommandRequest request)
+        {
+            var response = await _mediator.Send(request);
             return Ok(response);
         }
     }

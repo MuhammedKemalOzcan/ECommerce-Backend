@@ -32,7 +32,7 @@ services:
       - ConnectionStrings__PostgreSQL=${DB_CONNECTION_STRING}
       - Jwt__Key=${JWT_KEY}
       - Jwt__Issuer=${JWT_ISSUER}
-      - Jwt__Audience=${JWT_AUDIENCE}
+      - Jwt__Audience=${JWT_AUDIENCE}ocke
       - Storage__Azure=${AZURE_STORAGE_CONNECTION}
     depends_on:
       db:

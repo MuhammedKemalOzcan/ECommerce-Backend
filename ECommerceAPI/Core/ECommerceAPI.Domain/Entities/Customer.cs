@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace ECommerceAPI.Domain.Entities
 {
@@ -32,10 +28,6 @@ namespace ECommerceAPI.Domain.Entities
 
         public void AddAddress(string street, string city, string country, string zipCode)
         {
-            if (_addresses.Count > 3)
-            {
-                throw new Exception("A customer cannot have more than 4 addresses.");
-            }
             var address = new Address(street, city, country, zipCode);
             _addresses.Add(address);
         }

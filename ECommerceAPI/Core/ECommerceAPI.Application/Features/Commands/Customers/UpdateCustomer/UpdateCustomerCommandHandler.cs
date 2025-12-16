@@ -34,7 +34,7 @@ namespace ECommerceAPI.Application.Features.Commands.Customers.UpdateCustomer
 
             var userId = Guid.Parse(Id);
 
-            var customer = await _customerReadRepository.GetByUserIdAsync(userId, false, cancellationToken);
+            var customer = await _customerReadRepository.GetByUserIdAsync(null,userId, false, cancellationToken);
 
             if (customer == null)
             {
