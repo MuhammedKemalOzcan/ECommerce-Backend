@@ -103,6 +103,7 @@ namespace ECommerceAPI.API.Controllers
             var response = await _mediator.Send(command);
             return Ok(response);
         }
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Merge()
         {

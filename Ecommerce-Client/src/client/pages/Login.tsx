@@ -6,17 +6,28 @@ import { useAuthStore } from "../../auth/authStore";
 import { useLogin } from "../../auth/useLogin";
 import { useEffect } from "react";
 import { ArrowBigRight } from "lucide-react";
+import { useCartStore } from "../../stores/cartStore";
+import { useShallow } from "zustand/shallow";
 
 export default function Login() {
   const navigate = useNavigate();
   const { mutate } = useLogin();
   const { register, handleSubmit } = useForm<User>();
   const user = useAuthStore((s) => s.user);
+  const { mergeCart, cart } = useCartStore(
+    useShallow((s) => ({
+      mergeCart: s.mergeCart,
+      cart: s.cart,
+    }))
+  );
 
   const onSubmit: SubmitHandler<User> = async (data) => {
     await mutate(data.email, data.password);
+    if (cart?.totalItemCount && cart?.totalItemCount > 0) {
+      mergeCart();
+      console.log("merged");
+    }
   };
-
 
   useEffect(() => {
     if (user) {

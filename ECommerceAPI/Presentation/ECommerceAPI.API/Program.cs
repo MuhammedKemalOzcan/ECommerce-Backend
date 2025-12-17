@@ -71,7 +71,10 @@ namespace ECommerceAPI.API
                 var audience = builder.Configuration["Jwt:Audience"];
 
                 builder.Services
-                    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddAuthentication(options =>
+                    {
+                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    })
                     .AddJwtBearer(opt =>
                     {
                         // ↓ Token doğrulama kuralları

@@ -13,6 +13,7 @@ type cartProps = {
   updateCartItem: (cartItem: UpdateCartItem) => Promise<void>;
   error: CartError | null;
   isLoading: boolean;
+  mergeCart: () => Promise<void>;
 };
 
 type CartError = {
@@ -114,6 +115,16 @@ export const useCartStore = create<cartProps>((set) => ({
 
       set({ cart: null });
       toast.success("Sepetteki bütün ürünler kaldırıldı");
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  mergeCart: async () => {
+    try {
+      const response = await cartApi.merge();
+      console.log(response.cartDto);
+
+      set({ cart: response.cartDto });
     } catch (error) {
       console.log(error);
     }

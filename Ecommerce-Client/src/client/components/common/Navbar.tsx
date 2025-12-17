@@ -25,7 +25,7 @@ function Navbar() {
 
   useEffect(() => {
     listCart();
-  }, [listCart]);
+  }, [listCart, user]);
 
   const handleLogout = () => {
     clearAuth();

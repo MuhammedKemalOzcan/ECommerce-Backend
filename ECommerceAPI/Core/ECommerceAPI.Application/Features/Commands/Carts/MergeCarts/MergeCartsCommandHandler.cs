@@ -3,12 +3,6 @@ using ECommerceAPI.Application.Dtos.Cart;
 using ECommerceAPI.Application.Repositories.Carts;
 using ECommerceAPI.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Application.Features.Commands.Carts.MergeCarts
 {
