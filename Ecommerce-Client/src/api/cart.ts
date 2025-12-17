@@ -15,6 +15,5 @@ export const cartApi = {
   list: () => methods.get<{ data: Cart }>("/Cart"),
   clear: () => methods.delete("/Cart"),
   delete: (itemId: string) => methods.delete<CartItem>(`Cart/items/${itemId}`),
+  merge: () => methods.post<null, { cartDto: Cart }>("/Cart/Merge", null),
 };
-
-
