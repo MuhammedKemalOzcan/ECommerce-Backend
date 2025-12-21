@@ -21,6 +21,7 @@ import ProductDetail from "./client/components/products/ProductDetail";
 import ProfileLayout from "./layouts/ProfileLayout";
 import ProfileInformation from "./client/components/Profile/ProfileInformation";
 import ProfileSettings from "./client/components/Profile/ProfileSettings";
+import Checkout from "./client/pages/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       { path: ":category/:id", element: <ProductDetail /> },
       { path: "/cart", element: <Cart /> },
       { path: "*", element: <NotFoundPage /> },
+      { path: "/checkout", element: <Checkout /> },
     ],
   },
   {

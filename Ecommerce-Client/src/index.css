@@ -54,3 +54,8 @@ h1 {
   font-size: 20px;
   font-weight: bold;
 }
+
+.radio-option.selected {
+  border-color: #d87d4a; /* Senin projenin turuncu rengi */
+  background-color: #fbfbfb;
+}

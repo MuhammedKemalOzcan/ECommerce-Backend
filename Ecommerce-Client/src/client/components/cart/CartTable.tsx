@@ -3,6 +3,10 @@ import { BeatLoader } from "react-spinners";
 import { useShallow } from "zustand/shallow";
 import { useCartStore } from "../../../stores/cartStore";
 import type { Cart } from "../../../types/cart";
+import { useNavigate } from "react-router-dom";
+import ConfirmationModal from "../../../admin/components/common/ConfirmationModal";
+import { useAuthStore } from "../../../auth/authStore";
+import { useState } from "react";
 
 type CartProps = {
   cart: Cart | null;
@@ -18,6 +22,12 @@ export default function CartTable({ cart }: CartProps) {
     }))
   );
 
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const user = useAuthStore((s) => s.user);
+
+  const navigate = useNavigate();
+
   const handleDelete = (itemId: string | null) => {
     if (!itemId) return;
     deleteCartItem(itemId);
@@ -32,6 +42,14 @@ export default function CartTable({ cart }: CartProps) {
   const handlePlus = (cartItemId: string | null, quantity: number) => {
     if (!cartItemId) return;
     updateCartItem({ cartItemId, quantity: quantity + 1 });
+  };
+
+  const handleCheckout = () => {
+    if (!user) {
+      setIsOpen(true);
+    } else {
+      navigate("/checkout");
+    }
   };
 
   const hasItems = Boolean(cart?.cartItems.length);
@@ -115,10 +133,23 @@ export default function CartTable({ cart }: CartProps) {
           type="button"
           disabled={!hasItems}
           className="btn-1 w-full py-3 disabled:cursor-not-allowed disabled:opacity-60"
+          onClick={handleCheckout}
         >
           Proceed to Checkout
         </button>
       </div>
+      {isOpen == true && (
+        <ConfirmationModal
+          isOpen={isOpen}
+          title="Giris Yapilmadi"
+          message="Lutfen odeme islemi icin giris yapiniz."
+          onConfirm={() => navigate("/login")}
+          onCancel={() => setIsOpen(false)}
+          confirmText="Giriş Yap"
+          cancelText="İptal"
+          variant="warning"
+        />
+      )}
     </div>
   );
 }
