@@ -8,7 +8,7 @@ export default function AdminLayout() {
 
   useEffect(() => {
    void getAll();
-  }, []);
+  }, [getAll]);
 
 
   return (

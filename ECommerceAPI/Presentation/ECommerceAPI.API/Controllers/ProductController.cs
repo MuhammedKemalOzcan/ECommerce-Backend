@@ -13,7 +13,6 @@ using ECommerceAPI.Application.Repositories.ProductGallery;
 using ECommerceAPI.Application.Repositories.Products;
 using ECommerceAPI.Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

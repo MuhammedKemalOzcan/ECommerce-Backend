@@ -11,15 +11,15 @@ import { useSearchParams } from "react-router-dom";
 export default function AddAddress() {
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  // const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  // const [selectedAddress, setSelectedAddress] = useState<string>("");
   const addressId = searchParams.get("addressId");
   const isDeleteModalOpen = Boolean(addressId);
 
-  const { AddAddress, customer, deleteAddress } = useCustomerStore(
+  const { AddAddress, customer } = useCustomerStore(
     useShallow((s) => ({
-      AddAddress: s.addAddress,
+      AddAddress: s.AddAddress,
       customer: s.customer,
-      deleteAddress: s.deleteAddress,
     }))
   );
 
@@ -32,29 +32,48 @@ export default function AddAddress() {
     console.log(id);
   };
 
-  const handleCancelDelete = () => {
-    setSearchParams({});
-  };
+  // useEffect(() => {
+  //   if (customer?.addresses) {
+  //     const defaultPrimary = customer.addresses.find((addr) => addr.isPrimary);
+  //     if (defaultPrimary) {
+  //       setSelectedAddress(defaultPrimary.id);
+  //     }
+  //   }
+  // }, [customer]);
 
-  const confirmDelete = async () => {
-    if (addressId === null) return;
-    try {
-      setIsDeleting(true);
-      await deleteAddress(addressId);
-      setSearchParams({});
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsDeleting(false);
-    }
-  };
+  // const handleChange = async (id: string | null) => {
+  //   if (!id) return;
+  //   setSelectedAddress(id);
+  //   await updatePrimaryAddress(id);
+  // };
+
+  // const handleCancelDelete = () => {
+  //   setSearchParams({});
+  // };
+
+  // const confirmDelete = async () => {
+  //   if (addressId === null) return;
+  //   try {
+  //     setIsDeleting(true);
+  //     await deleteAddress(addressId);
+  //     setSearchParams({});
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setIsDeleting(false);
+  //   }
+  // };
 
   const { register, handleSubmit } = useForm<AddAdress>({
     defaultValues: {
-      street: "",
-      city: "",
-      country: "",
-      zipCode: "",
+      title: "",
+      location: {
+        country: "",
+        city: "",
+        street: "",
+        zipCode: "",
+      },
+      isPrimary: false,
     },
   });
 
@@ -94,7 +113,13 @@ export default function AddAddress() {
           </button>
 
           <h3 className="text-lg font-bold text-gray-900 mb-2">New Address</h3>
-
+          <FormField
+            id="title"
+            label="Title"
+            type="text"
+            placeHolder="Enter title"
+            {...register("title", { required: true })}
+          />
           <div className="flex gap-4">
             <div className="flex-1">
               <FormField
@@ -102,7 +127,7 @@ export default function AddAddress() {
                 label="Street"
                 type="text"
                 placeHolder="Enter street address"
-                {...register("street", { required: true })}
+                {...register("location.street", { required: true })}
               />
             </div>
             <div className="flex-1">
@@ -111,7 +136,7 @@ export default function AddAddress() {
                 label="City"
                 type="text"
                 placeHolder="Enter city"
-                {...register("city", { required: true })}
+                {...register("location.city", { required: true })}
               />
             </div>
           </div>
@@ -123,7 +148,7 @@ export default function AddAddress() {
                 label="Country"
                 type="text"
                 placeHolder="Enter country"
-                {...register("country", { required: true })}
+                {...register("location.country", { required: true })}
               />
             </div>
             <div className="flex-1">
@@ -132,7 +157,7 @@ export default function AddAddress() {
                 label="Zip Code"
                 type="text"
                 placeHolder="Enter zip code"
-                {...register("zipCode", { required: true })}
+                {...register("location.zipCode", { required: true })}
               />
             </div>
           </div>
@@ -158,28 +183,39 @@ export default function AddAddress() {
         {customer?.addresses?.map((address) => (
           <div
             key={address.id}
-            className="flex flex-col border border-dashed w-auto h-auto p-4 relative"
+            className="flex items-start gap-20 border border-dashed w-auto h-auto p-4 relative"
           >
+            <input
+              type="radio"
+              name="address"
+              id={address.id}
+              value={address.id}
+              // checked={selectedAddress === address.id}
+              // onChange={() => handleChange(address.id)}
+            />
+            <label htmlFor={address.id}>
+              <h1>{address.title}</h1>
+              <p>{address.location?.city}</p>
+              <p>{address.location?.country}</p>
+              <p>{address.location?.street}</p>
+              <p>{address.location?.zipCode}</p>
+            </label>
             <button
               onClick={() => handleDelete(address.id)}
-              className="absolute right-2"
+              className="absolute right-10 top-10"
             >
               <Trash2Icon color="red" />
             </button>
-            <p>{address.country}</p>
-            <p>{address.city}</p>
-            <p>{address.street}</p>
-            <p>{address.zipCode}</p>
           </div>
         ))}
-        <ConfirmationModal
+        {/* <ConfirmationModal
           isOpen={isDeleteModalOpen}
           title="Delete Address"
           message="Bu işlem geri alınamaz. adres kalıcı olarak silinecek."
-          onConfirm={confirmDelete}
-          onCancel={handleCancelDelete}
+          // onConfirm={confirmDelete}
+          // onCancel={handleCancelDelete}
           variant="danger"
-        />
+        /> */}
       </div>
     </div>
   );

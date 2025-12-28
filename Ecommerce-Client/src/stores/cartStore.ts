@@ -80,7 +80,6 @@ export const useCartStore = create<cartProps>((set) => ({
     try {
       const res = await cartApi.add(cartItem);
       console.log(res);
-
       set({ cart: res.data });
       toast.success(res.message);
     } catch (error) {
@@ -122,7 +121,7 @@ export const useCartStore = create<cartProps>((set) => ({
   mergeCart: async () => {
     try {
       const response = await cartApi.merge();
-      console.log(response.cartDto);
+      console.log(response);
 
       set({ cart: response.cartDto });
     } catch (error) {

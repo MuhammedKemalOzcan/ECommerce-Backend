@@ -1,8 +1,6 @@
-﻿using ECommerceAPI.Application.Dtos.UserDto;
-using ECommerceAPI.Application.Features.Commands.LoginUser;
+﻿using ECommerceAPI.Application.Features.Commands.LoginUser;
 using ECommerceAPI.Application.Features.Commands.RegisterUser;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.API.Controllers

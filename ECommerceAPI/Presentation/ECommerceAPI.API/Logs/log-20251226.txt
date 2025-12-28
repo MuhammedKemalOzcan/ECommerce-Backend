@@ -1,0 +1,204 @@
+2025-12-26 21:20:00.423 +03:00 [FTL] Application start-up failed
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 125
+2025-12-26 21:39:19.741 +03:00 [FTL] Application start-up failed
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 125
+2025-12-26 21:39:36.602 +03:00 [FTL] Application start-up failed
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 125
+2025-12-26 21:39:52.339 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-26 21:39:52.947 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-26 21:39:52.954 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-26 21:39:53.030 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-26 21:39:53.034 +03:00 [INF] Hosting environment: Development
+2025-12-26 21:39:53.037 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-26 21:39:59.147 +03:00 [INF] HTTP GET /api/Customer responded 404 in 1.1466 ms
+2025-12-26 21:39:59.179 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-26 21:39:59.181 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-26 21:40:00.544 +03:00 [INF] HTTP GET /api/Customer responded 404 in 0.0173 ms
+2025-12-26 21:40:02.200 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-26 21:40:02.200 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-26 21:40:02.478 +03:00 [INF] HTTP GET /api/Cart responded 200 in 1934.2029 ms
+2025-12-26 21:40:02.483 +03:00 [INF] HTTP GET /api/Product responded 200 in 2282.1746 ms
+2025-12-26 21:40:02.483 +03:00 [INF] HTTP GET /api/Product responded 200 in 3341.6802 ms
+2025-12-26 21:40:02.481 +03:00 [INF] HTTP GET /api/Cart responded 200 in 3339.4108 ms
+2025-12-26 21:40:02.491 +03:00 [INF] HTTP GET /api/Product responded 200 in 1946.9642 ms
+2025-12-26 21:40:02.577 +03:00 [INF] HTTP GET /api/Product responded 200 in 91.0975 ms
+2025-12-26 21:40:02.740 +03:00 [INF] HTTP GET /api/Customer responded 404 in 0.0277 ms
+2025-12-26 21:40:02.762 +03:00 [INF] HTTP GET /api/Cart responded 200 in 22.0745 ms
+2025-12-26 21:40:02.769 +03:00 [INF] HTTP GET /api/Product responded 200 in 29.4894 ms
+2025-12-26 21:40:02.792 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.5432 ms
+2025-12-26 21:47:07.071 +03:00 [INF] HTTP POST /api/Auth/register responded 400 in 29710.8922 ms
+2025-12-26 21:47:41.698 +03:00 [INF] HTTP POST /api/Auth/register responded 200 in 19577.8189 ms
+2025-12-26 21:48:17.822 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 177.7308 ms
+2025-12-26 21:48:18.029 +03:00 [INF] HTTP GET /api/Customer responded 404 in 0.0294 ms
+2025-12-26 21:48:18.067 +03:00 [INF] HTTP GET /api/Product responded 200 in 37.8803 ms
+2025-12-26 21:48:18.084 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-26 21:48:18.089 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.3519 ms
+2025-12-26 21:48:18.113 +03:00 [INF] HTTP GET /api/Cart responded 200 in 83.1796 ms
+2025-12-26 21:48:27.042 +03:00 [INF] HTTP GET /api/Customer responded 404 in 0.0137 ms
+2025-12-26 21:48:27.049 +03:00 [INF] HTTP GET /api/Cart responded 200 in 7.7736 ms
+2025-12-26 21:57:47.651 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-26 21:57:48.148 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-26 21:57:48.159 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-26 21:57:48.257 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-26 21:57:48.262 +03:00 [INF] Hosting environment: Development
+2025-12-26 21:57:48.266 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-26 21:58:00.631 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-26 21:58:03.028 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-26 21:58:03.252 +03:00 [INF] HTTP GET /api/Cart responded 200 in 2652.4903 ms
+2025-12-26 21:58:34.038 +03:00 [INF] HTTP POST /api/Auth/register responded 200 in 20560.6548 ms
+2025-12-26 21:58:39.537 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 250.6940 ms
+2025-12-26 21:58:39.719 +03:00 [INF] HTTP GET /api/Customer responded 404 in 0.1143 ms
+2025-12-26 21:58:39.755 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-26 21:58:39.781 +03:00 [INF] HTTP GET /api/Cart responded 200 in 61.5031 ms
+2025-12-26 21:58:42.708 +03:00 [INF] HTTP GET /api/Customer responded 404 in 0.0326 ms
+2025-12-26 21:58:42.728 +03:00 [INF] HTTP GET /api/Cart responded 200 in 20.0455 ms
+2025-12-26 21:59:27.195 +03:00 [INF] HTTP GET /api/Cart responded 200 in 8.4639 ms
+2025-12-26 22:00:23.968 +03:00 [INF] HTTP POST /api/Auth/register responded 200 in 37494.9055 ms
+2025-12-26 22:00:39.555 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-26 22:00:40.061 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-26 22:00:40.070 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-26 22:00:40.163 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-26 22:00:40.169 +03:00 [INF] Hosting environment: Development
+2025-12-26 22:00:40.172 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-26 22:01:01.866 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-26 22:01:16.014 +03:00 [INF] HTTP POST /api/Auth/register responded 200 in 14184.5629 ms
+2025-12-26 22:02:13.324 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-26 22:02:13.869 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-26 22:02:13.879 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-26 22:02:13.974 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-26 22:02:13.978 +03:00 [INF] Hosting environment: Development
+2025-12-26 22:02:13.980 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-26 22:02:56.679 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-26 22:03:31.453 +03:00 [INF] HTTP POST /api/Auth/register responded 200 in 34807.2190 ms
+2025-12-26 22:04:03.799 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-26 22:04:04.350 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-26 22:04:04.359 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-26 22:04:04.498 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-26 22:04:04.503 +03:00 [INF] Hosting environment: Development
+2025-12-26 22:04:04.510 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-26 22:10:50.886 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.RegisterUser.RegisterUserCommandRequest,ECommerceAPI.Application.Features.Commands.RegisterUser.RegisterUserCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.RegisterUser.RegisterUserCommandHandler': Unable to resolve service for type 'ECommerceAPI.Domain.Repositories.ICustomerRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.RegisterUser.RegisterUserCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Commands.RegisterUser.RegisterUserCommandRequest,ECommerceAPI.Application.Features.Commands.RegisterUser.RegisterUserCommandResponse] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.RegisterUser.RegisterUserCommandHandler': Unable to resolve service for type 'ECommerceAPI.Domain.Repositories.ICustomerRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.RegisterUser.RegisterUserCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Domain.Repositories.ICustomerRepository' while attempting to activate 'ECommerceAPI.Application.Features.Commands.RegisterUser.RegisterUserCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 125
+2025-12-26 22:11:34.299 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-26 22:11:34.896 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-26 22:11:34.905 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-26 22:11:35.036 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-26 22:11:35.041 +03:00 [INF] Hosting environment: Development
+2025-12-26 22:11:35.046 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-26 22:11:52.043 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-26 22:12:05.138 +03:00 [INF] HTTP POST /api/Auth/register responded 200 in 13124.8466 ms
+2025-12-26 22:12:05.224 +03:00 [INF] HTTP POST /api/Auth/register responded 400 in 194.8633 ms
+2025-12-26 22:12:28.951 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 187.3481 ms
+2025-12-26 22:12:29.160 +03:00 [INF] HTTP GET /api/Customer responded 404 in 0.2004 ms
+2025-12-26 22:12:29.371 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-26 22:12:29.464 +03:00 [INF] HTTP GET /api/Cart responded 200 in 304.9867 ms
+2025-12-26 22:12:52.020 +03:00 [INF] HTTP GET /api/Customer responded 404 in 0.0226 ms
+2025-12-26 22:12:52.062 +03:00 [INF] HTTP GET /api/Cart responded 200 in 40.9705 ms
+2025-12-26 22:51:45.497 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryRequest,ECommerceAPI.Application.Dtos.Customer.CustomerDto] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Data.IEcommerceAPIDbContext' while attempting to activate 'ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryRequest,ECommerceAPI.Application.Dtos.Customer.CustomerDto] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Data.IEcommerceAPIDbContext' while attempting to activate 'ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Data.IEcommerceAPIDbContext' while attempting to activate 'ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 125
+2025-12-26 22:52:58.571 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryRequest,ECommerceAPI.Application.Dtos.Customer.CustomerDto] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Data.IEcommerceAPIDbContext' while attempting to activate 'ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryRequest,ECommerceAPI.Application.Dtos.Customer.CustomerDto] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Data.IEcommerceAPIDbContext' while attempting to activate 'ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Data.IEcommerceAPIDbContext' while attempting to activate 'ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 125
+2025-12-26 22:55:27.618 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryRequest,ECommerceAPI.Application.Dtos.Customer.CustomerDto] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Data.IEcommerceAPIDbContext' while attempting to activate 'ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryRequest,ECommerceAPI.Application.Dtos.Customer.CustomerDto] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Data.IEcommerceAPIDbContext' while attempting to activate 'ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Data.IEcommerceAPIDbContext' while attempting to activate 'ECommerceAPI.Application.Features.Queries.Customer.GetCustomerQueryHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 125
+2025-12-26 22:56:56.050 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-26 22:56:56.687 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-26 22:56:56.700 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-26 22:56:56.806 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-26 22:56:56.810 +03:00 [INF] Hosting environment: Development
+2025-12-26 22:56:56.812 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-26 22:57:06.569 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-26 22:57:09.373 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 2845.0272 ms
+2025-12-26 22:57:09.599 +03:00 [INF] HTTP GET /api/Customer responded 400 in 43.4316 ms
+2025-12-26 22:57:09.873 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-26 22:57:09.972 +03:00 [INF] HTTP GET /api/Cart responded 200 in 423.2882 ms
+2025-12-26 22:58:11.078 +03:00 [INF] HTTP GET /api/Customer responded 400 in 1.5246 ms
+2025-12-26 22:58:11.117 +03:00 [INF] HTTP GET /api/Cart responded 200 in 43.8471 ms
+2025-12-26 22:58:11.146 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-26 22:58:11.219 +03:00 [INF] HTTP GET /api/Product responded 200 in 146.2417 ms
+2025-12-26 22:58:11.251 +03:00 [INF] HTTP GET /api/Product responded 200 in 30.4762 ms
+2025-12-26 22:58:17.479 +03:00 [INF] HTTP GET /api/Customer responded 400 in 0.7649 ms
+2025-12-26 22:58:17.505 +03:00 [INF] HTTP GET /api/Cart responded 200 in 28.7527 ms

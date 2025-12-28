@@ -1,13 +1,13 @@
-﻿using ECommerceAPI.Domain.Entities;
+﻿using ECommerceAPI.Application.Abstractions.Data;
+using ECommerceAPI.Domain.Entities;
+using ECommerceAPI.Domain.Entities.Customer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ECommerceAPI.Persistence.Contexts
 {
-    public class ECommerceAPIDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
+    public class ECommerceAPIDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>, IEcommerceAPIDbContext
     {
         public ECommerceAPIDbContext(DbContextOptions<ECommerceAPIDbContext> options) : base(options){}
 
