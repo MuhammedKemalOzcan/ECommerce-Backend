@@ -11,7 +11,6 @@ export default function ProfileInformation() {
   const { customer, updateCustomer, loading } = useCustomerStore(
     useShallow((s) => ({
       customer: s.customer,
-      updateCustomer: s.updateCustomer,
       loading: s.loading,
     }))
   );
@@ -110,7 +109,7 @@ export default function ProfileInformation() {
 
             <div className="flex flex-col gap-2 mb-8">
               <label className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
-                Email Address
+                Phone Number
               </label>
               <input
                 {...register("phoneNumber", { required: true })}

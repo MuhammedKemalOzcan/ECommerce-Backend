@@ -1,9 +1,4 @@
 ﻿using ECommerceAPI.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Application.Abstractions.Services
 {
@@ -16,7 +11,6 @@ namespace ECommerceAPI.Application.Abstractions.Services
 
         Task<List<Cart>> GetExpiredGuestCartsAsync(CancellationToken ct = default);
         Task MergeCartsAsync(Cart guestCart, Cart userCart, CancellationToken ct = default);
-
 
     }
 }

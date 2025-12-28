@@ -1,12 +1,9 @@
 ﻿using ECommerceAPI.Application.Abstractions;
 using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Dtos.UserDto;
+using ECommerceAPI.Application.Repositories;
+using ECommerceAPI.Domain.Entities.Customer;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
 {
@@ -15,12 +12,14 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ITokenHandler _jwtToken;
+        private readonly IUnitOfWork _uow;
 
-        public IdentityServices(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ITokenHandler jwtToken)
+        public IdentityServices(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ITokenHandler jwtToken, IUnitOfWork uow)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtToken = jwtToken;
+            _uow = uow;
         }
 
         public async Task<AuthResultDto> LoginAsync(LoginDto model)
@@ -69,8 +68,12 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
                 return new AuthResultDto { Succeed = false, Error = error };
             }
 
+            
+
+
             var roles = await _userManager.GetRolesAsync(user);
             var token = _jwtToken.GenerateToken(user.Id, user.Email, roles);
+            
 
             return new AuthResultDto
             {

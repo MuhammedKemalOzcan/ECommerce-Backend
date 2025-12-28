@@ -48,9 +48,6 @@ export default function ConfirmationModal({
   const config = variantConfig[variant];
   const Icon = config.icon;
 
-  console.log(isOpen);
-  
-
   // modal açıldığı gibi confirm butonuna odaklanır.
   useEffect(() => {
     if (isOpen && confirmButtonRef.current) {

@@ -22,44 +22,6 @@ namespace ECommerceAPI.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("CustomerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Address");
-                });
-
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.Cart", b =>
                 {
                     b.Property<Guid>("Id")
@@ -144,43 +106,69 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.ToTable("CartItems", "dbo");
                 });
 
-            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Customer.Customer", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("AppUserId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Customer.CustomerAddress", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsPrimary")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("CustomerAddress");
                 });
 
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.File", b =>
@@ -505,14 +493,6 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.HasDiscriminator().HasValue("ProductGallery");
                 });
 
-            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Address", b =>
-                {
-                    b.HasOne("ECommerceAPI.Domain.Entities.Customer", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.CartItem", b =>
                 {
                     b.HasOne("ECommerceAPI.Domain.Entities.Cart", "Cart")
@@ -530,6 +510,51 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Navigation("Cart");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Customer.CustomerAddress", b =>
+                {
+                    b.HasOne("ECommerceAPI.Domain.Entities.Customer.Customer", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("Location", "Location", b1 =>
+                        {
+                            b1.Property<Guid>("CustomerAddressId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)");
+
+                            b1.Property<string>("Country")
+                                .IsRequired()
+                                .HasMaxLength(25)
+                                .HasColumnType("character varying(25)");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("character varying(100)");
+
+                            b1.Property<string>("ZipCode")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)");
+
+                            b1.HasKey("CustomerAddressId");
+
+                            b1.ToTable("CustomerAddress");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerAddressId");
+                        });
+
+                    b.Navigation("Location")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.ProductBox", b =>
@@ -614,7 +639,7 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Navigation("CartItems");
                 });
 
-            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Customer.Customer", b =>
                 {
                     b.Navigation("Addresses");
                 });

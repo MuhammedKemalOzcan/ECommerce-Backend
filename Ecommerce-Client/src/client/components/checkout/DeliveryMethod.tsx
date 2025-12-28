@@ -33,17 +33,6 @@ export default function DeliveryMethod() {
             </p>
           </div>
         ))}
-
-        {/* <div className="flex items-center gap-2 justify-between border p-6 rounded-3xl">
-          <div className="flex items-center gap-2">
-            <input type="radio" name="express" id="express" value="express" />
-            <div>
-              <label htmlFor="express">Express Shipping</label>
-              <p className="text-xs text-gray-400">1-3 Business Days</p>
-            </div>
-          </div>
-          <p className="font-bold">$15.00</p>
-        </div> */}
       </form>
     </CheckoutCart>
   );

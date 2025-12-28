@@ -1,0 +1,237 @@
+2025-12-28 16:44:38.395 +03:00 [FTL] Application start-up failed
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`1[ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddressToCustomerCommandRequest] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ICurrentUserService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddressToCustomerCommandHandler'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`1[ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddressToCustomerCommandRequest] Lifetime: Transient ImplementationType: ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddressToCustomerCommandHandler': Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ICurrentUserService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddressToCustomerCommandHandler'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'ECommerceAPI.Application.Abstractions.Services.ICurrentUserService' while attempting to activate 'ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddressToCustomerCommandHandler'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at ECommerceAPI.API.Program.Main(String[] args) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 125
+2025-12-28 16:45:28.847 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-28 16:45:29.511 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-28 16:45:29.516 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-28 16:45:29.596 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-28 16:45:29.600 +03:00 [INF] Hosting environment: Development
+2025-12-28 16:45:29.602 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-28 16:45:49.192 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-28 16:45:49.708 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-28 16:45:49.716 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-28 16:45:49.807 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-28 16:45:49.810 +03:00 [INF] Hosting environment: Development
+2025-12-28 16:45:49.812 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-28 16:45:57.522 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-28 16:45:57.519 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-28 16:46:00.505 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-28 16:46:00.505 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-28 16:46:01.086 +03:00 [INF] HTTP GET /api/Product responded 200 in 2259.8846 ms
+2025-12-28 16:46:01.086 +03:00 [INF] HTTP GET /api/Product responded 200 in 3308.6822 ms
+2025-12-28 16:46:01.086 +03:00 [INF] HTTP GET /api/Product responded 200 in 3614.8848 ms
+2025-12-28 16:46:01.086 +03:00 [INF] HTTP GET /api/Product responded 200 in 3552.8600 ms
+2025-12-28 16:46:01.086 +03:00 [INF] HTTP GET /api/Product responded 200 in 2451.0707 ms
+2025-12-28 16:46:01.086 +03:00 [INF] HTTP GET /api/Product responded 200 in 1362.0944 ms
+2025-12-28 16:46:01.086 +03:00 [INF] HTTP GET /api/Product responded 200 in 2668.5764 ms
+2025-12-28 16:46:01.086 +03:00 [INF] HTTP GET /api/Product responded 200 in 2209.0023 ms
+2025-12-28 16:46:01.086 +03:00 [INF] HTTP GET /api/Product responded 200 in 2882.9917 ms
+2025-12-28 16:46:01.086 +03:00 [INF] HTTP GET /api/Product responded 200 in 3087.1151 ms
+2025-12-28 16:46:01.213 +03:00 [INF] HTTP GET /api/Cart responded 200 in 2799.3672 ms
+2025-12-28 16:46:01.213 +03:00 [INF] HTTP GET /api/Cart responded 200 in 3222.5892 ms
+2025-12-28 16:46:01.213 +03:00 [INF] HTTP GET /api/Cart responded 200 in 2390.3482 ms
+2025-12-28 16:46:01.213 +03:00 [INF] HTTP GET /api/Cart responded 200 in 2183.7678 ms
+2025-12-28 16:46:01.214 +03:00 [INF] HTTP GET /api/Cart responded 200 in 3439.9111 ms
+2025-12-28 16:46:01.213 +03:00 [INF] HTTP GET /api/Cart responded 200 in 3741.3742 ms
+2025-12-28 16:46:01.213 +03:00 [INF] HTTP GET /api/Cart responded 200 in 2581.9500 ms
+2025-12-28 16:46:01.214 +03:00 [INF] HTTP GET /api/Cart responded 200 in 3014.8612 ms
+2025-12-28 16:46:03.270 +03:00 [INF] HTTP GET /api/Cart responded 200 in 118.3451 ms
+2025-12-28 16:46:03.277 +03:00 [INF] HTTP GET /api/Product responded 200 in 125.8985 ms
+2025-12-28 16:46:03.277 +03:00 [INF] HTTP GET /api/Product responded 200 in 67.1016 ms
+2025-12-28 16:46:32.772 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-28 16:46:33.343 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-28 16:46:33.351 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-28 16:46:33.502 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-28 16:46:33.506 +03:00 [INF] Hosting environment: Development
+2025-12-28 16:46:33.509 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-28 16:53:13.811 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-28 16:53:16.232 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 2450.5020 ms
+2025-12-28 16:53:16.637 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-28 16:53:16.639 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-28 16:53:16.661 +03:00 [INF] HTTP GET /api/Customer responded 200 in 233.0405 ms
+2025-12-28 16:53:16.728 +03:00 [INF] HTTP GET /api/Product responded 200 in 308.7189 ms
+2025-12-28 16:53:16.818 +03:00 [INF] HTTP GET /api/Product responded 200 in 57.4582 ms
+2025-12-28 16:53:16.936 +03:00 [INF] HTTP GET /api/Cart responded 200 in 516.6823 ms
+2025-12-28 16:53:22.315 +03:00 [INF] HTTP GET /api/Customer responded 200 in 36.2340 ms
+2025-12-28 16:53:22.318 +03:00 [INF] HTTP GET /api/Cart responded 200 in 42.5361 ms
+2025-12-28 16:53:39.810 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 615.4833 ms
+2025-12-28 16:53:48.340 +03:00 [INF] HTTP GET /api/Cart responded 200 in 40.4723 ms
+2025-12-28 16:53:48.345 +03:00 [INF] HTTP GET /api/Customer responded 200 in 44.8266 ms
+2025-12-28 17:03:45.607 +03:00 [INF] HTTP GET /api/Customer responded 200 in 34.0405 ms
+2025-12-28 17:18:33.163 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-28 17:18:33.794 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-28 17:18:33.801 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-28 17:18:33.882 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-28 17:18:33.885 +03:00 [INF] Hosting environment: Development
+2025-12-28 17:18:33.892 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-28 17:20:54.324 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-28 17:20:54.324 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-28 17:20:58.292 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-28 17:20:58.609 +03:00 [INF] HTTP GET /api/Customer responded 200 in 4326.7266 ms
+2025-12-28 17:20:58.861 +03:00 [INF] HTTP GET /api/Cart responded 200 in 4589.4754 ms
+2025-12-28 17:21:06.912 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 752.2318 ms
+2025-12-28 17:22:44.555 +03:00 [INF] HTTP GET /api/Customer responded 200 in 24.4170 ms
+2025-12-28 17:23:28.534 +03:00 [INF] HTTP GET /api/Customer responded 200 in 17.6257 ms
+2025-12-28 17:23:32.502 +03:00 [INF] HTTP GET /api/Customer responded 200 in 12.1002 ms
+2025-12-28 17:48:28.532 +03:00 [INF] HTTP GET /api/Customer responded 200 in 25.8103 ms
+2025-12-28 17:48:44.511 +03:00 [INF] HTTP GET /api/Customer responded 200 in 13.8025 ms
+2025-12-28 17:48:53.854 +03:00 [INF] HTTP GET /api/Customer responded 200 in 11.5273 ms
+2025-12-28 17:48:53.871 +03:00 [INF] HTTP GET /api/Cart responded 200 in 28.4002 ms
+2025-12-28 17:49:06.802 +03:00 [INF] HTTP GET /api/Customer responded 200 in 6.9781 ms
+2025-12-28 17:49:09.585 +03:00 [INF] HTTP GET /api/Customer responded 200 in 10.0262 ms
+2025-12-28 17:49:09.604 +03:00 [INF] HTTP GET /api/Cart responded 200 in 26.9576 ms
+2025-12-28 17:49:27.492 +03:00 [INF] HTTP GET /api/Customer responded 200 in 12.6920 ms
+2025-12-28 17:49:27.522 +03:00 [INF] HTTP GET /api/Cart responded 200 in 42.9580 ms
+2025-12-28 17:49:35.080 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 23.8893 ms
+2025-12-28 17:49:41.823 +03:00 [INF] HTTP GET /api/Customer responded 200 in 9.8228 ms
+2025-12-28 17:49:41.834 +03:00 [INF] HTTP GET /api/Cart responded 200 in 21.4330 ms
+2025-12-28 17:49:54.918 +03:00 [INF] HTTP GET /api/Customer responded 200 in 7.7925 ms
+2025-12-28 17:50:11.669 +03:00 [INF] HTTP GET /api/Customer responded 200 in 10.0766 ms
+2025-12-28 17:50:13.649 +03:00 [INF] HTTP GET /api/Customer responded 200 in 7.2001 ms
+2025-12-28 17:50:13.669 +03:00 [INF] HTTP GET /api/Cart responded 200 in 20.3654 ms
+2025-12-28 17:50:57.275 +03:00 [INF] HTTP GET /api/Customer responded 200 in 15.4404 ms
+2025-12-28 17:50:57.284 +03:00 [INF] HTTP GET /api/Cart responded 200 in 34.7614 ms
+2025-12-28 17:51:55.040 +03:00 [INF] HTTP GET /api/Customer responded 200 in 13.3085 ms
+2025-12-28 17:51:55.040 +03:00 [INF] HTTP GET /api/Cart responded 200 in 20.9288 ms
+2025-12-28 17:52:29.407 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 25.8976 ms
+2025-12-28 17:53:25.648 +03:00 [INF] HTTP GET /api/Cart responded 200 in 16.1570 ms
+2025-12-28 17:53:25.660 +03:00 [INF] HTTP GET /api/Customer responded 200 in 25.9154 ms
+2025-12-28 17:53:48.908 +03:00 [INF] HTTP GET /api/Cart responded 200 in 42.0163 ms
+2025-12-28 17:53:48.913 +03:00 [INF] HTTP GET /api/Customer responded 200 in 45.9143 ms
+2025-12-28 17:56:36.530 +03:00 [INF] HTTP GET /api/Customer responded 200 in 13.7528 ms
+2025-12-28 17:56:40.630 +03:00 [INF] HTTP GET /api/Customer responded 200 in 12.5623 ms
+2025-12-28 17:56:40.641 +03:00 [INF] HTTP GET /api/Cart responded 200 in 21.7464 ms
+2025-12-28 17:57:02.992 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 15.3968 ms
+2025-12-28 17:57:43.398 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 16.2395 ms
+2025-12-28 17:59:18.597 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-28 17:59:18.650 +03:00 [INF] HTTP GET /api/Cart responded 200 in 94.9083 ms
+2025-12-28 17:59:19.023 +03:00 [INF] HTTP GET /api/Cart responded 200 in 25.3089 ms
+2025-12-28 17:59:19.083 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-28 17:59:19.128 +03:00 [INF] HTTP GET /api/Product responded 200 in 109.6956 ms
+2025-12-28 17:59:19.353 +03:00 [INF] HTTP GET /api/Cart responded 200 in 7.8766 ms
+2025-12-28 17:59:19.377 +03:00 [INF] HTTP GET /api/Product responded 200 in 31.6121 ms
+2025-12-28 17:59:19.399 +03:00 [INF] HTTP GET /api/Product responded 200 in 21.8879 ms
+2025-12-28 17:59:19.734 +03:00 [INF] HTTP GET /api/Cart responded 200 in 12.5523 ms
+2025-12-28 17:59:19.764 +03:00 [INF] HTTP GET /api/Product responded 200 in 42.8615 ms
+2025-12-28 17:59:19.786 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.7982 ms
+2025-12-28 17:59:20.117 +03:00 [INF] HTTP GET /api/Cart responded 200 in 14.4928 ms
+2025-12-28 17:59:20.120 +03:00 [INF] HTTP GET /api/Product responded 200 in 17.6304 ms
+2025-12-28 17:59:20.140 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.6334 ms
+2025-12-28 17:59:20.481 +03:00 [INF] HTTP GET /api/Cart responded 200 in 11.8726 ms
+2025-12-28 17:59:20.486 +03:00 [INF] HTTP GET /api/Product responded 200 in 16.7980 ms
+2025-12-28 17:59:20.505 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.5718 ms
+2025-12-28 17:59:20.854 +03:00 [INF] HTTP GET /api/Cart responded 200 in 24.5872 ms
+2025-12-28 17:59:20.865 +03:00 [INF] HTTP GET /api/Product responded 200 in 35.5354 ms
+2025-12-28 17:59:20.878 +03:00 [INF] HTTP GET /api/Product responded 200 in 9.5133 ms
+2025-12-28 17:59:21.234 +03:00 [INF] HTTP GET /api/Cart responded 200 in 12.1268 ms
+2025-12-28 17:59:21.237 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.8057 ms
+2025-12-28 17:59:21.252 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.7350 ms
+2025-12-28 17:59:21.661 +03:00 [INF] HTTP GET /api/Cart responded 200 in 14.0772 ms
+2025-12-28 17:59:21.664 +03:00 [INF] HTTP GET /api/Product responded 200 in 17.1293 ms
+2025-12-28 17:59:21.680 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.5045 ms
+2025-12-28 17:59:22.067 +03:00 [INF] HTTP GET /api/Cart responded 200 in 9.5103 ms
+2025-12-28 17:59:22.074 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.8651 ms
+2025-12-28 17:59:22.097 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.2240 ms
+2025-12-28 17:59:22.509 +03:00 [INF] HTTP GET /api/Cart responded 200 in 19.9043 ms
+2025-12-28 17:59:22.512 +03:00 [INF] HTTP GET /api/Product responded 200 in 23.2566 ms
+2025-12-28 17:59:22.528 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.2410 ms
+2025-12-28 17:59:22.933 +03:00 [INF] HTTP GET /api/Cart responded 200 in 10.7761 ms
+2025-12-28 17:59:22.936 +03:00 [INF] HTTP GET /api/Product responded 200 in 14.4068 ms
+2025-12-28 17:59:22.951 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.5389 ms
+2025-12-28 17:59:26.047 +03:00 [INF] HTTP GET /api/Cart responded 200 in 14.3905 ms
+2025-12-28 17:59:26.049 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.8858 ms
+2025-12-28 17:59:26.063 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.7981 ms
+2025-12-28 17:59:26.476 +03:00 [INF] HTTP GET /api/Cart responded 200 in 10.9683 ms
+2025-12-28 17:59:26.479 +03:00 [INF] HTTP GET /api/Product responded 200 in 13.6031 ms
+2025-12-28 17:59:26.493 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.9355 ms
+2025-12-28 17:59:26.861 +03:00 [INF] HTTP GET /api/Cart responded 200 in 16.3122 ms
+2025-12-28 17:59:26.863 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.5189 ms
+2025-12-28 17:59:26.879 +03:00 [INF] HTTP GET /api/Product responded 200 in 11.4687 ms
+2025-12-28 17:59:27.256 +03:00 [INF] HTTP GET /api/Cart responded 200 in 14.0318 ms
+2025-12-28 17:59:27.260 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.4176 ms
+2025-12-28 17:59:27.275 +03:00 [INF] HTTP GET /api/Product responded 200 in 8.8666 ms
+2025-12-28 17:59:27.360 +03:00 [INF] HTTP GET /api/Cart responded 200 in 7.2856 ms
+2025-12-28 18:14:02.422 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-28 18:14:02.894 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-28 18:14:02.900 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-28 18:14:02.980 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-28 18:14:02.984 +03:00 [INF] Hosting environment: Development
+2025-12-28 18:14:02.987 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-28 18:14:11.125 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-28 18:14:13.678 +03:00 [INF] HTTP POST /api/Auth/login responded 200 in 2587.8726 ms
+2025-12-28 18:14:14.218 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-28 18:14:14.218 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-28 18:14:14.229 +03:00 [INF] HTTP GET /api/Customer responded 200 in 295.5244 ms
+2025-12-28 18:14:14.320 +03:00 [INF] HTTP GET /api/Product responded 200 in 396.4214 ms
+2025-12-28 18:14:14.367 +03:00 [INF] HTTP GET /api/Product responded 200 in 45.2212 ms
+2025-12-28 18:14:14.497 +03:00 [INF] HTTP GET /api/Cart responded 200 in 573.7910 ms
+2025-12-28 18:14:16.180 +03:00 [INF] HTTP GET /api/Customer responded 200 in 21.8710 ms
+2025-12-28 18:14:16.185 +03:00 [INF] HTTP GET /api/Cart responded 200 in 31.1300 ms
+2025-12-28 18:14:23.496 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 570.5939 ms
+2025-12-28 18:16:04.465 +03:00 [INF] HTTP GET /api/Customer responded 200 in 19.1015 ms
+2025-12-28 18:16:10.909 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 23.8896 ms
+2025-12-28 18:16:26.470 +03:00 [INF] HTTP GET /api/Customer responded 200 in 15.5705 ms
+2025-12-28 18:17:50.522 +03:00 [INF] HTTP GET /api/Customer responded 200 in 8.6938 ms
+2025-12-28 18:17:51.956 +03:00 [INF] HTTP GET /api/Customer responded 200 in 42.3014 ms
+2025-12-28 18:17:51.978 +03:00 [INF] HTTP GET /api/Cart responded 200 in 25.3702 ms
+2025-12-28 18:18:09.003 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 33.6293 ms
+2025-12-28 18:20:43.312 +03:00 [INF] HTTP GET /api/Cart responded 200 in 63.4833 ms
+2025-12-28 18:20:43.319 +03:00 [INF] HTTP GET /api/Customer responded 200 in 65.3553 ms
+2025-12-28 18:20:56.024 +03:00 [INF] HTTP GET /api/Customer responded 200 in 12.7900 ms
+2025-12-28 18:20:56.026 +03:00 [INF] HTTP GET /api/Cart responded 200 in 14.5925 ms
+2025-12-28 18:24:21.390 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 23.9419 ms
+2025-12-28 18:27:43.576 +03:00 [INF] HTTP GET /api/Customer responded 200 in 44.7440 ms
+2025-12-28 18:27:45.162 +03:00 [INF] HTTP GET /api/Customer responded 200 in 8.4843 ms
+2025-12-28 18:27:45.173 +03:00 [INF] HTTP GET /api/Cart responded 200 in 17.4107 ms
+2025-12-28 18:27:58.393 +03:00 [INF] HTTP GET /api/Customer responded 200 in 9.8362 ms
+2025-12-28 18:27:58.425 +03:00 [INF] HTTP GET /api/Cart responded 200 in 43.0620 ms
+2025-12-28 18:28:23.279 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 18559.2551 ms
+2025-12-28 18:29:42.665 +03:00 [INF] HTTP GET /api/Customer responded 200 in 48.9816 ms
+2025-12-28 18:29:42.675 +03:00 [INF] HTTP GET /api/Cart responded 200 in 58.3254 ms
+2025-12-28 18:31:59.050 +03:00 [INF] HTTP GET /api/Customer responded 200 in 22.5666 ms
+2025-12-28 18:31:59.050 +03:00 [INF] HTTP GET /api/Cart responded 200 in 23.4544 ms
+2025-12-28 18:32:06.160 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 3369.3209 ms
+2025-12-28 18:32:09.769 +03:00 [INF] HTTP GET /api/Customer responded 200 in 13.0169 ms
+2025-12-28 18:32:09.771 +03:00 [INF] HTTP GET /api/Cart responded 200 in 14.7652 ms
+2025-12-28 18:34:11.593 +03:00 [INF] HTTP GET /api/Customer responded 200 in 36.9829 ms
+2025-12-28 18:38:31.692 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-28 18:38:32.233 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-28 18:38:32.239 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-28 18:38:32.356 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-28 18:38:32.358 +03:00 [INF] Hosting environment: Development
+2025-12-28 18:38:32.360 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2025-12-28 18:38:40.466 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-28 18:38:40.466 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-28 18:38:44.180 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-12-28 18:38:44.417 +03:00 [INF] HTTP GET /api/Customer responded 200 in 3996.5564 ms
+2025-12-28 18:38:44.684 +03:00 [INF] HTTP GET /api/Cart responded 200 in 4273.7504 ms
+2025-12-28 18:39:01.934 +03:00 [INF] HTTP GET /api/Customer responded 200 in 180.7990 ms
+2025-12-28 18:39:03.004 +03:00 [INF] HTTP GET /api/Customer responded 200 in 17.8591 ms
+2025-12-28 18:39:03.010 +03:00 [INF] HTTP GET /api/Cart responded 200 in 23.0362 ms
+2025-12-28 18:40:49.779 +03:00 [INF] HTTP POST /api/Customer/Address responded 200 in 9433.6812 ms
+2025-12-28 18:42:38.423 +03:00 [INF] HTTP GET /api/Customer responded 200 in 8.4722 ms
+2025-12-28 18:42:39.331 +03:00 [INF] HTTP GET /api/Customer responded 200 in 10.0705 ms
+2025-12-28 18:42:39.348 +03:00 [INF] HTTP GET /api/Cart responded 200 in 24.7259 ms
+2025-12-28 18:42:50.615 +03:00 [INF] HTTP GET /api/Customer responded 200 in 12.7950 ms
+2025-12-28 18:42:50.639 +03:00 [INF] HTTP GET /api/Cart responded 200 in 36.6419 ms
+2025-12-28 18:43:59.610 +03:00 [INF] HTTP GET /api/Customer responded 200 in 59.4781 ms
+2025-12-28 18:43:59.614 +03:00 [INF] HTTP GET /api/Cart responded 200 in 63.1339 ms
+2025-12-28 18:44:01.624 +03:00 [INF] HTTP GET /api/Customer responded 200 in 12.2263 ms
+2025-12-28 18:44:01.637 +03:00 [INF] HTTP GET /api/Cart responded 200 in 25.3104 ms
+2025-12-28 18:44:02.334 +03:00 [INF] HTTP GET /api/Customer responded 200 in 15.2604 ms
+2025-12-28 18:44:02.337 +03:00 [INF] HTTP GET /api/Cart responded 200 in 19.3722 ms

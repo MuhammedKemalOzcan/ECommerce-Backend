@@ -10,7 +10,7 @@ export function useRegister() {
       setLoading(true);
       await RegisterUser(data);
     } catch (error: any) {
-      throw error;
+      console.log(error);
     } finally {
       setLoading(false);
     }

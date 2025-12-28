@@ -1,26 +1,24 @@
 ﻿using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Dtos.UserDto;
-using ECommerceAPI.Application.Repositories.Customers;
-using ECommerceAPI.Domain.Entities;
+using ECommerceAPI.Application.Repositories;
+using ECommerceAPI.Domain.Entities.Customer;
+using ECommerceAPI.Domain.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Application.Features.Commands.RegisterUser
 {
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommandRequest, RegisterUserCommandResponse>
     {
         private readonly IIdentityService _identity;
-        private readonly ICustomerWriteRepository _customerWriteRepository;
+        private readonly IUnitOfWork _uow;
+        private readonly ICustomerRepository _customerRepository;
 
 
-        public RegisterUserCommandHandler(IIdentityService identity, ICustomerWriteRepository customerWriteRepository, ISharedIdentityService sharedIdentityService)
+        public RegisterUserCommandHandler(IIdentityService identity, ISharedIdentityService sharedIdentityService, IUnitOfWork uow, ICustomerRepository customerRepository)
         {
             _identity = identity;
-            _customerWriteRepository = customerWriteRepository;
+            _uow = uow;
+            _customerRepository = customerRepository;
         }
 
         public async Task<RegisterUserCommandResponse> Handle(RegisterUserCommandRequest request, CancellationToken cancellationToken)
@@ -44,24 +42,17 @@ namespace ECommerceAPI.Application.Features.Commands.RegisterUser
                     Error = response.Error
                 };
             }
-            try
-            {
-                if (string.IsNullOrEmpty(response.UserId)) throw new Exception("UserId Gelmedi");
 
-                var customer = new Customer(
-                    appUserId: Guid.Parse(response.UserId),
-                    firstName: request.Name,
-                    lastName: request.LastName,
-                    email: request.Email,
-                    phoneNumber: request.PhoneNumber
-                    );
-                await _customerWriteRepository.AddAsync(customer);
-                await _customerWriteRepository.SaveChangesAsync();
-            }
-            catch (Exception ex)
+            if (!Guid.TryParse(response.UserId, out Guid appUserId))
             {
-                throw new Exception($"Kullanıcı oluştu ama Müşteri profili oluşturulamadı: {ex.Message}");
+                throw new Exception("Identity ID Guid formatında değil!");
             }
+
+            var customer = Customer.Create(appUserId, request.Name, request.LastName, request.Email, request.PhoneNumber);
+
+            _customerRepository.Add(customer);
+            await _uow.SaveChangesAsync();
+
 
             return new()
             {

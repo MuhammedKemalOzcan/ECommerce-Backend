@@ -1,18 +1,18 @@
-﻿using ECommerceAPI.Application.Abstractions.Services;
-using ECommerceAPI.Application.Repositories.Addresses;
+﻿using ECommerceAPI.Application.Abstractions.Data;
+using ECommerceAPI.Application.Abstractions.Services;
+using ECommerceAPI.Application.Repositories;
 using ECommerceAPI.Application.Repositories.CartItems;
 using ECommerceAPI.Application.Repositories.Carts;
-using ECommerceAPI.Application.Repositories.Customers;
 using ECommerceAPI.Application.Repositories.File;
 using ECommerceAPI.Application.Repositories.ProductBoxes;
 using ECommerceAPI.Application.Repositories.ProductGallery;
 using ECommerceAPI.Application.Repositories.Products;
+using ECommerceAPI.Domain.Repositories;
 using ECommerceAPI.Persistence.Contexts;
-using ECommerceAPI.Persistence.Repositories.Address;
+using ECommerceAPI.Persistence.Repositories;
 using ECommerceAPI.Persistence.Repositories.Cart;
 using ECommerceAPI.Persistence.Repositories.CartItem;
 using ECommerceAPI.Persistence.Repositories.Carts;
-using ECommerceAPI.Persistence.Repositories.Customer;
 using ECommerceAPI.Persistence.Repositories.File;
 using ECommerceAPI.Persistence.Repositories.ProductBoxes;
 using ECommerceAPI.Persistence.Repositories.ProductGallery;
@@ -46,12 +46,11 @@ namespace ECommerceAPI.Persistence
             services.AddScoped<ICartItemReadRepository, CartItemReadRepository>();
             services.AddScoped<ICartItemWriteRepository, CartItemWriteRepository>();
             services.AddScoped<ICartService, CartService>();
-            services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
-            services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ISharedIdentityService, SharedIdentityService>();
-            services.AddScoped<IAddressesReadRepository, AddressesReadRepository>();
-            services.AddScoped<IAddressesWriteRepository, AddressesWriteRepository>();
-
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IEcommerceAPIDbContext>(provider =>
+    provider.GetRequiredService<ECommerceAPIDbContext>());
         }
     }
 }

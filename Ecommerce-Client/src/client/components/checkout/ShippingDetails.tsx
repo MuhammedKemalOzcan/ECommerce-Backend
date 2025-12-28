@@ -2,22 +2,39 @@ import { useForm } from "react-hook-form";
 import FormField from "../../../admin/components/products/FormField";
 import { useCustomerStore } from "../../../stores/customerStore";
 import CheckoutCart from "./CheckoutCart";
+import { useEffect } from "react";
 
 export default function ShippingDetails() {
   const customer = useCustomerStore((state) => state.customer);
 
   console.log(customer);
 
-  const { register } = useForm({
+  const addresses = customer?.addresses?.find((a) => a.isPrimary === true);
+  console.log(addresses);
+
+  const { register, reset } = useForm({
     defaultValues: {
-      firstName: customer?.firstName || "",
-      lastName: customer?.lastName || "",
+      firstName: "",
+      lastName: "",
       street: "",
       city: "",
-      postalCode: "",
+      zipCode: "",
       country: "",
     },
   });
+
+  useEffect(() => {
+    if (customer) {
+      reset({
+        firstName: customer?.firstName,
+        lastName: customer?.lastName,
+        street: addresses?.street,
+        city: addresses?.city,
+        zipCode: addresses?.zipCode,
+        country: addresses?.country,
+      });
+    }
+  }, [customer, reset]);
 
   return (
     <CheckoutCart title="Shipping Details" count="1">
@@ -37,7 +54,6 @@ export default function ShippingDetails() {
           type="text"
           required
           {...register("lastName")}
-
         />
       </div>
       <FormField
@@ -46,6 +62,7 @@ export default function ShippingDetails() {
         placeHolder="1234 Main Street"
         type="text"
         required
+        {...register("street")}
       />
       <div className="flex justify-between">
         <FormField
@@ -54,13 +71,15 @@ export default function ShippingDetails() {
           placeHolder="Istanbul"
           type="text"
           required
+          {...register("city")}
         />
         <FormField
-          id="postalCode"
-          label="Postal Code"
+          id="zipCode"
+          label="Zip Code"
           placeHolder="10000"
           type="text"
           required
+          {...register("zipCode")}
         />
       </div>
       <FormField
@@ -69,6 +88,7 @@ export default function ShippingDetails() {
         placeHolder="Turkey"
         type="text"
         required
+        {...register("country")}
       />
     </CheckoutCart>
   );

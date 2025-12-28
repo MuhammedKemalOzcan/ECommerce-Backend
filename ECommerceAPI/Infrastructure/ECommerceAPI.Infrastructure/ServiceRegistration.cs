@@ -1,6 +1,7 @@
 ﻿using ECommerceAPI.Application.Abstractions;
 using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Abstractions.Storage;
+using ECommerceAPI.Infrastructure.Services;
 using ECommerceAPI.Infrastructure.Services.JwtGenerator;
 using ECommerceAPI.Infrastructure.Services.Storage;
 using ECommerceAPI.Persistence.Contexts;
@@ -13,7 +14,7 @@ namespace ECommerceAPI.Infrastructure
 {
     public static class ServiceRegistration
     {
-        public static void AddInfrastructureServices(this IServiceCollection services,IConfiguration config)
+        public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddDbContext<ECommerceAPIDbContext>(opt =>
             {
@@ -31,12 +32,12 @@ namespace ECommerceAPI.Infrastructure
 
             services.AddScoped<ITokenHandler, JwtGenerator>();
             services.AddScoped<IIdentityService, IdentityServices>();
-
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IStorageService, StorageService>();
         }
 
         //T => IStorage'dan türemiş bir class ise burayı çalıştır.
-        public static void AddStorage<T>(this IServiceCollection services) where T:Storage,IStorage
+        public static void AddStorage<T>(this IServiceCollection services) where T : Storage, IStorage
         {
             services.AddScoped<IStorage, T>();
         }

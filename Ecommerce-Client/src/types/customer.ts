@@ -13,15 +13,20 @@ export interface Customer {
   addresses?: Adress[];
 }
 
-export interface AddAdress {
-  street: string;
-  city: string;
-  country: string;
-  zipCode: string;
-}
-
 export interface Adress {
   id: string;
+  title: string;
+  location: Location;
+  isPrimary: boolean;
+}
+
+export interface AddAdress {
+  title: string;
+  location: Location;
+  isPrimary: boolean;
+}
+
+export interface Location {
   street: string;
   city: string;
   country: string;
