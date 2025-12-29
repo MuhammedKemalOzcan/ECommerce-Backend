@@ -27,7 +27,8 @@ namespace ECommerceAPI.Application.Features.Queries.Customer
                     LastName = c.LastName,
                     Email = c.Email,
                     PhoneNumber = c.PhoneNumber,
-                    Addresses = c.Addresses.Select(a => new AddressDto
+                    Addresses = c.Addresses.OrderByDescending(a => a.Title)
+                    .Select(a => new AddressDto
                     {
                         Id = a.Id.Value,
                         Title = a.Title,
