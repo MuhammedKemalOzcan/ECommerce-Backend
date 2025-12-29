@@ -1,5 +1,5 @@
 import { MapPinned, Plus, Trash2Icon, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormField from "../../../admin/components/products/FormField";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import type { AddAdress } from "../../../types/customer";
@@ -11,58 +11,63 @@ import { useSearchParams } from "react-router-dom";
 export default function AddAddress() {
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  // const [isDeleting, setIsDeleting] = useState<boolean>(false);
-  // const [selectedAddress, setSelectedAddress] = useState<string>("");
-  const addressId = searchParams.get("addressId");
-  const isDeleteModalOpen = Boolean(addressId);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
 
-  const { AddAddress, customer } = useCustomerStore(
-    useShallow((s) => ({
-      AddAddress: s.AddAddress,
-      customer: s.customer,
-    }))
-  );
+  const customerAddressId = searchParams.get("customerAddressId");
+  const isDeleteModalOpen = Boolean(customerAddressId);
+
+  const { AddAddress, customer, removeAddress, setPrimaryAddress } =
+    useCustomerStore(
+      useShallow((s) => ({
+        AddAddress: s.AddAddress,
+        customer: s.customer,
+        removeAddress: s.removeAddress,
+        setPrimaryAddress: s.setPrimaryAddress,
+      }))
+    );
+
+  const handleChange = (id: string) => {
+    setSelectedAddress(id);
+    setSearchParams(id);
+    setPrimaryAddress(id);
+    
+  };
+
+  useEffect(() => {
+    if (customer?.addresses && customer.addresses.length > 0) {
+      const primaryAddress = customer.addresses.find((a) => a.isPrimary);
+      if (primaryAddress && selectedAddress === null) {
+        setSelectedAddress(primaryAddress.id);
+      }
+    }
+  }, [customer, selectedAddress]);
 
   const handleClick = () => {
     setIsAdding(true);
   };
 
   const handleDelete = (id: string) => {
-    setSearchParams({ addressId: id });
+    setSearchParams({ customerAddressId: id });
     console.log(id);
   };
 
-  // useEffect(() => {
-  //   if (customer?.addresses) {
-  //     const defaultPrimary = customer.addresses.find((addr) => addr.isPrimary);
-  //     if (defaultPrimary) {
-  //       setSelectedAddress(defaultPrimary.id);
-  //     }
-  //   }
-  // }, [customer]);
+  const handleCancelDelete = () => {
+    setSearchParams({});
+  };
 
-  // const handleChange = async (id: string | null) => {
-  //   if (!id) return;
-  //   setSelectedAddress(id);
-  //   await updatePrimaryAddress(id);
-  // };
-
-  // const handleCancelDelete = () => {
-  //   setSearchParams({});
-  // };
-
-  // const confirmDelete = async () => {
-  //   if (addressId === null) return;
-  //   try {
-  //     setIsDeleting(true);
-  //     await deleteAddress(addressId);
-  //     setSearchParams({});
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setIsDeleting(false);
-  //   }
-  // };
+  const confirmDelete = async () => {
+    if (customerAddressId === null) return;
+    try {
+      setIsDeleting(true);
+      await removeAddress(customerAddressId);
+      setSearchParams({});
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   const { register, handleSubmit } = useForm<AddAdress>({
     defaultValues: {
@@ -161,6 +166,19 @@ export default function AddAddress() {
               />
             </div>
           </div>
+          <div className="flex items-center gap-3 mt-4">
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                {...register("isPrimary")}
+                className="sr-only peer" // sr-only: Inputu gizler ama erişilebilir tutar
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#D87D4A]"></div>
+              <span className="ml-3 text-sm font-medium text-gray-700">
+                Set as default address
+              </span>
+            </label>
+          </div>
 
           <div className="flex gap-3 pt-4">
             <button
@@ -190,8 +208,9 @@ export default function AddAddress() {
               name="address"
               id={address.id}
               value={address.id}
-              // checked={selectedAddress === address.id}
-              // onChange={() => handleChange(address.id)}
+              checked={selectedAddress === address.id}
+              onChange={() => handleChange(address.id)}
+              className="cursor-pointer"
             />
             <label htmlFor={address.id}>
               <h1>{address.title}</h1>
@@ -208,14 +227,14 @@ export default function AddAddress() {
             </button>
           </div>
         ))}
-        {/* <ConfirmationModal
+        <ConfirmationModal
           isOpen={isDeleteModalOpen}
           title="Delete Address"
           message="Bu işlem geri alınamaz. adres kalıcı olarak silinecek."
-          // onConfirm={confirmDelete}
-          // onCancel={handleCancelDelete}
+          onConfirm={confirmDelete}
+          onCancel={handleCancelDelete}
           variant="danger"
-        /> */}
+        />
       </div>
     </div>
   );

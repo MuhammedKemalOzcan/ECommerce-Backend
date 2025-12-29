@@ -5,7 +5,7 @@ using ECommerceAPI.Domain.Entities.Customer;
 using ECommerceAPI.Domain.Repositories;
 using MediatR;
 
-namespace ECommerceAPI.Application.Features.Commands.CustomerCommand
+namespace ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddress
 {
     internal sealed class AddAddressToCustomerCommandHandler : IRequestHandler<AddAddressToCustomerCommandRequest,Guid>
     {

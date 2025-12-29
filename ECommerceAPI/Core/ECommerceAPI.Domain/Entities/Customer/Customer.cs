@@ -18,7 +18,7 @@ namespace ECommerceAPI.Domain.Entities.Customer
 
         public static Customer Create(Guid appUserId, string firstName, string lastName, string email, string phoneNumber)
         {
-            if(appUserId == Guid.Empty) throw new DomainException("User Cannot be found");
+            if (appUserId == Guid.Empty) throw new DomainException("User Cannot be found");
             if (string.IsNullOrEmpty(firstName)) throw new DomainException("First name cannot be null.");
             if (string.IsNullOrEmpty(lastName)) throw new DomainException("Last name cannot be null.");
             if (string.IsNullOrEmpty(email)) throw new DomainException("email cannot be null.");
@@ -35,7 +35,7 @@ namespace ECommerceAPI.Domain.Entities.Customer
             return customer;
         }
 
-        public void AddAddress(CustomerAddressId addressId,Location location, string title,bool isPrimary)
+        public void AddAddress(CustomerAddressId addressId, Location location, string title, bool isPrimary)
         {
             if (string.IsNullOrEmpty(title)) throw new DomainException("Title cannot be null.");
 
@@ -43,15 +43,42 @@ namespace ECommerceAPI.Domain.Entities.Customer
 
             if (isPrimary == true)
             {
-                foreach (var existingAddress in _addresses)
-                {
-                    existingAddress.IsPrimary = false;
-                }
+                UnsetPrimaryAddress();
             }
 
             var address = new CustomerAddress(addressId, Id, title, location, isPrimary);
 
             _addresses.Add(address);
+        }
+
+        public void RemoveAddress(CustomerAddressId customerAddressId)
+        {
+            var address = _addresses.FirstOrDefault(a => a.Id == customerAddressId);
+
+            if (address == null) throw new DomainException("Address cannot found.");
+
+            _addresses.Remove(address);
+
+        }
+
+        public void SetPrimaryAddress(CustomerAddressId addressId)
+        {
+            var address = _addresses.FirstOrDefault(a => a.Id == addressId);
+            if (address == null) throw new DomainException("Address cannot be found.");
+
+            if (address.IsPrimary) return;
+
+            UnsetPrimaryAddress();
+
+            address.IsPrimary = true;
+
+        }
+
+        private void UnsetPrimaryAddress()
+        {
+            var currentPrimary = _addresses.FirstOrDefault(a => a.IsPrimary == true);
+
+            if (currentPrimary != null) currentPrimary.IsPrimary = false;
         }
     }
 }

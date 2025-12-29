@@ -1,7 +1,7 @@
 ﻿using ECommerceAPI.Application.Dtos.Customer;
 using MediatR;
 
-namespace ECommerceAPI.Application.Features.Commands.CustomerCommand
+namespace ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddress
 {
     public class AddAddressToCustomerCommandRequest() : IRequest<Guid>
     {

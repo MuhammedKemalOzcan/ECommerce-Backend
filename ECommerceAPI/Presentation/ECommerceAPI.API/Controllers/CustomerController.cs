@@ -1,6 +1,9 @@
 ﻿using ECommerceAPI.Application.Exceptions;
-using ECommerceAPI.Application.Features.Commands.CustomerCommand;
+using ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddress;
+using ECommerceAPI.Application.Features.Commands.CustomerCommand.PrimaryAddress;
+using ECommerceAPI.Application.Features.Commands.CustomerCommand.RemoveAddress;
 using ECommerceAPI.Application.Features.Queries.Customer;
+using ECommerceAPI.Domain.Entities.Customer;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +46,24 @@ namespace ECommerceAPI.API.Controllers
             Guid customerAddresId = await _mediator.Send(request);
 
             return Ok(customerAddresId);
+        }
+
+        [HttpDelete("Address/{customerAddressId}")]
+        public async Task<IActionResult> RemoveAddress([FromRoute] Guid customerAddressId)
+        {
+            var request = new RemoveAddressCommand(new CustomerAddressId(customerAddressId));
+            await _mediator.Send(request);
+
+            return NoContent();
+        }
+
+        [HttpPut("SetPrimaryAddress/{customerAddressId}")]
+        public async Task<IActionResult> SetPrimaryAddress([FromRoute] Guid customerAddressId)
+        {
+            var request = new SetPrimaryAddressCommand(new CustomerAddressId(customerAddressId));
+            await _mediator.Send(request);
+
+            return Ok();
         }
     }
 
