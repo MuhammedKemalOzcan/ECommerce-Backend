@@ -1,14 +1,7 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ECommerceAPI.Domain.Entities.Products;
+using MediatR;
 
 namespace ECommerceAPI.Application.Features.Commands.Products.RemoveProduct
 {
-    public class RemoveProductCommandRequest : IRequest<RemoveProductCommandResponse>
-    {
-        public Guid Id { get; set; }
-    }
+    public record RemoveProductCommandRequest(ProductId ProductId) : IRequest<RemoveProductCommandResponse>;
 }

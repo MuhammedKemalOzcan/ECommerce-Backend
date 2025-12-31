@@ -1,8 +1,8 @@
 import { PlusCircleIcon } from "lucide-react";
 import { useState } from "react";
 import ProductBoxForm from "./ProductBoxForm";
-import { useProductBoxStore } from "../../../stores/ProductBoxStore";
 import type { ProductBoxes } from "../../../types/ProductBox";
+import { useProductStore } from "../../../stores/productStore";
 
 type AddItemProps = {
   productId: string | null;
@@ -11,10 +11,10 @@ type AddItemProps = {
 export default function AddProductBox({ productId }: AddItemProps) {
   const [isCreating, setIsCreating] = useState<boolean>(false);
 
-  const createBoxItem = useProductBoxStore((s) => s.createBoxItem);
+  const AddBoxToProduct = useProductStore((s) => s.addBoxToProduct);
 
   const handleSubmit = (data: ProductBoxes, productId: string | null) => {
-    createBoxItem(productId, data);
+    AddBoxToProduct(productId, data);
     setIsCreating(false);
   };
 

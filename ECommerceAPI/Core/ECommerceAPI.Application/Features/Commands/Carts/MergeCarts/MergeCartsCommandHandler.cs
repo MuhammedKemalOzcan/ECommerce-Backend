@@ -42,7 +42,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.MergeCarts
                             return new CartItemDto
                             {
                                 Id = ci.Id,
-                                ProductId = ci.ProductId,
+                                ProductId = ci.ProductId.Value,
                                 ProductName = ci.Product?.Name ?? string.Empty,
                                 ProductImageUrl = imageUrl,
                                 Quantity = ci.Quantity,
@@ -105,7 +105,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.MergeCarts
                     return new CartItemDto
                     {
                         Id = ci.Id,
-                        ProductId = ci.ProductId,
+                        ProductId = ci.ProductId.Value,
                         ProductName = ci.Product?.Name ?? string.Empty,
                         ProductImageUrl = imageUrl,
                         Quantity = ci.Quantity,

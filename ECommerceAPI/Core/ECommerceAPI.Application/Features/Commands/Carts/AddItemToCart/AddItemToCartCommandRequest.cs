@@ -1,9 +1,5 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ECommerceAPI.Domain.Entities.Products;
+using MediatR;
 
 namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
 {
@@ -11,7 +7,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
     {
         public Guid? UserId { get; set; }
         public string? SessionId { get; set; }
-        public Guid ProductId { get; set; }
+        public ProductId ProductId { get; set; }
         public int Quantity { get; set; }
     }
 }

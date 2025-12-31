@@ -1,11 +1,9 @@
 ﻿using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Dtos.Cart;
 using ECommerceAPI.Application.Exceptions;
-using ECommerceAPI.Application.Features.Commands.ProductBoxes.CreateProductBox;
 using ECommerceAPI.Application.Repositories.CartItems;
-using ECommerceAPI.Application.Repositories.ProductBoxes;
-using ECommerceAPI.Application.Repositories.Products;
 using ECommerceAPI.Domain.Entities;
+using ECommerceAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -14,28 +12,28 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
     public class AddItemToCartCommandHandler : IRequestHandler<AddItemToCartCommandRequest, AddItemToCartCommandResponse>
     {
         private readonly ICartService _cartService;
-        private readonly IProductReadRepository _productReadRepository;
+        private readonly IProductRepository _productRepository;
         private readonly ICartItemWriteRepository _cartItemWriteRepository;
         private readonly ILogger<AddItemToCartCommandHandler> _logger;
 
-        public AddItemToCartCommandHandler(ICartService cartService, IProductReadRepository productReadRepository, ICartItemWriteRepository cartItemWriteRepository, ILogger<AddItemToCartCommandHandler> logger)
+        public AddItemToCartCommandHandler(ICartService cartService, ICartItemWriteRepository cartItemWriteRepository, ILogger<AddItemToCartCommandHandler> logger, IProductRepository productRepository)
         {
             _cartService = cartService;
-            _productReadRepository = productReadRepository;
             _cartItemWriteRepository = cartItemWriteRepository;
             _logger = logger;
+            _productRepository = productRepository;
         }
 
         public async Task<AddItemToCartCommandResponse> Handle(AddItemToCartCommandRequest request, CancellationToken cancellationToken)
         {
             var cart = await _cartService.GetOrCreateCartAsync(request.UserId, request.SessionId, cancellationToken);
 
-            var product = await _productReadRepository.GetByIdAsync(request.ProductId);
-            if (product == null) 
+            var product = await _productRepository.GetByIdAsync(request.ProductId);
+            if (product == null)
             {
                 _logger.LogWarning("Ürün Bulunamadı. ProductId: {ProductId}", request.ProductId);
                 throw new NotFoundException("Ürün bulunamadı");
-            } 
+            }
 
             var existingItem = await _cartService.GetCartItemAsync(cart.Id, request.ProductId, cancellationToken);
             var totalQuantity = (existingItem?.Quantity ?? 0) + request.Quantity;
@@ -84,7 +82,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
                     return new CartItemDto
                     {
                         Id = ci.Id,
-                        ProductId = ci.ProductId,
+                        ProductId = ci.ProductId.Value,
                         ProductName = ci.Product?.Name ?? string.Empty,
                         ProductImageUrl = imageUrl,
                         Quantity = ci.Quantity,

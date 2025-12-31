@@ -1,0 +1,6 @@
+2025-12-31 13:05:13.161 +03:00 [INF] Uygulama başarıyla başladı!
+2025-12-31 13:05:13.916 +03:00 [INF] Now listening on: https://localhost:7196
+2025-12-31 13:05:13.922 +03:00 [INF] Now listening on: http://localhost:5067
+2025-12-31 13:05:14.002 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-31 13:05:14.006 +03:00 [INF] Hosting environment: Development
+2025-12-31 13:05:14.008 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API

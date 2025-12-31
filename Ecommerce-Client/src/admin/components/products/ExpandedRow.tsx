@@ -1,14 +1,11 @@
 import { GalleryHorizontalEndIcon, Package, X } from "lucide-react";
 import type { Products } from "../../../types/Products";
-import { useEffect, useState } from "react";
-import { useProductBoxStore } from "../../../stores/ProductBoxStore";
-import { useShallow } from "zustand/shallow";
+import { useState } from "react";
 import ProductBoxForm from "../productBox/ProductBoxForm";
 import type { ProductBoxes } from "../../../types/ProductBox";
 import DisplayProductBox from "../productBox/DisplayProductBox";
 import AddProductBox from "../productBox/AddProductBox";
 import { productGalleryApi } from "../../../api/productGalleryApi";
-import { useProductStore } from "../../../stores/productStore";
 
 type Props = {
   product: Products;
@@ -17,25 +14,11 @@ type Props = {
 export default function ExpandedRow({ product }: Props) {
   const [boxItemId, setBoxItemId] = useState<string | null>(null);
 
-  const { getAllBoxes, productBoxes, updateBoxItem } = useProductBoxStore(
-    useShallow((state) => ({
-      productBoxes: state.productBoxes,
-      getAllBoxes: state.getAllBoxes,
-      updateBoxItem: state.updateBoxItems,
-    }))
-  );
-  const refreshById = useProductStore((s) => s.refreshById);
-
-  useEffect(() => {
-    getAllBoxes(product.id);
-  }, [getAllBoxes, product.id]);
-
   const handleDelete = async (
     productId: string | null,
     imageId: string | null
   ) => {
     await productGalleryApi.delete(productId, imageId);
-    await refreshById(productId);
   };
 
   const handleEditBox = (id: string | null) => {
@@ -51,6 +34,8 @@ export default function ExpandedRow({ product }: Props) {
     setBoxItemId(null);
   };
 
+  console.log(product);
+
   return (
     <div className="bg-gray-200 rounded-lg w-full shadow-sm flex flex-col gap-8 p-8">
       <div className="flex text-[20px] text-blue-700 gap-2">
@@ -64,7 +49,7 @@ export default function ExpandedRow({ product }: Props) {
         </div>
         <div>
           <h3 className="font-bold text-blue-500">Product Boxes:</h3>
-          {productBoxes.map((bx) => (
+          {product.productBoxes?.map((bx) => (
             <div key={bx.id} className="flex gap-4 items-center">
               {boxItemId === bx.id ? (
                 <ProductBoxForm
@@ -73,7 +58,11 @@ export default function ExpandedRow({ product }: Props) {
                   defaultValues={bx}
                 />
               ) : (
-                <DisplayProductBox box={bx} onEditBox={handleEditBox} />
+                <DisplayProductBox
+                  productId={product.id}
+                  box={bx}
+                  onEditBox={handleEditBox}
+                />
               )}
             </div>
           ))}

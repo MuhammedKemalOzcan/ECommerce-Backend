@@ -180,11 +180,6 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("character varying(21)");
-
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -197,37 +192,37 @@ namespace ECommerceAPI.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.HasKey("Id");
 
                     b.ToTable("Files");
-
-                    b.HasDiscriminator().HasValue("File");
-
-                    b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Product", b =>
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Product", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<string>("Features")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(155)
+                        .HasColumnType("character varying(155)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -235,26 +230,20 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.HasKey("Id");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("ECommerceAPI.Domain.Entities.ProductBox", b =>
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductBox", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
@@ -262,14 +251,44 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductBox");
+                });
+
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductGallery", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<bool>("IsPrimary")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Storage")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductBoxes");
+                    b.ToTable("ProductGallery");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -468,31 +487,6 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ProductProductGallery", b =>
-                {
-                    b.Property<Guid>("ProductGalleriesId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("ProductGalleriesId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductProductGallery");
-                });
-
-            modelBuilder.Entity("ECommerceAPI.Domain.Entities.ProductGallery", b =>
-                {
-                    b.HasBaseType("ECommerceAPI.Domain.Entities.File");
-
-                    b.Property<bool>("IsPrimary")
-                        .HasColumnType("boolean");
-
-                    b.HasDiscriminator().HasValue("ProductGallery");
-                });
-
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.CartItem", b =>
                 {
                     b.HasOne("ECommerceAPI.Domain.Entities.Cart", "Cart")
@@ -501,7 +495,7 @@ namespace ECommerceAPI.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ECommerceAPI.Domain.Entities.Product", "Product")
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -557,15 +551,22 @@ namespace ECommerceAPI.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ECommerceAPI.Domain.Entities.ProductBox", b =>
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductBox", b =>
                 {
-                    b.HasOne("ECommerceAPI.Domain.Entities.Product", "Product")
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Product", null)
                         .WithMany("ProductBoxes")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.Navigation("Product");
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.ProductGallery", b =>
+                {
+                    b.HasOne("ECommerceAPI.Domain.Entities.Products.Product", null)
+                        .WithMany("ProductGalleries")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -619,21 +620,6 @@ namespace ECommerceAPI.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProductProductGallery", b =>
-                {
-                    b.HasOne("ECommerceAPI.Domain.Entities.ProductGallery", null)
-                        .WithMany()
-                        .HasForeignKey("ProductGalleriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ECommerceAPI.Domain.Entities.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ECommerceAPI.Domain.Entities.Cart", b =>
                 {
                     b.Navigation("CartItems");
@@ -644,9 +630,11 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Navigation("Addresses");
                 });
 
-            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Product", b =>
+            modelBuilder.Entity("ECommerceAPI.Domain.Entities.Products.Product", b =>
                 {
                     b.Navigation("ProductBoxes");
+
+                    b.Navigation("ProductGalleries");
                 });
 #pragma warning restore 612, 618
         }

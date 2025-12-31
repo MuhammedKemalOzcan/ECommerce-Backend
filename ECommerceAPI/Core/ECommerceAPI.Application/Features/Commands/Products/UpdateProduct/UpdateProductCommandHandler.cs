@@ -1,62 +1,37 @@
-﻿using ECommerceAPI.Application.Dtos.Products;
-using ECommerceAPI.Application.Exceptions;
-using ECommerceAPI.Application.Repositories.Products;
-using ECommerceAPI.Domain.Entities;
+﻿using ECommerceAPI.Application.Exceptions;
+using ECommerceAPI.Application.Repositories;
+using ECommerceAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Application.Features.Commands.Products.UpdateProduct
 {
-    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommandRequest, UpdateProductCommandResponse>
+    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommandRequest>
     {
-        private readonly IProductWriteRepository _productWriteRepo;
-        private readonly IProductReadRepository _productReadRepo;
+        private readonly IProductRepository _productRepository;
+        private readonly IUnitOfWork _uow;
         private readonly ILogger<UpdateProductCommandHandler> _logger;
 
-        public UpdateProductCommandHandler(IProductWriteRepository productWriteRepo, IProductReadRepository productReadRepo, ILogger<UpdateProductCommandHandler> logger)
+        public UpdateProductCommandHandler(IProductRepository productRepository, IUnitOfWork uow, ILogger<UpdateProductCommandHandler> logger)
         {
-            _productWriteRepo = productWriteRepo;
-            _productReadRepo = productReadRepo;
+            _productRepository = productRepository;
+            _uow = uow;
             _logger = logger;
         }
 
-        public async Task<UpdateProductCommandResponse> Handle(UpdateProductCommandRequest request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateProductCommandRequest request, CancellationToken cancellationToken)
         {
-            var product = await _productReadRepo.GetByIdAsync(request.Id,true);
+            var product = await _productRepository.GetByIdAsync(request.ProductId);
 
             if (product == null)
             {
-                _logger.LogWarning("Güncellenmek istenen ürün bulunamadı. Request Id: {ProductId}", request.Id);
-                throw new NotFoundException("Ürün bulunamadı.");
+                _logger.LogWarning($"{request.ProductId} cannot found");
+                throw new NotFoundException($"{request.ProductId} cannot found");
             }
 
-            product.Name = request.Name;
-            product.Price = request.Price;
-            product.Category = request.Category;
-            product.Stock = request.Stock;
-            product.Description = request.Description;
-            product.Features = request.Features;
+            product.Update(request.Name, request.Stock, request.Price, request.Category, request.Description, request.Features);
 
-
-            _productWriteRepo.Update(product);
-            await _productWriteRepo.SaveChangesAsync();
-
-            return new UpdateProductCommandResponse
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Category = product.Category,
-                Price = product.Price,
-                Stock = product.Stock,
-                Description = product.Description,
-                Features = product.Features,
-            };
-
+            await _uow.SaveChangesAsync(cancellationToken);
 
         }
     }
