@@ -38,6 +38,7 @@ namespace ECommerceAPI.Domain.Entities.Products
                 Description = description,
                 Features = features
             };
+
             return product;
         }
 
@@ -57,7 +58,10 @@ namespace ECommerceAPI.Domain.Entities.Products
 
         public void AddBox(BoxId boxId, string name, int quantity)
         {
-            var box = new ProductBox(boxId, name, quantity, Id);
+            if (string.IsNullOrEmpty(name)) throw new DomainException("Name cannot be empty");
+            if (quantity < 1) throw new DomainException("Quantity cannot be below 1");
+
+            var box = new ProductBox(new BoxId(Guid.NewGuid()), name, quantity, Id);
             _productBoxes.Add(box);
         }
 
@@ -67,6 +71,15 @@ namespace ECommerceAPI.Domain.Entities.Products
             if (box is null) throw new DomainException("Product box cannot be found");
 
             _productBoxes.Remove(box);
+        }
+
+        public void UpdateBoxItem(BoxId boxId, string name, int quantity)
+        {
+            var box = _productBoxes.FirstOrDefault(b => b.Id == boxId);
+            if (box is null) throw new DomainException("Product box cannot be found");
+
+            box.Update(name, quantity);
+
         }
 
 

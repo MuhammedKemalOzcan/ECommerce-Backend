@@ -3,5 +3,5 @@ using MediatR;
 
 namespace ECommerceAPI.Application.Features.Commands.Products.RemoveProduct
 {
-    public record RemoveProductCommandRequest(ProductId ProductId) : IRequest<RemoveProductCommandResponse>;
+    public record RemoveProductCommandRequest(Guid ProductId) : IRequest;
 }

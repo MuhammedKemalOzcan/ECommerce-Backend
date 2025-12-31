@@ -1,7 +1,7 @@
 import { PlusCircleIcon } from "lucide-react";
 import { useState } from "react";
 import ProductBoxForm from "./ProductBoxForm";
-import type { ProductBoxes } from "../../../types/ProductBox";
+import type { ProductBoxes } from "../../../types/Products";
 import { useProductStore } from "../../../stores/productStore";
 
 type AddItemProps = {

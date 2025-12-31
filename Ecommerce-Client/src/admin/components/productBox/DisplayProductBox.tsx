@@ -1,5 +1,5 @@
 import { PenBoxIcon, Trash2 } from "lucide-react";
-import type { ProductBoxes } from "../../../types/ProductBox";
+import type { ProductBoxes } from "../../../types/Products";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import ConfirmationModal from "../common/ConfirmationModal";

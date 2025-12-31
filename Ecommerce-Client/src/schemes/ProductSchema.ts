@@ -1,6 +1,6 @@
 import type { RegisterOptions } from "react-hook-form";
 import type { AddProduct } from "../types/Products";
-import type { ProductBoxes } from "../types/ProductBox";
+import type { ProductBoxes } from "../types/Products";
 
 export const PRODUCT_VALIDATION_RULES = {
   name: {

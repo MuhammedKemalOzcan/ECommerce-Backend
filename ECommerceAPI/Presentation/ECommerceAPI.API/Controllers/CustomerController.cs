@@ -3,7 +3,6 @@ using ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddress;
 using ECommerceAPI.Application.Features.Commands.CustomerCommand.PrimaryAddress;
 using ECommerceAPI.Application.Features.Commands.CustomerCommand.RemoveAddress;
 using ECommerceAPI.Application.Features.Queries.Customer;
-using ECommerceAPI.Domain.Entities.Customer;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
