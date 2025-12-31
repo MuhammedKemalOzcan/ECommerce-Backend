@@ -1,12 +1,14 @@
 ﻿using ECommerceAPI.Application.Abstractions.Storage;
+using ECommerceAPI.Application.Dtos.Products;
 using ECommerceAPI.Application.Features.Commands.Products.AddBoxToProduct;
 using ECommerceAPI.Application.Features.Commands.Products.CreateProduct;
 using ECommerceAPI.Application.Features.Commands.Products.RemoveBoxFromProduct;
+using ECommerceAPI.Application.Features.Commands.Products.RemoveProduct;
+using ECommerceAPI.Application.Features.Commands.Products.UpdateBoxItem;
 using ECommerceAPI.Application.Features.Commands.Products.UpdateProduct;
 using ECommerceAPI.Application.Features.Queries.Products.GetAllCustomer;
 using ECommerceAPI.Application.Features.Queries.Products.GetProductById;
 using ECommerceAPI.Application.Repositories.File;
-using ECommerceAPI.Domain.Entities.Products;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,12 +51,20 @@ namespace ECommerceAPI.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateProductCommandRequest request)
         {
-            var response = await _mediator.Send(request);
-            return Ok(response);
+            ProductDto productDto = await _mediator.Send(request);
+            return Ok(productDto);
         }
 
         [HttpPut("{Id}")]
-        public async Task<IActionResult> Update([FromBody] UpdateProductCommandRequest request)
+        public async Task<IActionResult> Update([FromRoute] Guid id,[FromBody] UpdateProductCommandRequest request)
+        {
+            var command = request with { ProductId = id };
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+
+        [HttpDelete("{productId}")]
+        public async Task<IActionResult> Delete([FromRoute] RemoveProductCommandRequest request)
         {
             await _mediator.Send(request);
             return Ok();
@@ -75,20 +85,18 @@ namespace ECommerceAPI.API.Controllers
             return Ok();
         }
 
-        //[HttpDelete("{Id}")]
-        //public async Task<IActionResult> Delete([FromRoute] RemoveProductCommandRequest request)
-        //{
-        //    RemoveProductCommandResponse response = await _mediator.Send(request);
-        //    return Ok(response);
-        //}
+        [HttpPut("{productId}/Boxes/{boxId}")]
+        public async Task<IActionResult> UpdateBox([FromRoute] Guid boxId, [FromRoute] Guid productId, [FromBody] UpdateBoxItemCommand request)
+        {
+            var command = request with { ProductId = productId, BoxId = boxId };
+            await _mediator.Send(command);
 
-        //[HttpPut("Boxes/{boxId}")]
-        //public async Task<IActionResult> UpdateBox([FromRoute] Guid boxId, [FromBody] UpdateBoxCommandRequest request)
-        //{
-        //    request.BoxId = boxId;
-        //    UpdateBoxCommandResponse response = await _mediator.Send(request);
-        //    return Ok(response);
-        //}
+            return NoContent();
+        }
+
+        
+
+
 
         //[HttpPost("[Action]/{productId}")]
         //public async Task<IActionResult> Upload([FromRoute] Guid productId ){

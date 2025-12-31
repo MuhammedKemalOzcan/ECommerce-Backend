@@ -1,12 +1,13 @@
 ﻿using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories;
+using ECommerceAPI.Domain.Entities.Products;
 using ECommerceAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace ECommerceAPI.Application.Features.Commands.Products.RemoveProduct
 {
-    public class RemoveProductCommandHandler : IRequestHandler<RemoveProductCommandRequest, RemoveProductCommandResponse>
+    public class RemoveProductCommandHandler : IRequestHandler<RemoveProductCommandRequest>
     {
         private readonly IProductRepository _productRepository;
         private readonly IUnitOfWork _uow;
@@ -19,24 +20,17 @@ namespace ECommerceAPI.Application.Features.Commands.Products.RemoveProduct
             _logger = logger;
         }
 
-        public async Task<RemoveProductCommandResponse> Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken)
+        public async Task Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken)
         {
-            var product = await _productRepository.GetByIdAsync(request.ProductId);
+            var product = await _productRepository.GetByIdAsync(new ProductId(request.ProductId));
             if (product == null)
             {
-                _logger.LogWarning("Product with ID {ProductId} not found during remove operation.", request.ProductId.Value);
+                _logger.LogWarning("Product with ID {ProductId} not found during remove operation.", request.ProductId);
                 throw new NotFoundException($"{request.ProductId} id'li ürün bulunamadı");
             }
 
             _productRepository.Remove(product);
             await _uow.SaveChangesAsync();
-
-            return new RemoveProductCommandResponse()
-            {
-                Id = product.Id.Value,
-                Message = $"{product.Id.Value} id'sine sahip ürün başarıyla silindi."
-            };
-
         }
     }
 }

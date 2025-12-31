@@ -1,4 +1,4 @@
-import type { ProductBoxes } from "../../../types/ProductBox";
+import type { ProductBoxes } from "../../../types/Products";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Send, X } from "lucide-react";
 import FormField from "../products/FormField";
@@ -23,7 +23,10 @@ export default function ProductBoxForm({
     await onSubmit(data);
   };
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col bg-gray-300 p-4 rounded-lg">
+    <form
+      onSubmit={handleSubmit(handleFormSubmit)}
+      className="flex flex-col bg-gray-300 p-4 rounded-lg"
+    >
       <FormField
         id="name"
         label="Name"

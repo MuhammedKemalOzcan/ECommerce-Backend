@@ -1,7 +1,8 @@
 import { create } from "zustand";
-import type { Products } from "../types/Products";
+import type { AddProduct, Products } from "../types/Products";
 import { productsApi } from "../api/products";
-import type { ProductBoxes } from "../types/ProductBox";
+import type { ProductBoxes } from "../types/Products";
+import { toast } from "react-toastify";
 
 type productsState = {
   products: Products[];
@@ -14,16 +15,24 @@ type productsState = {
     productId: string | null,
     boxData: ProductBoxes
   ) => Promise<void>;
-  removeBoxFromProduct: (boxId: string | null, productId: string | null) => Promise<void>
-  // createProduct: (newProduct: AddProduct) => Promise<Products>;
-  // patchProduct: (
-  //   id: string | null,
-  //   data: AddProduct
-  // ) => Promise<Products | undefined>;
-  // refreshById: (id: string | null) => Promise<void>;
+  removeBoxFromProduct: (
+    boxId: string | null,
+    productId: string | null
+  ) => Promise<void>;
+  updateBoxItems: (
+    productId: string | null,
+    boxId: string | null,
+    boxPayload: ProductBoxes
+  ) => Promise<void>;
+  createProduct: (newProduct: AddProduct) => Promise<void>;
+  updateProduct: (
+    id: string | null,
+    productPayload: Partial<AddProduct>
+  ) => Promise<void>;
+  deleteProduct: (id: string) => Promise<void>;
 };
 
-export const useProductStore = create<productsState>((set) => ({
+export const useProductStore = create<productsState>((set, get) => ({
   products: [],
   currentProduct: null,
   loading: false,
@@ -51,6 +60,56 @@ export const useProductStore = create<productsState>((set) => ({
         loading: false,
         error: error instanceof Error ? error.message : "Ürün yüklenemedi",
       });
+    }
+  },
+  createProduct: async (newProduct: AddProduct) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await productsApi.add(newProduct);
+      set((state) => ({
+        products: [...state.products, response],
+      }));
+    } catch (error) {
+      set({ error: "Ürün eklenemedi." });
+      throw error;
+    } finally {
+      set({ loading: false });
+    }
+  },
+  updateProduct: async (
+    id: string | null,
+    productPayload: Partial<AddProduct>
+  ) => {
+    if (!id) return;
+    set({ loading: true, error: null });
+
+    try {
+      const response = await productsApi.update(id, productPayload);
+      console.log("updated product:", response);
+
+      set((state) => ({
+        products: state.products.map((product) =>
+          product.id === id ? { ...product, ...response } : product
+        ),
+      }));
+    } catch (error) {
+    } finally {
+      set({ loading: false });
+    }
+  },
+  deleteProduct: async (id: string) => {
+    set({ loading: true });
+    const prev = get().products;
+    set((s) => ({ products: s.products.filter((p) => p.id !== id) }));
+    try {
+      await productsApi.remove(id);
+      if (get().currentProduct?.id === id) set({ currentProduct: null });
+      toast.success("Ürün başarıyla silindi");
+    } catch (error) {
+      set({ products: prev });
+      console.log(error);
+    } finally {
+      set({ loading: false });
     }
   },
   addBoxToProduct: async (productId: string | null, boxData: ProductBoxes) => {
@@ -122,35 +181,47 @@ export const useProductStore = create<productsState>((set) => ({
       set({ loading: false });
     }
   },
-  // createProduct: async (newProduct: AddProduct) => {
-  //   set({ loading: true });
-  //   try {
-  //     const created = await productsApi.add(newProduct);
-  //     console.log(created);
-  //     set((state) => ({ products: [...state.products, created] }));
-  //     return created;
-  //   } catch (error) {
-  //     set({ error: "Ürün eklenemedi." });
-  //     throw error;
-  //   } finally {
-  //     set({ loading: false });
-  //   }
-  // },
-  // deleteProduct: async (id: string) => {
-  //   set({ loading: true });
-  //   const prev = get().products;
-  //   set((s) => ({ products: s.products.filter((p) => p.id !== id) }));
-  //   try {
-  //     await productsApi.remove(id);
-  //     if (get().currentProduct?.id === id) set({ currentProduct: null });
-  //     toast.success("Ürün başarıyla silindi");
-  //   } catch (error) {
-  //     set({ products: prev });
-  //     console.log(error);
-  //   } finally {
-  //     set({ loading: false });
-  //   }
-  // },
+  updateBoxItems: async (
+    productId: string | null,
+    boxId: string | null,
+    boxPayload: ProductBoxes
+  ) => {
+    if (!boxId) {
+      console.error("❌ Box ID is required for update");
+      throw new Error("Box ID is required");
+    }
+    if (!productId) {
+      console.error("❌ Product ID is required for update");
+      throw new Error("Product ID is required");
+    }
+    set({ loading: true, error: null });
+
+    const previouseProducts = get().products;
+
+    try {
+      set((state) => ({
+        products: state.products.map((product) => ({
+          ...product,
+          productBoxes: product.productBoxes?.map((box) =>
+            box.id === boxId
+              ? { ...box, name: boxPayload.name, quantity: boxPayload.quantity }
+              : box
+          ),
+        })),
+      }));
+
+      await productsApi.updateBoxItem(productId, boxId, boxPayload);
+    } catch (error) {
+      set({
+        products: previouseProducts,
+        error: error instanceof Error ? error.message : "Box update failed",
+      });
+      throw error;
+    } finally {
+      set({ loading: false });
+    }
+  },
+
   // patchProduct: async (id: string | null, data: AddProduct) => {
   //   if (!id) {
   //     console.error("❌ Product ID is required for update");

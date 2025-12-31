@@ -1,11 +1,12 @@
-import { GalleryHorizontalEndIcon, Package, X } from "lucide-react";
+import { Box, GalleryHorizontalEndIcon, Package, X } from "lucide-react";
 import type { Products } from "../../../types/Products";
 import { useState } from "react";
 import ProductBoxForm from "../productBox/ProductBoxForm";
-import type { ProductBoxes } from "../../../types/ProductBox";
+import type { ProductBoxes } from "../../../types/Products";
 import DisplayProductBox from "../productBox/DisplayProductBox";
 import AddProductBox from "../productBox/AddProductBox";
 import { productGalleryApi } from "../../../api/productGalleryApi";
+import { useProductStore } from "../../../stores/productStore";
 
 type Props = {
   product: Products;
@@ -13,6 +14,7 @@ type Props = {
 
 export default function ExpandedRow({ product }: Props) {
   const [boxItemId, setBoxItemId] = useState<string | null>(null);
+  const updateBoxItem = useProductStore((s) => s.updateBoxItems);
 
   const handleDelete = async (
     productId: string | null,
@@ -25,8 +27,12 @@ export default function ExpandedRow({ product }: Props) {
     setBoxItemId(boxItemId ? null : id);
   };
 
-  const handleUpdate = async (boxId: string, data: ProductBoxes) => {
-    await updateBoxItem(boxId, data);
+  const handleUpdate = async (
+    productId: string,
+    boxId: string,
+    data: ProductBoxes
+  ) => {
+    await updateBoxItem(productId, boxId, data);
     setBoxItemId(null);
   };
 
@@ -54,7 +60,7 @@ export default function ExpandedRow({ product }: Props) {
               {boxItemId === bx.id ? (
                 <ProductBoxForm
                   onCancel={handleCancelEdit}
-                  onSubmit={(data) => handleUpdate(bx.id, data)}
+                  onSubmit={(data) => handleUpdate(product.id, bx.id, data)}
                   defaultValues={bx}
                 />
               ) : (

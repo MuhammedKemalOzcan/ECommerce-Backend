@@ -1,0 +1,376 @@
+2026-01-01 00:01:25.217 +03:00 [INF] HTTP GET /api/Product responded 200 in 22.5506 ms
+2026-01-01 00:01:42.599 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 13.6105 ms
+2026-01-01 00:02:35.287 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 42.1550 ms
+2026-01-01 00:02:59.250 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 8.1689 ms
+2026-01-01 00:03:39.707 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 10.4924 ms
+2026-01-01 00:04:24.314 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 16.6315 ms
+2026-01-01 00:04:28.276 +03:00 [INF] HTTP PUT /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 45.3747 ms
+2026-01-01 00:04:34.024 +03:00 [INF] HTTP GET /api/Product responded 200 in 10.7566 ms
+2026-01-01 00:04:44.546 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 18.2619 ms
+2026-01-01 00:04:48.251 +03:00 [INF] HTTP PUT /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 26.5184 ms
+2026-01-01 00:04:59.874 +03:00 [INF] HTTP GET /api/Product responded 200 in 18.0307 ms
+2026-01-01 00:05:01.813 +03:00 [INF] HTTP GET /api/Product responded 200 in 9.5170 ms
+2026-01-01 00:05:03.201 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 13.7192 ms
+2026-01-01 00:05:17.676 +03:00 [INF] HTTP GET /api/Product responded 200 in 20.8027 ms
+2026-01-01 00:05:17.705 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 51.0895 ms
+2026-01-01 00:05:21.584 +03:00 [INF] HTTP PUT /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 31.4113 ms
+2026-01-01 00:07:01.201 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 7.4140 ms
+2026-01-01 00:07:47.443 +03:00 [INF] HTTP PUT /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 42500.3873 ms
+2026-01-01 00:07:50.564 +03:00 [INF] HTTP GET /api/Product responded 200 in 9.2563 ms
+2026-01-01 00:07:51.972 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 11.3420 ms
+2026-01-01 00:08:22.062 +03:00 [INF] HTTP PUT /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 18753.3920 ms
+2026-01-01 00:08:45.792 +03:00 [INF] HTTP GET /api/Product responded 200 in 17.0452 ms
+2026-01-01 00:08:46.869 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 11.8420 ms
+2026-01-01 00:08:55.317 +03:00 [INF] HTTP PUT /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 2848.8615 ms
+2026-01-01 00:09:25.127 +03:00 [INF] Uygulama başarıyla başladı!
+2026-01-01 00:09:25.676 +03:00 [INF] Now listening on: https://localhost:7196
+2026-01-01 00:09:25.683 +03:00 [INF] Now listening on: http://localhost:5067
+2026-01-01 00:09:25.793 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-01-01 00:09:25.796 +03:00 [INF] Hosting environment: Development
+2026-01-01 00:09:25.801 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2026-01-01 00:09:48.226 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-01-01 00:09:51.005 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-01-01 00:09:51.298 +03:00 [INF] HTTP GET /api/Product responded 200 in 3138.4328 ms
+2026-01-01 00:09:53.282 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-01-01 00:09:53.368 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 233.6725 ms
+2026-01-01 00:10:02.828 +03:00 [INF] HTTP PUT /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 3082.3610 ms
+2026-01-01 00:23:23.166 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 78.1687 ms
+2026-01-01 00:27:57.448 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 12.3145 ms
+2026-01-01 00:27:59.296 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 9.5329 ms
+2026-01-01 00:27:59.319 +03:00 [INF] HTTP GET /api/Product responded 200 in 31.8532 ms
+2026-01-01 00:29:19.972 +03:00 [INF] HTTP PUT /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 2225.5820 ms
+2026-01-01 00:34:28.491 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 53.1931 ms
+2026-01-01 00:34:48.448 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 15.4523 ms
+2026-01-01 00:35:09.294 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 9.5936 ms
+2026-01-01 00:35:15.903 +03:00 [INF] HTTP PUT /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 29.3385 ms
+2026-01-01 00:35:52.381 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 15.5231 ms
+2026-01-01 00:36:23.772 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.9027 ms
+2026-01-01 00:36:31.637 +03:00 [INF] HTTP GET /api/Product/3bd53a63-4788-4ae8-8b73-96cfe8e98c73 responded 200 in 17.5546 ms
+2026-01-01 00:39:03.157 +03:00 [INF] Uygulama başarıyla başladı!
+2026-01-01 00:39:03.627 +03:00 [INF] Now listening on: https://localhost:7196
+2026-01-01 00:39:03.632 +03:00 [INF] Now listening on: http://localhost:5067
+2026-01-01 00:39:03.714 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-01-01 00:39:03.716 +03:00 [INF] Hosting environment: Development
+2026-01-01 00:39:03.718 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2026-01-01 00:39:10.808 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-01-01 00:39:14.092 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-01-01 00:39:14.357 +03:00 [INF] HTTP GET /api/Product responded 200 in 3609.9926 ms
+2026-01-01 00:39:18.685 +03:00 [INF] HTTP DELETE /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae responded 400 in 90.0941 ms
+2026-01-01 00:39:28.314 +03:00 [INF] HTTP DELETE /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae responded 400 in 9.2493 ms
+2026-01-01 00:40:18.336 +03:00 [INF] Uygulama başarıyla başladı!
+2026-01-01 00:40:18.964 +03:00 [INF] Now listening on: https://localhost:7196
+2026-01-01 00:40:19.010 +03:00 [INF] Now listening on: http://localhost:5067
+2026-01-01 00:40:19.122 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-01-01 00:40:19.125 +03:00 [INF] Hosting environment: Development
+2026-01-01 00:40:19.127 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2026-01-01 00:40:25.642 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-01-01 00:40:44.490 +03:00 [WRN] Product with ID "00000000-0000-0000-0000-000000000000" not found during remove operation.
+2026-01-01 00:40:44.567 +03:00 [ERR] HTTP DELETE /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae responded 500 in 18998.3859 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-01-01 00:40:44.781 +03:00 [ERR] Unhandled exception occured.Path: /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae, Method: DELETE, StatusCode: 200,User: Anonymous,TraceId: 0HNI8MKONKJ06:00000001
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at ECommerceAPI.API.Program.<>c.<<Main>b__0_3>d.MoveNext() in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 161
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 27
+2026-01-01 00:40:44.855 +03:00 [WRN] Business exception occured: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at ECommerceAPI.API.Program.<>c.<<Main>b__0_3>d.MoveNext() in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 161
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 27
+2026-01-01 00:42:13.819 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-01-01 00:42:13.996 +03:00 [INF] HTTP GET /api/Product responded 200 in 392.7126 ms
+2026-01-01 00:42:32.347 +03:00 [WRN] Product with ID "00000000-0000-0000-0000-000000000000" not found during remove operation.
+2026-01-01 00:42:32.386 +03:00 [ERR] HTTP DELETE /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae responded 500 in 5141.5984 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-01-01 00:42:32.471 +03:00 [ERR] Unhandled exception occured.Path: /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae, Method: DELETE, StatusCode: 200,User: Anonymous,TraceId: 0HNI8MKONKJ06:00000005
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at ECommerceAPI.API.Program.<>c.<<Main>b__0_3>d.MoveNext() in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 161
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 27
+2026-01-01 00:42:32.492 +03:00 [WRN] Business exception occured: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at ECommerceAPI.API.Program.<>c.<<Main>b__0_3>d.MoveNext() in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 161
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 27
+2026-01-01 00:47:31.217 +03:00 [INF] HTTP GET /api/Product responded 200 in 89.0777 ms
+2026-01-01 00:47:38.965 +03:00 [WRN] Product with ID "00000000-0000-0000-0000-000000000000" not found during remove operation.
+2026-01-01 00:47:39.022 +03:00 [ERR] HTTP DELETE /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae responded 500 in 3203.0348 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-01-01 00:47:39.186 +03:00 [ERR] Unhandled exception occured.Path: /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae, Method: DELETE, StatusCode: 200,User: Anonymous,TraceId: 0HNI8MKONKJ08:00000003
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at ECommerceAPI.API.Program.<>c.<<Main>b__0_3>d.MoveNext() in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 161
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 27
+2026-01-01 00:47:39.202 +03:00 [WRN] Business exception occured: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at ECommerceAPI.API.Program.<>c.<<Main>b__0_3>d.MoveNext() in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 161
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 27
+2026-01-01 00:48:19.977 +03:00 [INF] HTTP GET /api/Product responded 200 in 15.8364 ms
+2026-01-01 00:48:42.817 +03:00 [INF] HTTP GET /api/Product responded 200 in 8.9498 ms
+2026-01-01 00:48:50.693 +03:00 [WRN] Product with ID "00000000-0000-0000-0000-000000000000" not found during remove operation.
+2026-01-01 00:48:50.756 +03:00 [ERR] HTTP DELETE /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae responded 500 in 6003.6473 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-01-01 00:48:50.851 +03:00 [ERR] Unhandled exception occured.Path: /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae, Method: DELETE, StatusCode: 200,User: Anonymous,TraceId: 0HNI8MKONKJ08:00000009
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at ECommerceAPI.API.Program.<>c.<<Main>b__0_3>d.MoveNext() in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 161
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 27
+2026-01-01 00:48:50.865 +03:00 [WRN] Business exception occured: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+ECommerceAPI.Application.Exceptions.NotFoundException: 00000000-0000-0000-0000-000000000000 id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at ECommerceAPI.API.Program.<>c.<<Main>b__0_3>d.MoveNext() in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 161
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 27
+2026-01-01 00:48:54.076 +03:00 [INF] HTTP GET /api/Product responded 200 in 12.9737 ms
+2026-01-01 00:49:21.631 +03:00 [INF] Uygulama başarıyla başladı!
+2026-01-01 00:49:22.222 +03:00 [INF] Now listening on: https://localhost:7196
+2026-01-01 00:49:22.230 +03:00 [INF] Now listening on: http://localhost:5067
+2026-01-01 00:49:22.350 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-01-01 00:49:22.353 +03:00 [INF] Hosting environment: Development
+2026-01-01 00:49:22.359 +03:00 [INF] Content root path: C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API
+2026-01-01 00:49:34.696 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-01-01 00:49:38.128 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-01-01 00:49:38.428 +03:00 [INF] HTTP GET /api/Product responded 200 in 3784.0600 ms
+2026-01-01 00:49:48.142 +03:00 [WRN] Product with ID "ccd8b979-58a6-4f15-9ded-0f6a51a936ae" not found during remove operation.
+2026-01-01 00:49:48.222 +03:00 [ERR] HTTP DELETE /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae responded 500 in 5285.2522 ms
+ECommerceAPI.Application.Exceptions.NotFoundException: ccd8b979-58a6-4f15-9ded-0f6a51a936ae id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-01-01 00:49:48.406 +03:00 [ERR] Unhandled exception occured.Path: /api/Product/ccd8b979-58a6-4f15-9ded-0f6a51a936ae, Method: DELETE, StatusCode: 200,User: Anonymous,TraceId: 0HNI8MPQKHOJJ:00000003
+ECommerceAPI.Application.Exceptions.NotFoundException: ccd8b979-58a6-4f15-9ded-0f6a51a936ae id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at ECommerceAPI.API.Program.<>c.<<Main>b__0_3>d.MoveNext() in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 161
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 27
+2026-01-01 00:49:48.433 +03:00 [WRN] Business exception occured: ccd8b979-58a6-4f15-9ded-0f6a51a936ae id'li ürün bulunamadı
+ECommerceAPI.Application.Exceptions.NotFoundException: ccd8b979-58a6-4f15-9ded-0f6a51a936ae id'li ürün bulunamadı
+   at ECommerceAPI.Application.Features.Commands.Products.RemoveProduct.RemoveProductCommandHandler.Handle(RemoveProductCommandRequest request, CancellationToken cancellationToken) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Core\ECommerceAPI.Application\Features\Commands\Products\RemoveProduct\RemoveProductCommandHandler.cs:line 29
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at ECommerceAPI.API.Controllers.ProductController.Delete(RemoveProductCommandRequest request) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Controllers\ProductController.cs:line 69
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at ECommerceAPI.API.Program.<>c.<<Main>b__0_3>d.MoveNext() in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Presentation\ECommerceAPI.API\Program.cs:line 161
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at ECommerceAPI.Infrastructure.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in C:\Users\Asus\Desktop\ECommerce-Backend\ECommerceAPI\Infrastructure\ECommerceAPI.Infrastructure\Middleware\GlobalExceptionHandlerMiddleware.cs:line 27

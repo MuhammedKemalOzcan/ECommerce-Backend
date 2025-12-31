@@ -1,4 +1,4 @@
-import type { ProductBoxes } from "../types/ProductBox";
+import type { ProductBoxes } from "../types/Products";
 import type { AddProduct, Products } from "../types/Products";
 import { methods } from "./apiClient";
 
@@ -13,10 +13,16 @@ export const productsApi = {
   addBox: (productId: string | null, boxItem: ProductBoxes) =>
     methods.post<ProductBoxes, string>(`Product/${productId}/boxes`, boxItem),
 
-  update: (id: string, patch: Partial<AddProduct>) =>
-    methods.put<Partial<AddProduct>, Products>(`Product/${id}`, patch),
+  update: (id: string, productPayload: Partial<AddProduct>) =>
+    methods.put<Partial<AddProduct>, Products>(`Product/${id}`, productPayload),
 
-  remove: (id: string) => methods.delete<Products>(`Product/${id}`),
+  updateBoxItem: (productId: string, boxId: string, boxPayload: ProductBoxes) =>
+    methods.put<Partial<ProductBoxes>, ProductBoxes>(
+      `Product/${productId}/Boxes/${boxId}`,
+      boxPayload
+    ),
+
+  remove: (productId: string) => methods.delete<Products>(`Product/${productId}`),
 
   removeBox: (boxId: string | null, productId: string | null) =>
     methods.delete<null>(`Product/${productId}/boxes/${boxId}`),

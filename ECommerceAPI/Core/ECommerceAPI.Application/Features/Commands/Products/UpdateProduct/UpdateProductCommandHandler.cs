@@ -1,12 +1,14 @@
-﻿using ECommerceAPI.Application.Exceptions;
+﻿using ECommerceAPI.Application.Dtos.Products;
+using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories;
+using ECommerceAPI.Domain.Entities.Products;
 using ECommerceAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace ECommerceAPI.Application.Features.Commands.Products.UpdateProduct
 {
-    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommandRequest>
+    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommandRequest, UpdateProductDto>
     {
         private readonly IProductRepository _productRepository;
         private readonly IUnitOfWork _uow;
@@ -19,9 +21,9 @@ namespace ECommerceAPI.Application.Features.Commands.Products.UpdateProduct
             _logger = logger;
         }
 
-        public async Task Handle(UpdateProductCommandRequest request, CancellationToken cancellationToken)
+        public async Task<UpdateProductDto> Handle(UpdateProductCommandRequest request, CancellationToken cancellationToken)
         {
-            var product = await _productRepository.GetByIdAsync(request.ProductId);
+            var product = await _productRepository.GetByIdAsync(new ProductId(request.ProductId));
 
             if (product == null)
             {
@@ -33,6 +35,15 @@ namespace ECommerceAPI.Application.Features.Commands.Products.UpdateProduct
 
             await _uow.SaveChangesAsync(cancellationToken);
 
+            return new UpdateProductDto
+            {
+                Name = product.Name,
+                Stock = product.Stock,
+                Price = product.Price,
+                Category = product.Category,
+                Description = product.Description,
+                Features = product.Features
+            };
         }
     }
 }
