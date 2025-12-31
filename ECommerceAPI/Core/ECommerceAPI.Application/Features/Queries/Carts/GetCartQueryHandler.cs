@@ -56,7 +56,7 @@ namespace ECommerceAPI.Application.Features.Queries.Carts
                     return new CartItemDto
                     {
                         Id = ci.Id,
-                        ProductId = ci.ProductId,
+                        ProductId = ci.ProductId.Value,
                         ProductName = ci.Product?.Name ?? string.Empty,
                         ProductImageUrl = imageUrl,
                         Quantity = ci.Quantity,

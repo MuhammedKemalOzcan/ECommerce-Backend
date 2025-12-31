@@ -1,80 +1,34 @@
-﻿using ECommerceAPI.Application.Dtos.Products;
-using ECommerceAPI.Application.Repositories.Products;
-using ECommerceAPI.Domain.Entities;
+﻿using ECommerceAPI.Application.Repositories;
+using ECommerceAPI.Domain.Entities.Products;
+using ECommerceAPI.Domain.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace ECommerceAPI.Application.Features.Commands.Products.CreateProduct
 {
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest, CreateProductCommandResponse>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest, Guid>
     {
-        private readonly IProductWriteRepository _productWriteRepo;
+        private readonly ILogger<CreateProductCommandHandler> _logger;
+        private readonly IProductRepository _productRepository;
+        private readonly IUnitOfWork _uow;
 
-        public CreateProductCommandHandler(IProductWriteRepository productWriteRepo)
+        public CreateProductCommandHandler(ILogger<CreateProductCommandHandler> logger, IProductRepository productRepository, IUnitOfWork uow)
         {
-            _productWriteRepo = productWriteRepo;
+            _logger = logger;
+            _productRepository = productRepository;
+            _uow = uow;
         }
 
-        public async Task<CreateProductCommandResponse> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
-            //Gelen Requestten bir product nesnesi oluşturulur.
-            var product = new Product
-            {
-                Name = request.Name,
-                Stock = request.Stock,
-                Category = request.Category,
-                Price = request.Price,
-                Description = request.Description,
-                Features = request.Features
-            };
+            var product = Product.Create(request.Name, request.Stock, request.Price, request.Category, request.Description, request.Features);
 
+            _logger.LogInformation("Product created with ID: {ProductId}", product.Id.Value);
 
+            _productRepository.Add(product);
+            await _uow.SaveChangesAsync();
 
-            if (request.ProductBoxes is { Count: > 0 })
-            {
-                foreach (var item in request.ProductBoxes)
-                {
-                    if (string.IsNullOrEmpty(item.Name)) throw new ValidationException("Box item name is required");
-                    if (item.Quantity <= 0) throw new ValidationException("Item quantity must be greater than zero");
-
-                    product.ProductBoxes.Add(new ProductBox { Name = item.Name, Quantity = item.Quantity });
-                }
-            };
-
-            var productDto = new ProductDto
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Stock = product.Stock,
-                Price = product.Price,
-                Category = product.Category,
-                Description = product.Description,
-                Features = product.Features,
-                ProductBoxes = product.ProductBoxes?.Select(pb => new ProductBoxDto
-                {
-                    Name = pb.Name,
-                    Quantity = pb.Quantity
-                }).ToList()
-            };
-
-
-
-
-
-            await _productWriteRepo.AddAsync(product, cancellationToken);
-            await _productWriteRepo.SaveChangesAsync();
-
-            return new CreateProductCommandResponse
-            {
-                Data = productDto
-            };
-
+            return product.Id.Value;
         }
     }
 }

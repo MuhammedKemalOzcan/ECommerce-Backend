@@ -1,9 +1,6 @@
 import type { ProductBoxes } from "../types/ProductBox";
 import { methods } from "./apiClient";
 
-type ApiMessage = {
-  message: string;
-};
 
 export const productBoxApi = {
   list: (productId: string) =>
@@ -15,12 +12,5 @@ export const productBoxApi = {
       patch
     ),
 
-  add: (productId: string | null, boxItem: ProductBoxes) =>
-    methods.post<ProductBoxes, ProductBoxes>(
-      `Product/${productId}/boxes`,
-      boxItem
-    ),
-
-  remove: (boxId: string | null) =>
-    methods.delete<ApiMessage>(`Product/Boxes/${boxId}`),
+  
 };

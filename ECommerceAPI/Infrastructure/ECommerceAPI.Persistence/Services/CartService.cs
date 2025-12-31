@@ -2,6 +2,7 @@
 using ECommerceAPI.Application.Repositories.CartItems;
 using ECommerceAPI.Application.Repositories.Carts;
 using ECommerceAPI.Domain.Entities;
+using ECommerceAPI.Domain.Entities.Products;
 using ECommerceAPI.Domain.Enums;
 using System.Linq.Expressions;
 
@@ -63,7 +64,7 @@ namespace ECommerceAPI.Persistence.Services
 
         }
 
-        public async Task<CartItem?> GetCartItemAsync(Guid cartId, Guid productId, CancellationToken ct = default)
+        public async Task<CartItem?> GetCartItemAsync(Guid cartId, ProductId productId, CancellationToken ct = default)
         {
             Expression<Func<CartItem, bool>> predicate = x => x.CartId == cartId && x.ProductId == productId;
 

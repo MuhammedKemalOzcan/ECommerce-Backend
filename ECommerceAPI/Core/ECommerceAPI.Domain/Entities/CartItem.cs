@@ -1,9 +1,11 @@
-﻿namespace ECommerceAPI.Domain.Entities
+﻿using ECommerceAPI.Domain.Entities.Products;
+
+namespace ECommerceAPI.Domain.Entities
 {
     public class CartItem : BaseEntity
     {
         public Guid CartId { get; set; }
-        public Guid ProductId { get; set; }
+        public ProductId ProductId { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
 

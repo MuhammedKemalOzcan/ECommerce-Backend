@@ -1,7 +1,6 @@
 ﻿using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories;
-using ECommerceAPI.Domain.Entities.Customer;
 using ECommerceAPI.Domain.Repositories;
 using MediatR;
 

@@ -3,7 +3,7 @@ using ECommerceAPI.Application.Dtos.Cart;
 using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Features.Commands.Carts.UpdateCartItem;
 using ECommerceAPI.Application.Repositories.CartItems;
-using ECommerceAPI.Application.Repositories.Products;
+using ECommerceAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -14,15 +14,15 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.UpdateCart
         private readonly ICartItemReadRepository _cartItemRepo;
         private readonly ICartItemWriteRepository _cartItemWriteRepo;
         private readonly ICartService _cartService;
-        private readonly IProductReadRepository _productReadRepo;
+        private readonly IProductRepository _productRepository;
         private readonly ILogger<UpdateCartItemsCommandHandler> _logger;
 
-        public UpdateCartItemsCommandHandler(ICartItemReadRepository cartItemRepo, ICartService cartService, IProductReadRepository productReadRepo, ICartItemWriteRepository cartItemWriteRepo, ILogger<UpdateCartItemsCommandHandler> logger)
+        public UpdateCartItemsCommandHandler(ICartItemReadRepository cartItemRepo, ICartItemWriteRepository cartItemWriteRepo, ICartService cartService, IProductRepository productRepository, ILogger<UpdateCartItemsCommandHandler> logger)
         {
             _cartItemRepo = cartItemRepo;
-            _cartService = cartService;
-            _productReadRepo = productReadRepo;
             _cartItemWriteRepo = cartItemWriteRepo;
+            _cartService = cartService;
+            _productRepository = productRepository;
             _logger = logger;
         }
 
@@ -48,7 +48,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.UpdateCart
             var isOwner = await _cartService.ValidateCartOwnershipAsync(request.UserId, cart, request.SessionId, cancellationToken);
             if (!isOwner) throw new UnauthorizedAccessException();
 
-            var product = await _productReadRepo.GetByIdAsync(cartItem.ProductId);
+            var product = await _productRepository.GetByIdAsync(cartItem.ProductId);
             if (product == null)
             {
                 _logger.LogWarning("Ürün Bulunamadı. ProductId: {ProductId}", cartItem.ProductId);
@@ -80,7 +80,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.UpdateCart
                     return new CartItemDto
                     {
                         Id = ci.Id,
-                        ProductId = ci.ProductId,
+                        ProductId = ci.ProductId.Value,
                         ProductName = ci.Product?.Name ?? string.Empty,
                         ProductImageUrl = imageUrl,
                         Quantity = ci.Quantity,
