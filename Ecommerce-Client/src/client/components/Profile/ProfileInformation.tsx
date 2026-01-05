@@ -3,17 +3,26 @@ import type { Customer } from "../../../types/customer";
 import { useCustomerStore } from "../../../stores/customerStore";
 import { useEffect } from "react";
 import { useShallow } from "zustand/shallow";
-import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
 import AddAddress from "./AddAddress";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileInformation() {
-  const { customer, updateCustomer, loading } = useCustomerStore(
+  const { customer, updateCustomer, loading, getCustomer } = useCustomerStore(
     useShallow((s) => ({
       customer: s.customer,
       loading: s.loading,
+      getCustomer: s.getCustomer,
+      updateCustomer: s.updateCustomer,
     }))
   );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getCustomer();
+  }, [getCustomer]);
 
   const {
     register,
@@ -42,7 +51,6 @@ export default function ProfileInformation() {
 
   const handleFormSubmit: SubmitHandler<Customer> = async (data) => {
     await updateCustomer(data);
-    toast.info("Bilgiler güncellendi");
     console.log("Data:", data);
   };
 
@@ -54,7 +62,14 @@ export default function ProfileInformation() {
     );
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-8 md:p-12">
+    <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 p-8 md:p-12">
+      <button
+        onClick={() => navigate("/")}
+        className="lg:hidden mb-8 flex items-center gap-1 text-[#716c6c]"
+      >
+        <ArrowBackIcon />
+        <p>Go Back</p>
+      </button>
       {/* Header */}
       <div className="mb-12">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 pb-4 border-b-2 border-[#D87D4A]">
@@ -64,10 +79,10 @@ export default function ProfileInformation() {
           Update your profile details
         </p>
       </div>
-      <div className="flex w-full gap-40">
-        <form className="w-[60%]" onSubmit={handleSubmit(handleFormSubmit)}>
+      <div className="lg:flex-row lg:gap-40 gap-12 flex flex-col w-full ">
+        <form className="lg:w-[60%]" onSubmit={handleSubmit(handleFormSubmit)}>
           {/* Form Container */}
-          <div className="w-full max-w-md bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-gray-200">
+          <div className="w-full  bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-gray-200">
             {/* Name Field */}
             <div className="flex flex-col gap-2 mb-6">
               <label className="text-sm font-semibold text-gray-700 uppercase tracking-wide">

@@ -1,36 +1,75 @@
 import { Avatar } from "@mui/material";
 import { Package, Settings, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom"; // Link yerine NavLink kullanıyoruz
 import { useCustomerStore } from "../../../stores/customerStore";
 
 export default function ProfileNavbar() {
   const customer = useCustomerStore((s) => s.customer);
+
   const profileLinks = [
-    { name: "Account", path: "/profile/account", icon: <User /> },
-    { name: "Orders", path: "/profile/orders", icon: <Package /> },
-    { name: "Settings", path: "/profile/settings", icon: <Settings /> },
+    { name: "Account", path: "/profile/account", icon: <User size={24} /> },
+    { name: "Orders", path: "/profile/orders", icon: <Package size={24} /> },
+    {
+      name: "Settings",
+      path: "/profile/settings",
+      icon: <Settings size={24} />,
+    },
   ];
 
-  return (
-    <div className="flex flex-col w-80 gap-4 p-4 bg-[#141414] items-center text-white rounded-r-lg">
-      <div className="flex gap-4 items-center mb-8">
-        <Avatar />
-        <div>
-          <p className="text-sm">Hello</p>
-          <p className="font-bold">{customer?.firstName} </p>
-        </div>
+  const UserInfo = () => (
+    <div className="flex gap-4 items-center">
+      <Avatar alt={customer?.firstName} sx={{ width: 50, height: 50 }} />
+      <div className="flex flex-col">
+        <span className="text-sm text-gray-400">Hello,</span>
+        <span className="font-bold text-lg">{customer?.firstName}</span>
       </div>
+    </div>
+  );
 
-      {profileLinks.map((link) => (
-        <Link
-          className="flex w-full h-12 gap-2 items-center px-4 focus:bg-orange-500 rounded-md"
-          key={link.path}
-          to={link.path}
-        >
-          <span>{link.icon}</span>
-          <p>{link.name}</p>
-        </Link>
-      ))}
+  return (
+    <div>
+      <div className="hidden lg:flex flex-col w-60 h-full gap-6 p-6 bg-[#141414] text-white rounded-r-lg">
+        <div className="mb-4">
+          <UserInfo />
+        </div>
+
+        <nav className="flex flex-col gap-2">
+          {profileLinks.map((link) => (
+            <NavLink
+              key={link.path}
+              to={link.path}
+              className={({ isActive }) =>
+                `flex w-full h-12 gap-3 items-center px-4 rounded-md transition-colors ${
+                  isActive
+                    ? "bg-[#D87D4A] text-white"
+                    : "hover:bg-white/10 text-gray-300"
+                }`
+              }
+            >
+              {link.icon}
+              <p className="font-medium">{link.name}</p>
+            </NavLink>
+          ))}
+        </nav>
+      </div>
+      <div className="flex lg:hidden fixed bottom-0 left-0 w-full h-[70px] bg-[#141414] border-t border-white/10 z-50 justify-around items-center px-2">
+        {profileLinks.map((link) => (
+          <NavLink
+            key={link.path}
+            to={link.path}
+            className={({ isActive }) =>
+              `flex flex-col items-center justify-center gap-1 w-full h-full ${
+                isActive ? "text-[#D87D4A]" : "text-gray-400"
+              }`
+            }
+          >
+            {link.icon}
+            <span className="text-[10px] uppercase font-bold tracking-wide">
+              {link.name}
+            </span>
+          </NavLink>
+        ))}
+      </div>
     </div>
   );
 }

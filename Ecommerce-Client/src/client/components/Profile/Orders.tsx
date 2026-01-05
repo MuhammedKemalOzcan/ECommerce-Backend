@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Orders() {
-  return <div>mami</div>;
+  return <div className="w-full h-full">mami</div>;
 }

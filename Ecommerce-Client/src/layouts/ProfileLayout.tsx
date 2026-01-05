@@ -20,15 +20,14 @@ export default function ProfileLayout() {
   }, [location, getCustomer]);
 
   return (
-    <div className="flex flex-col w-screen ">
+    <div className="flex flex-col w-full">
       <Navbar />
-      <div className="flex">
+      <div className="lg:flex">
         <ProfileNavbar />
         {path.pathname.includes("account") && <ProfileInformation />}
         {path.pathname.includes("orders") && <Orders />}
         {path.pathname.includes("settings") && <ProfileSettings />}
       </div>
-
       <Footer />
     </div>
   );

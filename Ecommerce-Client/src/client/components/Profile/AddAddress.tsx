@@ -107,7 +107,7 @@ export default function AddAddress() {
       ) : (
         <form
           onSubmit={handleSubmit(handleFormSubmit)}
-          className="flex flex-col gap-6 relative bg-gray-50 p-8 rounded-xl border border-gray-200"
+          className="flex flex-col gap-6 mb-6 relative bg-gray-50 p-8 rounded-xl border border-gray-200"
         >
           <button
             type="button"
@@ -125,7 +125,7 @@ export default function AddAddress() {
             placeHolder="Enter title"
             {...register("title", { required: true })}
           />
-          <div className="flex gap-4">
+          <div className="lg:flex-row flex flex-col gap-6">
             <div className="flex-1">
               <FormField
                 id="street"
@@ -146,7 +146,7 @@ export default function AddAddress() {
             </div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="lg:flex-row flex flex-col gap-6">
             <div className="flex-1">
               <FormField
                 id="country"

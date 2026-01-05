@@ -5,8 +5,8 @@ import OrderSummary from "../components/checkout/OrderSummary";
 
 export default function Checkout() {
   return (
-    <div className="w-full min-h-screen  py-10 lg:py-20">
-      <div className="max-w-[1100px] mx-auto px-5">
+    <div className="w-full py-10 lg:py-20">
+      <div className="lg:max-w-[1100px] mx-auto px-5">
         <div className="flex flex-col lg:flex-row gap-12 items-start relative">
           <div className="w-full lg:flex-1 flex flex-col gap-6">
             <ShippingDetails />

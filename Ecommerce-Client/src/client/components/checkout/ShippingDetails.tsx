@@ -38,7 +38,7 @@ export default function ShippingDetails() {
 
   return (
     <CheckoutCart title="Shipping Details" count="1">
-      <div className="flex justify-between gap-3">
+      <div className="lg:flex-row flex flex-col justify-between gap-3">
         <FormField
           id="firstName"
           label="First Name"
@@ -64,7 +64,7 @@ export default function ShippingDetails() {
         required
         {...register("street")}
       />
-      <div className="flex justify-between">
+      <div className="lg:flex-row flex flex-col justify-between gap-3">
         <FormField
           id="city"
           label="City"

@@ -7,7 +7,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
     {
         public Guid? UserId { get; set; }
         public string? SessionId { get; set; }
-        public ProductId ProductId { get; set; }
+        public Guid ProductId { get; set; }
         public int Quantity { get; set; }
     }
 }

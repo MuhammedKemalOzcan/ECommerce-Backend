@@ -12,7 +12,7 @@ export default function Payment() {
           type="number"
           placeHolder="0000 0000 0000 0000"
         />
-        <div className="flex justify-between">
+        <div className="lg:flex-row flex flex-col gap-3 justify-between">
           <FormField
             label="Expiry Date"
             id="expiry date"

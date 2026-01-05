@@ -6,7 +6,7 @@ export default function Earphones() {
   return (
     <div
       id="earphones"
-      className="flex flex-col items-center justify-center w-[1110px] gap-40"
+      className="flex flex-col items-center justify-center gap-40"
     >
       <ListProduct />
       <MenuItem />

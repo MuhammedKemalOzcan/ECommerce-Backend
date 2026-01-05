@@ -3,6 +3,7 @@ using ECommerceAPI.Application.Dtos.Cart;
 using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories.CartItems;
 using ECommerceAPI.Domain.Entities;
+using ECommerceAPI.Domain.Entities.Products;
 using ECommerceAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -28,14 +29,15 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
         {
             var cart = await _cartService.GetOrCreateCartAsync(request.UserId, request.SessionId, cancellationToken);
 
-            var product = await _productRepository.GetByIdAsync(request.ProductId);
+            var product = await _productRepository.GetByIdAsync(new ProductId(request
+                .ProductId));
             if (product == null)
             {
                 _logger.LogWarning("Ürün Bulunamadı. ProductId: {ProductId}", request.ProductId);
                 throw new NotFoundException("Ürün bulunamadı");
             }
 
-            var existingItem = await _cartService.GetCartItemAsync(cart.Id, request.ProductId, cancellationToken);
+            var existingItem = await _cartService.GetCartItemAsync(cart.Id, new ProductId(request.ProductId), cancellationToken);
             var totalQuantity = (existingItem?.Quantity ?? 0) + request.Quantity;
 
             if (product.Stock < totalQuantity)
@@ -56,7 +58,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
                 {
                     Id = Guid.NewGuid(),
                     CartId = cart.Id,
-                    ProductId = request.ProductId,
+                    ProductId = new ProductId(request.ProductId),
                     Quantity = request.Quantity,
                     UnitPrice = product.Price
                 };
