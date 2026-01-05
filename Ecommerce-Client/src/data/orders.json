@@ -1,0 +1,66 @@
+{
+  "orders": [
+    {
+      "id": "ord_1001",
+      "orderCode": "ORD-3492X",
+      "userId": "user_55",
+      "date": "2026-01-05T14:30:00Z",
+      "status": "delivered",
+      "totalAmount": 6999,
+      "currency": "USD",
+      "products": [
+        {
+          "productId": "prod_1",
+          "name": "XX99 MARK II HEADPHONES",
+          "image": "/assets/cart/image-xx99-mark-two-headphones.jpg",
+          "price": 2999,
+          "quantity": 1
+        },
+        {
+          "productId": "prod_2",
+          "name": "XX99 MARK I HEADPHONES",
+          "image": "/assests/earphones.svg",
+          "price": 2000,
+          "quantity": 2
+        }
+      ],
+      "shippingAddress": "123 Main St, New York, NY"
+    },
+    {
+      "id": "ord_1002",
+      "orderCode": "ORD-5521Y",
+      "userId": "user_55",
+      "date": "2026-01-04T09:15:00Z",
+      "status": "shipped",
+      "totalAmount": 2999,
+      "currency": "USD",
+      "products": [
+        {
+          "productId": "prod_1",
+          "name": "XX99 MARK II HEADPHONES",
+          "image": "/assets/earphones.svg",
+          "price": 2999,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "ord_1002",
+      "orderCode": "ORD-5521Y",
+      "userId": "user_55",
+      "date": "2026-01-04T09:15:00Z",
+      "status": "canceled",
+      "totalAmount": 2999,
+      "currency": "USD",
+      "products": [
+        {
+          "productId": "prod_1",
+          "name": "XX99 MARK II HEADPHONES",
+          "image": "/assets/earphones.svg",
+          "price": 2999,
+          "quantity": 1
+        }
+      ]
+    }
+  ]
+}
