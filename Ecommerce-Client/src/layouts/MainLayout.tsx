@@ -3,24 +3,32 @@ import Navbar from "../client/components/common/Navbar";
 import Footer from "../client/components/common/Footer";
 import { useEffect } from "react";
 import { useProductStore } from "../stores/productStore";
-import { useCustomerStore } from "../stores/customerStore";
 
 export default function MainLayout() {
   const getAll = useProductStore((state) => state.getAll);
-  const getCustomer = useCustomerStore((state) => state.getCustomer)
+  
 
   useEffect(() => {
     getAll();
-    getCustomer();
-  }, [getAll,getCustomer]);
+  }, [getAll]);
 
-  return (
-    <div className="flex flex-col items-center justify-center w-screen">
-      <Navbar />
-      <div className="flex flex-col pb-40">
-        <Outlet />
+return (
+    <div className="flex flex-col w-full min-h-screen bg-[#FAFAFA] font-sans text-[#101010]">
+      
+      {/* Navbar Container */}
+      <div className="w-full relative z-50">
+        <Navbar />
       </div>
-      <Footer />
+
+      <main className="flex-1 w-full">
+        <div className="w-full lg:max-w-[90%] mx-auto px-4 py-10">
+          <Outlet />
+        </div>
+      </main>
+
+      <div className="w-full">
+        <Footer />
+      </div>
     </div>
   );
 }

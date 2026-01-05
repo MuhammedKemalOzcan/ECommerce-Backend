@@ -10,6 +10,7 @@ type CustomerState = {
   AddAddress: (address: AddAdress) => Promise<void>;
   removeAddress: (customerAddressid: string | null) => Promise<void>;
   setPrimaryAddress: (id: string | null) => Promise<void>;
+  updateCustomer: (customerData: Customer) => Promise<void>
 };
 
 export const useCustomerStore = create<CustomerState>((set) => ({
@@ -99,6 +100,19 @@ export const useCustomerStore = create<CustomerState>((set) => ({
       console.log(error);
     } finally {
       set({ loading: false });
+    }
+  },
+  updateCustomer: async (customerData: Customer) => {
+    set({loading:true,error:null})
+    try {
+      const response = await customerApi.updateCustomer(customerData);
+        set({
+          customer: response,
+          loading: false,
+        })
+    } catch (error) {
+      console.log(error);
+      set({loading:false})
     }
   },
 }));

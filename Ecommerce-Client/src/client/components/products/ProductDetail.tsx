@@ -55,16 +55,16 @@ export default function ProductDetail() {
     );
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex gap-32 ">
-        <div className="p-4 w-[70%] h-[60%] flex items-center justify-center rounded-lg">
-          <img className="shadow-lg size-[70%]" src={chosen} />
+    <div className="flex flex-col items-center gap-12">
+      <div className="lg:flex-row lg:gap-32 flex flex-col md:max-w-[70%] md:justify-center">
+        <div className="p-4 lg:w-[70%] lg:h-[60%] flex items-center justify-center rounded-lg">
+          <img className="shadow-lg size-full sm:mb-8" src={chosen} />
         </div>
-        <div className="flex flex-col justify-center  w-[60%] gap-10">
+        <div className="flex flex-col justify-center lg:w-[60%] gap-10 ">
           <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">
             {currentProduct?.name}
           </p>
-          <p className="text-[15px] font-medium leading-[25px] w-[60%] ">
+          <p className="text-[15px] font-medium leading-[25px] lg:w-[60%] ">
             {currentProduct?.description}
           </p>
           <p className="font-bold">$ {currentProduct?.price}</p>
@@ -92,8 +92,8 @@ export default function ProductDetail() {
           )}
         </div>
       </div>
-      <div className="p-32 gap-40 flex">
-        <div className="flex flex-col w-[50%] gap-6 ">
+      <div className="flex flex-col gap-12 lg:gap-40 lg:flex-row lg:justify-between md:max-w-[70%] md:justify-center">
+        <div className="flex flex-col lg:w-[50%] gap-6 ">
           <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">
             FEATURES
           </p>

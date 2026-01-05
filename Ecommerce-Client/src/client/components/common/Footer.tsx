@@ -7,24 +7,23 @@ import { navItems } from "../../../utils/navItems";
 
 function Footer() {
   return (
-    <div className="w-full h-[365px] bg-black flex justify-center items-center text-white  ">
-      <div className="w-[80%] mt-20 flex flex-col h-[80%] gap-9">
-        <div className="flex justify-between">
-          <img src={logo} />
-          <nav className="flex justify-around gap-4 w-[30%] ">
+      <div className="bg-black text-white flex flex-col text-center items-center gap-12 p-4 lg:p-20">
+        <div className="w-full lg:flex-row lg:justify-between items-center flex flex-col text-center gap-6">
+          <img src={logo} className="size-[50%]" />
+          <nav className="w-full lg:flex-row lg:justify-end flex flex-col gap-4 text-center justify-around">
             {navItems.map((item) => (
               <NavLink
                 to={item.path}
                 key={item.item}
-                className="hover:text-[#D87D4A]"
+                className="hover:text-[#D87D4A] flex flex-col gap-4 "
               >
                 <p>{item.item}</p>
               </NavLink>
             ))}
           </nav>
         </div>
-        <div className="flex items-end justify-between">
-          <p className="w-[40%] opacity-50">
+        <div className="lg:flex-row lg:justify-between flex flex-col items-center justify-center gap-6">
+          <p className="lg:w-[40%] lg:text-start opacity-50">
             Audiophile is an all in one stop to fulfill your audio needs. We're
             a small team of music lovers and sound specialists who are devoted
             to helping you get the most out of personal audio. Come and visit
@@ -45,9 +44,8 @@ function Footer() {
             </button>
           </div>
         </div>
-        <p className="opacity-50">Copyright 2021. All Rights Reserved</p>
+        <p className="opacity-50 w-full lg:text-start">Copyright 2021. All Rights Reserved</p>
       </div>
-    </div>
   );
 }
 

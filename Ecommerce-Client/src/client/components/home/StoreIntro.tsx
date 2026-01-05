@@ -2,9 +2,14 @@ import intro from "../../../assets/intro.svg";
 
 export default function StoreIntro() {
   return (
-    <div className="flex items-center justify-between gap-32">
-      <div className="flex flex-col w-[30%] gap-4">
-        <h1>
+    <div className="flex flex-col p-6 gap-6 lg:flex-row lg:gap-60 md:items-center">
+      <img
+        src={intro}
+        alt="Audio Gear"
+        className="w-full h-auto rounded-lg md:max-w-[400px] lg:max-w-[540px] object-cover"
+      />
+      <div className="flex flex-col items-center justify-center text-center gap-4 lg:w-[30%] lg:text-start">
+        <h1 className="w-[80%] text-[30px] lg:w-full">
           BRINGING YOU THE <span className="text-orange-500">BEST</span> AUDIO
           GEAR
         </h1>
@@ -17,7 +22,6 @@ export default function StoreIntro() {
           best place to buy your portable audio equipment.
         </p>
       </div>
-      <img src={intro} className="size-[50%]" />
     </div>
   );
 }

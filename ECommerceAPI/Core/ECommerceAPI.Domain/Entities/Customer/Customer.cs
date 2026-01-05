@@ -35,6 +35,20 @@ namespace ECommerceAPI.Domain.Entities.Customer
             return customer;
         }
 
+        public void Update(string firstName, string lastName, string email, string phoneNumber)
+        {
+            if (string.IsNullOrEmpty(firstName)) throw new DomainException("First name cannot be null.");
+            if (string.IsNullOrEmpty(lastName)) throw new DomainException("Last name cannot be null.");
+            if (string.IsNullOrEmpty(email)) throw new DomainException("email cannot be null.");
+            if (string.IsNullOrEmpty(phoneNumber)) throw new DomainException("Phone Number cannot be null.");
+
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+
+        }
+
         public void AddAddress(CustomerAddressId addressId, Location location, string title, bool isPrimary)
         {
             if (string.IsNullOrEmpty(title)) throw new DomainException("Title cannot be null.");

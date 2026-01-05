@@ -5,7 +5,7 @@ import ListProduct from "../components/products/ListProduct";
 
 export default function Headphones() {
   return (
-    <div className="flex flex-col items-center w-[1110px] gap-40">
+    <div className="flex flex-col items-center gap-40">
       <ListProduct />
       <MenuItem/>
       <StoreIntro/>

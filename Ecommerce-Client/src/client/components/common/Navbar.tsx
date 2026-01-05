@@ -35,16 +35,34 @@ function Navbar() {
     navigate("/login");
   };
 
+  const MuiIcon = navItems.map((item) => item.icon);
+
   return (
     <div className="w-full h-[97px] bg-[#141414] flex flex-col justify-center items-center relative">
-      <div className="flex w-[80%] justify-between text-white">
+      <div className="flex w-[80%] justify-between text-white ">
         <img src={logo} />
-        <nav className="flex justify-around w-[50%] ">
+        <nav className="hidden lg:flex justify-around w-[50%]">
           {navItems.map((item, key) => (
             <NavLink key={key} className="hover:text-[#D87D4A]" to={item.path}>
               <p>{item.item}</p>
             </NavLink>
           ))}
+        </nav>
+        {/* Mobil navbar */}
+        <nav className="lg:hidden flex fixed bottom-0 left-0 bg-[#F1F1F1] text-black justify-around w-full h-[70px]">
+          {navItems.map((item, key) => {
+            const MuiIcon = item.icon;
+            return (
+              <NavLink
+                key={key}
+                className="hover:text-[#D87D4A] flex flex-col items-center w-[25%] justify-center border-gray-100"
+                to={item.path}
+              >
+                <MuiIcon sx={{ fontSize: 30 }} />
+                <p>{item.item}</p>
+              </NavLink>
+            );
+          })}
         </nav>
         <div className="flex gap-4">
           {user ? (
@@ -66,7 +84,6 @@ function Navbar() {
           </button>
         </div>
       </div>
-      <div className="border border-[#FFFFFF] opacity-25 w-[80%] absolute bottom-0 "></div>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 using ECommerceAPI.Application.Features.Commands.CustomerCommand.AddAddress;
 using ECommerceAPI.Application.Features.Commands.CustomerCommand.PrimaryAddress;
 using ECommerceAPI.Application.Features.Commands.CustomerCommand.RemoveAddress;
+using ECommerceAPI.Application.Features.Commands.CustomerCommand.UpdateCustomer;
 using ECommerceAPI.Application.Features.Queries.Customer;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -37,6 +38,13 @@ namespace ECommerceAPI.API.Controllers
 
             return Ok(result);
 
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCustomer([FromBody] UpdateCustomerComand request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         [HttpPost("Address")]
