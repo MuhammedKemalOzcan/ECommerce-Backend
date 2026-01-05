@@ -35,7 +35,6 @@ function Navbar() {
     navigate("/login");
   };
 
-  const MuiIcon = navItems.map((item) => item.icon);
 
   return (
     <div className="w-full h-[97px] bg-[#141414] flex flex-col justify-center items-center relative">
