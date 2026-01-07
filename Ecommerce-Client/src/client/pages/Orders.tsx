@@ -1,5 +1,5 @@
-import ordersData from "../../../data/orders.json";
-import OrderCard from "../orders/OrderCard";
+import ordersData from "../../data/orders.json";
+import OrderCard from "../components/orders/OrderCard";
 
 export default function Orders() {
   return (
