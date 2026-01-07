@@ -20,7 +20,7 @@ export default function Cart() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col lg:w-[80%] h-auto lg:p-8">
+      <div className="flex flex-col h-auto lg:p-8">
         <div className="flex mb-4 justify-between">
           <h1>SHOPPING CART</h1>
           <button

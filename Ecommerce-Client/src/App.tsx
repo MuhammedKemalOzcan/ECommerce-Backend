@@ -11,7 +11,6 @@ import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./admin/Pages/Dashboard";
 import Customers from "./admin/Pages/Customers";
 import Catalog from "./admin/Pages/Catalog";
-import Orders from "./admin/Pages/Orders";
 import AdminHome from "./admin/Pages/AdminHome";
 import EditProduct from "./admin/Pages/EditProduct";
 import CreateProduct from "./admin/Pages/CreateProduct";
@@ -22,6 +21,8 @@ import ProfileLayout from "./layouts/ProfileLayout";
 import ProfileInformation from "./client/components/Profile/ProfileInformation";
 import ProfileSettings from "./client/components/Profile/ProfileSettings";
 import Checkout from "./client/pages/Checkout";
+import OrderDetails from "./client/pages/OrderDetails";
+import Orders from "./client/pages/Orders";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
     children: [
       { path: "account", element: <ProfileInformation /> },
       { path: "orders", element: <Orders /> },
+      { path: "orders/:id", element: <OrderDetails /> },
       { path: "settings", element: <ProfileSettings /> },
     ],
   },

@@ -79,7 +79,7 @@ export default function CartTable({ cart }: CartProps) {
             {cart?.cartItems?.map((item) => (
               <div
                 key={item.id}
-                className="flex flex-col sm:flex-row items-center gap-6 py-6 border-b border-[#F1F1F1] last:border-0 last:pb-0"
+                className="flex flex-col relative sm:flex-row items-center gap-6 py-6 border-b border-[#F1F1F1] last:border-0 last:pb-0"
               >
                 {/* Image */}
                 <div className="shrink-0">
@@ -98,8 +98,8 @@ export default function CartTable({ cart }: CartProps) {
 
                 {/* Info & Controls */}
                 <div className="flex-1 w-full flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="space-y-1 text-center sm:text-left">
-                    <h3 className="text-sm font-bold text-[#101010] uppercase w-full sm:w-40 md:w-auto truncate">
+                  <div className="space-y-1 min-w-40 text-center sm:text-left">
+                    <h3 className="text-sm font-bold text-[#101010] uppercase w-full sm:w-40 md:w-auto">
                       {item.productName}
                     </h3>
                     <p className="text-sm font-bold text-[#101010]/50">
@@ -134,10 +134,10 @@ export default function CartTable({ cart }: CartProps) {
                       </p>
                       <button
                         onClick={() => handleDelete(item.id)}
-                        className="text-[#101010]/40 hover:text-[#D87D4A] transition-colors p-1"
+                        className="text-[#101010]/40 hover:text-[#D87D4A] transition-colors p-1 absolute top-0 right-0"
                         title="Ürünü Sil"
                       >
-                        <Trash2Icon size={18} />
+                        <Trash2Icon size={18} color="red" />
                       </button>
                     </div>
                   </div>
