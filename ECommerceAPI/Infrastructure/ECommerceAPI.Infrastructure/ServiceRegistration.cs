@@ -34,6 +34,7 @@ namespace ECommerceAPI.Infrastructure
             services.AddScoped<IIdentityService, IdentityServices>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IStorageService, StorageService>();
+            services.AddScoped<IPaymentService, IyzicoPaymentService>();
         }
 
         //T => IStorage'dan türemiş bir class ise burayı çalıştır.

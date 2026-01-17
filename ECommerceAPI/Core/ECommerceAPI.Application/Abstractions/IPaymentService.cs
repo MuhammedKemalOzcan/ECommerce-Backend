@@ -4,6 +4,6 @@ namespace ECommerceAPI.Application.Abstractions
 {
     public interface IPaymentService
     {
-        Task<string> ReceivePaymentAsync(PaymentRequestDto paymentModel);
+        Task<PaymentResultDto> ReceivePaymentAsync(PaymentRequestDto paymentModel);
     }
 }

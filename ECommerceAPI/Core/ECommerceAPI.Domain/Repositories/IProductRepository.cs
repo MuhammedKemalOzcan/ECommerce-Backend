@@ -8,5 +8,6 @@ namespace ECommerceAPI.Domain.Repositories
         Task<Product?> GetByIdOrThrowAsync(ProductId productId);
         void Add(Product product);
         void Remove(Product product);
+        void Update(Product product);
     }
 }

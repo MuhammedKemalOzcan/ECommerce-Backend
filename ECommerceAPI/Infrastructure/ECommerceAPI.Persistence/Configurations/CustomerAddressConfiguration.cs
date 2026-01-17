@@ -35,7 +35,7 @@ namespace ECommerceAPI.Persistence.Configurations
                 .IsRequired();
 
                 locationBuilder.Property(l => l.Country)
-                .HasMaxLength(25)
+                .HasMaxLength(50)
                 .IsRequired();
             });
 

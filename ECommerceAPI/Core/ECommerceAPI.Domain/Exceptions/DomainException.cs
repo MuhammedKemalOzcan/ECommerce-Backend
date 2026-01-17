@@ -1,14 +1,9 @@
 ﻿namespace ECommerceAPI.Domain.Exceptions
 {
-    internal class DomainException : Exception
+    internal class DomainException : BaseException
     {
-        public DomainException()
+        public DomainException(string message) : base(message, 400, "Domain_Error")
         {
-        }
-
-        public DomainException(string? message) : base(message)
-        {
-
         }
     }
 }

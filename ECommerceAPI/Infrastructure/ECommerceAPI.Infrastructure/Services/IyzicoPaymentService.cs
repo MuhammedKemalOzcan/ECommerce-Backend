@@ -1,24 +1,42 @@
 ﻿using ECommerceAPI.Application.Abstractions;
+using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Dtos.PaymentDto;
+using ECommerceAPI.Application.Exceptions;
+using ECommerceAPI.Domain.Exceptions;
 using Iyzipay;
 using Iyzipay.Model;
 using Iyzipay.Request;
 using Microsoft.Extensions.Configuration;
 using System.Globalization;
+using System.Threading;
 
 namespace ECommerceAPI.Infrastructure.Services
 {
     public class IyzicoPaymentService : IPaymentService
     {
         private readonly IConfiguration _configuration;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly ICartService _cartService;
 
-        public IyzicoPaymentService(IConfiguration configuration)
+        public IyzicoPaymentService(IConfiguration configuration, ICurrentUserService currentUserService, ICartService cartService)
         {
             _configuration = configuration;
+            _currentUserService = currentUserService;
+            _cartService = cartService;
         }
 
-        public async Task<string> ReceivePaymentAsync(PaymentRequestDto paymentModel)
+        public async Task<PaymentResultDto> ReceivePaymentAsync(PaymentRequestDto paymentModel)
         {
+
+            var userId = _currentUserService.GetCurrentUserId();
+
+            var cart = await _cartService.GetActiveCartAsync(userId, null);
+
+            if (cart == null)
+            {
+                throw new NotFoundException($"Cart not exist");
+            }
+
             Options options = new Options();
             options.ApiKey = _configuration["Iyzico:ApiKey"];
             options.SecretKey = _configuration["Iyzico:SecretKey"];
@@ -27,11 +45,11 @@ namespace ECommerceAPI.Infrastructure.Services
             CreatePaymentRequest request = new CreatePaymentRequest();
             request.Locale = Locale.TR.ToString();
             request.ConversationId = Guid.NewGuid().ToString();
-            request.Price = paymentModel.Price.ToString("F2");
-            request.PaidPrice = paymentModel.Price.ToString("F2");
+            request.Price = paymentModel.Price.ToString("F2", CultureInfo.InvariantCulture);
+            request.PaidPrice = paymentModel.PaidPrice.ToString("F2", CultureInfo.InvariantCulture);
             request.Currency = Currency.TRY.ToString();
             request.Installment = 1;
-            request.BasketId = "B67832";
+            request.BasketId = cart.Id.ToString();
             request.PaymentChannel = PaymentChannel.WEB.ToString();
             request.PaymentGroup = PaymentGroup.PRODUCT.ToString();
 
@@ -50,9 +68,9 @@ namespace ECommerceAPI.Infrastructure.Services
             buyer.Surname = paymentModel.Buyer.Surname;
             buyer.GsmNumber = paymentModel.Buyer.GsmNumber;
             buyer.Email = paymentModel.Buyer.Email;
-            buyer.IdentityNumber = paymentModel.Buyer.IdentityNumber;
+            buyer.IdentityNumber = "74300864791";
             buyer.RegistrationAddress = paymentModel.Buyer.RegistrationAddress;
-            buyer.Ip = paymentModel.Buyer.Ip;
+            buyer.Ip = "85.34.78.112";
             buyer.City = paymentModel.Buyer.City;
             buyer.Country = paymentModel.Buyer.Country;
             buyer.ZipCode = paymentModel.Buyer.ZipCode;
@@ -68,10 +86,10 @@ namespace ECommerceAPI.Infrastructure.Services
 
             Address billingAddress = new Address();
             billingAddress.ContactName = paymentModel.BillingAddress.ContactName;
-            billingAddress.City = paymentModel.BillingAddress.ContactName; ;
-            billingAddress.Country = paymentModel.BillingAddress.ContactName; ;
-            billingAddress.Description = paymentModel.BillingAddress.ContactName;
-            billingAddress.ZipCode = paymentModel.BillingAddress.ContactName;
+            billingAddress.City = paymentModel.BillingAddress.City; ;
+            billingAddress.Country = paymentModel.BillingAddress.Country;
+            billingAddress.Description = paymentModel.BillingAddress.Street;
+            billingAddress.ZipCode = paymentModel.BillingAddress.ZipCode;
             request.BillingAddress = billingAddress;
 
             List<BasketItem> basketItems = new List<BasketItem>();
@@ -87,17 +105,20 @@ namespace ECommerceAPI.Infrastructure.Services
                 basketItems.Add(basketItem);
             }
 
-            Payment payment = new Payment();
+            request.BasketItems = basketItems;
 
-            if (payment.Status == "success")
+            Payment payment = await Payment.Create(request, options);
+
+            return new PaymentResultDto
             {
-                return payment.PaymentId;
-            }
-            else
-            {
-                // Hata mesajını logla: payment.ErrorMessage
-                throw new Exception($"Ödeme Başarısız: {payment.ErrorMessage}");
-            }
+                IsSuccess = payment.Status == "success",
+                PaymentId = payment.PaymentId,
+                ErrorMessage = payment.ErrorMessage,
+                CardFamily = payment.CardFamily,
+                CardAssociation = payment.CardAssociation,
+                CardType = payment.CardType,
+                CardLastFourDigits = payment.LastFourDigits
+            };
         }
     }
 }

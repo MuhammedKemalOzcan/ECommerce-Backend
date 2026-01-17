@@ -15,6 +15,7 @@ using ECommerceAPI.Persistence.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace ECommerceAPI.Persistence
 {
@@ -24,7 +25,9 @@ namespace ECommerceAPI.Persistence
         {
             services.AddDbContext<ECommerceAPIDbContext>(opt =>
             {
-                opt.UseNpgsql(configuration.GetConnectionString("PostgreSQL"));
+                opt.UseNpgsql(configuration.GetConnectionString("PostgreSQL"))
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging();
             });
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IFileReadRepository, FileReadRepository>();
@@ -39,6 +42,7 @@ namespace ECommerceAPI.Persistence
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IEcommerceAPIDbContext>(provider =>
     provider.GetRequiredService<ECommerceAPIDbContext>());
+            services.AddScoped<IOrderRepository, OrderRepository>();
         }
     }
 }

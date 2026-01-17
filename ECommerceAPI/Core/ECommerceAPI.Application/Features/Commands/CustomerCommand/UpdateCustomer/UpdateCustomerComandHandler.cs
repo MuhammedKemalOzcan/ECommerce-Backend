@@ -2,6 +2,7 @@
 using ECommerceAPI.Application.Dtos.Customer;
 using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories;
+using ECommerceAPI.Domain.Exceptions;
 using ECommerceAPI.Domain.Repositories;
 using MediatR;
 

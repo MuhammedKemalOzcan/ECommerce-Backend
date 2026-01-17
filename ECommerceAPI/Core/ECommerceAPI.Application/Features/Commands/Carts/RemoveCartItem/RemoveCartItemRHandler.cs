@@ -2,6 +2,7 @@
 using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories.CartItems;
 using ECommerceAPI.Application.Repositories.Carts;
+using ECommerceAPI.Domain.Exceptions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;

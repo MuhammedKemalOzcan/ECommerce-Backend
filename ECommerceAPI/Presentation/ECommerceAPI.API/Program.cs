@@ -2,6 +2,7 @@
 using ECommerceAPI.Infrastructure;
 using ECommerceAPI.Infrastructure.Middleware;
 using ECommerceAPI.Infrastructure.Services.Storage.Azure;
+using ECommerceAPI.Infrastructure.Services.Storage.Local;
 using ECommerceAPI.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -55,8 +56,8 @@ namespace ECommerceAPI.API
                 builder.Services.AddApplicationServices();
                 builder.Services.AddPersistenceServices(builder.Configuration);
 
-                builder.Services.AddStorage<AzureStorage>();
-                //builder.Services.AddStorage<LocalStorage>();
+                //builder.Services.AddStorage<AzureStorage>();
+                builder.Services.AddStorage<LocalStorage>();
 
                 builder.Services.AddInfrastructureServices(builder.Configuration);
 

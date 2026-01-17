@@ -2,6 +2,7 @@
 using ECommerceAPI.Domain.Contracts;
 using ECommerceAPI.Domain.Entities;
 using ECommerceAPI.Domain.Entities.Customer;
+using ECommerceAPI.Domain.Entities.Orders;
 using ECommerceAPI.Domain.Entities.Products;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace ECommerceAPI.Persistence.Contexts
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Domain.Entities.File> Files { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

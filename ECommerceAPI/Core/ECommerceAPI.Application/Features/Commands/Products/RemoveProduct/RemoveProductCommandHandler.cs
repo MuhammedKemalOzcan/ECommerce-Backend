@@ -1,6 +1,7 @@
 ﻿using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories;
 using ECommerceAPI.Domain.Entities.Products;
+using ECommerceAPI.Domain.Exceptions;
 using ECommerceAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;

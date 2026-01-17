@@ -20,6 +20,8 @@ namespace ECommerceAPI.Persistence.Configurations
                 .IsRequired()
                 .HasColumnType("decimal(18,2)");
 
+            builder.Property(p => p.Version).IsRowVersion();
+
             builder.Property(p => p.Features)
                 .IsRequired()
                 .HasMaxLength(1000);

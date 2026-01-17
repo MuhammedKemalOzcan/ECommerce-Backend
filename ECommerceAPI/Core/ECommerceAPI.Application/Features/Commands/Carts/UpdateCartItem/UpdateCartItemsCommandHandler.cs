@@ -3,6 +3,7 @@ using ECommerceAPI.Application.Dtos.Cart;
 using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Features.Commands.Carts.UpdateCartItem;
 using ECommerceAPI.Application.Repositories.CartItems;
+using ECommerceAPI.Domain.Exceptions;
 using ECommerceAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;

@@ -9,6 +9,7 @@ using ECommerceAPI.Application.Features.Commands.Products.UpdateProduct;
 using ECommerceAPI.Application.Features.Queries.Products.GetAllCustomer;
 using ECommerceAPI.Application.Features.Queries.Products.GetProductById;
 using ECommerceAPI.Application.Repositories.File;
+using ECommerceAPI.Domain.Entities.Products;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -94,48 +95,45 @@ namespace ECommerceAPI.API.Controllers
             return NoContent();
         }
 
-        
+        [HttpPost("[Action]/{productId}")]
+        public async Task<IActionResult> Upload([FromRoute] Guid productId)
+        {
 
+            Product product = await _productReadRepository.GetByIdAsync(productId, true);
+            if (product == null) throw new Exception("Ürün bulunamadı");
 
+            _productWriteRepository.Attach(product);
 
-        //[HttpPost("[Action]/{productId}")]
-        //public async Task<IActionResult> Upload([FromRoute] Guid productId ){
+            var datas = await _storageService.UploadAsync("uploads", Request.Form.Files);
 
-        //    Product product = await _productReadRepository.GetByIdAsync(productId,true);
-        //    if (product == null) throw new Exception("Ürün bulunamadı");
+            int? primaryIndex = null;
+            if (int.TryParse(Request.Form["primaryIndex"], out var idx))
+                primaryIndex = idx;
 
-        //    _productWriteRepository.Attach(product);
+            // Eğer kullanıcı birincil seçtiyse, mevcut birincilleri sıfırla
+            if (primaryIndex.HasValue)
+            {
+                var primary = await _galleryReadRepository.FirstOrDefaultAsync(g => g.IsPrimary && g.Product.Any(p => p.Id == productId && g.IsPrimary), CancellationToken.None, false);
 
-        //    var datas = await _storageService.UploadAsync("uploads", Request.Form.Files);
+                if (primary is not null)
+                {
+                    primary.IsPrimary = false;
+                    await _galleryWriteRepository.SaveChangesAsync();
+                }
 
-        //    int? primaryIndex = null;
-        //    if (int.TryParse(Request.Form["primaryIndex"], out var idx))
-        //        primaryIndex = idx;
+            }
 
-        //    // Eğer kullanıcı birincil seçtiyse, mevcut birincilleri sıfırla
-        //    if (primaryIndex.HasValue)
-        //    {
-        //        var primary = await _galleryReadRepository.FirstOrDefaultAsync(g => g.IsPrimary && g.Product.Any(p => p.Id == productId && g.IsPrimary), CancellationToken.None, false);
-
-        //        if (primary is not null)
-        //        {
-        //            primary.IsPrimary = false;
-        //            await _galleryWriteRepository.SaveChangesAsync();
-        //        }
-
-        //    }
-
-        //    await _galleryWriteRepository.AddRangeAsync(datas.Select((d,i) => new ProductGallery
-        //    {
-        //        FileName = d.fileName,
-        //        Path = $"{_config["BaseStorageUrl"]}/{d.pathOrContainerName}",
-        //        Storage = _storageService.StorageName,
-        //        IsPrimary = primaryIndex.HasValue && primaryIndex.Value == i,
-        //        Product = new List<Product>() { product }
-        //    }).ToList());
-        //    await _galleryWriteRepository.SaveChangesAsync();
-        //    return Ok();
-        //}
+            await _galleryWriteRepository.AddRangeAsync(datas.Select((d, i) => new ProductGallery
+            {
+                FileName = d.fileName,
+                Path = $"{_config["BaseStorageUrl"]}/{d.pathOrContainerName}",
+                Storage = _storageService.StorageName,
+                IsPrimary = primaryIndex.HasValue && primaryIndex.Value == i,
+                Product = new List<Product>() { product }
+            }).ToList());
+            await _galleryWriteRepository.SaveChangesAsync();
+            return Ok();
+        }
 
         //[HttpDelete("[action]/{productId}/{imageId}")]
         //public async Task<IActionResult> DeleteProductImage(Guid productId, Guid imageId)
