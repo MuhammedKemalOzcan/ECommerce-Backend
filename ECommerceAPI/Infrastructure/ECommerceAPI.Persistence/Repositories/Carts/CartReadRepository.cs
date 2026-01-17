@@ -1,5 +1,4 @@
 ﻿using ECommerceAPI.Application.Repositories.Carts;
-using ECommerceAPI.Domain.Entities;
 using ECommerceAPI.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -19,6 +18,8 @@ namespace ECommerceAPI.Persistence.Repositories.Carts
             return _context.Carts.Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
                 .ThenInclude(p => p.ProductGalleries)
+                .AsSplitQuery()
+                .AsTracking()
                 .FirstOrDefaultAsync(predicate, ct);
         }
     }

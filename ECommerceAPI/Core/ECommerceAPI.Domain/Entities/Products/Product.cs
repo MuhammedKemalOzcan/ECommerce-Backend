@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.Domain.Exceptions;
+using System.ComponentModel.DataAnnotations;
 
 namespace ECommerceAPI.Domain.Entities.Products
 {
@@ -18,6 +19,9 @@ namespace ECommerceAPI.Domain.Entities.Products
 
         private readonly List<ProductGallery> _productGalleries = new();
         public IReadOnlyList<ProductGallery> ProductGalleries => _productGalleries.AsReadOnly();
+
+        [Timestamp]
+        public uint Version { get; set; }
 
         public static Product Create(string name, int stock, decimal price, string category, string description, string features)
         {
@@ -80,6 +84,13 @@ namespace ECommerceAPI.Domain.Entities.Products
 
             box.Update(name, quantity);
 
+        }
+
+        public void DecreaseStock(int quantity)
+        {
+            if (quantity <= 0) throw new DomainException("The minimum stock quantity to be reduced must be 1.");
+            if (Stock < quantity) throw new DomainException("Insufficient Stock");
+            Stock -= quantity;
         }
 
 

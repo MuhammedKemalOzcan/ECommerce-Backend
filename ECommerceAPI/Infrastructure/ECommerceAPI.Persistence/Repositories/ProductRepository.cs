@@ -1,5 +1,6 @@
 ﻿using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Domain.Entities.Products;
+using ECommerceAPI.Domain.Exceptions;
 using ECommerceAPI.Domain.Repositories;
 using ECommerceAPI.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,11 @@ namespace ECommerceAPI.Persistence.Repositories
         public void Remove(Product product)
         {
             _context.Products.Remove(product);
+        }
+
+        public void Update(Product product)
+        {
+            _context.Products.Update(product);
         }
     }
 }

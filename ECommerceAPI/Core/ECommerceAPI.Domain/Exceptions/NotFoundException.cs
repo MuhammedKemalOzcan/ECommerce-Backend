@@ -1,4 +1,4 @@
-﻿namespace ECommerceAPI.Application.Exceptions
+﻿namespace ECommerceAPI.Domain.Exceptions
 {
     public class NotFoundException : BaseException
     {

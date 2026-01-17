@@ -1,21 +1,38 @@
+import type { Customer, Location } from "./customer";
 import type { Products } from "./Products";
 
+export interface CreateOrder {
+  shippingCost: number;
+  shippingAddress: Location;
+  billingAddress: Location;
+  paymentInfo: PaymentInfo;
+  installment: number;
+}
 
 export interface Order {
-  id: string;
+  id:string
+  orderDate: string;
+  grandTotal: number;
   orderCode: string;
-  userId: string;
-  date: string;
-  status: string;
-  totalAmount: number;
-  currency: string;
+  deliveryStatus: string;
   products: Products[];
-  customerName: string;
-  shippingAddress: string;
-  phoneNumber: string;
-  cart: {
-    cartNumber: string;
-    name: string;
-    lastDate: string;
-  }[];
+  shippingAddress: Location;
+  customer: Customer;
+  paymentInfo: PaymentInfo;
+  orderItems: OrderItems[];
+}
+
+export interface PaymentInfo {
+  cardNumber: string;
+  expireMonth: string;
+  expireYear: string;
+  cvc: string;
+  cardHolderName: string;
+}
+
+export interface OrderItems {
+  productName: string;
+  price: number;
+  quantity: number;
+  imageUrl: string;
 }

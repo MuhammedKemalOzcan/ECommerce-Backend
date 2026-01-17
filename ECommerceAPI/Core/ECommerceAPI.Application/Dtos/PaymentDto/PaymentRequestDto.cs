@@ -1,4 +1,6 @@
-﻿namespace ECommerceAPI.Application.Dtos.PaymentDto
+﻿using ECommerceAPI.Application.Dtos.Customer;
+
+namespace ECommerceAPI.Application.Dtos.PaymentDto
 {
     public class PaymentRequestDto
     {
@@ -8,6 +10,7 @@
         public string ExpireYear { get; set; }
         public string Cvc { get; set; }
         public decimal Price { get; set; }
+        public decimal PaidPrice { get; set; }
 
         public PaymentBuyerDto Buyer { get; set; }
 

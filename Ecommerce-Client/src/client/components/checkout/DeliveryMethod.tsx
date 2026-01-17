@@ -1,54 +1,45 @@
-import React, { useState } from "react";
+import { shippingOptions } from "../../../constants/shippingOptions";
 import CheckoutCart from "./CheckoutCart";
+import { useFormContext } from "react-hook-form";
 
 export default function DeliveryMethod() {
-  const [selectedShipping, setSelectedShipping] = useState<string>("standard");
+  const { register, watch } = useFormContext();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedShipping(event.target.value);
-  };
+  const currentShippingCost = watch("shippingCost");
 
   return (
     <CheckoutCart count="2" title="Delivery Method">
-      <form>
+      <div>
         {shippingOptions.map((opt) => (
-          <div className="flex items-center gap-2 justify-between border p-6 rounded-3xl mb-4 focus:border-[#D87D4A]">
+          <label
+            key={opt.id}
+            className={`flex items-center gap-2 justify-between border p-6 rounded-3xl mb-4 cursor-pointer transition-colors
+              ${
+                Number(currentShippingCost) === opt.price
+                  ? "border-[#D87D4A] bg-orange-50"
+                  : "border-gray-200"
+              }`}
+          >
             <div className="flex items-center gap-2">
               <input
                 type="radio"
-                name="shipping"
-                id={opt.id}
-                value={opt.id}
-                checked={selectedShipping === opt.id}
-                onChange={handleChange}
-                className="radio-option.selected"
+                {...register("shippingCost", {
+                  valueAsNumber: true,
+                })}
+                value={opt.price}
+                className="accent-[#D87D4A] w-5 h-5"
               />
               <div>
-                <label htmlFor={opt.id}>{opt.label}</label>
+                <span className="font-bold block text-sm">{opt.label}</span>
                 <p className="text-xs text-gray-400">{opt.desc}</p>
               </div>
             </div>
             <p className="text-[#D87D4A] font-bold">
               {opt.price > 0 ? "$" + opt.price.toFixed(2) : "Free"}
             </p>
-          </div>
+          </label>
         ))}
-      </form>
+      </div>
     </CheckoutCart>
   );
 }
-
-const shippingOptions = [
-  {
-    id: "standard",
-    label: "Standard Shipping",
-    price: 0,
-    desc: "5-7 Business Days",
-  },
-  {
-    id: "express",
-    label: "Express Shipping",
-    price: 15.0,
-    desc: "1-3 Business Days",
-  },
-];

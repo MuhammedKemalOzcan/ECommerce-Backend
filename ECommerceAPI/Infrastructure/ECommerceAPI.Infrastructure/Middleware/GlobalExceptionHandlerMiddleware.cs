@@ -1,5 +1,6 @@
 ﻿using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Models;
+using ECommerceAPI.Domain.Exceptions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;

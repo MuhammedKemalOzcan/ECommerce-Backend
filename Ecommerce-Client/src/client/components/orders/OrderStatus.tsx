@@ -12,7 +12,7 @@ export default function OrderStatus({ currentConfig, status }: StatusProps) {
       <span className={`p-2 rounded-full ${currentConfig.style}`}>
         {currentConfig.icon}
       </span>
-      <h1>{status.toUpperCase()}</h1>
+      <h1>{status}</h1>
     </div>
   );
 }

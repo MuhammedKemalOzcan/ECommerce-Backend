@@ -1,21 +1,8 @@
+import type { Order } from "../../../types/Order";
+
 interface infoProps {
-  order: {
-    id: string;
-    orderCode: string;
-    userId: string;
-    date: string;
-    status: string;
-    totalAmount: number;
-    currency: string;
-    products: {
-      productId: string;
-      name: string;
-      image: string;
-      price: number;
-      quantity: number;
-    }[];
+  order: Order
   };
-}
 
 export default function OrderInfo({ order }: infoProps) {
   return (
@@ -23,12 +10,12 @@ export default function OrderInfo({ order }: infoProps) {
       <div>
         <p className="text-red-500 text-sm">ORDER PLACED</p>
         <p className="text-sm font-bold">
-          {new Date(order.date).toLocaleDateString()}
+          {new Date(order.orderDate).toLocaleDateString()}
         </p>
       </div>
       <div>
         <p className="text-red-500 text-sm">TOTAL</p>
-        <p className="text-sm font-bold">${order.totalAmount}</p>
+        <p className="text-sm font-bold">${order.grandTotal}</p>
       </div>
       <div>
         <p className="text-red-500 text-sm">ORDER</p>

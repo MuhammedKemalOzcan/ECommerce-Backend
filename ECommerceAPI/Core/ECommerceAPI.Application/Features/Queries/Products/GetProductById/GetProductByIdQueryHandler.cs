@@ -2,6 +2,7 @@
 using ECommerceAPI.Application.Dtos.Products;
 using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Domain.Entities.Products;
+using ECommerceAPI.Domain.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
