@@ -22,18 +22,11 @@ namespace ECommerceAPI.API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IFileWriteRepository _fileWriteRepository;
-        private readonly IFileReadRepository _fileReadRepository;
-        private readonly IStorageService _storageService;
-        private readonly IConfiguration _config;
+
 
         public ProductController(IMediator mediator, IFileWriteRepository fileWriteRepository, IFileReadRepository fileReadRepository, IStorageService storageService, IConfiguration config)
         {
             _mediator = mediator;
-            _fileWriteRepository = fileWriteRepository;
-            _fileReadRepository = fileReadRepository;
-            _storageService = storageService;
-            _config = config;
         }
 
         [HttpGet]
