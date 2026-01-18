@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Products } from "../../../types/Products";
 import { ChevronLeft, ChevronRight, ChevronRightCircle } from "lucide-react";
+import { baseApiUrl } from "../../../constants/apiUrl";
 
 type Props = {
   product: Products | null;
@@ -34,7 +35,7 @@ export default function ProductGallery({ product }: Props) {
             <ChevronLeft color="white" />
           </button>
           <img
-            src={currentSlide?.path}
+            src={`${baseApiUrl}/${currentSlide?.path}`}
             alt={product?.name}
             className="w-full h-full object-contain p-8 transition-transform duration-300 group-hover:scale-105"
           />
@@ -60,7 +61,7 @@ export default function ProductGallery({ product }: Props) {
                   : "border-gray-300"
               } `}
             >
-              <img src={gallery.path} />
+              <img src={`${baseApiUrl}/${gallery.path}`} />
             </button>
           ))}
         </div>

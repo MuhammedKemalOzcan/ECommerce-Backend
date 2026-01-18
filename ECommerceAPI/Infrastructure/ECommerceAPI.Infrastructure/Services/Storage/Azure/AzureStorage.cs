@@ -37,7 +37,7 @@ namespace ECommerceAPI.Infrastructure.Services.Storage.Azure
             return _blobContainerClient.GetBlobs().Any(b => b.Name == fileName);
         }
 
-        public async Task<List<(string fileName, string pathOrContainerName)>> UploadAsync(string containerName, IFormFileCollection files)
+        public async Task<List<(string fileName, string pathOrContainerName)>> UploadAsync(string containerName, List<IFormFile> files)
         {
             _blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
             await _blobContainerClient.CreateIfNotExistsAsync();

@@ -1,39 +1,34 @@
 import { useEffect, useMemo, useState } from "react";
 import type { UploadStatus } from "../../../types/Gallery";
-import { productGalleryApi } from "../../../api/productGalleryApi";
-import { useSearchParams } from "react-router-dom";
-import { useProductStore } from "../../../stores/productStore";
 import { X } from "lucide-react";
-export default function AddProductImage() {
+import { useProductStore } from "../../../stores/productStore";
+
+interface ImageProps {
+  productId: string | null;
+}
+
+export default function AddProductImage({ productId }: ImageProps) {
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState<UploadStatus>("initial");
   const [primaryIndex, setPrimaryIndex] = useState<number | null>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
   let [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
-  const refreshById = useProductStore((s) => s.refreshById);
-
-  const productId = searchParams.get("productId");
+  const uploadImage = useProductStore((state) => state.uploadImage);
 
   const handleSubmit = async () => {
     if (files) {
       try {
         setStatus("uploading");
-
         const formData = new FormData();
-        [...files].forEach((file) => {
-          formData.append("files", file);
+        [...files].forEach((file, index) => {
+          formData.append(`Files[${index}].File`, file);
+          if (index === primaryIndex)
+            formData.append(`Files[${index}].IsPrimary`, "true");
         });
-
-        formData.append("primaryIndex", String(primaryIndex));
-
-        await productGalleryApi.add(productId, formData);
-        await refreshById(productId);
-
-        setSearchParams({});
+        await uploadImage(productId, formData);
         setStatus("success");
         setFiles([]);
-        setPrimaryIndex(null);
+        // setPrimaryIndex(null);
       } catch (error) {
         setStatus("fail");
       }
@@ -67,7 +62,7 @@ export default function AddProductImage() {
   }, []);
 
   return (
-    <div className="p-12 flex flex-col justify-center items-center p-12 gap-3 w-full max-h-[50%] bg-gray-100 border-2 border-dashed rounded-lg hover:bg-gray-400 hover:text-white">
+    <div className="flex flex-col justify-center items-center p-12 gap-3 w-full max-h-[50%] bg-gray-100 border-2 border-dashed rounded-lg hover:bg-gray-400 hover:text-white">
       <input
         onChange={handleFileChange}
         type="file"
@@ -82,6 +77,7 @@ export default function AddProductImage() {
         <div className="w-full grid grid-cols-2 ">
           {previewUrls.map((src, i) => (
             <button
+              key={i}
               onClick={() => setPrimaryIndex(i)}
               className="focus:border-2 focus:border-blue-500 relative"
             >
