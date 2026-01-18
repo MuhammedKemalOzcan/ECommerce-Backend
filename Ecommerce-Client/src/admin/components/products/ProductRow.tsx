@@ -6,6 +6,7 @@ import { formatCurrency } from "../../../utils/format";
 import StatusBadge from "./StatusBadge";
 import { useNavigate } from "react-router-dom";
 import ExpandedRow from "./ExpandedRow";
+import { baseApiUrl } from "../../../constants/apiUrl";
 
 type RowProps = {
   product: Products;
@@ -40,7 +41,7 @@ const ProductRow = React.memo(function ProductRow({
   };
 
   const primaryImage = product?.productGalleries?.find(
-    (gallery) => gallery.isPrimary === true
+    (gallery) => gallery.isPrimary === true,
   );
 
   const chosen = primaryImage?.path ? `${primaryImage.path}` : image;
@@ -57,7 +58,11 @@ const ProductRow = React.memo(function ProductRow({
           {expandedRowId === product.id ? <ChevronUp /> : <ChevronDown />}
         </td>
         <td>
-          <img loading="lazy" src={chosen} className="size-20" />
+          <img
+            loading="lazy"
+            src={`${baseApiUrl}/${chosen}`}
+            className="size-20"
+          />
         </td>
 
         <td>{product.name}</td>

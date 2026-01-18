@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Internal;
 
 namespace ECommerceAPI.Application.Abstractions.Storage
 {
@@ -11,7 +7,7 @@ namespace ECommerceAPI.Application.Abstractions.Storage
     {
         //Öyle bir şekilde inşa etmeliyiz ki local,aws,azure gibi servislerde de ayağa kaldırabilelim.
 
-        Task<List<(string fileName, string pathOrContainerName)>> UploadAsync(string pathOrContainerName, IFormFileCollection files);
+        Task<List<(string fileName, string pathOrContainerName)>> UploadAsync(string pathOrContainerName, List<IFormFile> files);
 
         Task DeleteAsync(string pathOrContainerName, string fileName);
         List<string> GetFiles(string pathOrContainerName);

@@ -3,6 +3,7 @@ import type { AddProduct, Products } from "../types/Products";
 import { productsApi } from "../api/products";
 import type { ProductBoxes } from "../types/Products";
 import { toast } from "react-toastify";
+import { productGalleryApi } from "../api/productGalleryApi";
 
 type productsState = {
   products: Products[];
@@ -13,23 +14,28 @@ type productsState = {
   getById: (id: string | null) => Promise<void>;
   addBoxToProduct: (
     productId: string | null,
-    boxData: ProductBoxes
+    boxData: ProductBoxes,
   ) => Promise<void>;
   removeBoxFromProduct: (
     boxId: string | null,
-    productId: string | null
+    productId: string | null,
   ) => Promise<void>;
   updateBoxItems: (
     productId: string | null,
     boxId: string | null,
-    boxPayload: ProductBoxes
+    boxPayload: ProductBoxes,
   ) => Promise<void>;
   createProduct: (newProduct: AddProduct) => Promise<void>;
   updateProduct: (
     id: string | null,
-    productPayload: Partial<AddProduct>
+    productPayload: Partial<AddProduct>,
   ) => Promise<void>;
   deleteProduct: (id: string) => Promise<void>;
+  uploadImage: (productId: string | null, formData: FormData) => Promise<void>;
+  deleteImage: (
+    productId: string | null,
+    imageId: string | null,
+  ) => Promise<void>;
 };
 
 export const useProductStore = create<productsState>((set, get) => ({
@@ -78,7 +84,7 @@ export const useProductStore = create<productsState>((set, get) => ({
   },
   updateProduct: async (
     id: string | null,
-    productPayload: Partial<AddProduct>
+    productPayload: Partial<AddProduct>,
   ) => {
     if (!id) return;
     set({ loading: true, error: null });
@@ -89,7 +95,7 @@ export const useProductStore = create<productsState>((set, get) => ({
 
       set((state) => ({
         products: state.products.map((product) =>
-          product.id === id ? { ...product, ...response } : product
+          product.id === id ? { ...product, ...response } : product,
         ),
       }));
     } catch (error) {
@@ -152,7 +158,7 @@ export const useProductStore = create<productsState>((set, get) => ({
   },
   removeBoxFromProduct: async (
     boxId: string | null,
-    productId: string | null
+    productId: string | null,
   ) => {
     set({ loading: true });
     if (!boxId) return;
@@ -163,7 +169,7 @@ export const useProductStore = create<productsState>((set, get) => ({
           if (!product.productBoxes) return product;
 
           const filteredBoxes = product.productBoxes.filter(
-            (box) => box.id !== boxId
+            (box) => box.id !== boxId,
           );
 
           return {
@@ -184,7 +190,7 @@ export const useProductStore = create<productsState>((set, get) => ({
   updateBoxItems: async (
     productId: string | null,
     boxId: string | null,
-    boxPayload: ProductBoxes
+    boxPayload: ProductBoxes,
   ) => {
     if (!boxId) {
       console.error("❌ Box ID is required for update");
@@ -205,7 +211,7 @@ export const useProductStore = create<productsState>((set, get) => ({
           productBoxes: product.productBoxes?.map((box) =>
             box.id === boxId
               ? { ...box, name: boxPayload.name, quantity: boxPayload.quantity }
-              : box
+              : box,
           ),
         })),
       }));
@@ -217,6 +223,45 @@ export const useProductStore = create<productsState>((set, get) => ({
         error: error instanceof Error ? error.message : "Box update failed",
       });
       throw error;
+    } finally {
+      set({ loading: false });
+    }
+  },
+  uploadImage: async (productId: string | null, formData: FormData) => {
+    set({ loading: true, error: null });
+    if (!productId) return;
+    try {
+      const updatedProducts = await productGalleryApi.add(productId, formData);
+      set((state) => ({
+        products: state.products.map((product) =>
+          product.id === productId ? updatedProducts : product,
+        ),
+      }));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      set({ loading: false });
+    }
+  },
+  deleteImage: async (productId: string | null, imageId: string | null) => {
+    set({ loading: true });
+    if (productId === null || imageId === null) return;
+    try {
+      await productGalleryApi.delete(productId, imageId);
+      set((state) => ({
+        products: state.products.map((product) =>
+          product.id === productId
+            ? {
+                ...product,
+                productGalleries: product.productGalleries?.filter(
+                  (image) => image.id !== imageId,
+                ),
+              }
+            : product,
+        ),
+      }));
+    } catch (error) {
+      console.log(error);
     } finally {
       set({ loading: false });
     }

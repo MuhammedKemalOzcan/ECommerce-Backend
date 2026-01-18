@@ -7,7 +7,7 @@ type Props = {
   productId: string | null;
 };
 
-export default function AddImageModal({ isOpen, onCancel }: Props) {
+export default function AddImageModal({ isOpen, onCancel, productId }: Props) {
   if (!isOpen) return;
   return (
     <div className="modal">
@@ -15,7 +15,7 @@ export default function AddImageModal({ isOpen, onCancel }: Props) {
         <button className="text-gray-400" onClick={onCancel}>
           <X size={24} />
         </button>
-        <AddProductImage />
+        <AddProductImage productId={productId} />
       </div>
     </div>
   );

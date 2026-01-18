@@ -1,12 +1,12 @@
-import { Box, GalleryHorizontalEndIcon, Package, X } from "lucide-react";
+import { GalleryHorizontalEndIcon, Package, X } from "lucide-react";
 import type { Products } from "../../../types/Products";
 import { useState } from "react";
 import ProductBoxForm from "../productBox/ProductBoxForm";
 import type { ProductBoxes } from "../../../types/Products";
 import DisplayProductBox from "../productBox/DisplayProductBox";
 import AddProductBox from "../productBox/AddProductBox";
-import { productGalleryApi } from "../../../api/productGalleryApi";
 import { useProductStore } from "../../../stores/productStore";
+import { baseApiUrl } from "../../../constants/apiUrl";
 
 type Props = {
   product: Products;
@@ -16,11 +16,13 @@ export default function ExpandedRow({ product }: Props) {
   const [boxItemId, setBoxItemId] = useState<string | null>(null);
   const updateBoxItem = useProductStore((s) => s.updateBoxItems);
 
+  const deleteImage = useProductStore((state) => state.deleteImage);
+
   const handleDelete = async (
     productId: string | null,
-    imageId: string | null
+    imageId: string | null,
   ) => {
-    await productGalleryApi.delete(productId, imageId);
+    await deleteImage(productId, imageId);
   };
 
   const handleEditBox = (id: string | null) => {
@@ -30,7 +32,7 @@ export default function ExpandedRow({ product }: Props) {
   const handleUpdate = async (
     productId: string,
     boxId: string,
-    data: ProductBoxes
+    data: ProductBoxes,
   ) => {
     await updateBoxItem(productId, boxId, data);
     setBoxItemId(null);
@@ -82,10 +84,14 @@ export default function ExpandedRow({ product }: Props) {
           <div className="grid grid-cols-2 gap-2">
             {product.productGalleries?.map((image) => (
               <div className="relative">
-                <img className="w-[80%]" src={`${image.path}`} />
+                <img
+                  key={image.id}
+                  className="w-[80%]"
+                  src={`${baseApiUrl}/${image.path}`}
+                />
                 <button
                   onClick={() => handleDelete(product.id, image.id)}
-                  className="absolute top-0 "
+                  className="absolute top-0"
                 >
                   <X color="red" />
                 </button>

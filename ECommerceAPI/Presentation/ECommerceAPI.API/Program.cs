@@ -1,4 +1,5 @@
 ﻿using ECommerceAPI.API.Configurations;
+using ECommerceAPI.Application.Settings;
 using ECommerceAPI.Infrastructure;
 using ECommerceAPI.Infrastructure.Middleware;
 using ECommerceAPI.Infrastructure.Services.Storage.Azure;
@@ -55,6 +56,9 @@ namespace ECommerceAPI.API
                 // Add services to the container.
                 builder.Services.AddApplicationServices();
                 builder.Services.AddPersistenceServices(builder.Configuration);
+
+                var StorageUrlSection = builder.Configuration.GetSection("BaseStorageUrl");
+                builder.Services.Configure<StorageUrlSettings>(StorageUrlSection);
 
                 //builder.Services.AddStorage<AzureStorage>();
                 builder.Services.AddStorage<LocalStorage>();

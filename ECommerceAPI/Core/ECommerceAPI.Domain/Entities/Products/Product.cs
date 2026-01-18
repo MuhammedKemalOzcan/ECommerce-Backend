@@ -86,6 +86,29 @@ namespace ECommerceAPI.Domain.Entities.Products
 
         }
 
+        public void UploadImage(string fileName, string path, string storage, bool isPrimary)
+        {
+            var galleries = new ProductGallery(new ImageId(Guid.NewGuid()), fileName, path, storage, Id, isPrimary);
+            if (galleries.IsPrimary == true) galleries.SetPrimaryImage();
+            _productGalleries.Add(galleries);
+        }
+
+        public void ChangePrimaryImage()
+        {
+            var primaryImage = _productGalleries.FirstOrDefault(x => x.IsPrimary == true);
+            if (primaryImage == null) return;
+            primaryImage.SetNonPrimary();
+        }
+
+        public void DeleteImage(ImageId imageId)
+        {
+            var deletingImage = _productGalleries.FirstOrDefault(x => x.Id == imageId);
+            if (deletingImage == null) throw new NotFoundException("Image cannot be found");
+            _productGalleries.Remove(deletingImage);
+        }
+
+
+
         public void DecreaseStock(int quantity)
         {
             if (quantity <= 0) throw new DomainException("The minimum stock quantity to be reduced must be 1.");

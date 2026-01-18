@@ -41,7 +41,7 @@ namespace ECommerceAPI.Infrastructure.Services.Storage.Local
             }
         }
 
-        public async Task<List<(string fileName, string pathOrContainerName)>> UploadAsync(string path, IFormFileCollection files)
+        public async Task<List<(string fileName, string pathOrContainerName)>> UploadAsync(string path, List<IFormFile> files)
         {
             string uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, path); 
 
@@ -52,10 +52,11 @@ namespace ECommerceAPI.Infrastructure.Services.Storage.Local
             foreach (IFormFile file in files)
             {
 
-                string fileNewName = await FileRenameAsync(uploadPath, file.FileName,HasFile );
+                string fileNewName = await FileRenameAsync(uploadPath, file.FileName, HasFile);
+                await CopyFileAsync(Path.Combine(uploadPath, fileNewName), file);
+                string webPath = $"{path.Replace("\\", "/")}/{fileNewName}";
 
-                await CopyFileAsync($"{uploadPath}\\{fileNewName}", file);
-                datas.Add((fileNewName, $"{path}\\{file.Name}"));
+                datas.Add((fileNewName, webPath));
             }
            
             return datas;

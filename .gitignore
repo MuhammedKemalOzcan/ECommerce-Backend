@@ -13,3 +13,5 @@
 
 .env
 logs/
+
+wwwroot/uploads/*
