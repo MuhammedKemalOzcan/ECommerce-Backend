@@ -1,14 +1,16 @@
 import { useShallow } from "zustand/shallow";
 import { useProductStore } from "../../../stores/productStore";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { randomNumberGenerator } from "../../../constants/randomNumberGenerator";
+import { baseApiUrl } from "../../../constants/apiUrl";
 
 export default function ProductShowcase() {
   const { getAll, products } = useProductStore(
     useShallow((s) => ({
       getAll: s.getAll,
       products: s.products,
-    }))
+    })),
   );
 
   const navigate = useNavigate();
@@ -17,7 +19,11 @@ export default function ProductShowcase() {
     getAll();
   }, [getAll]);
 
-  const product = products?.[0];
+  const randomIndex = useMemo(() => {
+    return randomNumberGenerator(products.length);
+  }, [products.length]);
+
+  const product = products?.[randomIndex];
 
   if (!product?.productGalleries) {
     return <div className="h-[560px] bg-[#D87D4A]"></div>;
@@ -35,7 +41,7 @@ export default function ProductShowcase() {
               {/* Resim Bölümü */}
               <div className="flex-1 flex items-center justify-center">
                 <img
-                  src={g.path}
+                  src={`${baseApiUrl}/${g.path}`}
                   alt={product.name}
                   className="h-full max-h-96 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
                 />
@@ -60,7 +66,7 @@ export default function ProductShowcase() {
                 </button>
               </div>
             </div>
-          )
+          ),
       )}
     </div>
   );

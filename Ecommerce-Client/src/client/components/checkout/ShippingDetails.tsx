@@ -10,7 +10,7 @@ export default function ShippingDetails() {
     useShallow((s) => ({
       getCustomer: s.getCustomer,
       customer: s.customer,
-    }))
+    })),
   );
 
   useEffect(() => {
@@ -80,8 +80,6 @@ export default function ShippingDetails() {
             {...register("shippingAddress.zipCode")}
           />
         </div>
-        <input id="billingAsShipping" type="checkbox" />
-        <label htmlFor="billingAsShipping">test</label>
       </div>
     </CheckoutCart>
   );

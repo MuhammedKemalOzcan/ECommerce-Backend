@@ -7,6 +7,7 @@ import ProductGallery from "./ProductGallery";
 import { Minus, Plus } from "lucide-react";
 import { useProductStore } from "../../../stores/productStore";
 import { useCartStore } from "../../../stores/cartStore";
+import { baseApiUrl } from "../../../constants/apiUrl";
 
 export default function ProductDetail() {
   const { id, category } = useParams<{ id: string; category: string }>();
@@ -16,7 +17,7 @@ export default function ProductDetail() {
       getById: s.getById,
       currentProduct: s.currentProduct,
       loading: s.loading,
-    }))
+    })),
   );
   const addItemToCart = useCartStore((s) => s.addItemToCart);
 
@@ -30,7 +31,7 @@ export default function ProductDetail() {
   }));
 
   const primaryImage = currentProduct?.productGalleries?.find(
-    (gallery) => gallery.isPrimary === true
+    (gallery) => gallery.isPrimary === true,
   );
 
   const chosen = primaryImage?.path ? `${primaryImage.path}` : image;
@@ -58,7 +59,10 @@ export default function ProductDetail() {
     <div className="flex flex-col items-center gap-12">
       <div className="lg:flex-row lg:gap-32 flex flex-col md:max-w-[70%] md:justify-center">
         <div className="p-4 lg:w-[70%] lg:h-[60%] flex items-center justify-center rounded-lg">
-          <img className="shadow-lg size-full sm:mb-8" src={chosen} />
+          <img
+            className="shadow-lg size-full sm:mb-8"
+            src={`${baseApiUrl}/${chosen}`}
+          />
         </div>
         <div className="flex flex-col justify-center lg:w-[60%] gap-10 ">
           <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">

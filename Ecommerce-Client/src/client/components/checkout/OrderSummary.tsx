@@ -2,6 +2,7 @@ import { LockKeyhole } from "lucide-react";
 import { useCartStore } from "../../../stores/cartStore";
 import { shippingOptions } from "../../../constants/shippingOptions";
 import { useFormContext } from "react-hook-form";
+import { baseApiUrl } from "../../../constants/apiUrl";
 
 export default function OrderSummary() {
   const cart = useCartStore((s) => s.cart);
@@ -11,7 +12,7 @@ export default function OrderSummary() {
   const watchedShippingValue = watch("shippingCost");
 
   const currentShippingCost = shippingOptions.find(
-    (opt) => Number(watchedShippingValue) === opt.price
+    (opt) => Number(watchedShippingValue) === opt.price,
   );
 
   const shippingPrice = currentShippingCost?.price ?? 0;
@@ -34,7 +35,10 @@ export default function OrderSummary() {
         <div key={item.id} className="flex items-center justify-between">
           <div className="flex gap-4">
             {item.productImageUrl !== null && (
-              <img className="size-16 rounded-3xl" src={item.productImageUrl} />
+              <img
+                className="size-16 rounded-3xl"
+                src={`${baseApiUrl}/${item.productImageUrl}`}
+              />
             )}
             <div className="flex flex-col justify-center">
               <h1 className="text-sm">{item.productName}</h1>

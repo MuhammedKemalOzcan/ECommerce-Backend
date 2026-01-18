@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../../../admin/components/common/ConfirmationModal";
 import { useAuthStore } from "../../../auth/authStore";
 import { useState } from "react";
+import { baseApiUrl } from "../../../constants/apiUrl";
 
 type CartProps = {
   cart: Cart | null;
@@ -19,7 +20,7 @@ export default function CartTable({ cart }: CartProps) {
       updateCartItem: s.updateCartItem,
       isLoading: s.isLoading,
       error: s.error,
-    }))
+    })),
   );
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -87,7 +88,7 @@ export default function CartTable({ cart }: CartProps) {
                     <div className="w-24 h-24 rounded-lg bg-[#F1F1F1] flex items-center justify-center overflow-hidden">
                       <img
                         className="w-full h-full object-contain mix-blend-multiply p-2"
-                        src={item.productImageUrl}
+                        src={`${baseApiUrl}/${item.productImageUrl}`}
                         alt={item.productName}
                       />
                     </div>

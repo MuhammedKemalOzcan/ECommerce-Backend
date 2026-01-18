@@ -1,15 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useProductStore } from "../../../stores/productStore";
 import { useShallow } from "zustand/shallow";
 import { useNavigate } from "react-router-dom";
-import image from "../../../assets/product.svg";
+import { randomNumberGenerator } from "../../../constants/randomNumberGenerator";
+import { baseApiUrl } from "../../../constants/apiUrl";
 
 export default function HomeBanner() {
   const { getAll, products } = useProductStore(
     useShallow((s) => ({
       getAll: s.getAll,
       products: s.products,
-    }))
+    })),
   );
 
   const navigate = useNavigate();
@@ -18,7 +19,11 @@ export default function HomeBanner() {
     getAll();
   }, [getAll]);
 
-  const product = products[1];
+  const randomIndex = useMemo(() => {
+    return randomNumberGenerator(products.length);
+  }, [products.length]);
+
+  const product = products && products[randomIndex];
 
   return (
     <div className="relative w-full min-h-[600px] lg:min-h-0 flex lg:flex-row flex-col items-center justify-center lg:justify-between overflow-hidden">
@@ -41,13 +46,19 @@ export default function HomeBanner() {
           See Product
         </button>
       </div>
-      <div className="absolute inset-0 w-full h-full lg:static lg:w-1/2 lg:h-auto z-0">
-        <img
-          src={image}
-          alt={product?.name}
-          className="w-full h-full object-cover opacity-10 lg:opacity-100 lg:object-contain lg:max-w-[708px]"
-        />
-      </div>
+      {product &&
+        product.productGalleries?.map(
+          (image) =>
+            image.isPrimary === true && (
+              <div className="absolute inset-0 w-full h-full lg:static lg:w-1/2 lg:h-auto z-0">
+                <img
+                  src={`${baseApiUrl}/${image.path}`}
+                  alt={product?.name}
+                  className="w-full h-full object-cover opacity-10 lg:opacity-100 lg:object-contain lg:max-w-[708px]"
+                />
+              </div>
+            ),
+        )}
     </div>
   );
 }

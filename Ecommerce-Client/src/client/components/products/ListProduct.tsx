@@ -3,6 +3,7 @@ import { useShallow } from "zustand/shallow";
 import image from "../../../assets/product.svg";
 import { PacmanLoader } from "react-spinners";
 import { useProductStore } from "../../../stores/productStore";
+import { baseApiUrl } from "../../../constants/apiUrl";
 
 export default function ListProduct() {
   let location = useLocation().pathname.slice(1);
@@ -12,7 +13,7 @@ export default function ListProduct() {
     useShallow((state) => ({
       loading: state.loading,
       products: state.products,
-    }))
+    })),
   );
 
   const handleClick = (id: string) => {
@@ -22,7 +23,7 @@ export default function ListProduct() {
   const filteredProduct = products.filter((p) => p.category == location);
 
   const showCase = filteredProduct.map((p) =>
-    p.productGalleries?.find((gallery) => gallery.isPrimary === true)
+    p.productGalleries?.find((gallery) => gallery.isPrimary === true),
   );
 
   if (loading)
@@ -51,9 +52,11 @@ export default function ListProduct() {
                     <img
                       key={galleryIndex}
                       className="size-[75%] lg:w-[45%] lg:h-[90%] md:max-w-[400px] lg:max-w-[540px] flex"
-                      src={gallery?.path ? `${gallery?.path}` : image}
+                      src={
+                        gallery?.path ? `${baseApiUrl}/${gallery?.path}` : image
+                      }
                     />
-                  )
+                  ),
               )}
               <div className="flex flex-col gap-8 items-center justify-center p-2 lg:gap-20 lg:w-[50%] md:max-w-[65%] ">
                 <p className="text-[40px] font-bold leading-[44px] tracking-[1.43px] ">
@@ -70,7 +73,7 @@ export default function ListProduct() {
                 </button>
               </div>
             </div>
-          )
+          ),
       )}
     </div>
   );
