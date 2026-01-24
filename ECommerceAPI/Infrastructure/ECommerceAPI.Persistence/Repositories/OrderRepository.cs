@@ -1,6 +1,7 @@
 ﻿using ECommerceAPI.Domain.Entities.Orders;
 using ECommerceAPI.Domain.Repositories;
 using ECommerceAPI.Persistence.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommerceAPI.Persistence.Repositories
 {
@@ -18,9 +19,17 @@ namespace ECommerceAPI.Persistence.Repositories
             _context.Orders.Add(order);
         }
 
-        public Task<Order> GetByIdAsync()
+        public async Task<Order> GetByIdAsync(OrderId orderId)
         {
-            throw new NotImplementedException();
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+            return order;
+        }
+
+        public async Task<Order> GetByTokenAsync(string paymentToken)
+        {
+            var order = await _context.Orders.FirstOrDefaultAsync(
+                o => o.PaymentToken == paymentToken);
+            return order;
         }
     }
 }

@@ -1,28 +1,33 @@
 import { ArrowLeft } from "lucide-react";
-import ordersData from "../../data/orders.json";
 import { useParams, useNavigate } from "react-router-dom";
 import OrderStatus from "../components/orders/OrderStatus";
 import { statusConfig } from "../../utils/statusConfig";
 import DetailCard from "../components/orders/DetailCard";
 import OrderDetailsCard from "../components/orders/OrderDetailsCard";
-import type { Order } from "../../types/Order";
+import { useOrderStore } from "../../stores/orderStore";
+import { useShallow } from "zustand/shallow";
+import { useEffect } from "react";
 
 export default function OrderDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // TypeScript için tip dönüşümü ve undefined kontrolü
-  const currentOrder = ordersData.orders.find((order) => order.id === id) as
-    | Order
-    | undefined;
+  const { order, getOneOrder } = useOrderStore(
+    useShallow((state) => ({
+      order: state.order,
+      getOneOrder: state.getOneOrder,
+    })),
+  );
 
-  // Eğer sipariş bulunamazsa (404 Sayfası gösterilmeli normalde)
-  if (!currentOrder)
-    return <div className="p-10 text-center">Order not found!</div>;
+  useEffect(() => {
+    if (!id) return;
+    getOneOrder(id);
+  }, [getOneOrder]);
 
-  const currentConfig =
-    statusConfig[currentOrder.status as keyof typeof statusConfig] ||
-    statusConfig.shipped;
+  if (!order) return <div className="p-10 text-center">Order not found!</div>;
+
+  const currentConfig = statusConfig[order.deliveryStatus];
+  console.log(order.paymentInfo);
 
   return (
     <div className="mx-auto p-6 flex flex-col gap-8 w-full">
@@ -41,12 +46,12 @@ export default function OrderDetails() {
           <div className="flex items-baseline gap-3">
             <h1 className="text-3xl font-bold text-gray-900">Order Details</h1>
             <span className="text-xl text-gray-400 font-medium">
-              #{currentOrder.id}
+              #{order.orderCode}
             </span>
           </div>
           <p className="text-sm text-gray-500 mt-1">
             Ordered on{" "}
-            {new Date(currentOrder.date).toLocaleDateString("tr-TR", {
+            {new Date(order.orderDate).toLocaleDateString("tr-TR", {
               year: "numeric",
               month: "long",
               day: "numeric",
@@ -57,27 +62,21 @@ export default function OrderDetails() {
         </div>
         <OrderStatus
           currentConfig={currentConfig}
-          status={currentOrder.status}
+          status={currentConfig.title}
         />
       </div>
 
       <div className="flex flex-col lg:flex gap-8 items-start">
-        {/* SOL KOLON: Detaylar ve Ürünler */}
         <div className="flex flex-col gap-8 flex-1 w-full">
-          {/* Adres ve Ödeme Kartları (Yan yana) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <DetailCard order={currentOrder} type="shipping" />
-            <DetailCard order={currentOrder} type="payment" />
+            <DetailCard order={order} type="shipping" />
+            <DetailCard order={order} type="payment" />
           </div>
 
-          {/* Ürün Listesi */}
-          <OrderDetailsCard currentOrder={currentOrder} />
+          <OrderDetailsCard currentOrder={order} />
         </div>
 
-        {/* SAĞ KOLON: Özet (Sticky olabilir) */}
-        <div className="w-full lg:w-[350px] lg:sticky lg:top-6">
-          {/* ARTIK store'dan değil, prop'tan alıyor */}
-        </div>
+        <div className="w-full lg:w-[350px] lg:sticky lg:top-6"></div>
       </div>
     </div>
   );

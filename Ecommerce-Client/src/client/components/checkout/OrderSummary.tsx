@@ -16,14 +16,9 @@ export default function OrderSummary() {
   );
 
   const shippingPrice = currentShippingCost?.price ?? 0;
-
   const taxRate = 0.2;
-
   const taxAmount = cart ? cart.totalAmount * taxRate : 0;
-
   const grandTotal = cart ? cart?.totalAmount + taxAmount + shippingPrice : 0;
-
-  console.log(currentShippingCost);
 
   return (
     <div className="flex flex-col bg-white w-[70] justify-self-end p-10 gap-4 rounded-3xl shadow">

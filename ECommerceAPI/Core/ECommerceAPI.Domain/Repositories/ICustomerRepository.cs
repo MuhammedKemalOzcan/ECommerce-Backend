@@ -5,6 +5,7 @@ namespace ECommerceAPI.Domain.Repositories
     public interface ICustomerRepository
     {
         Task<Customer?> GetByUserIdAsync(Guid appUserId);
+        Task<Customer?> GetById(Guid customerId);
 
         void Add(Customer customer);
     }

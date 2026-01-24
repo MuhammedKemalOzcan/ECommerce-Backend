@@ -23,6 +23,8 @@ import ProfileSettings from "./client/components/Profile/ProfileSettings";
 import Checkout from "./client/pages/Checkout";
 import OrderDetails from "./client/pages/OrderDetails";
 import Orders from "./client/pages/Orders";
+import PaymentSuccess from "./client/components/payment/PaymentSuccess";
+import PaymentFailed from "./client/components/payment/PaymentFailed";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,8 @@ const router = createBrowserRouter([
       { path: "/cart", element: <Cart /> },
       { path: "*", element: <NotFoundPage /> },
       { path: "/checkout", element: <Checkout /> },
+      { path: "/payment/success", element: <PaymentSuccess /> },
+      { path: "/payment/failed", element: <PaymentFailed /> },
     ],
   },
   {

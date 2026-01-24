@@ -12,3 +12,5 @@ export const shippingOptions = [
     desc: "1-3 Business Days",
   },
 ];
+
+// export const ORDER_STATUS_CONFIG: {(key:string) : {}}
