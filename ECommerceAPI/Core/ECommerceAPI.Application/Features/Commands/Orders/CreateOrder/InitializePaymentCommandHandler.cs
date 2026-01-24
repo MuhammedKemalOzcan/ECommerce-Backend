@@ -1,32 +1,28 @@
 ﻿using ECommerceAPI.Application.Abstractions;
 using ECommerceAPI.Application.Abstractions.Services;
-using ECommerceAPI.Application.Dtos.Customer;
 using ECommerceAPI.Application.Dtos.PaymentDto;
-using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories;
 using ECommerceAPI.Application.Repositories.Carts;
 using ECommerceAPI.Domain.Entities.Orders;
 using ECommerceAPI.Domain.Exceptions;
 using ECommerceAPI.Domain.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
 {
-    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, string>
+    public class InitializePaymentCommandHandler : IRequestHandler<InitializePaymentCommand, string>
     {
         private readonly ICartService _cartService;
         private readonly ICurrentUserService _currentUser;
         private readonly IUnitOfWork _uow;
         private readonly IOrderRepository _orderRepository;
         private readonly ICustomerRepository _customerRepository;
-        private readonly ILogger<CreateOrderCommandHandler> _logger;
-        private readonly ICartsWriteRepository _cartsWriteRepository;
+        private readonly ILogger<InitializePaymentCommandHandler> _logger;
         private readonly IProductRepository _productRepository;
         private readonly IPaymentService _paymentService;
 
-        public CreateOrderCommandHandler(ICartService cartService, ICurrentUserService currentUser, IUnitOfWork uow, IOrderRepository orderRepository, ICustomerRepository customerRepository, ILogger<CreateOrderCommandHandler> logger, ICartsWriteRepository cartsWriteRepository, IProductRepository productRepository, IPaymentService paymentService)
+        public InitializePaymentCommandHandler(ICartService cartService, ICurrentUserService currentUser, IUnitOfWork uow, IOrderRepository orderRepository, ICustomerRepository customerRepository, ILogger<InitializePaymentCommandHandler> logger, IProductRepository productRepository, IPaymentService paymentService)
         {
             _cartService = cartService;
             _currentUser = currentUser;
@@ -34,12 +30,11 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
             _orderRepository = orderRepository;
             _customerRepository = customerRepository;
             _logger = logger;
-            _cartsWriteRepository = cartsWriteRepository;
             _productRepository = productRepository;
             _paymentService = paymentService;
         }
 
-        public async Task<string> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(InitializePaymentCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUser.GetCurrentUserId();
 
@@ -76,6 +71,9 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
             var order = Order.Create(customer.Id,
                 request.ShippingCost, shippingAddress, billingAddress);
 
+            _logger.LogError($"[DEBUG] 1. Yeni Order Oluştu. ID: {order.Id.Value}");
+            _logger.LogError($"[DEBUG] 1. Bu Order için Cart ID: {cart.Id}");
+
             foreach (var item in cart.CartItems)
             {
                 if (item == null) throw new NotFoundException($"Item with ${item.Id} Id not exist");
@@ -86,27 +84,32 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
 
                 order.AddOrderItem(
                     item.ProductId,
-                    item.Product.Name, //product cart içerisinde include ediliyor.
+                    item.Product.Name,
                     item.UnitPrice,
                     item.Quantity
                 );
             }
 
+            _orderRepository.Add(order);
+            await _uow.SaveChangesAsync(cancellationToken);
+
+            _logger.LogError($"[DEBUG] 2. SaveChanges Sonrası Order ID: {order.Id.Value}");
+
             var basketItemsDto = cart.CartItems.Select(item => new PaymentBasketItemDto
             {
                 Id = item.ProductId.ToString(),
+                Quantity = item.Quantity,
                 Name = item.Product.Name,
                 Category1 = item.Product.Category,
                 Price = item.UnitPrice,
             }).ToList();
 
-            var paymentRequestDto = new PaymentRequestDto()
+            var newOrder = await _orderRepository.GetByIdAsync(order.Id);
+
+            var checkoutFormDto = new CreateCheckoutFormDto()
             {
-                CardHolderName = request.PaymentInfo.CardHolderName,
-                CardNumber = request.PaymentInfo.CardNumber,
-                ExpireMonth = request.PaymentInfo.ExpireMonth,
-                ExpireYear = request.PaymentInfo.ExpireYear,
-                Cvc = request.PaymentInfo.Cvc,
+                ConversationId = order.Id.Value.ToString(),
+                BasketId = cart.Id.ToString(),
                 Price = order.SubTotal,
                 PaidPrice = order.GrandTotal,
                 Buyer = new PaymentBuyerDto()
@@ -140,40 +143,15 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
                 BasketItems = basketItemsDto
             };
 
-            var iyzicoResult = await _paymentService.ReceivePaymentAsync(paymentRequestDto);
+            var htmlContent = await _paymentService.InitializeCheckoutFormAsync(checkoutFormDto);
 
-            if (!iyzicoResult.IsSuccess)
-            {
-                _logger.LogError($"Payment failed for User {userId}. Ödeme Hatası: {iyzicoResult.ErrorMessage}");
-                throw new BusinessException($"Ödeme alınamadı, Ödeme Hatası: {iyzicoResult.ErrorMessage}");
-            }
-
-
-            var paymentInfo = PaymentInfo.Create(
-                iyzicoResult.PaymentId,
-                "CREDIT_CARD",
-                request.installment,
-                iyzicoResult.CardAssociation,
-                iyzicoResult.CardFamily,
-                iyzicoResult.CardLastFourDigits,
-                request.PaymentInfo.CardHolderName
-            );
-            order.SetPaymentInfo(paymentInfo);
+            order.SetPaymentToken(htmlContent.Token);
+            await _uow.SaveChangesAsync();
 
 
 
-            _orderRepository.Add(order);
-            try
-            {
-                await _uow.SaveChangesAsync(cancellationToken);
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new BusinessException("Sipariş oluşturulurken ürün stok durumu değişti. Ödemeniz iade edildi.");
-            }
-            _logger.LogInformation("Order {OrderId} created successfully for user {UserId}", order.Id.Value, userId);
 
-            return order.OrderCode;
+            return htmlContent.HtmlContent;
 
         }
     }

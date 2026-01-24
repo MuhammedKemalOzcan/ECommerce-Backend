@@ -1,4 +1,4 @@
-import image from "../../../assets/Headphones.svg";
+import { baseApiUrl } from "../../../constants/apiUrl";
 import type { OrderItems } from "../../../types/Order";
 
 interface GalleryProps {
@@ -10,7 +10,7 @@ export default function OrderProductGallery({ products }: GalleryProps) {
     <div className="flex gap-2">
       {products.map((product) => (
         <div className="flex ">
-          <img src={product.imageUrl} className="size-20" />
+          <img src={`${baseApiUrl}/${product.imageUrl}`} className="size-20" />
         </div>
       ))}
     </div>

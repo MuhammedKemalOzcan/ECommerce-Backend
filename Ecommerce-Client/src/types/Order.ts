@@ -5,12 +5,11 @@ export interface CreateOrder {
   shippingCost: number;
   shippingAddress: Location;
   billingAddress: Location;
-  paymentInfo: PaymentInfo;
   installment: number;
 }
 
 export interface Order {
-  id:string
+  id: string;
   orderDate: string;
   grandTotal: number;
   orderCode: string;
@@ -23,11 +22,9 @@ export interface Order {
 }
 
 export interface PaymentInfo {
-  cardNumber: string;
-  expireMonth: string;
-  expireYear: string;
-  cvc: string;
+  cardAssociation: string;
   cardHolderName: string;
+  cardLastFourDigits: string;
 }
 
 export interface OrderItems {

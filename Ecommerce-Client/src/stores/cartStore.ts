@@ -111,9 +111,7 @@ export const useCartStore = create<cartProps>((set) => ({
     try {
       const response = await cartApi.clear();
       console.log(response);
-
       set({ cart: null });
-      toast.success("Sepetteki bütün ürünler kaldırıldı");
     } catch (error) {
       console.log(error);
     }
@@ -150,7 +148,7 @@ export const useCartStore = create<cartProps>((set) => ({
           totalItemCount: cartItems.length, // istersen backend'den al
           totalAmount: cartItems.reduce(
             (sum, item) => sum + item.totalPrice,
-            0
+            0,
           ),
         };
 

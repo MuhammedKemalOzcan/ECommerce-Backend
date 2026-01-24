@@ -19,11 +19,18 @@ namespace ECommerceAPI.Persistence.Repositories
             _context.Customers.Add(customer);
         }
 
+        public async Task<Customer?> GetById(Guid customerId)
+        {
+            return await _context.Customers
+                .FirstOrDefaultAsync(c => c.Id == new CustomerId(customerId));
+        }
+
         public async Task<Customer?> GetByUserIdAsync(Guid appUserId)
         {
             return await _context.Customers
                 .Include(c => c.Addresses)
                 .SingleOrDefaultAsync(c => c.AppUserId == appUserId);
         }
+
     }
 }

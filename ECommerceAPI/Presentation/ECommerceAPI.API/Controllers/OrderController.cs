@@ -1,5 +1,6 @@
 ﻿using ECommerceAPI.Application.Features.Commands.Orders.CreateOrder;
-using ECommerceAPI.Application.Features.Queries.Orders;
+using ECommerceAPI.Application.Features.Queries.Orders.GetOne;
+using ECommerceAPI.Application.Features.Queries.Orders.ListOrders;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,8 +29,16 @@ namespace ECommerceAPI.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{OrderId}")]
+        public async Task<IActionResult> GetOneOrder([FromRoute] GetByIdOrdersQuery request)
+        {
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderCommand request)
+        public async Task<IActionResult> CreateOrder([FromBody] InitializePaymentCommand request)
         {
             var result = await _mediator.Send(request);
             return Ok(result);

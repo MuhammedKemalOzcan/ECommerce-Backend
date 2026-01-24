@@ -1,13 +1,13 @@
 import ShippingDetails from "../components/checkout/ShippingDetails";
 import DeliveryMethod from "../components/checkout/DeliveryMethod";
-import Payment from "../components/checkout/Payment";
 import OrderSummary from "../components/checkout/OrderSummary";
 import { FormProvider, useForm, type SubmitHandler } from "react-hook-form";
 import type { CreateOrder } from "../../types/Order";
 import { useOrderStore } from "../../stores/orderStore";
-import ConfirmationModal from "../../admin/components/common/ConfirmationModal";
 import { useState } from "react";
 import { useCartStore } from "../../stores/cartStore";
+import IyzicoPaymentForm from "../components/payment/PaymentForm";
+import { toast } from "react-toastify";
 
 export default function Checkout() {
   const methods = useForm<CreateOrder>({
@@ -26,25 +26,37 @@ export default function Checkout() {
         country: "",
         zipCode: "",
       },
-      paymentInfo: {
-        cardNumber: "",
-        expireMonth: "",
-        expireYear: "",
-        cvc: "",
-        cardHolderName: "",
-      },
+      // paymentInfo: {
+      //   cardNumber: "",
+      //   expireMonth: "",
+      //   expireYear: "",
+      //   cvc: "",
+      //   cardHolderName: "",
+      // },
     },
   });
   const { handleSubmit } = methods;
   const createOrder = useOrderStore((state) => state.createOrder);
-  const clearCart = useCartStore((state) => state.clearCart);
+  const [paymentHtml, setPaymentHtml] = useState<string | null>(null);
 
   const onSubmit: SubmitHandler<CreateOrder> = async (data: CreateOrder) => {
     const payload = { ...data };
     payload.billingAddress = { ...payload.shippingAddress };
-    const response = await createOrder(payload);
-    if (response) clearCart();
-    console.log(response);
+    try {
+      const htmlContent = await createOrder(payload);
+
+      if (htmlContent) {
+        setPaymentHtml(htmlContent);
+        setTimeout(() => {
+          document
+            .getElementById("iyzipay-checkout-form")
+            ?.scrollIntoView({ behavior: "smooth" });
+        }, 500);
+      }
+    } catch (error) {
+      console.error("Ödeme başlatılamadı", error);
+      toast.error("Ödeme formu oluşturulamadı.");
+    }
   };
 
   return (
@@ -58,9 +70,8 @@ export default function Checkout() {
             <div className="w-full lg:flex-1 flex flex-col gap-6">
               <ShippingDetails />
               <DeliveryMethod />
-              <Payment />
             </div>
-
+            {paymentHtml && <IyzicoPaymentForm htmlContent={paymentHtml} />}
             <div className="w-full lg:w-[350px] sticky top-10 h-fit flex-shrink-0">
               <OrderSummary />
             </div>

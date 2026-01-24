@@ -12,8 +12,7 @@ interface CardProps {
 export default function OrderCard({ order }: CardProps) {
   const navigate = useNavigate();
 
-  const currentConfig =
-    statusConfig[order.deliveryStatus] || statusConfig.shipped;
+  const currentConfig = statusConfig[order.deliveryStatus];
   return (
     <div className="border flex flex-col bg-gray-300 rounded-2xl shadow-lg">
       <div className="lg:flex lg:gap-8 p-6 flex justify-between">
@@ -28,8 +27,9 @@ export default function OrderCard({ order }: CardProps) {
       <div className="lg:flex-row lg:justify-between flex flex-col gap-8 p-6 bg-white rounded-b-2xl">
         <OrderStatus
           currentConfig={currentConfig}
-          status={order.deliveryStatus}
+          status={currentConfig.title}
         />
+
         <div className="flex flex-col gap-12">
           <OrderProductGallery products={order.orderItems} />
 

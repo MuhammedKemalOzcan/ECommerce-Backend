@@ -2,37 +2,29 @@
 using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Dtos.Customer;
 using ECommerceAPI.Application.Dtos.Orders;
-using ECommerceAPI.Application.Dtos.PaymentDto;
-using ECommerceAPI.Application.Dtos.Products;
-using ECommerceAPI.Application.Repositories;
+using ECommerceAPI.Domain.Entities.Customer;
+using ECommerceAPI.Domain.Entities.Products;
 using ECommerceAPI.Domain.Exceptions;
 using ECommerceAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
-namespace ECommerceAPI.Application.Features.Queries.Orders
+namespace ECommerceAPI.Application.Features.Queries.Orders.GetOne
 {
-    public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, List<OrderSummaryDto>>
+    public class GetByIdOrdersQueryHandler : IRequestHandler<GetByIdOrdersQuery, OrderSummaryDto>
     {
-        private readonly IProductRepository _productRepository;
-        private readonly ILogger<GetOrdersQueryHandler> _logger;
-        private readonly IUnitOfWork _uow;
-        private readonly ICustomerRepository _customerRepository;
         private readonly IEcommerceAPIDbContext _context;
         private readonly ICurrentUserService _currentUser;
+        private readonly ICustomerRepository _customerRepository;
 
-        public GetOrdersQueryHandler(IProductRepository productRepository, ILogger<GetOrdersQueryHandler> logger, IUnitOfWork uow, ICustomerRepository customerRepository, IEcommerceAPIDbContext context, ICurrentUserService currentUser)
+        public GetByIdOrdersQueryHandler(IEcommerceAPIDbContext context, ICurrentUserService currentUser, ICustomerRepository customerRepository)
         {
-            _productRepository = productRepository;
-            _logger = logger;
-            _uow = uow;
-            _customerRepository = customerRepository;
             _context = context;
             _currentUser = currentUser;
+            _customerRepository = customerRepository;
         }
 
-        public async Task<List<OrderSummaryDto>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
+        public async Task<OrderSummaryDto> Handle(GetByIdOrdersQuery request, CancellationToken cancellationToken)
         {
             var userId = _currentUser.GetCurrentUserId();
             var customer = await _customerRepository.GetByUserIdAsync(userId);
@@ -41,7 +33,7 @@ namespace ECommerceAPI.Application.Features.Queries.Orders
 
             var order = await _context.Orders
                 .AsNoTracking()
-                .Where(o => o.CustomerId == customer.Id)
+                .Where(o => o.Id == new OrderId(request.OrderId))
                 .Select(o => new OrderSummaryDto
                 {
                     Id = o.Id.Value,
@@ -79,9 +71,9 @@ namespace ECommerceAPI.Application.Features.Queries.Orders
                         CardAssociation = o.PaymentInfo.CardAssociation,
                         CardHolderName = o.PaymentInfo.CardHolderName
                     },
-                })
-                .OrderByDescending(o => o.OrderDate)
-                .ToListAsync(cancellationToken);
+                }).FirstOrDefaultAsync(cancellationToken);
+
+            if (order == null) throw new NotFoundException($"Product with ID {request.OrderId} not found.");
 
             return order;
         }

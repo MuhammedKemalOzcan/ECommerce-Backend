@@ -18,7 +18,9 @@ namespace ECommerceAPI.Domain.Entities.Orders
         public decimal GrandTotal { get; private set; }
         public Location ShippingAddress { get; private set; }
         public Location BillingAddress { get; private set; }
-        public PaymentInfo PaymentInfo { get; private set; }
+        public PaymentInfo? PaymentInfo { get; private set; }
+        public PaymentStatus PaymentStatus { get; private set; }
+        public string? PaymentToken { get; private set; }
 
         private readonly List<OrderItem> _orderItems = new();
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
@@ -40,12 +42,33 @@ namespace ECommerceAPI.Domain.Entities.Orders
                 ShippingCost = shippingCost,
                 ShippingAddress = shippingAddress,
                 BillingAddress = billingAddress,
+                PaymentInfo = null,
+                PaymentStatus = PaymentStatus.Pending,
                 SubTotal = 0,
                 TaxAmount = 0,
                 GrandTotal = 0,
             };
 
             return order;
+        }
+
+        public void SetPaymentSuccess(PaymentInfo paymentInfo)
+        {
+            if (PaymentStatus == PaymentStatus.Success)
+                return;
+
+            PaymentInfo = paymentInfo;
+            PaymentStatus = PaymentStatus.Success;
+        }
+
+        public void SetPaymentToken(string token)
+        {
+            PaymentToken = token;
+        }
+
+        public void SetPaymentFailed()
+        {
+            PaymentStatus = PaymentStatus.Failed;
         }
 
         public void AddOrderItem(ProductId productId, string productName, decimal price, int quantity)

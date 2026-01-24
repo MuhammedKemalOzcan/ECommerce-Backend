@@ -79,26 +79,26 @@ namespace ECommerceAPI.Persistence.Configurations
             builder.OwnsOne(o => o.PaymentInfo, paymentInfoBuilder =>
             {
                 paymentInfoBuilder
-                .Property(p => p.Installment).IsRequired();
+                .Property(p => p.Installment);
 
                 paymentInfoBuilder
                 .Property(p => p.CardAssociation)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(50);
 
                 paymentInfoBuilder
                 .Property(p => p.PaymentType)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(50);
 
                 paymentInfoBuilder
                 .Property(p => p.CardFamily)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(50);
 
                 paymentInfoBuilder
                 .Property(p => p.CardLastFourDigits)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(50);
             });
 
