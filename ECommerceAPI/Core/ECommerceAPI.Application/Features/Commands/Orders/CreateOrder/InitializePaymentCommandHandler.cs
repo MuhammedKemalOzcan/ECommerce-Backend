@@ -2,7 +2,6 @@
 using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Dtos.PaymentDto;
 using ECommerceAPI.Application.Repositories;
-using ECommerceAPI.Application.Repositories.Carts;
 using ECommerceAPI.Domain.Entities.Orders;
 using ECommerceAPI.Domain.Exceptions;
 using ECommerceAPI.Domain.Repositories;
@@ -13,7 +12,7 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
 {
     public class InitializePaymentCommandHandler : IRequestHandler<InitializePaymentCommand, string>
     {
-        private readonly ICartService _cartService;
+        private readonly ICartRepository _cartRepository;
         private readonly ICurrentUserService _currentUser;
         private readonly IUnitOfWork _uow;
         private readonly IOrderRepository _orderRepository;
@@ -22,9 +21,9 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
         private readonly IProductRepository _productRepository;
         private readonly IPaymentService _paymentService;
 
-        public InitializePaymentCommandHandler(ICartService cartService, ICurrentUserService currentUser, IUnitOfWork uow, IOrderRepository orderRepository, ICustomerRepository customerRepository, ILogger<InitializePaymentCommandHandler> logger, IProductRepository productRepository, IPaymentService paymentService)
+        public InitializePaymentCommandHandler(ICurrentUserService currentUser, IUnitOfWork uow, IOrderRepository orderRepository, ICustomerRepository customerRepository, ILogger<InitializePaymentCommandHandler> logger, IProductRepository productRepository, IPaymentService paymentService, ICartRepository cartRepository)
         {
-            _cartService = cartService;
+
             _currentUser = currentUser;
             _uow = uow;
             _orderRepository = orderRepository;
@@ -32,13 +31,14 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
             _logger = logger;
             _productRepository = productRepository;
             _paymentService = paymentService;
+            _cartRepository = cartRepository;
         }
 
         public async Task<string> Handle(InitializePaymentCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUser.GetCurrentUserId();
 
-            var cart = await _cartService.GetActiveCartAsync(userId, null, cancellationToken);
+            var cart = await _cartRepository.GetActiveCartAsync(userId, null);
 
             if (cart == null)
             {
@@ -53,6 +53,12 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
                 _logger.LogWarning($"Customer not exist");
                 throw new NotFoundException($"Customer not exist");
             }
+
+            var productIds = cart.CartItems.Select(x => x.ProductId).ToList();
+
+            var products = await _productRepository.GetProductsByIdsAsync(productIds);
+
+            var productMap = products.ToDictionary(p => p.Id, p => p);
 
             var billingAddress = Location.Create(
             request.BillingAddress.City,
@@ -71,20 +77,20 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
             var order = Order.Create(customer.Id,
                 request.ShippingCost, shippingAddress, billingAddress);
 
-            _logger.LogError($"[DEBUG] 1. Yeni Order Oluştu. ID: {order.Id.Value}");
-            _logger.LogError($"[DEBUG] 1. Bu Order için Cart ID: {cart.Id}");
-
             foreach (var item in cart.CartItems)
             {
-                if (item == null) throw new NotFoundException($"Item with ${item.Id} Id not exist");
+                if (item == null) throw new NotFoundException($"Item not exist");
 
-                item.Product.DecreaseStock(item.Quantity);
+                if (!productMap.TryGetValue(item.ProductId, out var product))
+                {
+                    throw new NotFoundException($"Product not found: {item.ProductName}");
+                }
 
-                _productRepository.Update(item.Product);
+                product.DecreaseStock(item.Quantity);
 
                 order.AddOrderItem(
                     item.ProductId,
-                    item.Product.Name,
+                    item.ProductName,
                     item.UnitPrice,
                     item.Quantity
                 );
@@ -93,15 +99,18 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
             _orderRepository.Add(order);
             await _uow.SaveChangesAsync(cancellationToken);
 
-            _logger.LogError($"[DEBUG] 2. SaveChanges Sonrası Order ID: {order.Id.Value}");
-
-            var basketItemsDto = cart.CartItems.Select(item => new PaymentBasketItemDto
+            var basketItemsDto = cart.CartItems.Select(item =>
             {
-                Id = item.ProductId.ToString(),
-                Quantity = item.Quantity,
-                Name = item.Product.Name,
-                Category1 = item.Product.Category,
-                Price = item.UnitPrice,
+                var product = productMap[item.ProductId];
+                return new PaymentBasketItemDto
+                {
+
+                    Id = item.ProductId.ToString(),
+                    Quantity = item.Quantity,
+                    Name = item.ProductName,
+                    Category1 = product.Category,
+                    Price = item.UnitPrice,
+                };
             }).ToList();
 
             var newOrder = await _orderRepository.GetByIdAsync(order.Id);

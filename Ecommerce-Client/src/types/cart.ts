@@ -1,11 +1,10 @@
 export type Cart = {
   id: string;
   userId: string | null;
+  sessionId: string;
   cartItems: CartItem[];
   totalAmount: number;
   totalItemCount: number;
-  createdDate?: string;
-  lastModifiedDate?: string | null;
 };
 
 export type CartItem = {
@@ -14,9 +13,8 @@ export type CartItem = {
   productName: string;
   productImageUrl: string | null;
   quantity: number;
-  stock: number | null;
-  totalPrice: number;
   unitPrice: number;
+  totalPrice: number;
 };
 
 export type AddItem = {
@@ -26,5 +24,4 @@ export type AddItem = {
 export type UpdateCartItem = {
   cartItemId: string;
   quantity: number;
-  stock?: number;
 };

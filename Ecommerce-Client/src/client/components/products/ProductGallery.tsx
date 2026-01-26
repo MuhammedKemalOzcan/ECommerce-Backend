@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Products } from "../../../types/Products";
-import { ChevronLeft, ChevronRight, ChevronRightCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { baseApiUrl } from "../../../constants/apiUrl";
 
 type Props = {

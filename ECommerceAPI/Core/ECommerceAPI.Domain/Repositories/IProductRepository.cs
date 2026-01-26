@@ -6,6 +6,7 @@ namespace ECommerceAPI.Domain.Repositories
     {
         Task<Product?> GetByIdAsync(ProductId productId);
         Task<Product?> GetByIdOrThrowAsync(ProductId productId);
+        Task<List<Product>> GetProductsByIdsAsync(List<ProductId> productIds);
         void Add(Product product);
         void Remove(Product product);
         void Update(Product product);

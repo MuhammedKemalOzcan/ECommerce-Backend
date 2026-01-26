@@ -1,123 +1,51 @@
-﻿using ECommerceAPI.Application.Abstractions.Services;
-using ECommerceAPI.Application.Dtos.Cart;
-using ECommerceAPI.Application.Repositories.Carts;
-using ECommerceAPI.Domain.Entities;
+﻿using ECommerceAPI.Application.Dtos.Cart;
+using ECommerceAPI.Application.Mappings;
+using ECommerceAPI.Application.Repositories;
+using ECommerceAPI.Domain.Entities.Cart;
+using ECommerceAPI.Domain.Repositories;
 using MediatR;
 
 namespace ECommerceAPI.Application.Features.Commands.Carts.MergeCarts
 {
-    public class MergeCartsCommandHandler : IRequestHandler<MergeCartsCommandRequest, MergeCartsCommandResponse>
+    public class MergeCartsCommandHandler : IRequestHandler<MergeCartsCommandRequest, CartDto>
     {
-        private readonly ICartService _cartService;
-        private readonly ICartsWriteRepository _cartsWriteRepository;
+        private readonly ICartRepository _cartRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public MergeCartsCommandHandler(ICartService cartService, ICartsWriteRepository cartsWriteRepository)
+        public MergeCartsCommandHandler(IUnitOfWork unitOfWork, ICartRepository cartRepository)
         {
-            _cartService = cartService;
-            _cartsWriteRepository = cartsWriteRepository;
+            _unitOfWork = unitOfWork;
+            _cartRepository = cartRepository;
         }
 
-        public async Task<MergeCartsCommandResponse> Handle(MergeCartsCommandRequest request, CancellationToken cancellationToken)
+        public async Task<CartDto> Handle(MergeCartsCommandRequest request, CancellationToken cancellationToken)
         {
-            var guestCart = await _cartService.GetActiveCartAsync(null, request.SessionId, cancellationToken);
+            var guestCart = await _cartRepository.GetActiveCartAsync(null, request.SessionId);
+            var userCart = await _cartRepository.GetActiveCartAsync(request.UserId, null);
+
             if (guestCart == null)
             {
-                var emptyCart = await _cartService.GetActiveCartAsync(request.UserId, null, cancellationToken);
-                if (emptyCart != null)
+                if (userCart is null)
                 {
-                    var emptyCartDto = new CartDto
-                    {
-                        Id = emptyCart.Id,
-                        UserId = emptyCart.UserId,
-                        TotalItemCount = emptyCart.TotalItemCount,
-                        TotalAmount = emptyCart.TotalAmount,
-                        CartItems = emptyCart.CartItems.Select(ci =>
-                        {
-                            var primary = ci.Product?.ProductGalleries?
-                                .FirstOrDefault(g => g.IsPrimary)
-                                ?? ci.Product?.ProductGalleries?.FirstOrDefault();
-
-                            var imageUrl = primary?.Path;
-
-                            return new CartItemDto
-                            {
-                                Id = ci.Id,
-                                ProductId = ci.ProductId.Value,
-                                ProductName = ci.Product?.Name ?? string.Empty,
-                                ProductImageUrl = imageUrl,
-                                Quantity = ci.Quantity,
-                                Stock = ci.Product?.Stock,
-                                TotalPrice = ci.TotalPrice,
-                                UnitPrice = ci.UnitPrice
-                            };
-                        }).ToList() ?? new List<CartItemDto>()
-
-                    };
+                    userCart = Cart.Create(request.UserId, null);
+                    _cartRepository.Add(userCart);
+                    await _unitOfWork.SaveChangesAsync(cancellationToken);
                 }
-
-                var newEmptyCart = new CartDto
-                {
-                    Id = Guid.Empty,
-                    UserId = request.UserId,
-                    TotalItemCount = 0,
-                    TotalAmount = 0,
-                    CartItems = new List<CartItemDto>()
-                };
-
-                return new MergeCartsCommandResponse() { Message = "Misafir Sepeti Boş" };
+                return userCart.ToDto();
             }
-
-            var userCart = await _cartService.GetActiveCartAsync(request.UserId, null, cancellationToken);
-            Cart resultCart;
 
             if (userCart == null)
             {
-                guestCart.UserId = request.UserId;
-                guestCart.SessionId = null;
-                guestCart.ExpiryDate = null;
-
-                resultCart = guestCart;
-            }
-            else
-            {
-                await _cartService.MergeCartsAsync(guestCart, userCart, cancellationToken);
-                resultCart = userCart;
+                userCart = Cart.Create(request.UserId, null);
             }
 
-            await _cartsWriteRepository.SaveChangesAsync();
-            // 4. Return merged cart
-            var finalCart = await _cartService.GetActiveCartAsync(request.UserId, null, cancellationToken);
+            userCart.MergeCarts(guestCart);
 
-            var cartDto = new CartDto
-            {
-                Id = finalCart.Id,
-                UserId = finalCart.UserId,
-                TotalItemCount = finalCart.TotalItemCount,
-                TotalAmount = finalCart.TotalAmount,
-                CartItems = finalCart.CartItems.Select(ci =>
-                {
-                    var primary = ci.Product?.ProductGalleries?
-                        .FirstOrDefault(g => g.IsPrimary)
-                        ?? ci.Product?.ProductGalleries?.FirstOrDefault();
+            _cartRepository.Remove(guestCart);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-                    var imageUrl = primary?.Path;
-
-                    return new CartItemDto
-                    {
-                        Id = ci.Id,
-                        ProductId = ci.ProductId.Value,
-                        ProductName = ci.Product?.Name ?? string.Empty,
-                        ProductImageUrl = imageUrl,
-                        Quantity = ci.Quantity,
-                        Stock = ci.Product?.Stock,
-                        TotalPrice = ci.TotalPrice,
-                        UnitPrice = ci.UnitPrice
-                    };
-                }).ToList() ?? new List<CartItemDto>()
-            };
-            return new MergeCartsCommandResponse() { CartDto = cartDto };
+            var cartDto = userCart.ToDto();
+            return cartDto;
         }
-
     }
 }
-

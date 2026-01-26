@@ -10,7 +10,6 @@ using ECommerceAPI.Application.Features.Commands.Products.UpdateProduct;
 using ECommerceAPI.Application.Features.Commands.Products.UploadImage;
 using ECommerceAPI.Application.Features.Queries.Products.GetAllCustomer;
 using ECommerceAPI.Application.Features.Queries.Products.GetProductById;
-using ECommerceAPI.Application.Repositories.File;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +23,7 @@ namespace ECommerceAPI.API.Controllers
         private readonly IMediator _mediator;
 
 
-        public ProductController(IMediator mediator, IFileWriteRepository fileWriteRepository, IFileReadRepository fileReadRepository, IStorageService storageService, IConfiguration config)
+        public ProductController(IMediator mediator, IStorageService storageService, IConfiguration config)
         {
             _mediator = mediator;
         }

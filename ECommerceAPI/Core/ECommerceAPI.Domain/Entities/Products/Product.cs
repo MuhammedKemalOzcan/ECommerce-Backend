@@ -116,6 +116,13 @@ namespace ECommerceAPI.Domain.Entities.Products
             Stock -= quantity;
         }
 
+        public string GetPrimaryImage()
+        {
+            var primaryImage = _productGalleries.FirstOrDefault(x => x.IsPrimary == true);
+
+            return primaryImage.Path;
+        }
+
 
     }
 

@@ -17,17 +17,17 @@ namespace ECommerceAPI.Infrastructure.Services
     {
         private readonly IConfiguration _configuration;
         private readonly ICurrentUserService _currentUserService;
-        private readonly ICartService _cartService;
+        private readonly ICartRepository _cartRepository;
         private readonly Iyzipay.Options _options;
         private readonly IOrderRepository _orderRepository;
         private readonly IUnitOfWork _uow;
         private readonly ICustomerRepository _customerRepository;
         private readonly ILogger<IyzicoPaymentService> _logger;
-        public IyzicoPaymentService(IConfiguration configuration, ICurrentUserService currentUserService, ICartService cartService, IOrderRepository orderRepository, IUnitOfWork uow, ICustomerRepository customerRepository, ILogger<IyzicoPaymentService> logger)
+        public IyzicoPaymentService(IConfiguration configuration, ICurrentUserService currentUserService, ICartRepository cartRepository, IOrderRepository orderRepository, IUnitOfWork uow, ICustomerRepository customerRepository, ILogger<IyzicoPaymentService> logger)
         {
             _configuration = configuration;
             _currentUserService = currentUserService;
-            _cartService = cartService;
+            _cartRepository = cartRepository;
             _options = new Iyzipay.Options();
             _options.ApiKey = _configuration["Iyzico:ApiKey"];
             _options.SecretKey = _configuration["Iyzico:SecretKey"];
@@ -43,7 +43,7 @@ namespace ECommerceAPI.Infrastructure.Services
 
             var userId = _currentUserService.GetCurrentUserId();
 
-            var cart = await _cartService.GetActiveCartAsync(userId, null);
+            var cart = await _cartRepository.GetActiveCartAsync(userId, null);
 
             if (cart == null)
             {
@@ -150,6 +150,8 @@ namespace ECommerceAPI.Infrastructure.Services
 
             if (customer == null) throw new NotFoundException("Customer Not Found");
 
+            var cart = await _cartRepository.GetActiveCartAsync(customer.AppUserId, null);
+
             CheckoutForm checkoutForm = await CheckoutForm.Retrieve(request, _options);
 
             if (checkoutForm.PaymentStatus == "SUCCESS")
@@ -165,7 +167,7 @@ namespace ECommerceAPI.Infrastructure.Services
                 );
 
                 order.SetPaymentSuccess(paymentInfo);
-
+                cart.ClearCart();
             }
 
             await _uow.SaveChangesAsync();

@@ -1,38 +1,34 @@
-﻿using ECommerceAPI.Application.Abstractions.Services;
-using ECommerceAPI.Application.Repositories.CartItems;
+﻿using ECommerceAPI.Application.Repositories;
 using ECommerceAPI.Domain.Exceptions;
+using ECommerceAPI.Domain.Repositories;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace ECommerceAPI.Application.Features.Commands.Carts.ClearCart
 {
-    public class ClearCartCommandHandler : IRequestHandler<ClearCartCommandRequest, ClearCartCommandResponse>
+    public class ClearCartCommandHandler : IRequestHandler<ClearCartCommandRequest>
     {
-        private readonly ICartService _cartService;
-        private readonly ICartItemWriteRepository _cartItemWriteRepository;
+        private readonly ICartRepository _cartRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<ClearCartCommandHandler> _logger;
 
-        public ClearCartCommandHandler(ICartService cartService, ICartItemWriteRepository cartItemWriteRepository)
+        public ClearCartCommandHandler(ICartRepository cartRepository, IUnitOfWork unitOfWork, ILogger<ClearCartCommandHandler> logger)
         {
-            _cartService = cartService;
-            _cartItemWriteRepository = cartItemWriteRepository;
+            _cartRepository = cartRepository;
+            _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
-        public async Task<ClearCartCommandResponse> Handle(ClearCartCommandRequest request, CancellationToken cancellationToken)
+        public async Task Handle(ClearCartCommandRequest request, CancellationToken cancellationToken)
         {
-            var cart = await _cartService.GetActiveCartAsync(request.UserId, request.SessionId, cancellationToken);
-            if (cart == null) throw new NotFoundException("Sepet bulunamadı");
-
-            var isOwner = await _cartService.ValidateCartOwnershipAsync(request.UserId, cart, request.SessionId, cancellationToken);
-            if (!isOwner) throw new NotFoundException("Sepete erişiminiz bulunmamaktadır.");
-
-            foreach (var item in cart.CartItems.ToList())
+            var cart = await _cartRepository.GetActiveCartAsync(request.UserId, request.SessionId);
+            if (cart == null)
             {
-                 _cartItemWriteRepository.Remove(item);
+                return;
             }
 
-            await _cartItemWriteRepository.SaveChangesAsync();
-
-            return new ClearCartCommandResponse();
-
+            cart.ClearCart();
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

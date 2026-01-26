@@ -1,6 +1,6 @@
 ﻿using ECommerceAPI.Application.Abstractions.Data;
 using ECommerceAPI.Domain.Contracts;
-using ECommerceAPI.Domain.Entities;
+using ECommerceAPI.Domain.Entities.Cart;
 using ECommerceAPI.Domain.Entities.Customer;
 using ECommerceAPI.Domain.Entities.Orders;
 using ECommerceAPI.Domain.Entities.Products;
