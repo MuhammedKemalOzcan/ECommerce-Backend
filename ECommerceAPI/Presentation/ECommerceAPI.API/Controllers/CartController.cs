@@ -27,11 +27,7 @@ namespace ECommerceAPI.API.Controllers
             var userId = GetUserIdFromToken();
             var sessionId = GetOrCreateSessionId();
 
-            var query = new GetCartQueryRequest
-            {
-                UserId = userId,
-                SessionId = sessionId
-            };
+            var query = new GetCartQueryRequest(userId, sessionId);
 
             var result = await _mediator.Send(query);
             return Ok(result);
@@ -61,13 +57,8 @@ namespace ECommerceAPI.API.Controllers
             var userId = GetUserIdFromToken();
             var sessionId = GetOrCreateSessionId();
 
-            var command = new UpdateCartItemsCommandRequest
-            {
-                UserId = userId,
-                SessionId = sessionId,
-                CartItemId = itemId,
-                Quantity = request.Quantity,
-            };
+            var command = new UpdateCartItemsCommandRequest(userId, sessionId, itemId, request.Quantity);
+
             var response = await _mediator.Send(command);
             return Ok(response);
 
@@ -79,14 +70,10 @@ namespace ECommerceAPI.API.Controllers
             var userId = GetUserIdFromToken();
             var sessionId = GetOrCreateSessionId();
 
-            var command = new RemoveCartItemRequest
-            {
-                UserId = userId,
-                SessionId = sessionId,
-                CartItemId = itemId
-            };
-            var response = await _mediator.Send(command);
-            return Ok(response);
+            var command = new RemoveCartItemRequest(userId, sessionId, itemId);
+
+            await _mediator.Send(command);
+            return Ok();
         }
 
         [HttpDelete]
@@ -94,14 +81,13 @@ namespace ECommerceAPI.API.Controllers
         {
             var userId = GetUserIdFromToken();
             var sessionId = GetOrCreateSessionId();
-            var command = new ClearCartCommandRequest
-            {
-                UserId = userId,
-                SessionId = sessionId,
-            };
-            var response = await _mediator.Send(command);
-            return Ok(response);
+            var command = new ClearCartCommandRequest(userId, sessionId);
+
+
+            await _mediator.Send(command);
+            return Ok();
         }
+
         [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Merge()
@@ -115,12 +101,7 @@ namespace ECommerceAPI.API.Controllers
             if (string.IsNullOrEmpty(sessionId))
                 return BadRequest(new { IsSuccess = false, Errors = new[] { "Misafir sepeti bulunamadı" } });
 
-            var command = new MergeCartsCommandRequest
-            {
-                UserId = userId.Value,
-                SessionId = sessionId
-            };
-
+            var command = new MergeCartsCommandRequest(userId, sessionId);
             var response = await _mediator.Send(command);
             return Ok(response);
         }

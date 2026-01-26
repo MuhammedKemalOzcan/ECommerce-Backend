@@ -1,108 +1,71 @@
-﻿using ECommerceAPI.Application.Abstractions.Services;
-using ECommerceAPI.Application.Dtos.Cart;
-using ECommerceAPI.Application.Exceptions;
-using ECommerceAPI.Application.Repositories.CartItems;
-using ECommerceAPI.Domain.Entities;
+﻿using ECommerceAPI.Application.Dtos.Cart;
+using ECommerceAPI.Application.Repositories;
+using ECommerceAPI.Domain.Entities.Cart;
 using ECommerceAPI.Domain.Entities.Products;
-using ECommerceAPI.Domain.Exceptions;
 using ECommerceAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace ECommerceAPI.Application.Features.Commands.Carts.AddItemToCart
 {
-    public class AddItemToCartCommandHandler : IRequestHandler<AddItemToCartCommandRequest, AddItemToCartCommandResponse>
+    public class AddItemToCartCommandHandler : IRequestHandler<AddItemToCartCommandRequest, CartDto>
     {
-        private readonly ICartService _cartService;
+        private readonly ICartRepository _cartRepository;
         private readonly IProductRepository _productRepository;
-        private readonly ICartItemWriteRepository _cartItemWriteRepository;
+        private readonly IUnitOfWork _uow;
         private readonly ILogger<AddItemToCartCommandHandler> _logger;
 
-        public AddItemToCartCommandHandler(ICartService cartService, ICartItemWriteRepository cartItemWriteRepository, ILogger<AddItemToCartCommandHandler> logger, IProductRepository productRepository)
+        public AddItemToCartCommandHandler(ICartRepository cartRepository, IProductRepository productRepository, ILogger<AddItemToCartCommandHandler> logger, IUnitOfWork uow)
         {
-            _cartService = cartService;
-            _cartItemWriteRepository = cartItemWriteRepository;
-            _logger = logger;
+            _cartRepository = cartRepository;
             _productRepository = productRepository;
+            _logger = logger;
+            _uow = uow;
         }
 
-        public async Task<AddItemToCartCommandResponse> Handle(AddItemToCartCommandRequest request, CancellationToken cancellationToken)
+        public async Task<CartDto> Handle(AddItemToCartCommandRequest request, CancellationToken cancellationToken)
         {
-            var cart = await _cartService.GetOrCreateCartAsync(request.UserId, request.SessionId, cancellationToken);
+            var cart = await _cartRepository.GetActiveCartAsync(request.UserId, request.SessionId);
 
-            var product = await _productRepository.GetByIdAsync(new ProductId(request
-                .ProductId));
-            if (product == null)
+            if (cart == null)
             {
-                _logger.LogWarning("Ürün Bulunamadı. ProductId: {ProductId}", request.ProductId);
-                throw new NotFoundException("Ürün bulunamadı");
+                cart = Cart.Create(request.UserId, request.SessionId);
+                _cartRepository.Add(cart);
             }
 
-            var existingItem = await _cartService.GetCartItemAsync(cart.Id, new ProductId(request.ProductId), cancellationToken);
-            var totalQuantity = (existingItem?.Quantity ?? 0) + request.Quantity;
 
-            if (product.Stock < totalQuantity)
-            {
-                _logger.LogWarning(
-                "Yetersiz stok. ProductId: {ProductId}, Stock: {Stock}, Requested: {RequestedQuantity}",
-                product.Id, product.Stock, totalQuantity);
-                throw new StockException(message: $"Stok yeterli değil stok miktarı: {product.Stock}");
-            }
+            var product = await _productRepository.GetByIdOrThrowAsync(new ProductId(request.ProductId));
 
-            if (existingItem != null)
-            {
-                existingItem.Quantity += request.Quantity;
-            }
-            else
-            {
-                var newCartItem = new CartItem
-                {
-                    Id = Guid.NewGuid(),
-                    CartId = cart.Id,
-                    ProductId = new ProductId(request.ProductId),
-                    Quantity = request.Quantity,
-                    UnitPrice = product.Price
-                };
-                await _cartItemWriteRepository.AddAsync(newCartItem);
-            }
+            var productImage = product.GetPrimaryImage();
 
-            await _cartItemWriteRepository.SaveChangesAsync();
+            cart.AddCartItem(
+                product.Id,
+                request.Quantity,
+                product.Price,
+                product.Name,
+                productImage
+                );
 
-            var cartDto = new CartDto
+            await _uow.SaveChangesAsync(cancellationToken);
+
+
+            return new CartDto
             {
-                Id = cart.Id,
-                UserId = request.UserId,
+                Id = cart.Id.Value,
                 TotalAmount = cart.TotalAmount,
-                TotalItemCount = cart.TotalItemCount,
-                CartItems = cart.CartItems.Select(ci =>
+                CartItems = cart.CartItems.Select(x => new CartItemDto
                 {
-                    var primary = ci.Product?.ProductGalleries?
-                        .FirstOrDefault(g => g.IsPrimary)
-                        ?? ci.Product?.ProductGalleries?.FirstOrDefault();
-
-                    var imageUrl = primary?.Path;
-
-                    return new CartItemDto
-                    {
-                        Id = ci.Id,
-                        ProductId = ci.ProductId.Value,
-                        ProductName = ci.Product?.Name ?? string.Empty,
-                        ProductImageUrl = imageUrl,
-                        Quantity = ci.Quantity,
-                        Stock = ci.Product?.Stock,
-                        TotalPrice = ci.TotalPrice,
-                        UnitPrice = ci.UnitPrice
-                    };
-                }).ToList() ?? new List<CartItemDto>()
+                    Id = x.Id.Value,
+                    ProductId = x.ProductId.Value,
+                    ProductImageUrl = x.ProductImageUrl,
+                    ProductName = x.ProductName,
+                    Quantity = x.Quantity,
+                    TotalPrice = x.TotalPrice,
+                    UnitPrice = x.UnitPrice,
+                }).ToList(),
+                TotalItemCount = cart.TotalItemCount,
+                UserId = cart.UserId
             };
-
-            return new AddItemToCartCommandResponse
-            {
-                Data = cartDto,
-                Message = "Ürün başarıyla eklendi."
-            };
-
-
         }
     }
 }

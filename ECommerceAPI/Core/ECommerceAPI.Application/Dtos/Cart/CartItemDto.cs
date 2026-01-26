@@ -1,6 +1,4 @@
-﻿using ECommerceAPI.Domain.Entities;
-
-namespace ECommerceAPI.Application.Dtos.Cart
+﻿namespace ECommerceAPI.Application.Dtos.Cart
 {
     public class CartItemDto
     {
@@ -11,7 +9,6 @@ namespace ECommerceAPI.Application.Dtos.Cart
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal TotalPrice { get; set; }
-        public int? Stock { get; set; }
 
     }
 }

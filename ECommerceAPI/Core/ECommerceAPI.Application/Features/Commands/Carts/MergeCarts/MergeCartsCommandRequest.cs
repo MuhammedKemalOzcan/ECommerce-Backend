@@ -1,16 +1,7 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ECommerceAPI.Application.Dtos.Cart;
+using MediatR;
 
 namespace ECommerceAPI.Application.Features.Commands.Carts.MergeCarts
 {
-    public class MergeCartsCommandRequest : IRequest<MergeCartsCommandResponse>
-    {
-        public Guid? UserId { get; set; }
-        public string? SessionId { get; set; }
-        
-    }
+    public record MergeCartsCommandRequest(Guid? UserId, string? SessionId) : IRequest<CartDto>;
 }

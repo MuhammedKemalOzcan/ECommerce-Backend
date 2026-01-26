@@ -4,6 +4,7 @@ import { statusConfig } from "../../../utils/statusConfig";
 import OrderProductGallery from "./OrderProductGallery";
 import { useNavigate } from "react-router-dom";
 import type { Order } from "../../../types/Order";
+import { useCartStore } from "../../../stores/cartStore";
 
 interface CardProps {
   order: Order;

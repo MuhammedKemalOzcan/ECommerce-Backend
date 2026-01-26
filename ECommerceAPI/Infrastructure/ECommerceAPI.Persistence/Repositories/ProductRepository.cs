@@ -43,6 +43,13 @@ namespace ECommerceAPI.Persistence.Repositories
             return product;
         }
 
+        public async Task<List<Product>> GetProductsByIdsAsync(List<ProductId> productIds)
+        {
+            return await _context.Products
+                .Where(p => productIds.Contains(p.Id))
+                .ToListAsync();
+        }
+
         public void Remove(Product product)
         {
             _context.Products.Remove(product);

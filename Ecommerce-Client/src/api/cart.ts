@@ -3,17 +3,14 @@ import { methods } from "./apiClient";
 
 export const cartApi = {
   add: (cartItem: AddItem) =>
-    methods.post<AddItem, { data: Cart; message?: string }>(
-      "/Cart/items",
-      cartItem
-    ),
+    methods.post<AddItem, Cart>("/Cart/items", cartItem),
   update: (CartItem: UpdateCartItem) =>
-    methods.put<UpdateCartItem, { data: Cart }>(
+    methods.put<UpdateCartItem, Cart>(
       `Cart/items/${CartItem.cartItemId}`,
-      CartItem
+      CartItem,
     ),
-  list: () => methods.get<{ data: Cart }>("/Cart"),
+  list: () => methods.get<Cart>("/Cart"),
   clear: () => methods.delete("/Cart"),
   delete: (itemId: string) => methods.delete<CartItem>(`Cart/items/${itemId}`),
-  merge: () => methods.post<null, { cartDto: Cart }>("/Cart/Merge", null),
+  merge: () => methods.post<null, Cart>("/Cart/Merge", null),
 };

@@ -1,11 +1,7 @@
-﻿using ECommerceAPI.Domain.Entities;
+﻿using ECommerceAPI.Domain.Entities.Cart;
+using ECommerceAPI.Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Persistence.Configurations
 {
@@ -13,28 +9,33 @@ namespace ECommerceAPI.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<CartItem> builder)
         {
-            builder.ToTable("CartItems", "dbo");
+            builder.HasKey(ci => ci.Id);
+            builder.Property(ci => ci.Id)
+                .HasConversion(
+                    id => id.Value,
+                    value => new CartItemId(value));
 
-            builder.HasKey(x => x.Id);
+            builder.Property(ci => ci.CartId)
+                .HasConversion(
+                    id => id.Value,
+                    value => new CartId(value));
 
-            builder.Property(x => x.Quantity).IsRequired();
-            builder.Property(x => x.UnitPrice).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(ci => ci.ProductId)
+                .HasConversion(
+                    id => id.Value,
+                    value => new ProductId(value));
 
-            builder.HasIndex(x => x.CartId)
-               .HasDatabaseName("IX_CartItems_CartId");
+            builder.Property(ci => ci.UnitPrice)
+                .HasColumnType("decimal(18,2)")
+                .IsRequired();
 
-            builder.HasIndex(x => x.ProductId)
-                .HasDatabaseName("IX_CartItems_ProductId");
+            builder.Property(ci => ci.ProductName)
+                .HasMaxLength(200)
+                .IsRequired();
 
-            // Cart → CartItems(1:N), FK: CartItems.ProductId
-            builder.HasOne(x => x.Product)
-           .WithMany()
-           .HasForeignKey(x => x.ProductId)
-           .OnDelete(DeleteBehavior.Restrict);
+            builder.Property(ci => ci.ProductImageUrl)
+                .HasMaxLength(500);
 
-            // Unique constraint: Aynı üründen sepette sadece 1 kayıt
-            builder.HasIndex(x => new { x.CartId, x.ProductId })
-                .IsUnique();
         }
     }
 }

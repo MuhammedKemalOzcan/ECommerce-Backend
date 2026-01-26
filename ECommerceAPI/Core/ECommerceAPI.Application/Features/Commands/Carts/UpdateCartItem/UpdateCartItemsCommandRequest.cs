@@ -1,14 +1,12 @@
-﻿using ECommerceAPI.Application.Features.Commands.Carts.UpdateCart;
+﻿using ECommerceAPI.Application.Dtos.Cart;
 using MediatR;
 
 namespace ECommerceAPI.Application.Features.Commands.Carts.UpdateCartItem
 {
-    public class UpdateCartItemsCommandRequest : IRequest<UpdateCartItemsCommandResponse>
-    {
-        public Guid? UserId { get; set; }
-        public string? SessionId { get; set; }
-        public Guid CartItemId { get; set; }
-        public int Quantity { get; set; }
-
-    }
+    public record UpdateCartItemsCommandRequest(
+        Guid? UserId,
+        string? SessionId,
+        Guid CartItemId,
+        int Quantity)
+        : IRequest<CartDto>;
 }

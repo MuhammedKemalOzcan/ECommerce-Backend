@@ -10,17 +10,18 @@ import { useEffect } from "react";
 
 function Navbar() {
   const navigate = useNavigate();
-  const { clearAuth, user } = useAuthStore(
+  const { clearAuth, user, token } = useAuthStore(
     useShallow((state) => ({
       clearAuth: state.clearAuth,
       user: state.user,
-    }))
+      token: state.token,
+    })),
   );
   const { cart, listCart } = useCartStore(
     useShallow((s) => ({
       cart: s.cart,
       listCart: s.listCart,
-    }))
+    })),
   );
 
   useEffect(() => {
@@ -34,7 +35,6 @@ function Navbar() {
   const handleLogin = () => {
     navigate("/login");
   };
-
 
   return (
     <div className="w-full h-[97px] bg-[#141414] flex flex-col justify-center items-center relative">
@@ -64,7 +64,7 @@ function Navbar() {
           })}
         </nav>
         <div className="flex gap-4">
-          {user ? (
+          {token ? (
             <div className="flex gap-3">
               <button onClick={handleLogout}>
                 <LogOutIcon />

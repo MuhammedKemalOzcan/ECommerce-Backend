@@ -57,12 +57,12 @@ export const useCartStore = create<cartProps>((set) => ({
     try {
       set({ isLoading: true, error: null });
       const response = await cartApi.list();
-      if (!response?.data) {
+      if (!response) {
         throw new Error("Sepet verisi alınamadı.");
       }
       set({
-        cart: response.data,
-        cartItems: response.data.cartItems || [],
+        cart: response,
+        cartItems: response.cartItems || [],
         isLoading: false,
       });
     } catch (error) {
@@ -73,15 +73,15 @@ export const useCartStore = create<cartProps>((set) => ({
         cart: null,
         cartItems: [],
       });
+    } finally {
+      set({ isLoading: false });
     }
   },
   addItemToCart: async (cartItem: AddItem) => {
     set({ isLoading: true });
     try {
       const res = await cartApi.add(cartItem);
-      console.log(res);
-      set({ cart: res.data });
-      toast.success(res.message);
+      set({ cart: res });
     } catch (error) {
       const cartError = handleError(error, "Add Item Error");
       set({
@@ -96,8 +96,7 @@ export const useCartStore = create<cartProps>((set) => ({
     set({ isLoading: true });
     try {
       const res = await cartApi.update(cartItem);
-      set({ cart: res.data, isLoading: false });
-      console.log(res.data);
+      set({ cart: res, isLoading: false });
     } catch (error: any) {
       console.log(error.response?.data?.message);
       const cartError = handleError(error, "Update Item Error");
@@ -110,7 +109,6 @@ export const useCartStore = create<cartProps>((set) => ({
   clearCart: async () => {
     try {
       const response = await cartApi.clear();
-      console.log(response);
       set({ cart: null });
     } catch (error) {
       console.log(error);
@@ -119,9 +117,7 @@ export const useCartStore = create<cartProps>((set) => ({
   mergeCart: async () => {
     try {
       const response = await cartApi.merge();
-      console.log(response);
-
-      set({ cart: response.cartDto });
+      set({ cart: response });
     } catch (error) {
       console.log(error);
     }
@@ -137,10 +133,8 @@ export const useCartStore = create<cartProps>((set) => ({
         if (!state.cart) return state;
 
         const cart = state.cart; // Artık Cart, null değil
-        console.log("Cart:", cart);
 
         const cartItems = cart.cartItems.filter((item) => item.id !== itemId);
-        console.log("cartItems:", cartItems);
 
         const updatedCart: Cart = {
           ...cart,
@@ -151,8 +145,6 @@ export const useCartStore = create<cartProps>((set) => ({
             0,
           ),
         };
-
-        console.log("updatedCart:", updatedCart);
 
         return {
           ...state,

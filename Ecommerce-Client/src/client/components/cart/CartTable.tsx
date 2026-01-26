@@ -37,6 +37,7 @@ export default function CartTable({ cart }: CartProps) {
   const handleMinus = (cartItemId: string | null, quantity: number) => {
     if (!cartItemId) return;
     if (quantity <= 1) return;
+
     updateCartItem({ cartItemId, quantity: quantity - 1 });
   };
 

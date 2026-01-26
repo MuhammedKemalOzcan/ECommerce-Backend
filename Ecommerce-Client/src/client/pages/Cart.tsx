@@ -2,21 +2,24 @@ import { useEffect } from "react";
 import { useCartStore } from "../../stores/cartStore";
 import CartTable from "../components/cart/CartTable";
 import { useShallow } from "zustand/shallow";
+import Loading from "../components/common/Loading";
 
 export default function Cart() {
   const listCart = useCartStore((s) => s.listCart);
-  const { cart, clearCart, cartItems } = useCartStore(
+  const { cart, clearCart, isLoading } = useCartStore(
     useShallow((s) => ({
       cart: s.cart,
       clearCart: s.clearCart,
-      cartItems: s.cartItems,
-    }))
+      isLoading: s.isLoading,
+    })),
   );
 
   useEffect(() => {
     listCart();
   }, [listCart]);
 
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="flex flex-col">

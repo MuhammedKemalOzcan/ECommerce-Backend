@@ -10,7 +10,6 @@ export default function MainLayout() {
   const user = useAuthStore((state) => state.user);
   const clearAuth = useAuthStore((state) => state.clearAuth);
 
-  console.log(user);
 
   if (!user) clearAuth();
 
