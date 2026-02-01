@@ -1,13 +1,11 @@
 ﻿using ECommerceAPI.Application.Abstractions;
+using ECommerceAPI.Application.Dtos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
 {
@@ -19,13 +17,13 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
         {
             _config = config;
         }
-        public string GenerateToken(string userId, string email, IEnumerable<string> roles)
+        public TokenDto GenerateToken(string userId, string email, IEnumerable<string> roles)
         {
             //appsettings'den Jwt config okuma.
             var issuer = _config["Jwt:Issuer"];
             var audience = _config["Jwt:Audience"];
             var key = _config["Jwt:Key"];
-            var expires = int.Parse(_config["Jwt:Expires"] ?? "60");
+            var expires = int.Parse(_config["Jwt:ExpiresMinutes"]);
 
             var claims = new List<Claim>
             {
@@ -44,7 +42,7 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
             var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
 
             //Token oluşturma aşaması
-            var token = new JwtSecurityToken(
+            JwtSecurityToken token = new JwtSecurityToken(
                 issuer: issuer,
                 audience: audience,
                 claims: claims,
@@ -52,10 +50,18 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
                 signingCredentials: signingCredentials
                 );
 
-            //Token'ı stringe çeviriyor.
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            JwtSecurityTokenHandler tokenHandler = new();
 
+            return new TokenDto
+            {
+                AccessToken = tokenHandler.WriteToken(token),
+                RefreshToken = GenerateRefreshToken(),
+            };
+        }
 
+        public string GenerateRefreshToken()
+        {
+            return Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
         }
     }
 }

@@ -7,6 +7,7 @@ import { BeatLoader } from "react-spinners";
 import AddAddress from "./AddAddress";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
+import ConfirmationModal from "../../../admin/components/common/ConfirmationModal";
 
 export default function ProfileInformation() {
   const { customer, updateCustomer, loading, getCustomer } = useCustomerStore(
@@ -15,7 +16,7 @@ export default function ProfileInformation() {
       loading: s.loading,
       getCustomer: s.getCustomer,
       updateCustomer: s.updateCustomer,
-    }))
+    })),
   );
 
   const navigate = useNavigate();
@@ -60,7 +61,6 @@ export default function ProfileInformation() {
         <BeatLoader />
       </div>
     );
-
   return (
     <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 p-8 md:p-12">
       <button
@@ -146,6 +146,13 @@ export default function ProfileInformation() {
         </form>
         <AddAddress />
       </div>
+      {/* <ConfirmationModal
+        isOpen={!customer}
+        title="Session Expired"
+        message="Your session has expired and you are being redirected to the login page."
+        onConfirm={() => navigate("/login")}
+        onCancel={() => navigate("/")}
+      /> */}
     </div>
   );
 }

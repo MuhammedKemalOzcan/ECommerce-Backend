@@ -20,7 +20,26 @@ interface ApiErrorResponse {
   status?: number;
 }
 
+interface FailedRequest {
+  resolve: (token: string | null) => void;
+  reject: (error: any) => void;
+}
+
 const NO_RETRY_STATUS_CODES = [400, 401, 403, 403, 422];
+
+//gelen diğer 401 hatalarını beklemeye alıyoruz
+let isRefreshing = false;
+let failedQueue: FailedRequest[] = [];
+
+// Kuyruktaki bekleyen her şeyi işleme alan yardımcı fonksiyon
+const processQueue = (error: any, token: string | null) => {
+  failedQueue.forEach((prom) => {
+    if (error)
+      prom.reject(error); //Bekleyen isteğe hata aldık de
+    else prom.resolve(token); //Bekleyen isteğe yeni token geldi devam et de
+  });
+  failedQueue = [];
+};
 
 // Daha sonra dönüş yap.
 axios.interceptors.response.use(
@@ -103,14 +122,70 @@ axios.interceptors.response.use(
         }
         break;
       case 401:
-        window.location.href = "/login";
-        break;
+        // 1. Eğer bu istek zaten bir kez denenmişse (retry), sonsuz döngüye girmemek için reddet
+        if (originalRequest._retry) {
+          console.log("debug 1");
+          useAuthStore.getState().clearAuth(); // Refresh de işe yaramadıysa oturumu kapat
+          console.log("debug 2");
+
+          return Promise.reject(error);
+        }
+        console.log("debug 3");
+
+        // 2. Eğer şu an halihazırda bir refresh işlemi yapılıyorsa
+        if (isRefreshing) {
+          console.log("debug 4");
+
+          return new Promise((resolve, reject) => {
+            console.log("debug 5");
+
+            failedQueue.push({ resolve, reject });
+          })
+            .then((token) => {
+              originalRequest.headers["Authorization"] = "Bearer " + token;
+              return axios(originalRequest);
+            })
+            .catch((err) => {
+              return Promise.reject(err);
+            });
+        }
+
+        // 3. İLK DEFA 401 GELDİ: Refresh sürecini başlat
+        originalRequest._retry = true;
+        isRefreshing = true;
+
+        return new Promise((resolve, reject) => {
+          const currentRefreshToken = useAuthStore.getState().refreshToken;
+          console.log("currentRefreshToken", currentRefreshToken);
+
+          useAuthStore
+            .getState()
+            .refreshAccessToken(currentRefreshToken)
+            .then((newToken: string | undefined) => {
+              if (!newToken) return;
+              const authHeader = `Bearer ${newToken}`;
+
+              axios.defaults.headers.common["Authorization"] = authHeader;
+              originalRequest.headers["Authorization"] = authHeader;
+
+              processQueue(null, newToken);
+              resolve(axios(originalRequest));
+            })
+            .catch((err: any) => {
+              processQueue(err, null);
+              useAuthStore.getState().clearAuth();
+              reject(err);
+            })
+            .finally(() => {
+              isRefreshing = false;
+            });
+        });
       default:
         console.error("❓ Unexpected Error:", status, data);
         toast.error(errorMessage);
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export const methods = {

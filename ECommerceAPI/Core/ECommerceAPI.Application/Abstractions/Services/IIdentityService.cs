@@ -1,9 +1,5 @@
-﻿using ECommerceAPI.Application.Dtos.UserDto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ECommerceAPI.Application.Dtos;
+using ECommerceAPI.Application.Dtos.UserDto;
 
 namespace ECommerceAPI.Application.Abstractions.Services
 {
@@ -11,5 +7,7 @@ namespace ECommerceAPI.Application.Abstractions.Services
     {
         Task<AuthResultDto> RegisterAsync(RegisterDto model);
         Task<AuthResultDto> LoginAsync(LoginDto model);
+
+        Task<TokenDto> RefreshTokenLoginAsync(string userId);
     }
 }

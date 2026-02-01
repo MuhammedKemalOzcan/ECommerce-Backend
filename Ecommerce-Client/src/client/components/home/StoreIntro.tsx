@@ -2,11 +2,11 @@ import intro from "../../../assets/intro.svg";
 
 export default function StoreIntro() {
   return (
-    <div className="flex flex-col p-6 gap-6 lg:flex-row lg:gap-60 md:items-center">
+    <div className="flex flex-col p-6 gap-6 lg:flex-row lg:justify-around md:items-center">
       <img
         src={intro}
         alt="Audio Gear"
-        className="w-full h-auto rounded-lg md:max-w-[400px] lg:max-w-[540px] object-cover"
+        className="w-full h-auto rounded-lg md:max-w-[400px] lg:max-w-[480px] object-cover"
       />
       <div className="flex flex-col items-center justify-center text-center gap-4 lg:w-[30%] lg:text-start">
         <h1 className="w-[80%] text-[30px] lg:w-full">

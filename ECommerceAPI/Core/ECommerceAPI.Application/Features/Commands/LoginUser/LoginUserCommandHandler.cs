@@ -25,7 +25,8 @@ namespace ECommerceAPI.Application.Features.Commands.LoginUser
             {
                 Error = response.Error,
                 Succeed = response.Succeed,
-                Token = response.Token
+                AccesToken = response.AccessToken,
+                RefreshToken = response.RefreshToken
             };
 
         }

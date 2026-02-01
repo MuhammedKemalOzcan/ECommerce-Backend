@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { AddItem, Cart, CartItem, UpdateCartItem } from "../types/cart";
-import { cartApi } from "../api/cart";
+import { cartApi } from "../api/cartApi";
 import { toast } from "react-toastify";
 
 type cartProps = {

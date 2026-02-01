@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Register } from "../types/User";
-import { RegisterUser } from "../services/AuthService";
+import { RegisterUser } from "../api/AuthService";
 
 export function useRegister() {
   const [loading, setLoading] = useState<boolean>(false);

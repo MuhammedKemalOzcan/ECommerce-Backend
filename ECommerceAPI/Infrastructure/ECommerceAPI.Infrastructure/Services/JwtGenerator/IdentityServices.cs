@@ -1,8 +1,11 @@
 ﻿using ECommerceAPI.Application.Abstractions;
 using ECommerceAPI.Application.Abstractions.Services;
+using ECommerceAPI.Application.Dtos;
 using ECommerceAPI.Application.Dtos.UserDto;
+using ECommerceAPI.Application.Exceptions;
 using ECommerceAPI.Application.Repositories;
-using ECommerceAPI.Domain.Entities.Customer;
+using ECommerceAPI.Domain.Entities;
+using ECommerceAPI.Domain.Repositories;
 using Microsoft.AspNetCore.Identity;
 
 namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
@@ -13,13 +16,17 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ITokenHandler _jwtToken;
         private readonly IUnitOfWork _uow;
+        private readonly IRefreshTokenRepository _refreshTokenRepo;
+        private readonly ITokenHandler _tokenHandler;
 
-        public IdentityServices(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ITokenHandler jwtToken, IUnitOfWork uow)
+        public IdentityServices(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ITokenHandler jwtToken, IUnitOfWork uow, IRefreshTokenRepository refreshTokenRepo, ITokenHandler tokenHandler)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtToken = jwtToken;
             _uow = uow;
+            _refreshTokenRepo = refreshTokenRepo;
+            _tokenHandler = tokenHandler;
         }
 
         public async Task<AuthResultDto> LoginAsync(LoginDto model)
@@ -40,8 +47,51 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
             var roles = await _userManager.GetRolesAsync(user);
             var token = _jwtToken.GenerateToken(user.Id, user.Email, roles);
 
-            return new AuthResultDto { Succeed = true, Token = token };
+            //Eski tokenları silme işlemi.
+            _refreshTokenRepo.RemoveRefreshTokensByUserId(user.Id);
 
+            var refreshToken = new RefreshToken
+            {
+                Id = Guid.NewGuid(),
+                UserId = user.Id,
+                ExpiresOnUtc = DateTime.UtcNow.AddDays(7),
+                Token = token.RefreshToken
+            };
+
+            _refreshTokenRepo.Add(refreshToken);
+            await _uow.SaveChangesAsync(cancellationToken: default);
+
+            return new AuthResultDto { Succeed = true, AccessToken = token.AccessToken, RefreshToken = refreshToken.Token };
+
+        }
+
+        public async Task<TokenDto> RefreshTokenLoginAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null) throw new UnauthorizedException("User not found");
+
+            var roles = await _userManager.GetRolesAsync(user);
+            var token = _tokenHandler.GenerateToken(user.Id, user.Email, roles);
+
+            _refreshTokenRepo.RemoveRefreshTokensByUserId(user.Id);
+
+            var refreshToken = new RefreshToken
+            {
+                Id = Guid.NewGuid(),
+                UserId = user.Id,
+                ExpiresOnUtc = DateTime.UtcNow.AddDays(7),
+                Token = token.RefreshToken
+            };
+
+            _refreshTokenRepo.Add(refreshToken);
+            await _uow.SaveChangesAsync();
+
+            return new TokenDto
+            {
+                AccessToken = token.AccessToken,
+                RefreshToken = refreshToken.Token
+            };
         }
 
         public async Task<AuthResultDto> RegisterAsync(RegisterDto model)
@@ -68,21 +118,19 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
                 return new AuthResultDto { Succeed = false, Error = error };
             }
 
-            
-
-
             var roles = await _userManager.GetRolesAsync(user);
             var token = _jwtToken.GenerateToken(user.Id, user.Email, roles);
-            
 
             return new AuthResultDto
             {
                 Succeed = true,
-                Token = token,
+                AccessToken = token.AccessToken,
                 UserId = user.Id
             };
 
 
         }
+
+
     }
 }

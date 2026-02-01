@@ -1,5 +1,6 @@
 ﻿using ECommerceAPI.Application.Abstractions.Data;
 using ECommerceAPI.Domain.Contracts;
+using ECommerceAPI.Domain.Entities;
 using ECommerceAPI.Domain.Entities.Cart;
 using ECommerceAPI.Domain.Entities.Customer;
 using ECommerceAPI.Domain.Entities.Orders;
@@ -17,9 +18,9 @@ namespace ECommerceAPI.Persistence.Contexts
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<Domain.Entities.File> Files { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

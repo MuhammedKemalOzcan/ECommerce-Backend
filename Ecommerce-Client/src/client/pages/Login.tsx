@@ -18,14 +18,13 @@ export default function Login() {
     useShallow((s) => ({
       mergeCart: s.mergeCart,
       cart: s.cart,
-    }))
+    })),
   );
 
   const onSubmit: SubmitHandler<User> = async (data) => {
     await mutate(data.email, data.password);
     if (cart?.totalItemCount && cart?.totalItemCount > 0) {
       mergeCart();
-      console.log("merged");
     }
   };
 
