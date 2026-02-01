@@ -2,7 +2,6 @@
 using ECommerceAPI.Application.Settings;
 using ECommerceAPI.Infrastructure;
 using ECommerceAPI.Infrastructure.Middleware;
-using ECommerceAPI.Infrastructure.Services.Storage.Azure;
 using ECommerceAPI.Infrastructure.Services.Storage.Local;
 using ECommerceAPI.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,7 +9,6 @@ using Microsoft.IdentityModel.Tokens;
 using NpgsqlTypes;
 using Serilog;
 using Serilog.Context;
-using Serilog.Core;
 using Serilog.Events;
 using Serilog.Sinks.PostgreSQL;
 using System.Security.Claims;
@@ -79,10 +77,9 @@ namespace ECommerceAPI.API
                     .AddAuthentication(options =>
                     {
                         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    })
-                    .AddJwtBearer(opt =>
+                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    }).AddJwtBearer(opt =>
                     {
-                        // ↓ Token doğrulama kuralları
                         opt.TokenValidationParameters = new()
                         {
                             ValidateIssuer = true,
@@ -97,25 +94,8 @@ namespace ECommerceAPI.API
                             ValidateLifetime = true,
 
                             NameClaimType = ClaimTypes.NameIdentifier,
-                            RoleClaimType = ClaimTypes.Role
-                        };
-
-                        opt.Events = new JwtBearerEvents
-                        {
-                            OnAuthenticationFailed = context =>
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine($"🔥🔥 AUTH FAILED: {context.Exception.Message}");
-                                Console.ResetColor();
-                                return Task.CompletedTask;
-                            },
-                            OnTokenValidated = context =>
-                            {
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine("✅ TOKEN VALIDATED SUCCESS!");
-                                Console.ResetColor();
-                                return Task.CompletedTask;
-                            }
+                            RoleClaimType = ClaimTypes.Role,
+                            LifetimeValidator = (notBefore, expires, securityToken, validationParameters) => expires != null ? expires > DateTime.UtcNow : false
                         };
                     });
 
@@ -135,13 +115,7 @@ namespace ECommerceAPI.API
                     app.UseSwagger();
                     app.UseSwaggerUI();
                 }
-
-
-
                 app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
-
-
-
                 app.UseStaticFiles();
                 app.UseHttpsRedirection();
                 app.UseCors("client");
@@ -156,7 +130,6 @@ namespace ECommerceAPI.API
                     ? context.User.FindFirst(ClaimTypes.Email)?.Value
                     ?? context.User.FindFirst("email")?.Value
                     ?? "Unknown" : "Anonymous";
-
 
                     var correlationId = context.Request.Headers["X-Correlation-Id"].FirstOrDefault() ?? context.TraceIdentifier;
 

@@ -58,7 +58,7 @@ namespace ECommerceAPI.Application.Features.Commands.RegisterUser
             {
                 Error = response.Error,
                 Succeed = response.Succeed,
-                Token = response.Token
+                Token = response.AccessToken
             };
 
         }

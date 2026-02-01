@@ -44,7 +44,7 @@ namespace ECommerceAPI.Application.Features.Queries.Customer
                     }).ToList()
                 }).FirstOrDefaultAsync(cancellationToken);
 
-            if (response == null) throw new NotFoundException($"Customer with AppUserId {request.AppUserId} was not found.");
+            if (response == null) throw new UnauthorizedException("Customer cannot found");
 
             return response;
         }

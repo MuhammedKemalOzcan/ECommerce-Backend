@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthStore } from "./authStore";
-import { loginUser } from "../services/AuthService";
+import { loginUser } from "../api/AuthService";
 
 export function useLogin() {
   const setToken = useAuthStore((s) => s.setToken);
@@ -10,8 +10,7 @@ export function useLogin() {
     try {
       setLoading(true);
       const response = await loginUser(email, password);
-
-      setToken(response.token);
+      setToken(response.accessToken,response.refreshToken);
       return response;
     } catch (e: any) {
       return Promise.reject(e);

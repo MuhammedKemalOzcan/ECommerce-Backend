@@ -13,8 +13,14 @@ export interface LoginRequest {
 }
 
 export type LoginResponse = {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
   user: User;
+};
+
+export type RefreshResponse = {
+  accessToken: string;
+  refreshToken: string;
 };
 
 export interface Register {

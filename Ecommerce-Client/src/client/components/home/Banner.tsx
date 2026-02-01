@@ -50,7 +50,10 @@ export default function HomeBanner() {
         product.productGalleries?.map(
           (image) =>
             image.isPrimary === true && (
-              <div className="absolute inset-0 w-full h-full lg:static lg:w-1/2 lg:h-auto z-0">
+              <div
+                className="absolute inset-0 w-full h-full lg:static lg:w-1/2 lg:h-auto z-0"
+                key={image.id}
+              >
                 <img
                   src={`${baseApiUrl}/${image.path}`}
                   alt={product?.name}

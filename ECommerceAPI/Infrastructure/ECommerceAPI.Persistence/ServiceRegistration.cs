@@ -30,6 +30,7 @@ namespace ECommerceAPI.Persistence
             services.AddScoped<IEcommerceAPIDbContext>(provider =>
     provider.GetRequiredService<ECommerceAPIDbContext>());
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         }
     }
 }
