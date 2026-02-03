@@ -8,11 +8,17 @@ type authState = {
   token: string | null;
   user: User | null;
   refreshToken: string | null;
-  setToken: (accessToken: string | null, refreshToken: string | null) => void;
+  isAdmin: boolean;
+  setToken: (
+    accessToken: string | null,
+    refreshToken: string | null,
+    isAdmin: boolean,
+  ) => void;
   clearAuth: () => void;
   refreshAccessToken: (
     refreshToken: string | null,
   ) => Promise<string | undefined>;
+  role: string | null;
 };
 
 function decodeUser(token: string | null): User | null {
@@ -32,11 +38,18 @@ export const useAuthStore = create(
       token: null,
       user: null,
       refreshToken: null,
-      setToken: (accessToken: string | null, refreshToken: string | null) =>
+      isAdmin: false,
+      role: null,
+      setToken: (
+        accessToken: string | null,
+        refreshToken: string | null,
+        isAdmin: boolean,
+      ) =>
         set(() => ({
           token: accessToken,
           user: decodeUser(accessToken),
           refreshToken: refreshToken,
+          isAdmin: isAdmin,
         })),
       clearAuth: () => set({ token: null, user: null }),
       refreshAccessToken: async (refreshToken: string | null) => {

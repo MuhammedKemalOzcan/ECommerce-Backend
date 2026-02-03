@@ -1,6 +1,6 @@
 import { Avatar } from "@mui/material";
-import { Package, Settings, User } from "lucide-react";
-import { NavLink } from "react-router-dom"; // Link yerine NavLink kullanıyoruz
+import { Package, User } from "lucide-react";
+import { NavLink } from "react-router-dom";
 import { useCustomerStore } from "../../../stores/customerStore";
 
 export default function ProfileNavbar() {
@@ -9,11 +9,6 @@ export default function ProfileNavbar() {
   const profileLinks = [
     { name: "Account", path: "/profile/account", icon: <User size={24} /> },
     { name: "Orders", path: "/profile/orders", icon: <Package size={24} /> },
-    {
-      name: "Settings",
-      path: "/profile/settings",
-      icon: <Settings size={24} />,
-    },
   ];
 
   const UserInfo = () => (

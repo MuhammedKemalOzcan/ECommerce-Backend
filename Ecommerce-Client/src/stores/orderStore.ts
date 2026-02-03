@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import type { CreateOrder, Order } from "../types/Order";
 import { orderApi } from "../api/orderApi";
-import { toast } from "react-toastify";
 
 interface OrderProps {
   orders: Order[] | null;

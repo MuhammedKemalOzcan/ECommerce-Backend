@@ -88,7 +88,6 @@ namespace ECommerceAPI.API.Controllers
             return Ok();
         }
 
-        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Merge()
         {

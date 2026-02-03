@@ -1,6 +1,7 @@
 ﻿using ECommerceAPI.API.Configurations;
 using ECommerceAPI.Application.Settings;
 using ECommerceAPI.Infrastructure;
+using ECommerceAPI.Infrastructure.Authorization;
 using ECommerceAPI.Infrastructure.Middleware;
 using ECommerceAPI.Infrastructure.Services.Storage.Local;
 using ECommerceAPI.Persistence;
@@ -13,12 +14,13 @@ using Serilog.Events;
 using Serilog.Sinks.PostgreSQL;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ECommerceAPI.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             try
             {
@@ -144,7 +146,19 @@ namespace ECommerceAPI.API
                 app.MapControllers();
 
                 Log.Information("Uygulama başarıyla başladı!");
-
+                using (var scope = app.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    try
+                    {
+                        await SeedData.InitializeAsync(services);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Geliştirme aşamasında hataları görmek için loglayabilirsin
+                        Console.WriteLine($"Seeding Hatası: {ex.Message}");
+                    }
+                }
                 app.Run();
             }
             catch (Exception ex)

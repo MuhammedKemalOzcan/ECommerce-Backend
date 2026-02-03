@@ -9,7 +9,7 @@ namespace ECommerceAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(Roles = "User, Admin")]
     public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;

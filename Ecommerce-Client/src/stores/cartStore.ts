@@ -117,6 +117,7 @@ export const useCartStore = create<cartProps>((set) => ({
   mergeCart: async () => {
     try {
       const response = await cartApi.merge();
+      console.log(response);
       set({ cart: response });
     } catch (error) {
       console.log(error);

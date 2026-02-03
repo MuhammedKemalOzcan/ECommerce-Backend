@@ -11,17 +11,16 @@ using ECommerceAPI.Application.Features.Commands.Products.UploadImage;
 using ECommerceAPI.Application.Features.Queries.Products.GetAllCustomer;
 using ECommerceAPI.Application.Features.Queries.Products.GetProductById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;
-
 
         public ProductController(IMediator mediator, IStorageService storageService, IConfiguration config)
         {
@@ -43,6 +42,7 @@ namespace ECommerceAPI.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] CreateProductCommandRequest request)
         {
             ProductDto productDto = await _mediator.Send(request);
@@ -50,6 +50,7 @@ namespace ECommerceAPI.API.Controllers
         }
 
         [HttpPut("{Id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateProductCommandRequest request)
         {
             var command = request with { ProductId = id };
@@ -58,6 +59,7 @@ namespace ECommerceAPI.API.Controllers
         }
 
         [HttpDelete("{productId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete([FromRoute] RemoveProductCommandRequest request)
         {
             await _mediator.Send(request);
@@ -65,6 +67,7 @@ namespace ECommerceAPI.API.Controllers
         }
 
         [HttpPost("{productId}/boxes")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromRoute] Guid productId, [FromBody] AddBoxToProductCommand request)
         {
             var command = request with { ProductId = productId };
@@ -73,6 +76,7 @@ namespace ECommerceAPI.API.Controllers
         }
 
         [HttpDelete("{productId}/boxes/{boxId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete([FromRoute] RemoveBoxFromProductCommand request)
         {
             await _mediator.Send(request);
@@ -80,6 +84,7 @@ namespace ECommerceAPI.API.Controllers
         }
 
         [HttpPut("{productId}/Boxes/{boxId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateBox([FromRoute] Guid boxId, [FromRoute] Guid productId, [FromBody] UpdateBoxItemCommand request)
         {
             var command = request with { ProductId = productId, BoxId = boxId };
@@ -89,22 +94,20 @@ namespace ECommerceAPI.API.Controllers
         }
 
         [HttpPost("[Action]/{productId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Upload([FromRoute] Guid productId, [FromForm] UploadImageCommand request)
         {
-
             var command = request with { ProductId = productId };
             var response = await _mediator.Send(command);
             return Ok(response);
         }
 
         [HttpDelete("[action]/{productId}/{imageId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProductImage([FromRoute] DeleteImageCommand request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
-
         }
     }
 }
-
-

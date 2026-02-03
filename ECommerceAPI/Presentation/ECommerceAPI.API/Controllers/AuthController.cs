@@ -1,5 +1,4 @@
 ﻿using ECommerceAPI.Application.Dtos;
-using ECommerceAPI.Application.Dtos.UserDto;
 using ECommerceAPI.Application.Features.Commands.LoginUser;
 using ECommerceAPI.Application.Features.Commands.RefreshToken;
 using ECommerceAPI.Application.Features.Commands.RegisterUser;
@@ -28,7 +27,6 @@ namespace ECommerceAPI.API.Controllers
             if (!response.Succeed) return BadRequest(response.Error);
 
             return Ok();
-
         }
 
         [HttpPost("login")]
@@ -38,8 +36,9 @@ namespace ECommerceAPI.API.Controllers
 
             if (!response.Succeed) return BadRequest(response.Error);
 
-            return Ok(new TokenDto { AccessToken = response.AccesToken, RefreshToken = response.RefreshToken });
+            return Ok(new TokenDto { AccessToken = response.AccesToken, RefreshToken = response.RefreshToken, IsAdmin = response.IsAdmin });
         }
+
         [HttpPost("refresh-token")]
         [AllowAnonymous]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand request)

@@ -12,10 +12,10 @@ namespace ECommerceAPI.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
+
         public CustomerController(IMediator mediator)
         {
             _mediator = mediator;
@@ -37,7 +37,6 @@ namespace ECommerceAPI.API.Controllers
             var result = await _mediator.Send(request);
 
             return Ok(result);
-
         }
 
         [HttpPut]
@@ -73,8 +72,4 @@ namespace ECommerceAPI.API.Controllers
             return Ok();
         }
     }
-
 }
-
-
-

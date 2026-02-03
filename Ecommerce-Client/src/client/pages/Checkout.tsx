@@ -71,7 +71,13 @@ export default function Checkout() {
               <ShippingDetails />
               <DeliveryMethod />
             </div>
-            {paymentHtml && <IyzicoPaymentForm htmlContent={paymentHtml} />}
+
+            {paymentHtml && (
+              <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-md">
+                <IyzicoPaymentForm htmlContent={paymentHtml} />
+              </div>
+            )}
+
             <div className="w-full lg:w-[350px] sticky top-10 h-fit flex-shrink-0">
               <OrderSummary />
             </div>

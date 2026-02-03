@@ -55,6 +55,7 @@ export default function CartTable({ cart }: CartProps) {
   };
 
   const hasItems = Boolean(cart?.cartItems.length);
+  console.log("Cart:", cart);
 
   return (
     <div className="w-full">
