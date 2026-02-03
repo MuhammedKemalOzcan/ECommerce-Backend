@@ -10,7 +10,7 @@ export function useLogin() {
     try {
       setLoading(true);
       const response = await loginUser(email, password);
-      setToken(response.accessToken,response.refreshToken);
+      setToken(response.accessToken, response.refreshToken, response.isAdmin);
       return response;
     } catch (e: any) {
       return Promise.reject(e);

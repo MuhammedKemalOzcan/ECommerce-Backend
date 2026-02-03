@@ -51,7 +51,7 @@ export default function HomeBanner() {
           (image) =>
             image.isPrimary === true && (
               <div
-                className="absolute inset-0 w-full h-full lg:static lg:w-1/2 lg:h-auto z-0"
+                className="absolute inset-0 w-full h-full lg:static lg:w-1/2 lg:h-auto lg:z-0 flex items-center justify-center p-4"
                 key={image.id}
               >
                 <img

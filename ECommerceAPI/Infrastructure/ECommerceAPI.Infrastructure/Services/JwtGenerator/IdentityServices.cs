@@ -47,6 +47,8 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
             var roles = await _userManager.GetRolesAsync(user);
             var token = _jwtToken.GenerateToken(user.Id, user.Email, roles);
 
+            var isAdmin = roles.Contains("Admin");
+
             //Eski tokenları silme işlemi.
             _refreshTokenRepo.RemoveRefreshTokensByUserId(user.Id);
 
@@ -61,8 +63,15 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
             _refreshTokenRepo.Add(refreshToken);
             await _uow.SaveChangesAsync(cancellationToken: default);
 
-            return new AuthResultDto { Succeed = true, AccessToken = token.AccessToken, RefreshToken = refreshToken.Token };
+            var AuthResult = new AuthResultDto
+            {
+                AccessToken = token.AccessToken,
+                RefreshToken = refreshToken.Token,
+                IsAdmin = isAdmin,
+                Succeed = true
+            };
 
+            return AuthResult;
         }
 
         public async Task<TokenDto> RefreshTokenLoginAsync(string userId)
@@ -111,6 +120,7 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
                 PhoneNumber = model.PhoneNumber,
             };
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+            await _userManager.AddToRoleAsync(user, "User");
 
             if (!result.Succeeded)
             {
@@ -127,10 +137,6 @@ namespace ECommerceAPI.Infrastructure.Services.JwtGenerator
                 AccessToken = token.AccessToken,
                 UserId = user.Id
             };
-
-
         }
-
-
     }
 }

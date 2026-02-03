@@ -19,12 +19,12 @@ import NotFoundPage from "./client/components/common/NotFoundPage";
 import ProductDetail from "./client/components/products/ProductDetail";
 import ProfileLayout from "./layouts/ProfileLayout";
 import ProfileInformation from "./client/components/Profile/ProfileInformation";
-import ProfileSettings from "./client/components/Profile/ProfileSettings";
 import Checkout from "./client/pages/Checkout";
 import OrderDetails from "./client/pages/OrderDetails";
 import Orders from "./client/pages/Orders";
 import PaymentSuccess from "./client/components/payment/PaymentSuccess";
 import PaymentFailed from "./client/components/payment/PaymentFailed";
+import OrderManagement from "./admin/components/products/OrderManagement";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +51,6 @@ const router = createBrowserRouter([
       { path: "account", element: <ProfileInformation /> },
       { path: "orders", element: <Orders /> },
       { path: "orders/:id", element: <OrderDetails /> },
-      { path: "settings", element: <ProfileSettings /> },
     ],
   },
   {
@@ -64,7 +63,7 @@ const router = createBrowserRouter([
       { path: "products", element: <Catalog /> },
       { path: "products/:id", element: <EditProduct /> },
       { path: "products/create-product", element: <CreateProduct /> },
-      { path: "orders", element: <Orders /> },
+      { path: "order-management", element: <OrderManagement /> },
     ],
   },
   {

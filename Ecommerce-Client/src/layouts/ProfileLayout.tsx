@@ -4,6 +4,7 @@ import ProfileNavbar from "../client/components/Profile/ProfileNavbar";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useCustomerStore } from "../stores/customerStore";
+import { ProtectedUserRoute } from "../utils/ProtectedRoute";
 
 export default function ProfileLayout() {
   const location = useLocation();
@@ -17,13 +18,15 @@ export default function ProfileLayout() {
   }, [location, getCustomer]);
 
   return (
-    <div className="flex flex-col w-full">
-      <Navbar />
-      <div className="lg:flex">
-        <ProfileNavbar />
-        <Outlet />
+    <ProtectedUserRoute>
+      <div className="flex flex-col w-full">
+        <Navbar />
+        <div className="lg:flex">
+          <ProfileNavbar />
+          <Outlet />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </ProtectedUserRoute>
   );
 }

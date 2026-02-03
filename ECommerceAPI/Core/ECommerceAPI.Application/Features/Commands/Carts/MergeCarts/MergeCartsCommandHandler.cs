@@ -37,6 +37,7 @@ namespace ECommerceAPI.Application.Features.Commands.Carts.MergeCarts
             if (userCart == null)
             {
                 userCart = Cart.Create(request.UserId, null);
+                _cartRepository.Add(userCart);
             }
 
             userCart.MergeCarts(guestCart);

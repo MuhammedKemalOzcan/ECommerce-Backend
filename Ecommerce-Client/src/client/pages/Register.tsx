@@ -32,7 +32,7 @@ export default function Register() {
       onSubmit={handleSubmit(handleFormSubmit)}
       className="flex items-center justify-center  w-screen h-screen bg-[#F1F1F1] p-4"
     >
-      <div className="flex flex-col bg-[#101010] h-full lg:w-[30%] lg:h-auto text-white gap-4 p-8 rounded-lg">
+      <div className="flex flex-col bg-[#101010] h-full lg:w-[30%] lg:h-auto text-gray-500 gap-4 p-8 rounded-lg">
         <div className="flex flex-col gap-3">
           <h1>Welcome To Audiophile!</h1>
           <h2>Please Register</h2>

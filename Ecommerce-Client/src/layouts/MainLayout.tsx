@@ -10,12 +10,12 @@ export default function MainLayout() {
   const user = useAuthStore((state) => state.user);
   const clearAuth = useAuthStore((state) => state.clearAuth);
 
-
   if (!user) clearAuth();
 
   useEffect(() => {
     getAll();
   }, [getAll]);
+  
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-[#FAFAFA] font-sans text-[#101010]">

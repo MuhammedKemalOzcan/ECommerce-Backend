@@ -15,7 +15,7 @@ export interface LoginRequest {
 export type LoginResponse = {
   accessToken: string;
   refreshToken: string;
-  user: User;
+  isAdmin: boolean;
 };
 
 export type RefreshResponse = {
