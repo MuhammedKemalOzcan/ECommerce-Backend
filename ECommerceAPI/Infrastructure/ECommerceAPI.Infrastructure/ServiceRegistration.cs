@@ -30,6 +30,15 @@ namespace ECommerceAPI.Infrastructure
                 .AddEntityFrameworkStores<ECommerceAPIDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddSingleton<Iyzipay.Options>(sp =>
+            {
+                var options = new Iyzipay.Options();
+                options.ApiKey = config["Iyzico:ApiKey"];
+                options.SecretKey = config["Iyzico:SecretKey"];
+                options.BaseUrl = config["Iyzico:BaseUrl"];
+                return options;
+            });
+
             services.AddScoped<ITokenHandler, JwtGenerator>();
             services.AddScoped<IIdentityService, IdentityServices>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();

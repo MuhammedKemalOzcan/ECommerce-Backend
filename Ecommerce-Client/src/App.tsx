@@ -24,7 +24,8 @@ import OrderDetails from "./client/pages/OrderDetails";
 import Orders from "./client/pages/Orders";
 import PaymentSuccess from "./client/components/payment/PaymentSuccess";
 import PaymentFailed from "./client/components/payment/PaymentFailed";
-import OrderManagement from "./admin/components/products/OrderManagement";
+import OrderManagement from "./admin/Pages/OrderManagement";
+import OrderManagementDetail from "./admin/components/orders/OrderManagementDetail";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       { path: "products/:id", element: <EditProduct /> },
       { path: "products/create-product", element: <CreateProduct /> },
       { path: "order-management", element: <OrderManagement /> },
+      {
+        path: "order-management/:id",
+        element: <OrderManagementDetail />,
+      },
     ],
   },
   {

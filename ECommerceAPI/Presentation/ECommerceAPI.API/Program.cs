@@ -5,7 +5,9 @@ using ECommerceAPI.Infrastructure.Authorization;
 using ECommerceAPI.Infrastructure.Middleware;
 using ECommerceAPI.Infrastructure.Services.Storage.Local;
 using ECommerceAPI.Persistence;
+using ECommerceAPI.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using NpgsqlTypes;
 using Serilog;
@@ -14,7 +16,6 @@ using Serilog.Events;
 using Serilog.Sinks.PostgreSQL;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.API
 {
@@ -65,6 +66,8 @@ namespace ECommerceAPI.API
 
                 builder.Services.AddInfrastructureServices(builder.Configuration);
 
+                builder.Services.AddSignalRService();
+
                 builder.Services.AddCors(options =>
                 options.AddPolicy("client", builder =>
                 builder.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader().AllowCredentials()
@@ -99,6 +102,22 @@ namespace ECommerceAPI.API
                             RoleClaimType = ClaimTypes.Role,
                             LifetimeValidator = (notBefore, expires, securityToken, validationParameters) => expires != null ? expires > DateTime.UtcNow : false
                         };
+
+                        opt.Events = new JwtBearerEvents
+                        {
+                            OnMessageReceived = context =>
+                            {
+                                var accessToken = context.Request.Query["access_token"];
+
+                                var path = context.HttpContext.Request.Path;
+                                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/orders-hub"))
+                                {
+                                    context.Token = accessToken;
+                                }
+
+                                return Task.CompletedTask;
+                            }
+                        };
                     });
 
                 builder.Services.AddAuthorization();
@@ -107,7 +126,6 @@ namespace ECommerceAPI.API
                 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
                 builder.Services.AddEndpointsApiExplorer();
                 builder.Services.AddSwaggerGen();
-
 
                 var app = builder.Build();
 
@@ -127,7 +145,6 @@ namespace ECommerceAPI.API
 
                 app.Use(async (context, next) =>
                 {
-
                     string username = context.User?.Identity?.IsAuthenticated == true
                     ? context.User.FindFirst(ClaimTypes.Email)?.Value
                     ?? context.User.FindFirst("email")?.Value
@@ -159,6 +176,7 @@ namespace ECommerceAPI.API
                         Console.WriteLine($"Seeding Hatası: {ex.Message}");
                     }
                 }
+                app.MapHubs();
                 app.Run();
             }
             catch (Exception ex)
@@ -169,8 +187,6 @@ namespace ECommerceAPI.API
             {
                 Log.CloseAndFlush();
             }
-
-
         }
     }
 }

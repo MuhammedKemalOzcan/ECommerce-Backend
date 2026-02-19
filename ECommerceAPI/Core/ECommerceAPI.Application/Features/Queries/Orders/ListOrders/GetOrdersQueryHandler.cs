@@ -2,8 +2,6 @@
 using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Dtos.Customer;
 using ECommerceAPI.Application.Dtos.Orders;
-using ECommerceAPI.Application.Dtos.PaymentDto;
-using ECommerceAPI.Application.Dtos.Products;
 using ECommerceAPI.Application.Repositories;
 using ECommerceAPI.Domain.Exceptions;
 using ECommerceAPI.Domain.Repositories;
@@ -15,18 +13,12 @@ namespace ECommerceAPI.Application.Features.Queries.Orders.ListOrders
 {
     public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, List<OrderSummaryDto>>
     {
-        private readonly IProductRepository _productRepository;
-        private readonly ILogger<GetOrdersQueryHandler> _logger;
-        private readonly IUnitOfWork _uow;
         private readonly ICustomerRepository _customerRepository;
         private readonly IEcommerceAPIDbContext _context;
         private readonly ICurrentUserService _currentUser;
 
-        public GetOrdersQueryHandler(IProductRepository productRepository, ILogger<GetOrdersQueryHandler> logger, IUnitOfWork uow, ICustomerRepository customerRepository, IEcommerceAPIDbContext context, ICurrentUserService currentUser)
+        public GetOrdersQueryHandler(ICustomerRepository customerRepository, IEcommerceAPIDbContext context, ICurrentUserService currentUser)
         {
-            _productRepository = productRepository;
-            _logger = logger;
-            _uow = uow;
             _customerRepository = customerRepository;
             _context = context;
             _currentUser = currentUser;

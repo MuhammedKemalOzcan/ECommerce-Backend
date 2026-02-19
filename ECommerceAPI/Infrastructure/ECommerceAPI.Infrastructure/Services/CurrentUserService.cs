@@ -23,6 +23,17 @@ namespace ECommerceAPI.Infrastructure.Services
 
             return userId;
         }
+
+        public bool IsAdmin()
+        {
+            var user = _contextAccessor.HttpContext?.User;
+
+            if (user == null || user.Identity?.IsAuthenticated != true)
+            {
+                return false;
+            }
+            return user.IsInRole("Admin");
+        }
     }
 }
 

@@ -3,5 +3,6 @@
     public interface ICurrentUserService
     {
         Guid GetCurrentUserId();
+        bool IsAdmin();
     }
 }
