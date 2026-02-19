@@ -27,7 +27,9 @@ namespace ECommerceAPI.Persistence.Repositories
 
         public async Task<Order> GetByTokenAsync(string paymentToken)
         {
-            var order = await _context.Orders.FirstOrDefaultAsync(
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                .FirstOrDefaultAsync(
                 o => o.PaymentToken == paymentToken);
             return order;
         }

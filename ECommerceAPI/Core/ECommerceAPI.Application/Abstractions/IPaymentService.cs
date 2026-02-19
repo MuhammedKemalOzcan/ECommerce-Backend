@@ -6,6 +6,7 @@ namespace ECommerceAPI.Application.Abstractions
     {
         //Task<PaymentResultDto> ReceivePaymentAsync(PaymentRequestDto paymentModel);
         Task<PaymentInitializeResult> InitializeCheckoutFormAsync(CreateCheckoutFormDto formModel);
-        Task<CallbackResultDto> ProcessCallbackAsync(string token);
+
+        Task<PaymentResultDto> ProcessCallbackAsync(string token);
     }
 }

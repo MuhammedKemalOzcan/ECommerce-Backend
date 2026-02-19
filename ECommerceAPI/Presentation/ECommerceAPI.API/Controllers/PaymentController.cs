@@ -1,4 +1,6 @@
-﻿using ECommerceAPI.Application.Abstractions;
+﻿using ECommerceAPI.Application.Abstractions.Hubs;
+using ECommerceAPI.Application.Features.Commands.Orders.Iyzicocallback;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceAPI.API.Controllers
@@ -7,26 +9,29 @@ namespace ECommerceAPI.API.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        private readonly IPaymentService _paymentService;
         private readonly IConfiguration _configuration;
+        private readonly IOrderHubService _orderHubService;
+        private readonly IMediator _mediator;
 
-        public PaymentController(IPaymentService paymentService, IConfiguration configuration)
+        public PaymentController(IConfiguration configuration, IOrderHubService orderHubService, IMediator mediator)
         {
-            _paymentService = paymentService;
             _configuration = configuration;
+            _orderHubService = orderHubService;
+            _mediator = mediator;
         }
 
         [HttpPost("callback")]
-        public async Task<IActionResult> Callback([FromForm] IyzicoCallbackRequest request)
+        public async Task<IActionResult> Callback([FromForm] IyzicoCallbackCommand request)
         {
             try
             {
-                var result = await _paymentService.ProcessCallbackAsync(request.Token);
+                var result = await _mediator.Send(request);
 
                 var frontendUrl = _configuration["FrontendUrl"];
 
                 if (result.IsSuccess)
                 {
+                    await _orderHubService.NewOrderMessageAsync($"Yeni Sipariş Onaylandı! Kod: {result.OrderCode}");
                     return Redirect($"{frontendUrl}/payment/success?orderCode={result.OrderCode}");
                 }
                 else
@@ -42,9 +47,4 @@ namespace ECommerceAPI.API.Controllers
             }
         }
     }
-}
-
-public class IyzicoCallbackRequest
-{
-    public string Token { get; set; }
 }

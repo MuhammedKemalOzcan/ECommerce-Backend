@@ -6,11 +6,14 @@ namespace ECommerceAPI.Domain.Entities.Orders
 {
     public class Order
     {
-        private Order() { }
+        private Order()
+        { }
+
         public OrderId Id { get; private set; }
         public CustomerId CustomerId { get; private set; }
         public string OrderCode { get; private set; }
         public DateTime OrderDate { get; private set; }
+        public DateTime UpdatedDate { get; set; }
         public DeliveryStatus Status { get; private set; }
         public decimal SubTotal { get; private set; }
         public decimal TaxAmount { get; private set; }
@@ -21,10 +24,11 @@ namespace ECommerceAPI.Domain.Entities.Orders
         public PaymentInfo? PaymentInfo { get; private set; }
         public PaymentStatus PaymentStatus { get; private set; }
         public string? PaymentToken { get; private set; }
+        public DateTime? ShippedDate { get; set; }
+        public DateTime? DeliveredDate { get; set; }
 
         private readonly List<OrderItem> _orderItems = new();
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
-
 
         public static Order Create(CustomerId customerId, decimal shippingCost, Location shippingAddress, Location billingAddress)
         {
@@ -76,21 +80,26 @@ namespace ECommerceAPI.Domain.Entities.Orders
             var orderItem = new OrderItem(Id, productId, productName, price, quantity);
             _orderItems.Add(orderItem);
 
+            CalculateSubTotal();
             CalculateGrandTotal();
         }
 
         private void CalculateGrandTotal()
         {
-            SubTotal = _orderItems.Sum(x => x.Price * x.Quantity);
+            SubTotal = CalculateSubTotal();
 
             var taxRate = 0.2m;
 
             TaxAmount = SubTotal * taxRate;
 
             GrandTotal = SubTotal + TaxAmount + ShippingCost;
-
         }
 
+        private decimal CalculateSubTotal()
+        {
+            SubTotal = _orderItems.Sum(x => x.Price * x.Quantity);
+            return SubTotal;
+        }
 
         public void CancelOrder()
         {
@@ -100,6 +109,7 @@ namespace ECommerceAPI.Domain.Entities.Orders
             }
 
             Status = DeliveryStatus.Canceled;
+            UpdatedDate = DateTime.UtcNow;
         }
 
         public void ShipOrder()
@@ -110,9 +120,16 @@ namespace ECommerceAPI.Domain.Entities.Orders
             {
                 throw new DomainException("Sipariş zaten kargolanmış");
             }
-
             Status = DeliveryStatus.Shipped;
+            ShippedDate = DateTime.UtcNow;
+        }
 
+        public void DeliverOrder()
+        {
+            if (Status == DeliveryStatus.Canceled) throw new DomainException("Ürün iptal edilmiş.");
+            if (Status == DeliveryStatus.Delivered) throw new DomainException("Sipariş zaten teslim edilmiş");
+            Status = DeliveryStatus.Delivered;
+            DeliveredDate = DateTime.UtcNow;
         }
 
         private static string GenerateOrderCode()
@@ -125,7 +142,5 @@ namespace ECommerceAPI.Domain.Entities.Orders
         {
             PaymentInfo = paymentInfo;
         }
-
-
     }
 }

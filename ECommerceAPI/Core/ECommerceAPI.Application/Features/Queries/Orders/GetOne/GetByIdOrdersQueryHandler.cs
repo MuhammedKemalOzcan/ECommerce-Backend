@@ -2,10 +2,7 @@
 using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Dtos.Customer;
 using ECommerceAPI.Application.Dtos.Orders;
-using ECommerceAPI.Domain.Entities.Customer;
-using ECommerceAPI.Domain.Entities.Products;
 using ECommerceAPI.Domain.Exceptions;
-using ECommerceAPI.Domain.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,67 +12,81 @@ namespace ECommerceAPI.Application.Features.Queries.Orders.GetOne
     {
         private readonly IEcommerceAPIDbContext _context;
         private readonly ICurrentUserService _currentUser;
-        private readonly ICustomerRepository _customerRepository;
 
-        public GetByIdOrdersQueryHandler(IEcommerceAPIDbContext context, ICurrentUserService currentUser, ICustomerRepository customerRepository)
+        public GetByIdOrdersQueryHandler(IEcommerceAPIDbContext context, ICurrentUserService currentUser)
         {
             _context = context;
             _currentUser = currentUser;
-            _customerRepository = customerRepository;
         }
 
         public async Task<OrderSummaryDto> Handle(GetByIdOrdersQuery request, CancellationToken cancellationToken)
         {
-            var userId = _currentUser.GetCurrentUserId();
-            var customer = await _customerRepository.GetByUserIdAsync(userId);
+            var query = from order in _context.Orders
+                        join customer in _context.Customers
+                        on order.CustomerId equals customer.Id
+                        select new { order, customer };
 
-            if (customer == null) throw new NotFoundException("Customer not found");
+            query = query.Where(x => x.order.Id == new OrderId(request.OrderId));
 
-            var order = await _context.Orders
-                .AsNoTracking()
-                .Where(o => o.Id == new OrderId(request.OrderId))
-                .Select(o => new OrderSummaryDto
+            bool isAdmin = _currentUser.IsAdmin();
+
+            if (!isAdmin)
+            {
+                var currentUserId = _currentUser.GetCurrentUserId();
+
+                query = query.Where(x => x.customer.AppUserId == currentUserId);
+            }
+
+            var result = await query.Select(x => new OrderSummaryDto
+            {
+                Id = x.order.Id.Value,
+                OrderDate = x.order.OrderDate,
+                GrandTotal = x.order.GrandTotal,
+                OrderCode = x.order.OrderCode,
+                DeliveryStatus = x.order.Status,
+                ShippingCost = x.order.ShippingCost,
+                SubTotal = x.order.SubTotal,
+                ShippedDate = x.order.ShippedDate,
+                DeliveredDate = x.order.DeliveredDate,
+                Customer = new CustomerDto
                 {
-                    Id = o.Id.Value,
-                    OrderDate = o.OrderDate,
-                    GrandTotal = o.GrandTotal,
-                    OrderCode = o.OrderCode,
-                    DeliveryStatus = o.Status,
-                    OrderItems = o.OrderItems.Select(i => new OrderItemsDto
-                    {
-                        ProductName = i.ProductName,
-                        Price = i.Price,
-                        Quantity = i.Quantity,
-                        ImageUrl = i.Product.ProductGalleries
+                    Id = x.customer.Id.Value,
+                    FirstName = x.customer.FirstName,
+                    LastName = x.customer.LastName,
+                    Email = x.customer.Email,
+                    PhoneNumber = x.customer.PhoneNumber
+                },
+                ShippingAddress = new LocationDto
+                {
+                    City = x.order.ShippingAddress.City,
+                    Street = x.order.ShippingAddress.Street,
+                    Country = x.order.ShippingAddress.Country,
+                    ZipCode = x.order.ShippingAddress.ZipCode
+                },
+
+                PaymentInfo = new PaymentInfoDto
+                {
+                    CardLastFourDigits = x.order.PaymentInfo.CardLastFourDigits,
+                    CardAssociation = x.order.PaymentInfo.CardAssociation,
+                    CardHolderName = x.order.PaymentInfo.CardHolderName
+                },
+                OrderItems = x.order.OrderItems.Select(i => new OrderItemsDto
+                {
+                    ProductName = i.ProductName,
+                    Price = i.Price,
+                    Quantity = i.Quantity,
+                    ImageUrl = i.Product.ProductGalleries
                         .Where(pg => pg.IsPrimary == true)
                         .Select(pg => pg.Path)
                         .FirstOrDefault()
-                    }).ToList(),
-                    ShippingAddress = new LocationDto
-                    {
-                        City = o.ShippingAddress.City,
-                        Street = o.ShippingAddress.Street,
-                        Country = o.ShippingAddress.Country,
-                        ZipCode = o.ShippingAddress.ZipCode
-                    },
-                    Customer = new CustomerDto
-                    {
-                        Id = customer.Id.Value,
-                        FirstName = customer.FirstName,
-                        LastName = customer.LastName,
-                        PhoneNumber = customer.PhoneNumber,
-                    },
-                    PaymentInfo = new PaymentInfoDto
-                    {
-                        CardLastFourDigits = o.PaymentInfo.CardLastFourDigits,
-                        CardAssociation = o.PaymentInfo.CardAssociation,
-                        CardHolderName = o.PaymentInfo.CardHolderName
-                    },
-                }).FirstOrDefaultAsync(cancellationToken);
+                }).ToList()
+            }).FirstOrDefaultAsync(cancellationToken);
+            if (result == null)
+            {
+                throw new NotFoundException($"Order with ID {request.OrderId} not found.");
+            }
 
-            if (order == null) throw new NotFoundException($"Product with ID {request.OrderId} not found.");
-
-            return order;
+            return result;
         }
     }
 }

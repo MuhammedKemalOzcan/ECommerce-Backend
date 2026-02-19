@@ -19,6 +19,20 @@ export interface Order {
   customer: Customer;
   paymentInfo: PaymentInfo;
   orderItems: OrderItems[];
+  subTotal: number;
+  shippingCost: number;
+  updatedDate: string
+  shippedDate?: string;
+  deliveredDate?: string;
+}
+
+export interface OrderInfo {
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  items: Order[];
+  pageIndex: number;
+  totalPages: number;
+  orderCount: number;
 }
 
 export interface PaymentInfo {

@@ -1,14 +1,12 @@
 ﻿using ECommerceAPI.Application.Abstractions;
 using ECommerceAPI.Application.Abstractions.Services;
 using ECommerceAPI.Application.Dtos.PaymentDto;
-using ECommerceAPI.Application.Repositories;
-using ECommerceAPI.Domain.Entities.Orders;
 using ECommerceAPI.Domain.Exceptions;
 using ECommerceAPI.Domain.Repositories;
+using Iyzipay;
 using Iyzipay.Model;
 using Iyzipay.Request;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using System.Globalization;
 
 namespace ECommerceAPI.Infrastructure.Services
@@ -19,28 +17,17 @@ namespace ECommerceAPI.Infrastructure.Services
         private readonly ICurrentUserService _currentUserService;
         private readonly ICartRepository _cartRepository;
         private readonly Iyzipay.Options _options;
-        private readonly IOrderRepository _orderRepository;
-        private readonly IUnitOfWork _uow;
-        private readonly ICustomerRepository _customerRepository;
-        private readonly ILogger<IyzicoPaymentService> _logger;
-        public IyzicoPaymentService(IConfiguration configuration, ICurrentUserService currentUserService, ICartRepository cartRepository, IOrderRepository orderRepository, IUnitOfWork uow, ICustomerRepository customerRepository, ILogger<IyzicoPaymentService> logger)
+
+        public IyzicoPaymentService(IConfiguration configuration, ICurrentUserService currentUserService, ICartRepository cartRepository, Options options)
         {
             _configuration = configuration;
             _currentUserService = currentUserService;
             _cartRepository = cartRepository;
-            _options = new Iyzipay.Options();
-            _options.ApiKey = _configuration["Iyzico:ApiKey"];
-            _options.SecretKey = _configuration["Iyzico:SecretKey"];
-            _options.BaseUrl = "https://sandbox-api.iyzipay.com";
-            _orderRepository = orderRepository;
-            _uow = uow;
-            _customerRepository = customerRepository;
-            _logger = logger;
+            _options = options;
         }
 
         public async Task<PaymentInitializeResult> InitializeCheckoutFormAsync(CreateCheckoutFormDto formModel)
         {
-
             var userId = _currentUserService.GetCurrentUserId();
 
             var cart = await _cartRepository.GetActiveCartAsync(userId, null);
@@ -111,7 +98,6 @@ namespace ECommerceAPI.Infrastructure.Services
 
                     basketItems.Add(basketItem);
                 }
-
             }
 
             request.BasketItems = basketItems;
@@ -130,52 +116,24 @@ namespace ECommerceAPI.Infrastructure.Services
             };
         }
 
-        public async Task<CallbackResultDto> ProcessCallbackAsync(string token)
+        public async Task<PaymentResultDto> ProcessCallbackAsync(string token)
         {
-
             var request = new RetrieveCheckoutFormRequest();
             request.Locale = Locale.TR.ToString();
             request.ConversationId = Guid.NewGuid().ToString();
             request.Token = token;
 
-
-
-            var order = await _orderRepository.GetByTokenAsync(token);
-
-            if (order == null) throw new NotFoundException("Order not found");
-
-            var customerId = order.CustomerId;
-
-            var customer = await _customerRepository.GetById(customerId.Value);
-
-            if (customer == null) throw new NotFoundException("Customer Not Found");
-
-            var cart = await _cartRepository.GetActiveCartAsync(customer.AppUserId, null);
-
             CheckoutForm checkoutForm = await CheckoutForm.Retrieve(request, _options);
 
-            if (checkoutForm.PaymentStatus == "SUCCESS")
+            return new PaymentResultDto
             {
-                var paymentInfo = PaymentInfo.Create(
-                    checkoutForm.PaymentId,
-                    "CREDIT_CARD",
-                    1,
-                    checkoutForm.CardAssociation,
-                    checkoutForm.CardFamily,
-                    checkoutForm.LastFourDigits,
-                    customer.FirstName + " " + customer.LastName
-                );
-
-                order.SetPaymentSuccess(paymentInfo);
-                cart.ClearCart();
-            }
-
-            await _uow.SaveChangesAsync();
-
-            return new CallbackResultDto
-            {
-                IsSuccess = true,
-                OrderCode = order.OrderCode
+                CardAssociation = checkoutForm.CardAssociation,
+                CardFamily = checkoutForm.CardFamily,
+                CardLastFourDigits = checkoutForm.LastFourDigits,
+                CardType = checkoutForm.CardType,
+                ErrorMessage = checkoutForm.ErrorMessage,
+                IsSuccess = checkoutForm.PaymentStatus == "SUCCESS",
+                PaymentId = checkoutForm.PaymentId,
             };
         }
     }

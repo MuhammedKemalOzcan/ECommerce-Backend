@@ -23,7 +23,6 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
 
         public InitializePaymentCommandHandler(ICurrentUserService currentUser, IUnitOfWork uow, IOrderRepository orderRepository, ICustomerRepository customerRepository, ILogger<InitializePaymentCommandHandler> logger, IProductRepository productRepository, IPaymentService paymentService, ICartRepository cartRepository)
         {
-
             _currentUser = currentUser;
             _uow = uow;
             _orderRepository = orderRepository;
@@ -61,17 +60,17 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
             var productMap = products.ToDictionary(p => p.Id, p => p);
 
             var billingAddress = Location.Create(
+            request.BillingAddress.Street,
             request.BillingAddress.City,
             request.BillingAddress.Country,
-            request.BillingAddress.Street,
             request.BillingAddress.ZipCode
             );
 
             var shippingAddress = Location.Create(
-            request.ShippingAddress.City,
-            request.ShippingAddress.Country,
-            request.ShippingAddress.Street,
-            request.ShippingAddress.ZipCode
+            request.BillingAddress.Street,
+            request.BillingAddress.City,
+            request.BillingAddress.Country,
+            request.BillingAddress.ZipCode
             );
 
             var order = Order.Create(customer.Id,
@@ -85,8 +84,6 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
                 {
                     throw new NotFoundException($"Product not found: {item.ProductName}");
                 }
-
-                product.DecreaseStock(item.Quantity);
 
                 order.AddOrderItem(
                     item.ProductId,
@@ -104,7 +101,6 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
                 var product = productMap[item.ProductId];
                 return new PaymentBasketItemDto
                 {
-
                     Id = item.ProductId.ToString(),
                     Quantity = item.Quantity,
                     Name = item.ProductName,
@@ -157,11 +153,7 @@ namespace ECommerceAPI.Application.Features.Commands.Orders.CreateOrder
             order.SetPaymentToken(htmlContent.Token);
             await _uow.SaveChangesAsync();
 
-
-
-
             return htmlContent.HtmlContent;
-
         }
     }
 }

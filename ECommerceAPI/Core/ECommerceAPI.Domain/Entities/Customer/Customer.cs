@@ -96,5 +96,3 @@ namespace ECommerceAPI.Domain.Entities.Customer
         }
     }
 }
-
-public record CustomerId(Guid Value);

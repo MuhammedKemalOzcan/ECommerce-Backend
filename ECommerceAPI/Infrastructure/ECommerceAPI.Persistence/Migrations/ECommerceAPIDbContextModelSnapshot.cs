@@ -152,6 +152,9 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime?>("DeliveredDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<decimal>("GrandTotal")
                         .HasColumnType("numeric");
 
@@ -169,6 +172,9 @@ namespace ECommerceAPI.Persistence.Migrations
                     b.Property<string>("PaymentToken")
                         .HasColumnType("text");
 
+                    b.Property<DateTime?>("ShippedDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<decimal>("ShippingCost")
                         .HasColumnType("decimal(18,2)");
 
@@ -181,6 +187,9 @@ namespace ECommerceAPI.Persistence.Migrations
 
                     b.Property<decimal>("TaxAmount")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
